@@ -5,7 +5,7 @@ configfile: pyproject.toml
 plugins: anyio-4.14.2
 collected 57 items
 
-tests/test_phi4mini.py ......F...FF..........FF.F...F.F.FF.....F.FF.F... [ 85%]
+tests/test_phi4mini.py ......F...FF..........F..F..FF...FF.....F.FF.F... [ 85%]
 .F.FFF.F                                                                 [100%]
 
 =================================== FAILURES ===================================
@@ -13,13 +13,13 @@ ________________________ test_phi4mini[Включи Ведьмака] __________
 {
   "input": "Включи Ведьмака",
   "diff": {
-    "action": {
-      "expected": "run",
-      "actual": "on"
-    },
     "device": {
       "expected": "tv",
       "actual": "light"
+    },
+    "action": {
+      "expected": "run",
+      "actual": "on"
     },
     "value": {
       "expected": "Ведьмак",
@@ -57,16 +57,6 @@ __________ test_phi4mini[Запусти седьмую серию второго
     }
   }
 }
-____________________ test_phi4mini[Поставь Ведьмака у мамы] ____________________
-{
-  "input": "Поставь Ведьмака у мамы",
-  "diff": {
-    "device": {
-      "expected": "tv",
-      "actual": "media"
-    }
-  }
-}
 _________________ test_phi4mini[Перемотай на пять минут назад] _________________
 {
   "input": "Перемотай на пять минут назад",
@@ -77,6 +67,16 @@ _________________ test_phi4mini[Перемотай на пять минут на
     }
   }
 }
+_________________ test_phi4mini[Поставь альбом Meteora у Маши] _________________
+{
+  "input": "Поставь альбом Meteora у Маши",
+  "diff": {
+    "value": {
+      "expected": "альбом Meteora",
+      "actual": "альбом Meteора"
+    }
+  }
+}
 ____________________ test_phi4mini[Сделай музыку погромче] _____________________
 {
   "input": "Сделай музыку погромче",
@@ -84,16 +84,6 @@ ____________________ test_phi4mini[Сделай музыку погромче] _
     "value": {
       "expected": "",
       "actual": "погромче"
-    }
-  }
-}
-_______________ test_phi4mini[Поставь громкость на 40 процентов] _______________
-{
-  "input": "Поставь громкость на 40 процентов",
-  "diff": {
-    "value": {
-      "expected": "40 процентов",
-      "actual": "на 40 процентов"
     }
   }
 }
@@ -216,10 +206,9 @@ FAILED tests/test_phi4mini.py::test_phi4mini[Включи Ведьмака] - Fa
 FAILED tests/test_phi4mini.py::test_phi4mini[Сделай потемнее] - Failed: {
 FAILED tests/test_phi4mini.py::test_phi4mini[Сделай свет немного ярче] - Fail...
 FAILED tests/test_phi4mini.py::test_phi4mini[Запусти седьмую серию второго сезона Бен 10]
-FAILED tests/test_phi4mini.py::test_phi4mini[Поставь Ведьмака у мамы] - Faile...
 FAILED tests/test_phi4mini.py::test_phi4mini[Перемотай на пять минут назад]
+FAILED tests/test_phi4mini.py::test_phi4mini[Поставь альбом Meteora у Маши]
 FAILED tests/test_phi4mini.py::test_phi4mini[Сделай музыку погромче] - Failed: {
-FAILED tests/test_phi4mini.py::test_phi4mini[Поставь громкость на 40 процентов]
 FAILED tests/test_phi4mini.py::test_phi4mini[Запусти папин телевизор] - Faile...
 FAILED tests/test_phi4mini.py::test_phi4mini[Включи телик Артема] - Failed: {
 FAILED tests/test_phi4mini.py::test_phi4mini[Запусти Доктора Кто в гостиной]
@@ -231,19 +220,19 @@ FAILED tests/test_phi4mini.py::test_phi4mini[Прибавь у Маши ярко
 FAILED tests/test_phi4mini.py::test_phi4mini[У Антона в спальне сделай потемнее]
 FAILED tests/test_phi4mini.py::test_phi4mini[Поставь у меня на кухне яркость 25 процентов]
 FAILED tests/test_phi4mini.py::test_phi4mini[Убавь у мамы яркость немного] - ...
-================== 19 failed, 38 passed in 102.42s (0:01:42) ===================
+======================== 18 failed, 39 passed in 57.47s ========================
 
 ========================================================
 Ollama latency: phi4-mini
 ========================================================
-cold start : 19.041 s
+cold start : 6.680 s
 
 requests   : 57
-mean       : 1.461 s
-min        : 1.055 s
-p50        : 1.403 s
-p90        : 1.727 s
-p95        : 1.812 s
-p99        : 1.938 s
-max        : 2.008 s
+mean       : 0.889 s
+min        : 0.686 s
+p50        : 0.861 s
+p90        : 1.016 s
+p95        : 1.097 s
+p99        : 1.158 s
+max        : 1.197 s
 ========================================================

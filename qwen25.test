@@ -5,8 +5,8 @@ configfile: pyproject.toml
 plugins: anyio-4.14.2
 collected 57 items
 
-tests/test_qwen25.py ..F...FF..F.......FF...F.F...F...F.FF..FFFFF.F..... [ 89%]
-F.F..F                                                                   [100%]
+tests/test_qwen25.py ..F...FF..F............F.F...F...F.FF..FFFFF.F..... [ 89%]
+F.F...                                                                   [100%]
 
 =================================== FAILURES ===================================
 _____________________ test_qwen25[Запусти мамин телевизор] _____________________
@@ -16,10 +16,6 @@ _____________________ test_qwen25[Запусти мамин телевизор] 
     "action": {
       "expected": "on",
       "actual": "run"
-    },
-    "place": {
-      "expected": "",
-      "actual": "дом"
     }
   }
 }
@@ -47,29 +43,13 @@ _________________________ test_qwen25[Сделай потемнее] ___________
 {
   "input": "Сделай потемнее",
   "diff": {
+    "action": {
+      "expected": "decrease",
+      "actual": "increase"
+    },
     "value": {
       "expected": "",
-      "actual": "на 100 процентов"
-    }
-  }
-}
-__________________ test_qwen25[Запусти телевизор в гостиной] ___________________
-{
-  "input": "Запусти телевизор в гостиной",
-  "diff": {
-    "action": {
-      "expected": "on",
-      "actual": "run"
-    }
-  }
-}
-______________________ test_qwen25[Выруби Антонов телик] _______________________
-{
-  "input": "Выруби Антонов телик",
-  "diff": {
-    "place": {
-      "expected": "",
-      "actual": "гостиная"
+      "actual": "на несколько процентов"
     }
   }
 }
@@ -99,7 +79,7 @@ _____________________ test_qwen25[Сделай музыку погромче] __
   "diff": {
     "value": {
       "expected": "",
-      "actual": "на несколько децибел"
+      "actual": "на несколько громкостей"
     }
   }
 }
@@ -211,23 +191,13 @@ _______________ test_qwen25[У Антона в спальне сделай по�
 {
   "input": "У Антона в спальне сделай потемнее",
   "diff": {
-    "value": {
-      "expected": "",
-      "actual": "потемнее"
-    },
     "action": {
       "expected": "decrease",
       "actual": "set_state"
-    }
-  }
-}
-__________________ test_qwen25[Убавь у мамы яркость немного] ___________________
-{
-  "input": "Убавь у мамы яркость немного",
-  "diff": {
+    },
     "value": {
-      "expected": "немного",
-      "actual": "много"
+      "expected": "",
+      "actual": "потемнее"
     }
   }
 }
@@ -236,8 +206,6 @@ FAILED tests/test_qwen25.py::test_qwen25[Запусти мамин телеви�
 FAILED tests/test_qwen25.py::test_qwen25[Включи Ведьмака] - Failed: {
 FAILED tests/test_qwen25.py::test_qwen25[Включи мамин телевизор] - Failed: {
 FAILED tests/test_qwen25.py::test_qwen25[Сделай потемнее] - Failed: {
-FAILED tests/test_qwen25.py::test_qwen25[Запусти телевизор в гостиной] - Fail...
-FAILED tests/test_qwen25.py::test_qwen25[Выруби Антонов телик] - Failed: {
 FAILED tests/test_qwen25.py::test_qwen25[Поставь Ведьмака у мамы] - Failed: {
 FAILED tests/test_qwen25.py::test_qwen25[Перемотай на пять минут назад] - Fai...
 FAILED tests/test_qwen25.py::test_qwen25[Сделай музыку погромче] - Failed: {
@@ -252,20 +220,19 @@ FAILED tests/test_qwen25.py::test_qwen25[Запусти музыку у мамы
 FAILED tests/test_qwen25.py::test_qwen25[Запусти мой плеер] - Failed: {
 FAILED tests/test_qwen25.py::test_qwen25[Сделай у папы зеленый свет] - Failed: {
 FAILED tests/test_qwen25.py::test_qwen25[У Антона в спальне сделай потемнее]
-FAILED tests/test_qwen25.py::test_qwen25[Убавь у мамы яркость немного] - Fail...
-================== 21 failed, 36 passed in 117.97s (0:01:57) ===================
+=================== 18 failed, 39 passed in 72.76s (0:01:12) ===================
 
 ========================================================
 Ollama latency: qwen2.5:3b
 ========================================================
-cold start : 15.756 s
+cold start : 6.680 s
 
 requests   : 57
-mean       : 1.792 s
-min        : 1.333 s
-p50        : 1.762 s
-p90        : 2.035 s
-p95        : 2.103 s
-p99        : 2.211 s
-max        : 2.214 s
+mean       : 1.158 s
+min        : 0.901 s
+p50        : 1.138 s
+p90        : 1.324 s
+p95        : 1.380 s
+p99        : 1.428 s
+max        : 1.428 s
 ========================================================

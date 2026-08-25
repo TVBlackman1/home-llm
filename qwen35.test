@@ -1,73 +1,47 @@
 ============================= test session starts ==============================
-platform linux -- Python 3.14.4, pytest-9.1.1, pluggy-1.6.0 -- /root/ollama-test/ollama-runner/.venv/bin/python3
-cachedir: .pytest_cache
+platform linux -- Python 3.14.4, pytest-9.1.1, pluggy-1.6.0
 rootdir: /root/ollama-test/ollama-runner
 configfile: pyproject.toml
 plugins: anyio-4.14.2
-collecting ... collected 57 items
+collected 57 items
 
-tests/test_qwen35.py::test_qwen35[Включи свет] PASSED                    [  1%]
-tests/test_qwen35.py::test_qwen35[Перемотай сериал на 10 минут вперед] PASSED [  3%]
-tests/test_qwen35.py::test_qwen35[Запусти мамин телевизор] PASSED        [  5%]
-tests/test_qwen35.py::test_qwen35[Сделай свет в спальне красным] PASSED  [  7%]
-tests/test_qwen35.py::test_qwen35[Включи у Маши Sonne] PASSED            [  8%]
-tests/test_qwen35.py::test_qwen35[Хочу фиолетовый свет] PASSED           [ 10%]
-tests/test_qwen35.py::test_qwen35[Включи Ведьмака] FAILED                [ 12%]
-tests/test_qwen35.py::test_qwen35[Включи мамин телевизор] PASSED         [ 14%]
-tests/test_qwen35.py::test_qwen35[Увеличь яркость на 20 процентов] PASSED [ 15%]
-tests/test_qwen35.py::test_qwen35[Выключи свет на кухне] PASSED          [ 17%]
-tests/test_qwen35.py::test_qwen35[Сделай потемнее] PASSED                [ 19%]
-tests/test_qwen35.py::test_qwen35[Сделай свет немного ярче] PASSED       [ 21%]
-tests/test_qwen35.py::test_qwen35[Убавь яркость на 30 процентов] PASSED  [ 22%]
-tests/test_qwen35.py::test_qwen35[Поставь яркость 50 процентов] PASSED   [ 24%]
-tests/test_qwen35.py::test_qwen35[Сделай на кухне теплый белый] PASSED   [ 26%]
-tests/test_qwen35.py::test_qwen35[Сделай мамин свет синим] PASSED        [ 28%]
-tests/test_qwen35.py::test_qwen35[Выруби Машин свет в спальне] PASSED    [ 29%]
-tests/test_qwen35.py::test_qwen35[Включи телевизор в гостиной] PASSED    [ 31%]
-tests/test_qwen35.py::test_qwen35[Запусти телевизор в гостиной] PASSED   [ 33%]
-tests/test_qwen35.py::test_qwen35[Выруби Антонов телик] PASSED           [ 35%]
-tests/test_qwen35.py::test_qwen35[Поставь Интерстеллар] PASSED           [ 36%]
-tests/test_qwen35.py::test_qwen35[Запусти пятую серию второго сезона Доктора Кто] PASSED [ 38%]
-tests/test_qwen35.py::test_qwen35[Запусти седьмую серию второго сезона Бен 10] PASSED [ 40%]
-tests/test_qwen35.py::test_qwen35[Поставь Ведьмака у мамы] PASSED        [ 42%]
-tests/test_qwen35.py::test_qwen35[Поставь сериал на паузу] PASSED        [ 43%]
-tests/test_qwen35.py::test_qwen35[Перемотай на пять минут назад] FAILED  [ 45%]
-tests/test_qwen35.py::test_qwen35[Включи музыку на кухне] PASSED         [ 47%]
-tests/test_qwen35.py::test_qwen35[Вруби Rammstein] PASSED                [ 49%]
-tests/test_qwen35.py::test_qwen35[Поставь альбом Meteora у Маши] PASSED  [ 50%]
-tests/test_qwen35.py::test_qwen35[Сделай музыку погромче] PASSED         [ 52%]
-tests/test_qwen35.py::test_qwen35[Убавь громкость на кухне на 15 процентов] PASSED [ 54%]
-tests/test_qwen35.py::test_qwen35[Поставь громкость на 40 процентов] PASSED [ 56%]
-tests/test_qwen35.py::test_qwen35[Останови музыку у Антона] PASSED       [ 57%]
-tests/test_qwen35.py::test_qwen35[Запусти папин телевизор] PASSED        [ 59%]
-tests/test_qwen35.py::test_qwen35[Включи телик Артема] FAILED            [ 61%]
-tests/test_qwen35.py::test_qwen35[Запусти телевизор на кухне] PASSED     [ 63%]
-tests/test_qwen35.py::test_qwen35[Включи мой телевизор] PASSED           [ 64%]
-tests/test_qwen35.py::test_qwen35[Вруби телевизор в спальне] PASSED      [ 66%]
-tests/test_qwen35.py::test_qwen35[Запусти маме первую серию Ведьмака] PASSED [ 68%]
-tests/test_qwen35.py::test_qwen35[Включи Интерстеллар у Антона] FAILED   [ 70%]
-tests/test_qwen35.py::test_qwen35[Запусти Доктора Кто в гостиной] FAILED [ 71%]
-tests/test_qwen35.py::test_qwen35[Включи вторую серию первого сезона Аркейна] PASSED [ 73%]
-tests/test_qwen35.py::test_qwen35[Поставь Шрека у Маши] FAILED           [ 75%]
-tests/test_qwen35.py::test_qwen35[Запусти музыку у мамы] PASSED          [ 77%]
-tests/test_qwen35.py::test_qwen35[Включи плеер в спальне] PASSED         [ 78%]
-tests/test_qwen35.py::test_qwen35[Запусти мой плеер] PASSED              [ 80%]
-tests/test_qwen35.py::test_qwen35[Включи музыку у Антона] PASSED         [ 82%]
-tests/test_qwen35.py::test_qwen35[Запусти Sonne у мамы] PASSED           [ 84%]
-tests/test_qwen35.py::test_qwen35[Включи Linkin Park на кухне] PASSED    [ 85%]
-tests/test_qwen35.py::test_qwen35[Поставь плейлист для уборки у Маши] PASSED [ 87%]
-tests/test_qwen35.py::test_qwen35[Запусти альбом Mutter] PASSED          [ 89%]
-tests/test_qwen35.py::test_qwen35[Сделай у папы зеленый свет] PASSED     [ 91%]
-tests/test_qwen35.py::test_qwen35[Прибавь у Маши яркость на 10 процентов] PASSED [ 92%]
-tests/test_qwen35.py::test_qwen35[У Антона в спальне сделай потемнее] PASSED [ 94%]
-tests/test_qwen35.py::test_qwen35[Поставь у меня на кухне яркость 25 процентов] PASSED [ 96%]
-tests/test_qwen35.py::test_qwen35[Хочу в гостиной оранжевый] PASSED      [ 98%]
-tests/test_qwen35.py::test_qwen35[Убавь у мамы яркость немного] PASSED   [100%]
+tests/test_qwen35.py ......F...FF...........F.F........F....FF.F.....F.. [ 89%]
+......                                                                   [100%]
 
 =================================== FAILURES ===================================
 _________________________ test_qwen35[Включи Ведьмака] _________________________
 {
   "input": "Включи Ведьмака",
+  "diff": {
+    "device": {
+      "expected": "tv",
+      "actual": "media"
+    }
+  }
+}
+_________________________ test_qwen35[Сделай потемнее] _________________________
+{
+  "input": "Сделай потемнее",
+  "diff": {
+    "action": {
+      "expected": "decrease",
+      "actual": "set_state"
+    }
+  }
+}
+____________________ test_qwen35[Сделай свет немного ярче] _____________________
+{
+  "input": "Сделай свет немного ярче",
+  "diff": {
+    "owner": {
+      "expected": "",
+      "actual": "я"
+    }
+  }
+}
+_____________________ test_qwen35[Поставь Ведьмака у мамы] _____________________
+{
+  "input": "Поставь Ведьмака у мамы",
   "diff": {
     "device": {
       "expected": "tv",
@@ -102,6 +76,10 @@ __________________ test_qwen35[Включи Интерстеллар у Анто
     "value": {
       "expected": "Интерстеллар",
       "actual": ""
+    },
+    "action": {
+      "expected": "run",
+      "actual": "on"
     }
   }
 }
@@ -125,26 +103,44 @@ ______________________ test_qwen35[Поставь Шрека у Маши] ______
     }
   }
 }
+___________________ test_qwen35[Включи Linkin Park на кухне] ___________________
+{
+  "input": "Включи Linkin Park на кухне",
+  "diff": {
+    "value": {
+      "expected": "Linkin Park",
+      "actual": ""
+    },
+    "action": {
+      "expected": "run",
+      "actual": "on"
+    }
+  }
+}
 =========================== short test summary info ============================
 FAILED tests/test_qwen35.py::test_qwen35[Включи Ведьмака] - Failed: {
+FAILED tests/test_qwen35.py::test_qwen35[Сделай потемнее] - Failed: {
+FAILED tests/test_qwen35.py::test_qwen35[Сделай свет немного ярче] - Failed: {
+FAILED tests/test_qwen35.py::test_qwen35[Поставь Ведьмака у мамы] - Failed: {
 FAILED tests/test_qwen35.py::test_qwen35[Перемотай на пять минут назад] - Fai...
 FAILED tests/test_qwen35.py::test_qwen35[Включи телик Артема] - Failed: {
 FAILED tests/test_qwen35.py::test_qwen35[Включи Интерстеллар у Антона] - Fail...
 FAILED tests/test_qwen35.py::test_qwen35[Запусти Доктора Кто в гостиной] - Fa...
 FAILED tests/test_qwen35.py::test_qwen35[Поставь Шрека у Маши] - Failed: {
-=================== 6 failed, 51 passed in 385.40s (0:06:25) ===================
+FAILED tests/test_qwen35.py::test_qwen35[Включи Linkin Park на кухне] - Faile...
+================== 10 failed, 47 passed in 357.86s (0:05:57) ===================
 
 ========================================================
 Ollama latency: qwen3.5:4b
 ========================================================
-cold start : 24.121 s
+cold start : 7.842 s
 
 requests   : 57
-mean       : 6.337 s
-min        : 1.087 s
-p50        : 6.682 s
-p90        : 7.001 s
-p95        : 7.104 s
-p99        : 7.372 s
-max        : 7.390 s
+mean       : 6.139 s
+min        : 5.233 s
+p50        : 6.341 s
+p90        : 6.552 s
+p95        : 6.583 s
+p99        : 6.609 s
+max        : 6.616 s
 ========================================================

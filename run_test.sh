@@ -1,7 +1,7 @@
-time uv run pytest tests/test_qwen35.py -v > qwen35.test
+time uv run pytest tests/test_qwen35.py > qwen35.test
 ollama stop qwen3.5:4b
 
-time uv run pytest tests/test_gemma3.py -v > gemma3.test
+time uv run pytest tests/test_gemma3.py > gemma3.test
 ollama stop gemma3:4b
 
 time uv run pytest tests/test_qwen25.py > qwen25.test
