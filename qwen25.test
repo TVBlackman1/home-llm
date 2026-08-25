@@ -1,0 +1,271 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.4, pytest-9.1.1, pluggy-1.6.0
+rootdir: /root/ollama-test/ollama-runner
+configfile: pyproject.toml
+plugins: anyio-4.14.2
+collected 57 items
+
+tests/test_qwen25.py ..F...FF..F.......FF...F.F...F...F.FF..FFFFF.F..... [ 89%]
+F.F..F                                                                   [100%]
+
+=================================== FAILURES ===================================
+_____________________ test_qwen25[Запусти мамин телевизор] _____________________
+{
+  "input": "Запусти мамин телевизор",
+  "diff": {
+    "action": {
+      "expected": "on",
+      "actual": "run"
+    },
+    "place": {
+      "expected": "",
+      "actual": "дом"
+    }
+  }
+}
+_________________________ test_qwen25[Включи Ведьмака] _________________________
+{
+  "input": "Включи Ведьмака",
+  "diff": {
+    "device": {
+      "expected": "tv",
+      "actual": "media"
+    }
+  }
+}
+_____________________ test_qwen25[Включи мамин телевизор] ______________________
+{
+  "input": "Включи мамин телевизор",
+  "diff": {
+    "place": {
+      "expected": "",
+      "actual": "дом"
+    }
+  }
+}
+_________________________ test_qwen25[Сделай потемнее] _________________________
+{
+  "input": "Сделай потемнее",
+  "diff": {
+    "value": {
+      "expected": "",
+      "actual": "на 100 процентов"
+    }
+  }
+}
+__________________ test_qwen25[Запусти телевизор в гостиной] ___________________
+{
+  "input": "Запусти телевизор в гостиной",
+  "diff": {
+    "action": {
+      "expected": "on",
+      "actual": "run"
+    }
+  }
+}
+______________________ test_qwen25[Выруби Антонов телик] _______________________
+{
+  "input": "Выруби Антонов телик",
+  "diff": {
+    "place": {
+      "expected": "",
+      "actual": "гостиная"
+    }
+  }
+}
+_____________________ test_qwen25[Поставь Ведьмака у мамы] _____________________
+{
+  "input": "Поставь Ведьмака у мамы",
+  "diff": {
+    "device": {
+      "expected": "tv",
+      "actual": "media"
+    }
+  }
+}
+__________________ test_qwen25[Перемотай на пять минут назад] __________________
+{
+  "input": "Перемотай на пять минут назад",
+  "diff": {
+    "action": {
+      "expected": "decrease",
+      "actual": "increase"
+    }
+  }
+}
+_____________________ test_qwen25[Сделай музыку погромче] ______________________
+{
+  "input": "Сделай музыку погромче",
+  "diff": {
+    "value": {
+      "expected": "",
+      "actual": "на несколько децибел"
+    }
+  }
+}
+_____________________ test_qwen25[Запусти папин телевизор] _____________________
+{
+  "input": "Запусти папин телевизор",
+  "diff": {
+    "action": {
+      "expected": "on",
+      "actual": "run"
+    },
+    "place": {
+      "expected": "",
+      "actual": "дом"
+    }
+  }
+}
+___________________ test_qwen25[Запусти телевизор на кухне] ____________________
+{
+  "input": "Запусти телевизор на кухне",
+  "diff": {
+    "action": {
+      "expected": "on",
+      "actual": "run"
+    }
+  }
+}
+______________________ test_qwen25[Включи мой телевизор] _______________________
+{
+  "input": "Включи мой телевизор",
+  "diff": {
+    "place": {
+      "expected": "",
+      "actual": "дом"
+    }
+  }
+}
+__________________ test_qwen25[Включи Интерстеллар у Антона] ___________________
+{
+  "input": "Включи Интерстеллар у Антона",
+  "diff": {
+    "place": {
+      "expected": "",
+      "actual": "кухня"
+    }
+  }
+}
+_________________ test_qwen25[Запусти Доктора Кто в гостиной] __________________
+{
+  "input": "Запусти Доктора Кто в гостиной",
+  "diff": {
+    "value": {
+      "expected": "Доктор Кто",
+      "actual": "Доктора Кто"
+    }
+  }
+}
+___________ test_qwen25[Включи вторую серию первого сезона Аркейна] ____________
+{
+  "input": "Включи вторую серию первого сезона Аркейна",
+  "diff": {
+    "place": {
+      "expected": "",
+      "actual": "гостиная"
+    }
+  }
+}
+______________________ test_qwen25[Поставь Шрека у Маши] _______________________
+{
+  "input": "Поставь Шрека у Маши",
+  "diff": {
+    "device": {
+      "expected": "tv",
+      "actual": "media"
+    }
+  }
+}
+______________________ test_qwen25[Запусти музыку у мамы] ______________________
+{
+  "input": "Запусти музыку у мамы",
+  "diff": {
+    "action": {
+      "expected": "on",
+      "actual": "run"
+    }
+  }
+}
+________________________ test_qwen25[Запусти мой плеер] ________________________
+{
+  "input": "Запусти мой плеер",
+  "diff": {
+    "action": {
+      "expected": "on",
+      "actual": "run"
+    }
+  }
+}
+___________________ test_qwen25[Сделай у папы зеленый свет] ____________________
+{
+  "input": "Сделай у папы зеленый свет",
+  "diff": {
+    "place": {
+      "expected": "",
+      "actual": "кухня"
+    }
+  }
+}
+_______________ test_qwen25[У Антона в спальне сделай потемнее] ________________
+{
+  "input": "У Антона в спальне сделай потемнее",
+  "diff": {
+    "value": {
+      "expected": "",
+      "actual": "потемнее"
+    },
+    "action": {
+      "expected": "decrease",
+      "actual": "set_state"
+    }
+  }
+}
+__________________ test_qwen25[Убавь у мамы яркость немного] ___________________
+{
+  "input": "Убавь у мамы яркость немного",
+  "diff": {
+    "value": {
+      "expected": "немного",
+      "actual": "много"
+    }
+  }
+}
+=========================== short test summary info ============================
+FAILED tests/test_qwen25.py::test_qwen25[Запусти мамин телевизор] - Failed: {
+FAILED tests/test_qwen25.py::test_qwen25[Включи Ведьмака] - Failed: {
+FAILED tests/test_qwen25.py::test_qwen25[Включи мамин телевизор] - Failed: {
+FAILED tests/test_qwen25.py::test_qwen25[Сделай потемнее] - Failed: {
+FAILED tests/test_qwen25.py::test_qwen25[Запусти телевизор в гостиной] - Fail...
+FAILED tests/test_qwen25.py::test_qwen25[Выруби Антонов телик] - Failed: {
+FAILED tests/test_qwen25.py::test_qwen25[Поставь Ведьмака у мамы] - Failed: {
+FAILED tests/test_qwen25.py::test_qwen25[Перемотай на пять минут назад] - Fai...
+FAILED tests/test_qwen25.py::test_qwen25[Сделай музыку погромче] - Failed: {
+FAILED tests/test_qwen25.py::test_qwen25[Запусти папин телевизор] - Failed: {
+FAILED tests/test_qwen25.py::test_qwen25[Запусти телевизор на кухне] - Failed: {
+FAILED tests/test_qwen25.py::test_qwen25[Включи мой телевизор] - Failed: {
+FAILED tests/test_qwen25.py::test_qwen25[Включи Интерстеллар у Антона] - Fail...
+FAILED tests/test_qwen25.py::test_qwen25[Запусти Доктора Кто в гостиной] - Fa...
+FAILED tests/test_qwen25.py::test_qwen25[Включи вторую серию первого сезона Аркейна]
+FAILED tests/test_qwen25.py::test_qwen25[Поставь Шрека у Маши] - Failed: {
+FAILED tests/test_qwen25.py::test_qwen25[Запусти музыку у мамы] - Failed: {
+FAILED tests/test_qwen25.py::test_qwen25[Запусти мой плеер] - Failed: {
+FAILED tests/test_qwen25.py::test_qwen25[Сделай у папы зеленый свет] - Failed: {
+FAILED tests/test_qwen25.py::test_qwen25[У Антона в спальне сделай потемнее]
+FAILED tests/test_qwen25.py::test_qwen25[Убавь у мамы яркость немного] - Fail...
+================== 21 failed, 36 passed in 117.97s (0:01:57) ===================
+
+========================================================
+Ollama latency: qwen2.5:3b
+========================================================
+cold start : 15.756 s
+
+requests   : 57
+mean       : 1.792 s
+min        : 1.333 s
+p50        : 1.762 s
+p90        : 2.035 s
+p95        : 2.103 s
+p99        : 2.211 s
+max        : 2.214 s
+========================================================

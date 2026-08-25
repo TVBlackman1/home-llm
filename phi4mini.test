@@ -1,0 +1,249 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.4, pytest-9.1.1, pluggy-1.6.0
+rootdir: /root/ollama-test/ollama-runner
+configfile: pyproject.toml
+plugins: anyio-4.14.2
+collected 57 items
+
+tests/test_phi4mini.py ......F...FF..........FF.F...F.F.FF.....F.FF.F... [ 85%]
+.F.FFF.F                                                                 [100%]
+
+=================================== FAILURES ===================================
+________________________ test_phi4mini[Включи Ведьмака] ________________________
+{
+  "input": "Включи Ведьмака",
+  "diff": {
+    "action": {
+      "expected": "run",
+      "actual": "on"
+    },
+    "device": {
+      "expected": "tv",
+      "actual": "light"
+    },
+    "value": {
+      "expected": "Ведьмак",
+      "actual": ""
+    }
+  }
+}
+________________________ test_phi4mini[Сделай потемнее] ________________________
+{
+  "input": "Сделай потемнее",
+  "diff": {
+    "value": {
+      "expected": "",
+      "actual": "потемнее"
+    }
+  }
+}
+___________________ test_phi4mini[Сделай свет немного ярче] ____________________
+{
+  "input": "Сделай свет немного ярче",
+  "diff": {
+    "owner": {
+      "expected": "",
+      "actual": "я"
+    }
+  }
+}
+__________ test_phi4mini[Запусти седьмую серию второго сезона Бен 10] __________
+{
+  "input": "Запусти седьмую серию второго сезона Бен 10",
+  "diff": {
+    "owner": {
+      "expected": "",
+      "actual": "я"
+    }
+  }
+}
+____________________ test_phi4mini[Поставь Ведьмака у мамы] ____________________
+{
+  "input": "Поставь Ведьмака у мамы",
+  "diff": {
+    "device": {
+      "expected": "tv",
+      "actual": "media"
+    }
+  }
+}
+_________________ test_phi4mini[Перемотай на пять минут назад] _________________
+{
+  "input": "Перемотай на пять минут назад",
+  "diff": {
+    "action": {
+      "expected": "decrease",
+      "actual": "increase"
+    }
+  }
+}
+____________________ test_phi4mini[Сделай музыку погромче] _____________________
+{
+  "input": "Сделай музыку погромче",
+  "diff": {
+    "value": {
+      "expected": "",
+      "actual": "погромче"
+    }
+  }
+}
+_______________ test_phi4mini[Поставь громкость на 40 процентов] _______________
+{
+  "input": "Поставь громкость на 40 процентов",
+  "diff": {
+    "value": {
+      "expected": "40 процентов",
+      "actual": "на 40 процентов"
+    }
+  }
+}
+____________________ test_phi4mini[Запусти папин телевизор] ____________________
+{
+  "input": "Запусти папин телевизор",
+  "diff": {
+    "action": {
+      "expected": "on",
+      "actual": "run"
+    }
+  }
+}
+______________________ test_phi4mini[Включи телик Артема] ______________________
+{
+  "input": "Включи телик Артема",
+  "diff": {
+    "owner": {
+      "expected": "Артем",
+      "actual": ""
+    }
+  }
+}
+________________ test_phi4mini[Запусти Доктора Кто в гостиной] _________________
+{
+  "input": "Запусти Доктора Кто в гостиной",
+  "diff": {
+    "value": {
+      "expected": "Доктор Кто",
+      "actual": "Доктора Кто"
+    }
+  }
+}
+_____________________ test_phi4mini[Поставь Шрека у Маши] ______________________
+{
+  "input": "Поставь Шрека у Маши",
+  "diff": {
+    "device": {
+      "expected": "tv",
+      "actual": "media"
+    }
+  }
+}
+_____________________ test_phi4mini[Запусти музыку у мамы] _____________________
+{
+  "input": "Запусти музыку у мамы",
+  "diff": {
+    "action": {
+      "expected": "on",
+      "actual": "run"
+    }
+  }
+}
+_______________________ test_phi4mini[Запусти мой плеер] _______________________
+{
+  "input": "Запусти мой плеер",
+  "diff": {
+    "action": {
+      "expected": "on",
+      "actual": "run"
+    }
+  }
+}
+_____________________ test_phi4mini[Запусти альбом Mutter] _____________________
+{
+  "input": "Запусти альбом Mutter",
+  "diff": {
+    "owner": {
+      "expected": "",
+      "actual": "я"
+    }
+  }
+}
+____________ test_phi4mini[Прибавь у Маши яркость на 10 процентов] _____________
+{
+  "input": "Прибавь у Маши яркость на 10 процентов",
+  "diff": {
+    "device": {
+      "expected": "light",
+      "actual": "media"
+    }
+  }
+}
+______________ test_phi4mini[У Антона в спальне сделай потемнее] _______________
+{
+  "input": "У Антона в спальне сделай потемнее",
+  "diff": {
+    "action": {
+      "expected": "decrease",
+      "actual": "set_state"
+    },
+    "value": {
+      "expected": "",
+      "actual": "потемнее"
+    }
+  }
+}
+_________ test_phi4mini[Поставь у меня на кухне яркость 25 процентов] __________
+{
+  "input": "Поставь у меня на кухне яркость 25 процентов",
+  "diff": {
+    "owner": {
+      "expected": "я",
+      "actual": ""
+    }
+  }
+}
+_________________ test_phi4mini[Убавь у мамы яркость немного] __________________
+{
+  "input": "Убавь у мамы яркость немного",
+  "diff": {
+    "device": {
+      "expected": "light",
+      "actual": "media"
+    }
+  }
+}
+=========================== short test summary info ============================
+FAILED tests/test_phi4mini.py::test_phi4mini[Включи Ведьмака] - Failed: {
+FAILED tests/test_phi4mini.py::test_phi4mini[Сделай потемнее] - Failed: {
+FAILED tests/test_phi4mini.py::test_phi4mini[Сделай свет немного ярче] - Fail...
+FAILED tests/test_phi4mini.py::test_phi4mini[Запусти седьмую серию второго сезона Бен 10]
+FAILED tests/test_phi4mini.py::test_phi4mini[Поставь Ведьмака у мамы] - Faile...
+FAILED tests/test_phi4mini.py::test_phi4mini[Перемотай на пять минут назад]
+FAILED tests/test_phi4mini.py::test_phi4mini[Сделай музыку погромче] - Failed: {
+FAILED tests/test_phi4mini.py::test_phi4mini[Поставь громкость на 40 процентов]
+FAILED tests/test_phi4mini.py::test_phi4mini[Запусти папин телевизор] - Faile...
+FAILED tests/test_phi4mini.py::test_phi4mini[Включи телик Артема] - Failed: {
+FAILED tests/test_phi4mini.py::test_phi4mini[Запусти Доктора Кто в гостиной]
+FAILED tests/test_phi4mini.py::test_phi4mini[Поставь Шрека у Маши] - Failed: {
+FAILED tests/test_phi4mini.py::test_phi4mini[Запусти музыку у мамы] - Failed: {
+FAILED tests/test_phi4mini.py::test_phi4mini[Запусти мой плеер] - Failed: {
+FAILED tests/test_phi4mini.py::test_phi4mini[Запусти альбом Mutter] - Failed: {
+FAILED tests/test_phi4mini.py::test_phi4mini[Прибавь у Маши яркость на 10 процентов]
+FAILED tests/test_phi4mini.py::test_phi4mini[У Антона в спальне сделай потемнее]
+FAILED tests/test_phi4mini.py::test_phi4mini[Поставь у меня на кухне яркость 25 процентов]
+FAILED tests/test_phi4mini.py::test_phi4mini[Убавь у мамы яркость немного] - ...
+================== 19 failed, 38 passed in 102.42s (0:01:42) ===================
+
+========================================================
+Ollama latency: phi4-mini
+========================================================
+cold start : 19.041 s
+
+requests   : 57
+mean       : 1.461 s
+min        : 1.055 s
+p50        : 1.403 s
+p90        : 1.727 s
+p95        : 1.812 s
+p99        : 1.938 s
+max        : 2.008 s
+========================================================

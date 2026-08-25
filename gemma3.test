@@ -1,0 +1,246 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.4, pytest-9.1.1, pluggy-1.6.0 -- /root/ollama-test/ollama-runner/.venv/bin/python3
+cachedir: .pytest_cache
+rootdir: /root/ollama-test/ollama-runner
+configfile: pyproject.toml
+plugins: anyio-4.14.2
+collecting ... collected 57 items
+
+tests/test_gemma3.py::test_gemma3[Включи свет] PASSED                    [  1%]
+tests/test_gemma3.py::test_gemma3[Перемотай сериал на 10 минут вперед] PASSED [  3%]
+tests/test_gemma3.py::test_gemma3[Запусти мамин телевизор] FAILED        [  5%]
+tests/test_gemma3.py::test_gemma3[Сделай свет в спальне красным] PASSED  [  7%]
+tests/test_gemma3.py::test_gemma3[Включи у Маши Sonne] PASSED            [  8%]
+tests/test_gemma3.py::test_gemma3[Хочу фиолетовый свет] PASSED           [ 10%]
+tests/test_gemma3.py::test_gemma3[Включи Ведьмака] PASSED                [ 12%]
+tests/test_gemma3.py::test_gemma3[Включи мамин телевизор] PASSED         [ 14%]
+tests/test_gemma3.py::test_gemma3[Увеличь яркость на 20 процентов] PASSED [ 15%]
+tests/test_gemma3.py::test_gemma3[Выключи свет на кухне] PASSED          [ 17%]
+tests/test_gemma3.py::test_gemma3[Сделай потемнее] FAILED                [ 19%]
+tests/test_gemma3.py::test_gemma3[Сделай свет немного ярче] FAILED       [ 21%]
+tests/test_gemma3.py::test_gemma3[Убавь яркость на 30 процентов] PASSED  [ 22%]
+tests/test_gemma3.py::test_gemma3[Поставь яркость 50 процентов] PASSED   [ 24%]
+tests/test_gemma3.py::test_gemma3[Сделай на кухне теплый белый] PASSED   [ 26%]
+tests/test_gemma3.py::test_gemma3[Сделай мамин свет синим] FAILED        [ 28%]
+tests/test_gemma3.py::test_gemma3[Выруби Машин свет в спальне] PASSED    [ 29%]
+tests/test_gemma3.py::test_gemma3[Включи телевизор в гостиной] PASSED    [ 31%]
+tests/test_gemma3.py::test_gemma3[Запусти телевизор в гостиной] PASSED   [ 33%]
+tests/test_gemma3.py::test_gemma3[Выруби Антонов телик] PASSED           [ 35%]
+tests/test_gemma3.py::test_gemma3[Поставь Интерстеллар] PASSED           [ 36%]
+tests/test_gemma3.py::test_gemma3[Запусти пятую серию второго сезона Доктора Кто] FAILED [ 38%]
+tests/test_gemma3.py::test_gemma3[Запусти седьмую серию второго сезона Бен 10] PASSED [ 40%]
+tests/test_gemma3.py::test_gemma3[Поставь Ведьмака у мамы] PASSED        [ 42%]
+tests/test_gemma3.py::test_gemma3[Поставь сериал на паузу] PASSED        [ 43%]
+tests/test_gemma3.py::test_gemma3[Перемотай на пять минут назад] FAILED  [ 45%]
+tests/test_gemma3.py::test_gemma3[Включи музыку на кухне] PASSED         [ 47%]
+tests/test_gemma3.py::test_gemma3[Вруби Rammstein] FAILED                [ 49%]
+tests/test_gemma3.py::test_gemma3[Поставь альбом Meteora у Маши] FAILED  [ 50%]
+tests/test_gemma3.py::test_gemma3[Сделай музыку погромче] PASSED         [ 52%]
+tests/test_gemma3.py::test_gemma3[Убавь громкость на кухне на 15 процентов] PASSED [ 54%]
+tests/test_gemma3.py::test_gemma3[Поставь громкость на 40 процентов] FAILED [ 56%]
+tests/test_gemma3.py::test_gemma3[Останови музыку у Антона] PASSED       [ 57%]
+tests/test_gemma3.py::test_gemma3[Запусти папин телевизор] FAILED        [ 59%]
+tests/test_gemma3.py::test_gemma3[Включи телик Артема] PASSED            [ 61%]
+tests/test_gemma3.py::test_gemma3[Запусти телевизор на кухне] PASSED     [ 63%]
+tests/test_gemma3.py::test_gemma3[Включи мой телевизор] PASSED           [ 64%]
+tests/test_gemma3.py::test_gemma3[Вруби телевизор в спальне] PASSED      [ 66%]
+tests/test_gemma3.py::test_gemma3[Запусти маме первую серию Ведьмака] PASSED [ 68%]
+tests/test_gemma3.py::test_gemma3[Включи Интерстеллар у Антона] PASSED   [ 70%]
+tests/test_gemma3.py::test_gemma3[Запусти Доктора Кто в гостиной] FAILED [ 71%]
+tests/test_gemma3.py::test_gemma3[Включи вторую серию первого сезона Аркейна] PASSED [ 73%]
+tests/test_gemma3.py::test_gemma3[Поставь Шрека у Маши] PASSED           [ 75%]
+tests/test_gemma3.py::test_gemma3[Запусти музыку у мамы] FAILED          [ 77%]
+tests/test_gemma3.py::test_gemma3[Включи плеер в спальне] PASSED         [ 78%]
+tests/test_gemma3.py::test_gemma3[Запусти мой плеер] PASSED              [ 80%]
+tests/test_gemma3.py::test_gemma3[Включи музыку у Антона] PASSED         [ 82%]
+tests/test_gemma3.py::test_gemma3[Запусти Sonne у мамы] PASSED           [ 84%]
+tests/test_gemma3.py::test_gemma3[Включи Linkin Park на кухне] PASSED    [ 85%]
+tests/test_gemma3.py::test_gemma3[Поставь плейлист для уборки у Маши] PASSED [ 87%]
+tests/test_gemma3.py::test_gemma3[Запусти альбом Mutter] PASSED          [ 89%]
+tests/test_gemma3.py::test_gemma3[Сделай у папы зеленый свет] FAILED     [ 91%]
+tests/test_gemma3.py::test_gemma3[Прибавь у Маши яркость на 10 процентов] PASSED [ 92%]
+tests/test_gemma3.py::test_gemma3[У Антона в спальне сделай потемнее] FAILED [ 94%]
+tests/test_gemma3.py::test_gemma3[Поставь у меня на кухне яркость 25 процентов] PASSED [ 96%]
+tests/test_gemma3.py::test_gemma3[Хочу в гостиной оранжевый] PASSED      [ 98%]
+tests/test_gemma3.py::test_gemma3[Убавь у мамы яркость немного] PASSED   [100%]
+
+=================================== FAILURES ===================================
+_____________________ test_gemma3[Запусти мамин телевизор] _____________________
+{
+  "input": "Запусти мамин телевизор",
+  "diff": {
+    "action": {
+      "expected": "on",
+      "actual": "run"
+    }
+  }
+}
+_________________________ test_gemma3[Сделай потемнее] _________________________
+{
+  "input": "Сделай потемнее",
+  "diff": {
+    "action": {
+      "expected": "decrease",
+      "actual": "increase"
+    }
+  }
+}
+____________________ test_gemma3[Сделай свет немного ярче] _____________________
+{
+  "input": "Сделай свет немного ярче",
+  "diff": {
+    "owner": {
+      "expected": "",
+      "actual": "я"
+    }
+  }
+}
+_____________________ test_gemma3[Сделай мамин свет синим] _____________________
+{
+  "input": "Сделай мамин свет синим",
+  "diff": {
+    "value": {
+      "expected": "синий",
+      "actual": "синим"
+    }
+  }
+}
+_________ test_gemma3[Запусти пятую серию второго сезона Доктора Кто] __________
+{
+  "input": "Запусти пятую серию второго сезона Доктора Кто",
+  "diff": {
+    "value": {
+      "expected": "пятая серия второго сезона Доктора Кто",
+      "actual": "пятую серию второго сезона Доктора Кто"
+    }
+  }
+}
+__________________ test_gemma3[Перемотай на пять минут назад] __________________
+{
+  "input": "Перемотай на пять минут назад",
+  "diff": {
+    "value": {
+      "expected": "на пять минут",
+      "actual": "на пять минут назад"
+    },
+    "action": {
+      "expected": "decrease",
+      "actual": "increase"
+    }
+  }
+}
+_________________________ test_gemma3[Вруби Rammstein] _________________________
+{
+  "input": "Вруби Rammstein",
+  "diff": {
+    "action": {
+      "expected": "run",
+      "actual": "on"
+    }
+  }
+}
+__________________ test_gemma3[Поставь альбом Meteora у Маши] __________________
+{
+  "input": "Поставь альбом Meteora у Маши",
+  "diff": {
+    "value": {
+      "expected": "альбом Meteora",
+      "actual": "Meteora"
+    }
+  }
+}
+________________ test_gemma3[Поставь громкость на 40 процентов] ________________
+{
+  "input": "Поставь громкость на 40 процентов",
+  "diff": {
+    "value": {
+      "expected": "40 процентов",
+      "actual": "на 40 процентов"
+    }
+  }
+}
+_____________________ test_gemma3[Запусти папин телевизор] _____________________
+{
+  "input": "Запусти папин телевизор",
+  "diff": {
+    "action": {
+      "expected": "on",
+      "actual": "run"
+    }
+  }
+}
+_________________ test_gemma3[Запусти Доктора Кто в гостиной] __________________
+{
+  "input": "Запусти Доктора Кто в гостиной",
+  "diff": {
+    "value": {
+      "expected": "Доктор Кто",
+      "actual": "Доктора Кто"
+    }
+  }
+}
+______________________ test_gemma3[Запусти музыку у мамы] ______________________
+{
+  "input": "Запусти музыку у мамы",
+  "diff": {
+    "action": {
+      "expected": "on",
+      "actual": "run"
+    }
+  }
+}
+___________________ test_gemma3[Сделай у папы зеленый свет] ____________________
+{
+  "input": "Сделай у папы зеленый свет",
+  "diff": {
+    "owner": {
+      "expected": "папа",
+      "actual": "Антон"
+    }
+  }
+}
+_______________ test_gemma3[У Антона в спальне сделай потемнее] ________________
+{
+  "input": "У Антона в спальне сделай потемнее",
+  "diff": {
+    "value": {
+      "expected": "",
+      "actual": "потемнее"
+    },
+    "action": {
+      "expected": "decrease",
+      "actual": "set_state"
+    }
+  }
+}
+=========================== short test summary info ============================
+FAILED tests/test_gemma3.py::test_gemma3[Запусти мамин телевизор] - Failed: {
+FAILED tests/test_gemma3.py::test_gemma3[Сделай потемнее] - Failed: {
+FAILED tests/test_gemma3.py::test_gemma3[Сделай свет немного ярче] - Failed: {
+FAILED tests/test_gemma3.py::test_gemma3[Сделай мамин свет синим] - Failed: {
+FAILED tests/test_gemma3.py::test_gemma3[Запусти пятую серию второго сезона Доктора Кто]
+FAILED tests/test_gemma3.py::test_gemma3[Перемотай на пять минут назад] - Fai...
+FAILED tests/test_gemma3.py::test_gemma3[Вруби Rammstein] - Failed: {
+FAILED tests/test_gemma3.py::test_gemma3[Поставь альбом Meteora у Маши] - Fai...
+FAILED tests/test_gemma3.py::test_gemma3[Поставь громкость на 40 процентов]
+FAILED tests/test_gemma3.py::test_gemma3[Запусти папин телевизор] - Failed: {
+FAILED tests/test_gemma3.py::test_gemma3[Запусти Доктора Кто в гостиной] - Fa...
+FAILED tests/test_gemma3.py::test_gemma3[Запусти музыку у мамы] - Failed: {
+FAILED tests/test_gemma3.py::test_gemma3[Сделай у папы зеленый свет] - Failed: {
+FAILED tests/test_gemma3.py::test_gemma3[У Антона в спальне сделай потемнее]
+=================== 14 failed, 43 passed in 99.97s (0:01:39) ===================
+
+========================================================
+Ollama latency: gemma3:4b
+========================================================
+cold start : 17.647 s
+
+requests   : 57
+mean       : 1.443 s
+min        : 1.027 s
+p50        : 1.431 s
+p90        : 1.628 s
+p95        : 1.680 s
+p99        : 1.765 s
+max        : 1.776 s
+========================================================

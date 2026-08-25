@@ -1,0 +1,572 @@
+[
+  {
+    "text": "Включи свет",
+    "expected": {
+      "device": "light",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "text": "Перемотай сериал на 10 минут вперед",
+    "expected": {
+      "device": "tv",
+      "action": "increase",
+      "owner": "",
+      "place": "",
+      "value": "на 10 минут"
+    }
+  },
+  {
+    "text": "Запусти мамин телевизор",
+    "expected": {
+      "device": "tv",
+      "action": "on",
+      "owner": "мама",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "text": "Сделай свет в спальне красным",
+    "expected": {
+      "device": "light",
+      "action": "set_state",
+      "owner": "",
+      "place": "спальня",
+      "value": "красный"
+    }
+  },
+  {
+    "text": "Включи у Маши Sonne",
+    "expected": {
+      "device": "media",
+      "action": "run",
+      "owner": "Маша",
+      "place": "",
+      "value": "Sonne"
+    }
+  },
+  {
+    "text": "Хочу фиолетовый свет",
+    "expected": {
+      "device": "light",
+      "action": "set_state",
+      "owner": "",
+      "place": "",
+      "value": "фиолетовый"
+    }
+  },
+  {
+    "text": "Включи Ведьмака",
+    "expected": {
+      "device": "tv",
+      "action": "run",
+      "owner": "",
+      "place": "",
+      "value": "Ведьмак"
+    }
+  },
+  {
+    "text": "Включи мамин телевизор",
+    "expected": {
+      "device": "tv",
+      "action": "on",
+      "owner": "мама",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "text": "Увеличь яркость на 20 процентов",
+    "expected": {
+      "device": "light",
+      "action": "increase",
+      "owner": "",
+      "place": "",
+      "value": "на 20 процентов"
+    }
+  },
+  {
+    "text": "Выключи свет на кухне",
+    "expected": {
+      "device": "light",
+      "action": "off",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "text": "Сделай потемнее",
+    "expected": {
+      "device": "light",
+      "action": "decrease",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "text": "Сделай свет немного ярче",
+    "expected": {
+      "device": "light",
+      "action": "increase",
+      "owner": "",
+      "place": "",
+      "value": "немного"
+    }
+  },
+  {
+    "text": "Убавь яркость на 30 процентов",
+    "expected": {
+      "device": "light",
+      "action": "decrease",
+      "owner": "",
+      "place": "",
+      "value": "на 30 процентов"
+    }
+  },
+  {
+    "text": "Поставь яркость 50 процентов",
+    "expected": {
+      "device": "light",
+      "action": "set_state",
+      "owner": "",
+      "place": "",
+      "value": "50 процентов"
+    }
+  },
+  {
+    "text": "Сделай на кухне теплый белый",
+    "expected": {
+      "device": "light",
+      "action": "set_state",
+      "owner": "",
+      "place": "кухня",
+      "value": "теплый белый"
+    }
+  },
+  {
+    "text": "Сделай мамин свет синим",
+    "expected": {
+      "device": "light",
+      "action": "set_state",
+      "owner": "мама",
+      "place": "",
+      "value": "синий"
+    }
+  },
+  {
+    "text": "Выруби Машин свет в спальне",
+    "expected": {
+      "device": "light",
+      "action": "off",
+      "owner": "Маша",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "text": "Включи телевизор в гостиной",
+    "expected": {
+      "device": "tv",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    }
+  },
+  {
+    "text": "Запусти телевизор в гостиной",
+    "expected": {
+      "device": "tv",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    }
+  },
+  {
+    "text": "Выруби Антонов телик",
+    "expected": {
+      "device": "tv",
+      "action": "off",
+      "owner": "Антон",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "text": "Поставь Интерстеллар",
+    "expected": {
+      "device": "tv",
+      "action": "run",
+      "owner": "",
+      "place": "",
+      "value": "Интерстеллар"
+    }
+  },
+  {
+    "text": "Запусти пятую серию второго сезона Доктора Кто",
+    "expected": {
+      "device": "tv",
+      "action": "run",
+      "owner": "",
+      "place": "",
+      "value": "пятая серия второго сезона Доктора Кто"
+    }
+  },
+  {
+    "text": "Запусти седьмую серию второго сезона Бен 10",
+    "expected": {
+      "device": "tv",
+      "action": "run",
+      "owner": "",
+      "place": "",
+      "value": "седьмая серия второго сезона Бен 10"
+    }
+  },
+  {
+    "text": "Поставь Ведьмака у мамы",
+    "expected": {
+      "device": "tv",
+      "action": "run",
+      "owner": "мама",
+      "place": "",
+      "value": "Ведьмак"
+    }
+  },
+  {
+    "text": "Поставь сериал на паузу",
+    "expected": {
+      "device": "tv",
+      "action": "stop",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "text": "Перемотай на пять минут назад",
+    "expected": {
+      "device": "tv",
+      "action": "decrease",
+      "owner": "",
+      "place": "",
+      "value": "на пять минут"
+    }
+  },
+  {
+    "text": "Включи музыку на кухне",
+    "expected": {
+      "device": "media",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "text": "Вруби Rammstein",
+    "expected": {
+      "device": "media",
+      "action": "run",
+      "owner": "",
+      "place": "",
+      "value": "Rammstein"
+    }
+  },
+  {
+    "text": "Поставь альбом Meteora у Маши",
+    "expected": {
+      "device": "media",
+      "action": "run",
+      "owner": "Маша",
+      "place": "",
+      "value": "альбом Meteora"
+    }
+  },
+  {
+    "text": "Сделай музыку погромче",
+    "expected": {
+      "device": "media",
+      "action": "increase",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "text": "Убавь громкость на кухне на 15 процентов",
+    "expected": {
+      "device": "media",
+      "action": "decrease",
+      "owner": "",
+      "place": "кухня",
+      "value": "на 15 процентов"
+    }
+  },
+  {
+    "text": "Поставь громкость на 40 процентов",
+    "expected": {
+      "device": "media",
+      "action": "set_state",
+      "owner": "",
+      "place": "",
+      "value": "40 процентов"
+    }
+  },
+  {
+    "text": "Останови музыку у Антона",
+    "expected": {
+      "device": "media",
+      "action": "stop",
+      "owner": "Антон",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "text": "Запусти папин телевизор",
+    "expected": {
+      "device": "tv",
+      "action": "on",
+      "owner": "папа",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "text": "Включи телик Артема",
+    "expected": {
+      "device": "tv",
+      "action": "on",
+      "owner": "Артем",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "text": "Запусти телевизор на кухне",
+    "expected": {
+      "device": "tv",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "text": "Включи мой телевизор",
+    "expected": {
+      "device": "tv",
+      "action": "on",
+      "owner": "я",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "text": "Вруби телевизор в спальне",
+    "expected": {
+      "device": "tv",
+      "action": "on",
+      "owner": "",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "text": "Запусти маме первую серию Ведьмака",
+    "expected": {
+      "device": "tv",
+      "action": "run",
+      "owner": "мама",
+      "place": "",
+      "value": "первая серия Ведьмака"
+    }
+  },
+  {
+    "text": "Включи Интерстеллар у Антона",
+    "expected": {
+      "device": "tv",
+      "action": "run",
+      "owner": "Антон",
+      "place": "",
+      "value": "Интерстеллар"
+    }
+  },
+  {
+    "text": "Запусти Доктора Кто в гостиной",
+    "expected": {
+      "device": "tv",
+      "action": "run",
+      "owner": "",
+      "place": "гостиная",
+      "value": "Доктор Кто"
+    }
+  },
+  {
+    "text": "Включи вторую серию первого сезона Аркейна",
+    "expected": {
+      "device": "tv",
+      "action": "run",
+      "owner": "",
+      "place": "",
+      "value": "вторая серия первого сезона Аркейна"
+    }
+  },
+  {
+    "text": "Поставь Шрека у Маши",
+    "expected": {
+      "device": "tv",
+      "action": "run",
+      "owner": "Маша",
+      "place": "",
+      "value": "Шрек"
+    }
+  },
+  {
+    "text": "Запусти музыку у мамы",
+    "expected": {
+      "device": "media",
+      "action": "on",
+      "owner": "мама",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "text": "Включи плеер в спальне",
+    "expected": {
+      "device": "media",
+      "action": "on",
+      "owner": "",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "text": "Запусти мой плеер",
+    "expected": {
+      "device": "media",
+      "action": "on",
+      "owner": "я",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "text": "Включи музыку у Антона",
+    "expected": {
+      "device": "media",
+      "action": "on",
+      "owner": "Антон",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "text": "Запусти Sonne у мамы",
+    "expected": {
+      "device": "media",
+      "action": "run",
+      "owner": "мама",
+      "place": "",
+      "value": "Sonne"
+    }
+  },
+  {
+    "text": "Включи Linkin Park на кухне",
+    "expected": {
+      "device": "media",
+      "action": "run",
+      "owner": "",
+      "place": "кухня",
+      "value": "Linkin Park"
+    }
+  },
+  {
+    "text": "Поставь плейлист для уборки у Маши",
+    "expected": {
+      "device": "media",
+      "action": "run",
+      "owner": "Маша",
+      "place": "",
+      "value": "плейлист для уборки"
+    }
+  },
+  {
+    "text": "Запусти альбом Mutter",
+    "expected": {
+      "device": "media",
+      "action": "run",
+      "owner": "",
+      "place": "",
+      "value": "альбом Mutter"
+    }
+  },
+  {
+    "text": "Сделай у папы зеленый свет",
+    "expected": {
+      "device": "light",
+      "action": "set_state",
+      "owner": "папа",
+      "place": "",
+      "value": "зеленый"
+    }
+  },
+  {
+    "text": "Прибавь у Маши яркость на 10 процентов",
+    "expected": {
+      "device": "light",
+      "action": "increase",
+      "owner": "Маша",
+      "place": "",
+      "value": "на 10 процентов"
+    }
+  },
+  {
+    "text": "У Антона в спальне сделай потемнее",
+    "expected": {
+      "device": "light",
+      "action": "decrease",
+      "owner": "Антон",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "text": "Поставь у меня на кухне яркость 25 процентов",
+    "expected": {
+      "device": "light",
+      "action": "set_state",
+      "owner": "я",
+      "place": "кухня",
+      "value": "25 процентов"
+    }
+  },
+  {
+    "text": "Хочу в гостиной оранжевый",
+    "expected": {
+      "device": "light",
+      "action": "set_state",
+      "owner": "",
+      "place": "гостиная",
+      "value": "оранжевый"
+    }
+  },
+  {
+    "text": "Убавь у мамы яркость немного",
+    "expected": {
+      "device": "light",
+      "action": "decrease",
+      "owner": "мама",
+      "place": "",
+      "value": "немного"
+    }
+  }
+]
