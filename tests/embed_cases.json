@@ -1,0 +1,4034 @@
+[
+  {
+    "id": "embed:canonical:Андрей|лампа|балкон|light_andrey_balcony",
+    "text": "Включи у Андрея лампа на балконе",
+    "intent": {
+      "device": "лампа",
+      "action": "on",
+      "owner": "Андрей",
+      "place": "балкон",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_andrey_balcony",
+      "action": "on",
+      "owner": "Андрей",
+      "place": "балкон",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:Андрей|свет|балкон|light_andrey_balcony",
+    "text": "Включи у Андрея свет на балконе",
+    "intent": {
+      "device": "свет",
+      "action": "on",
+      "owner": "Андрей",
+      "place": "балкон",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_andrey_balcony",
+      "action": "on",
+      "owner": "Андрей",
+      "place": "балкон",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:Андрей|светодиодная лента||led_strip_andrey",
+    "text": "Включи у Андрея светодиодную ленту",
+    "intent": {
+      "device": "светодиодная лента",
+      "action": "on",
+      "owner": "Андрей",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "led_strip_andrey",
+      "action": "on",
+      "owner": "Андрей",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:Андрей|светодиодная лента|кабинет|led_strip_andrey_cabinet",
+    "text": "Включи у Андрея светодиодную ленту в кабинете",
+    "intent": {
+      "device": "светодиодная лента",
+      "action": "on",
+      "owner": "Андрей",
+      "place": "кабинет",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "led_strip_andrey_cabinet",
+      "action": "on",
+      "owner": "Андрей",
+      "place": "кабинет",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:Антон|лампа||light_anton",
+    "text": "Включи у Антона лампа",
+    "intent": {
+      "device": "лампа",
+      "action": "on",
+      "owner": "Антон",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_anton",
+      "action": "on",
+      "owner": "Антон",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:Антон|лампа|спальня|light_anton_bedroom",
+    "text": "Включи у Антона лампа в спальне",
+    "intent": {
+      "device": "лампа",
+      "action": "on",
+      "owner": "Антон",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_anton_bedroom",
+      "action": "on",
+      "owner": "Антон",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:Антон|свет||light_anton",
+    "text": "Включи у Антона свет",
+    "intent": {
+      "device": "свет",
+      "action": "on",
+      "owner": "Антон",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_anton",
+      "action": "on",
+      "owner": "Антон",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:Антон|свет|спальня|light_anton_bedroom",
+    "text": "Включи у Антона свет в спальне",
+    "intent": {
+      "device": "свет",
+      "action": "on",
+      "owner": "Антон",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_anton_bedroom",
+      "action": "on",
+      "owner": "Антон",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:Антон|торшер||floor_lamp_anton",
+    "text": "Включи у Антона торшер",
+    "intent": {
+      "device": "торшер",
+      "action": "on",
+      "owner": "Антон",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "floor_lamp_anton",
+      "action": "on",
+      "owner": "Антон",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:Антон|торшер|гостиная|floor_lamp_anton_living",
+    "text": "Включи у Антона торшер в гостиной",
+    "intent": {
+      "device": "торшер",
+      "action": "on",
+      "owner": "Антон",
+      "place": "гостиная",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "floor_lamp_anton_living",
+      "action": "on",
+      "owner": "Антон",
+      "place": "гостиная",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:Артем|лампа|детская|light_artem_nursery",
+    "text": "Включи у Артема лампа в детской",
+    "intent": {
+      "device": "лампа",
+      "action": "on",
+      "owner": "Артем",
+      "place": "детская",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_artem_nursery",
+      "action": "on",
+      "owner": "Артем",
+      "place": "детская",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:Артем|свет|детская|light_artem_nursery",
+    "text": "Включи у Артема свет в детской",
+    "intent": {
+      "device": "свет",
+      "action": "on",
+      "owner": "Артем",
+      "place": "детская",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_artem_nursery",
+      "action": "on",
+      "owner": "Артем",
+      "place": "детская",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:Марина|лампа||lamp_marina",
+    "text": "Включи у Марины лампа",
+    "intent": {
+      "device": "лампа",
+      "action": "on",
+      "owner": "Марина",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "lamp_marina",
+      "action": "on",
+      "owner": "Марина",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:Марина|лампа|спальня|lamp_marina_bedroom",
+    "text": "Включи у Марины лампа в спальне",
+    "intent": {
+      "device": "лампа",
+      "action": "on",
+      "owner": "Марина",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "lamp_marina_bedroom",
+      "action": "on",
+      "owner": "Марина",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:Марина|светильник||lamp_marina",
+    "text": "Включи у Марины светильник",
+    "intent": {
+      "device": "светильник",
+      "action": "on",
+      "owner": "Марина",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "lamp_marina",
+      "action": "on",
+      "owner": "Марина",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:Марина|светильник|спальня|lamp_marina_bedroom",
+    "text": "Включи у Марины светильник в спальне",
+    "intent": {
+      "device": "светильник",
+      "action": "on",
+      "owner": "Марина",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "lamp_marina_bedroom",
+      "action": "on",
+      "owner": "Марина",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:Мария|лампа||light_maria",
+    "text": "Включи у Марии лампа",
+    "intent": {
+      "device": "лампа",
+      "action": "on",
+      "owner": "Мария",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_maria",
+      "action": "on",
+      "owner": "Мария",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:Мария|лампа|гостиная|light_maria_living",
+    "text": "Включи у Марии лампа в гостиной",
+    "intent": {
+      "device": "лампа",
+      "action": "on",
+      "owner": "Мария",
+      "place": "гостиная",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_maria_living",
+      "action": "on",
+      "owner": "Мария",
+      "place": "гостиная",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:Мария|свет||light_maria",
+    "text": "Включи у Марии свет",
+    "intent": {
+      "device": "свет",
+      "action": "on",
+      "owner": "Мария",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_maria",
+      "action": "on",
+      "owner": "Мария",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:Мария|свет|гостиная|light_maria_living",
+    "text": "Включи у Марии свет в гостиной",
+    "intent": {
+      "device": "свет",
+      "action": "on",
+      "owner": "Мария",
+      "place": "гостиная",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_maria_living",
+      "action": "on",
+      "owner": "Мария",
+      "place": "гостиная",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:Маша|лампа||light_masha",
+    "text": "Включи у Маши лампа",
+    "intent": {
+      "device": "лампа",
+      "action": "on",
+      "owner": "Маша",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_masha",
+      "action": "on",
+      "owner": "Маша",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:Маша|лампа|кухня|light_masha_kitchen",
+    "text": "Включи у Маши лампа на кухне",
+    "intent": {
+      "device": "лампа",
+      "action": "on",
+      "owner": "Маша",
+      "place": "кухня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_masha_kitchen",
+      "action": "on",
+      "owner": "Маша",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:Маша|лампа|спальня|light_masha_bedroom",
+    "text": "Включи у Маши лампа в спальне",
+    "intent": {
+      "device": "лампа",
+      "action": "on",
+      "owner": "Маша",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_masha_bedroom",
+      "action": "on",
+      "owner": "Маша",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:Маша|свет||light_masha",
+    "text": "Включи у Маши свет",
+    "intent": {
+      "device": "свет",
+      "action": "on",
+      "owner": "Маша",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_masha",
+      "action": "on",
+      "owner": "Маша",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:Маша|свет|кухня|light_masha_kitchen",
+    "text": "Включи у Маши свет на кухне",
+    "intent": {
+      "device": "свет",
+      "action": "on",
+      "owner": "Маша",
+      "place": "кухня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_masha_kitchen",
+      "action": "on",
+      "owner": "Маша",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:Маша|свет|спальня|light_masha_bedroom",
+    "text": "Включи у Маши свет в спальне",
+    "intent": {
+      "device": "свет",
+      "action": "on",
+      "owner": "Маша",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_masha_bedroom",
+      "action": "on",
+      "owner": "Маша",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:Маша|телевизор|спальня|tv_masha_bedroom",
+    "text": "Включи у Маши телевизор в спальне",
+    "intent": {
+      "device": "телевизор",
+      "action": "on",
+      "owner": "Маша",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "tv_masha_bedroom",
+      "action": "on",
+      "owner": "Маша",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:мама|лампа||light_mama",
+    "text": "Включи мамин лампа",
+    "intent": {
+      "device": "лампа",
+      "action": "on",
+      "owner": "мама",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_mama",
+      "action": "on",
+      "owner": "мама",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:мама|лампа|кухня|light_mama_kitchen",
+    "text": "Включи мамин лампа на кухне",
+    "intent": {
+      "device": "лампа",
+      "action": "on",
+      "owner": "мама",
+      "place": "кухня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_mama_kitchen",
+      "action": "on",
+      "owner": "мама",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:мама|лампа|спальня|light_mama_bedroom",
+    "text": "Включи мамин лампа в спальне",
+    "intent": {
+      "device": "лампа",
+      "action": "on",
+      "owner": "мама",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_mama_bedroom",
+      "action": "on",
+      "owner": "мама",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:мама|свет||light_mama",
+    "text": "Включи мамин свет",
+    "intent": {
+      "device": "свет",
+      "action": "on",
+      "owner": "мама",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_mama",
+      "action": "on",
+      "owner": "мама",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:мама|свет|кухня|light_mama_kitchen",
+    "text": "Включи мамин свет на кухне",
+    "intent": {
+      "device": "свет",
+      "action": "on",
+      "owner": "мама",
+      "place": "кухня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_mama_kitchen",
+      "action": "on",
+      "owner": "мама",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:мама|свет|спальня|light_mama_bedroom",
+    "text": "Включи мамин свет в спальне",
+    "intent": {
+      "device": "свет",
+      "action": "on",
+      "owner": "мама",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_mama_bedroom",
+      "action": "on",
+      "owner": "мама",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:мама|термометр||thermometer_mama",
+    "text": "Включи мамин термометр",
+    "intent": {
+      "device": "термометр",
+      "action": "on",
+      "owner": "мама",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "thermometer_mama",
+      "action": "on",
+      "owner": "мама",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:мама|термометр|кухня|thermometer_mama_kitchen",
+    "text": "Включи мамин термометр на кухне",
+    "intent": {
+      "device": "термометр",
+      "action": "on",
+      "owner": "мама",
+      "place": "кухня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "thermometer_mama_kitchen",
+      "action": "on",
+      "owner": "мама",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:мама|увлажнитель||humidifier_mama",
+    "text": "Включи мамин увлажнитель",
+    "intent": {
+      "device": "увлажнитель",
+      "action": "on",
+      "owner": "мама",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "humidifier_mama",
+      "action": "on",
+      "owner": "мама",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:мама|увлажнитель|спальня|humidifier_mama_bedroom",
+    "text": "Включи мамин увлажнитель в спальне",
+    "intent": {
+      "device": "увлажнитель",
+      "action": "on",
+      "owner": "мама",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "humidifier_mama_bedroom",
+      "action": "on",
+      "owner": "мама",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|вентилятор||fan_common",
+    "text": "Включи вентилятор",
+    "intent": {
+      "device": "вентилятор",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "fan_common",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|вентилятор|гостиная|fan_living",
+    "text": "Включи вентилятор в гостиной",
+    "intent": {
+      "device": "вентилятор",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "fan_living",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|колонка вторая||speaker_second",
+    "text": "Включи вторую колонку",
+    "intent": {
+      "device": "колонка вторая",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "speaker_second",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|колонка вторая|кухня|speaker_second_kitchen",
+    "text": "Включи вторую колонку на кухне",
+    "intent": {
+      "device": "колонка вторая",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "speaker_second_kitchen",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|колонка первая||speaker_first",
+    "text": "Включи первую колонку",
+    "intent": {
+      "device": "колонка первая",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "speaker_first",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|колонка первая|гостиная|speaker_first_living",
+    "text": "Включи первую колонку в гостиной",
+    "intent": {
+      "device": "колонка первая",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "speaker_first_living",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|кондиционер||conditioner_common",
+    "text": "Включи кондиционер",
+    "intent": {
+      "device": "кондиционер",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "conditioner_common",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|кондиционер|спальня|conditioner_bedroom",
+    "text": "Включи кондиционер в спальне",
+    "intent": {
+      "device": "кондиционер",
+      "action": "on",
+      "owner": "",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "conditioner_bedroom",
+      "action": "on",
+      "owner": "",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|лампа||light_common",
+    "text": "Включи лампа",
+    "intent": {
+      "device": "лампа",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_common",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|лампа|ванная|light_common_bath",
+    "text": "Включи лампа в ванной",
+    "intent": {
+      "device": "лампа",
+      "action": "on",
+      "owner": "",
+      "place": "ванная",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_common_bath",
+      "action": "on",
+      "owner": "",
+      "place": "ванная",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|лампа|гостиная|light_common_living",
+    "text": "Включи лампа в гостиной",
+    "intent": {
+      "device": "лампа",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_common_living",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|лампа|коридор|light_common_hallway",
+    "text": "Включи лампа в коридоре",
+    "intent": {
+      "device": "лампа",
+      "action": "on",
+      "owner": "",
+      "place": "коридор",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_common_hallway",
+      "action": "on",
+      "owner": "",
+      "place": "коридор",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|лампа|кухня|light_common_kitchen",
+    "text": "Включи лампа на кухне",
+    "intent": {
+      "device": "лампа",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_common_kitchen",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|лампа|спальня|light_common_bedroom",
+    "text": "Включи лампа в спальне",
+    "intent": {
+      "device": "лампа",
+      "action": "on",
+      "owner": "",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_common_bedroom",
+      "action": "on",
+      "owner": "",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|люстра||chandelier_common",
+    "text": "Включи люстра",
+    "intent": {
+      "device": "люстра",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "chandelier_common",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|люстра|гостиная|chandelier_living",
+    "text": "Включи люстра в гостиной",
+    "intent": {
+      "device": "люстра",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "chandelier_living",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|микрофон||microphone",
+    "text": "Включи микрофон",
+    "intent": {
+      "device": "микрофон",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "microphone",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|микрофон|кабинет|microphone_cabinet",
+    "text": "Включи микрофон в кабинете",
+    "intent": {
+      "device": "микрофон",
+      "action": "on",
+      "owner": "",
+      "place": "кабинет",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "microphone_cabinet",
+      "action": "on",
+      "owner": "",
+      "place": "кабинет",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|монитор||monitor",
+    "text": "Включи монитор",
+    "intent": {
+      "device": "монитор",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "monitor",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|музыка||soundbar",
+    "text": "Включи музыка",
+    "intent": {
+      "device": "музыка",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "soundbar",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|музыка|гостиная|soundbar_living",
+    "text": "Включи музыка в гостиной",
+    "intent": {
+      "device": "музыка",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "soundbar_living",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|музыка|кухня|soundbar_kitchen",
+    "text": "Включи музыка на кухне",
+    "intent": {
+      "device": "музыка",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "soundbar_kitchen",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|наушники||headphones",
+    "text": "Включи наушники",
+    "intent": {
+      "device": "наушники",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "headphones",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|плеер||player",
+    "text": "Включи плеер",
+    "intent": {
+      "device": "плеер",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "player",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|плеер|кухня|player_kitchen",
+    "text": "Включи плеер на кухне",
+    "intent": {
+      "device": "плеер",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "player_kitchen",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|плеер|спальня|player_bedroom",
+    "text": "Включи плеер в спальне",
+    "intent": {
+      "device": "плеер",
+      "action": "on",
+      "owner": "",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "player_bedroom",
+      "action": "on",
+      "owner": "",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|проектор||projector",
+    "text": "Включи проектор",
+    "intent": {
+      "device": "проектор",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "projector",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|проектор|гостиная|projector_living",
+    "text": "Включи проектор в гостиной",
+    "intent": {
+      "device": "проектор",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "projector_living",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|пылесос||vacuum_common",
+    "text": "Включи пылесос",
+    "intent": {
+      "device": "пылесос",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "vacuum_common",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|радио||radio",
+    "text": "Включи радио",
+    "intent": {
+      "device": "радио",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "radio",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|радио|кухня|radio_kitchen",
+    "text": "Включи радио на кухне",
+    "intent": {
+      "device": "радио",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "radio_kitchen",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|саундбар||soundbar",
+    "text": "Включи саундбар",
+    "intent": {
+      "device": "саундбар",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "soundbar",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|саундбар|гостиная|soundbar_living",
+    "text": "Включи саундбар в гостиной",
+    "intent": {
+      "device": "саундбар",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "soundbar_living",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|саундбар|кухня|soundbar_kitchen",
+    "text": "Включи саундбар на кухне",
+    "intent": {
+      "device": "саундбар",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "soundbar_kitchen",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|свет||light_common",
+    "text": "Включи свет",
+    "intent": {
+      "device": "свет",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_common",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|свет|ванная|light_common_bath",
+    "text": "Включи свет в ванной",
+    "intent": {
+      "device": "свет",
+      "action": "on",
+      "owner": "",
+      "place": "ванная",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_common_bath",
+      "action": "on",
+      "owner": "",
+      "place": "ванная",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|свет|гостиная|light_common_living",
+    "text": "Включи свет в гостиной",
+    "intent": {
+      "device": "свет",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_common_living",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|свет|коридор|light_common_hallway",
+    "text": "Включи свет в коридоре",
+    "intent": {
+      "device": "свет",
+      "action": "on",
+      "owner": "",
+      "place": "коридор",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_common_hallway",
+      "action": "on",
+      "owner": "",
+      "place": "коридор",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|свет|кухня|light_common_kitchen",
+    "text": "Включи свет на кухне",
+    "intent": {
+      "device": "свет",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_common_kitchen",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|свет|спальня|light_common_bedroom",
+    "text": "Включи свет в спальне",
+    "intent": {
+      "device": "свет",
+      "action": "on",
+      "owner": "",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_common_bedroom",
+      "action": "on",
+      "owner": "",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|телевизор||tv",
+    "text": "Включи телевизор",
+    "intent": {
+      "device": "телевизор",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "tv",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|телевизор|гостиная|tv_living",
+    "text": "Включи телевизор в гостиной",
+    "intent": {
+      "device": "телевизор",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "tv_living",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|телевизор|кухня|tv_kitchen",
+    "text": "Включи телевизор на кухне",
+    "intent": {
+      "device": "телевизор",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "tv_kitchen",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|телевизор|спальня|tv_bedroom",
+    "text": "Включи телевизор в спальне",
+    "intent": {
+      "device": "телевизор",
+      "action": "on",
+      "owner": "",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "tv_bedroom",
+      "action": "on",
+      "owner": "",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|термостат||thermostat_common",
+    "text": "Включи термостат",
+    "intent": {
+      "device": "термостат",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "thermostat_common",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:общий|термостат|гостиная|thermostat_living",
+    "text": "Включи термостат в гостиной",
+    "intent": {
+      "device": "термостат",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "thermostat_living",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:папа|гигрометр||hygrometer_papa",
+    "text": "Включи папин гигрометр",
+    "intent": {
+      "device": "гигрометр",
+      "action": "on",
+      "owner": "папа",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "hygrometer_papa",
+      "action": "on",
+      "owner": "папа",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:папа|гигрометр|спальня|hygrometer_papa_bedroom",
+    "text": "Включи папин гигрометр в спальне",
+    "intent": {
+      "device": "гигрометр",
+      "action": "on",
+      "owner": "папа",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "hygrometer_papa_bedroom",
+      "action": "on",
+      "owner": "папа",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:папа|лампа||light_papa",
+    "text": "Включи папин лампа",
+    "intent": {
+      "device": "лампа",
+      "action": "on",
+      "owner": "папа",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_papa",
+      "action": "on",
+      "owner": "папа",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:папа|лампа|кабинет|light_papa_cabinet",
+    "text": "Включи папин лампа в кабинете",
+    "intent": {
+      "device": "лампа",
+      "action": "on",
+      "owner": "папа",
+      "place": "кабинет",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_papa_cabinet",
+      "action": "on",
+      "owner": "папа",
+      "place": "кабинет",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:папа|очиститель воздуха||purifier_papa",
+    "text": "Включи папин очиститель воздуха",
+    "intent": {
+      "device": "очиститель воздуха",
+      "action": "on",
+      "owner": "папа",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "purifier_papa",
+      "action": "on",
+      "owner": "папа",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:папа|очиститель воздуха|гостиная|purifier_papa_living",
+    "text": "Включи папин очиститель воздуха в гостиной",
+    "intent": {
+      "device": "очиститель воздуха",
+      "action": "on",
+      "owner": "папа",
+      "place": "гостиная",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "purifier_papa_living",
+      "action": "on",
+      "owner": "папа",
+      "place": "гостиная",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:папа|свет||light_papa",
+    "text": "Включи папин свет",
+    "intent": {
+      "device": "свет",
+      "action": "on",
+      "owner": "папа",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_papa",
+      "action": "on",
+      "owner": "папа",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:папа|свет|кабинет|light_papa_cabinet",
+    "text": "Включи папин свет в кабинете",
+    "intent": {
+      "device": "свет",
+      "action": "on",
+      "owner": "папа",
+      "place": "кабинет",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_papa_cabinet",
+      "action": "on",
+      "owner": "папа",
+      "place": "кабинет",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:я|лампа||light_me",
+    "text": "Включи мой лампа",
+    "intent": {
+      "device": "лампа",
+      "action": "on",
+      "owner": "я",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_me",
+      "action": "on",
+      "owner": "я",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:я|лампа|кабинет|light_me_cabinet",
+    "text": "Включи мой лампа в кабинете",
+    "intent": {
+      "device": "лампа",
+      "action": "on",
+      "owner": "я",
+      "place": "кабинет",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_me_cabinet",
+      "action": "on",
+      "owner": "я",
+      "place": "кабинет",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:я|лампа|кухня|light_me_kitchen",
+    "text": "Включи мой лампа на кухне",
+    "intent": {
+      "device": "лампа",
+      "action": "on",
+      "owner": "я",
+      "place": "кухня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_me_kitchen",
+      "action": "on",
+      "owner": "я",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:я|лампа|спальня|light_me_bedroom",
+    "text": "Включи мой лампа в спальне",
+    "intent": {
+      "device": "лампа",
+      "action": "on",
+      "owner": "я",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_me_bedroom",
+      "action": "on",
+      "owner": "я",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:я|монитор|кабинет|monitor_me_cabinet",
+    "text": "Включи мой монитор в кабинете",
+    "intent": {
+      "device": "монитор",
+      "action": "on",
+      "owner": "я",
+      "place": "кабинет",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "monitor_me_cabinet",
+      "action": "on",
+      "owner": "я",
+      "place": "кабинет",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:я|свет||light_me",
+    "text": "Включи мой свет",
+    "intent": {
+      "device": "свет",
+      "action": "on",
+      "owner": "я",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_me",
+      "action": "on",
+      "owner": "я",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:я|свет|кабинет|light_me_cabinet",
+    "text": "Включи мой свет в кабинете",
+    "intent": {
+      "device": "свет",
+      "action": "on",
+      "owner": "я",
+      "place": "кабинет",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_me_cabinet",
+      "action": "on",
+      "owner": "я",
+      "place": "кабинет",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:я|свет|кухня|light_me_kitchen",
+    "text": "Включи мой свет на кухне",
+    "intent": {
+      "device": "свет",
+      "action": "on",
+      "owner": "я",
+      "place": "кухня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_me_kitchen",
+      "action": "on",
+      "owner": "я",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:canonical:я|свет|спальня|light_me_bedroom",
+    "text": "Включи мой свет в спальне",
+    "intent": {
+      "device": "свет",
+      "action": "on",
+      "owner": "я",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_me_bedroom",
+      "action": "on",
+      "owner": "я",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:edge:|музыка||soundbar",
+    "text": "Включи музыка",
+    "intent": {
+      "device": "музыка",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "soundbar",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:edge:|музыка|кухня|soundbar_kitchen",
+    "text": "Включи музыка на кухне",
+    "intent": {
+      "device": "музыка",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "soundbar_kitchen",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:edge:|свет||light_common",
+    "text": "Включи свет",
+    "intent": {
+      "device": "свет",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_common",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:edge:|свет|кухня|light_common_kitchen",
+    "text": "Включи свет на кухне",
+    "intent": {
+      "device": "свет",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_common_kitchen",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:edge:|свет|спальня|light_common_bedroom",
+    "text": "Включи свет в спальне",
+    "intent": {
+      "device": "свет",
+      "action": "on",
+      "owner": "",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_common_bedroom",
+      "action": "on",
+      "owner": "",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:edge:|телевизор||tv",
+    "text": "Включи телевизор",
+    "intent": {
+      "device": "телевизор",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "tv",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:edge:|телевизор|гостиная|tv_living",
+    "text": "Включи телевизор в гостиной",
+    "intent": {
+      "device": "телевизор",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "tv_living",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:edge:общий|экран для телевизора||tv",
+    "text": "Включи экран для телевизора",
+    "intent": {
+      "device": "экран для телевизора",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "tv",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:place-syn:Андрей|диодная лента|офис|led_strip_andrey_cabinet",
+    "text": "Включи у Андрея диодную ленту в офисе",
+    "intent": {
+      "device": "диодная лента",
+      "action": "on",
+      "owner": "Андрей",
+      "place": "офис",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "led_strip_andrey_cabinet",
+      "action": "on",
+      "owner": "Андрей",
+      "place": "офис",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:place-syn:Андрей|лента|офис|led_strip_andrey_cabinet",
+    "text": "Включи у Андрея лента в офисе",
+    "intent": {
+      "device": "лента",
+      "action": "on",
+      "owner": "Андрей",
+      "place": "офис",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "led_strip_andrey_cabinet",
+      "action": "on",
+      "owner": "Андрей",
+      "place": "офис",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:place-syn:Андрей|световая лента|офис|led_strip_andrey_cabinet",
+    "text": "Включи у Андрея световую ленту в офисе",
+    "intent": {
+      "device": "световая лента",
+      "action": "on",
+      "owner": "Андрей",
+      "place": "офис",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "led_strip_andrey_cabinet",
+      "action": "on",
+      "owner": "Андрей",
+      "place": "офис",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:place-syn:Андрей|светодиодная лента|офис|led_strip_andrey_cabinet",
+    "text": "Включи у Андрея светодиодную ленту в офисе",
+    "intent": {
+      "device": "светодиодная лента",
+      "action": "on",
+      "owner": "Андрей",
+      "place": "офис",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "led_strip_andrey_cabinet",
+      "action": "on",
+      "owner": "Андрей",
+      "place": "офис",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:place-syn:общий|лампа|ванная комната|light_common_bath",
+    "text": "Включи лампа в ванной комнате",
+    "intent": {
+      "device": "лампа",
+      "action": "on",
+      "owner": "",
+      "place": "ванная комната",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_common_bath",
+      "action": "on",
+      "owner": "",
+      "place": "ванная комната",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:place-syn:общий|микро|офис|microphone_cabinet",
+    "text": "Включи микро в офисе",
+    "intent": {
+      "device": "микро",
+      "action": "on",
+      "owner": "",
+      "place": "офис",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "microphone_cabinet",
+      "action": "on",
+      "owner": "",
+      "place": "офис",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:place-syn:общий|микрофон|офис|microphone_cabinet",
+    "text": "Включи микрофон в офисе",
+    "intent": {
+      "device": "микрофон",
+      "action": "on",
+      "owner": "",
+      "place": "офис",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "microphone_cabinet",
+      "action": "on",
+      "owner": "",
+      "place": "офис",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:place-syn:общий|освещение|ванная комната|light_common_bath",
+    "text": "Включи освещение в ванной комнате",
+    "intent": {
+      "device": "освещение",
+      "action": "on",
+      "owner": "",
+      "place": "ванная комната",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_common_bath",
+      "action": "on",
+      "owner": "",
+      "place": "ванная комната",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:place-syn:общий|свет|ванная комната|light_common_bath",
+    "text": "Включи свет в ванной комнате",
+    "intent": {
+      "device": "свет",
+      "action": "on",
+      "owner": "",
+      "place": "ванная комната",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_common_bath",
+      "action": "on",
+      "owner": "",
+      "place": "ванная комната",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:place-syn:папа|лампа|офис|light_papa_cabinet",
+    "text": "Включи папин лампа в офисе",
+    "intent": {
+      "device": "лампа",
+      "action": "on",
+      "owner": "папа",
+      "place": "офис",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_papa_cabinet",
+      "action": "on",
+      "owner": "папа",
+      "place": "офис",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:place-syn:папа|освещение|офис|light_papa_cabinet",
+    "text": "Включи папин освещение в офисе",
+    "intent": {
+      "device": "освещение",
+      "action": "on",
+      "owner": "папа",
+      "place": "офис",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_papa_cabinet",
+      "action": "on",
+      "owner": "папа",
+      "place": "офис",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:place-syn:папа|свет|офис|light_papa_cabinet",
+    "text": "Включи папин свет в офисе",
+    "intent": {
+      "device": "свет",
+      "action": "on",
+      "owner": "папа",
+      "place": "офис",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_papa_cabinet",
+      "action": "on",
+      "owner": "папа",
+      "place": "офис",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:place-syn:я|компьютерный монитор|офис|monitor_me_cabinet",
+    "text": "Включи мой компьютерный монитор в офисе",
+    "intent": {
+      "device": "компьютерный монитор",
+      "action": "on",
+      "owner": "я",
+      "place": "офис",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "monitor_me_cabinet",
+      "action": "on",
+      "owner": "я",
+      "place": "офис",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:place-syn:я|лампа|офис|light_me_cabinet",
+    "text": "Включи мой лампа в офисе",
+    "intent": {
+      "device": "лампа",
+      "action": "on",
+      "owner": "я",
+      "place": "офис",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_me_cabinet",
+      "action": "on",
+      "owner": "я",
+      "place": "офис",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:place-syn:я|монитор|офис|monitor_me_cabinet",
+    "text": "Включи мой монитор в офисе",
+    "intent": {
+      "device": "монитор",
+      "action": "on",
+      "owner": "я",
+      "place": "офис",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "monitor_me_cabinet",
+      "action": "on",
+      "owner": "я",
+      "place": "офис",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:place-syn:я|освещение|офис|light_me_cabinet",
+    "text": "Включи мой освещение в офисе",
+    "intent": {
+      "device": "освещение",
+      "action": "on",
+      "owner": "я",
+      "place": "офис",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_me_cabinet",
+      "action": "on",
+      "owner": "я",
+      "place": "офис",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:place-syn:я|свет|офис|light_me_cabinet",
+    "text": "Включи мой свет в офисе",
+    "intent": {
+      "device": "свет",
+      "action": "on",
+      "owner": "я",
+      "place": "офис",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_me_cabinet",
+      "action": "on",
+      "owner": "я",
+      "place": "офис",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:Андрей|диодная лента||led_strip_andrey",
+    "text": "Включи у Андрея диодную ленту",
+    "intent": {
+      "device": "диодная лента",
+      "action": "on",
+      "owner": "Андрей",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "led_strip_andrey",
+      "action": "on",
+      "owner": "Андрей",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:Андрей|диодная лента|кабинет|led_strip_andrey_cabinet",
+    "text": "Включи у Андрея диодную ленту в кабинете",
+    "intent": {
+      "device": "диодная лента",
+      "action": "on",
+      "owner": "Андрей",
+      "place": "кабинет",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "led_strip_andrey_cabinet",
+      "action": "on",
+      "owner": "Андрей",
+      "place": "кабинет",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:Андрей|лента||led_strip_andrey",
+    "text": "Включи у Андрея лента",
+    "intent": {
+      "device": "лента",
+      "action": "on",
+      "owner": "Андрей",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "led_strip_andrey",
+      "action": "on",
+      "owner": "Андрей",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:Андрей|лента|кабинет|led_strip_andrey_cabinet",
+    "text": "Включи у Андрея лента в кабинете",
+    "intent": {
+      "device": "лента",
+      "action": "on",
+      "owner": "Андрей",
+      "place": "кабинет",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "led_strip_andrey_cabinet",
+      "action": "on",
+      "owner": "Андрей",
+      "place": "кабинет",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:Андрей|освещение|балкон|light_andrey_balcony",
+    "text": "Включи у Андрея освещение на балконе",
+    "intent": {
+      "device": "освещение",
+      "action": "on",
+      "owner": "Андрей",
+      "place": "балкон",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_andrey_balcony",
+      "action": "on",
+      "owner": "Андрей",
+      "place": "балкон",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:Андрей|световая лента||led_strip_andrey",
+    "text": "Включи у Андрея световую ленту",
+    "intent": {
+      "device": "световая лента",
+      "action": "on",
+      "owner": "Андрей",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "led_strip_andrey",
+      "action": "on",
+      "owner": "Андрей",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:Андрей|световая лента|кабинет|led_strip_andrey_cabinet",
+    "text": "Включи у Андрея световую ленту в кабинете",
+    "intent": {
+      "device": "световая лента",
+      "action": "on",
+      "owner": "Андрей",
+      "place": "кабинет",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "led_strip_andrey_cabinet",
+      "action": "on",
+      "owner": "Андрей",
+      "place": "кабинет",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:Антон|напольный светильник||floor_lamp_anton",
+    "text": "Включи у Антона напольный светильник",
+    "intent": {
+      "device": "напольный светильник",
+      "action": "on",
+      "owner": "Антон",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "floor_lamp_anton",
+      "action": "on",
+      "owner": "Антон",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:Антон|напольный светильник|гостиная|floor_lamp_anton_living",
+    "text": "Включи у Антона напольный светильник в гостиной",
+    "intent": {
+      "device": "напольный светильник",
+      "action": "on",
+      "owner": "Антон",
+      "place": "гостиная",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "floor_lamp_anton_living",
+      "action": "on",
+      "owner": "Антон",
+      "place": "гостиная",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:Антон|освещение||light_anton",
+    "text": "Включи у Антона освещение",
+    "intent": {
+      "device": "освещение",
+      "action": "on",
+      "owner": "Антон",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_anton",
+      "action": "on",
+      "owner": "Антон",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:Антон|освещение|спальня|light_anton_bedroom",
+    "text": "Включи у Антона освещение в спальне",
+    "intent": {
+      "device": "освещение",
+      "action": "on",
+      "owner": "Антон",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_anton_bedroom",
+      "action": "on",
+      "owner": "Антон",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:Артем|освещение|детская|light_artem_nursery",
+    "text": "Включи у Артема освещение в детской",
+    "intent": {
+      "device": "освещение",
+      "action": "on",
+      "owner": "Артем",
+      "place": "детская",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_artem_nursery",
+      "action": "on",
+      "owner": "Артем",
+      "place": "детская",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:Мария|освещение||light_maria",
+    "text": "Включи у Марии освещение",
+    "intent": {
+      "device": "освещение",
+      "action": "on",
+      "owner": "Мария",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_maria",
+      "action": "on",
+      "owner": "Мария",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:Мария|освещение|гостиная|light_maria_living",
+    "text": "Включи у Марии освещение в гостиной",
+    "intent": {
+      "device": "освещение",
+      "action": "on",
+      "owner": "Мария",
+      "place": "гостиная",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_maria_living",
+      "action": "on",
+      "owner": "Мария",
+      "place": "гостиная",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:Маша|освещение||light_masha",
+    "text": "Включи у Маши освещение",
+    "intent": {
+      "device": "освещение",
+      "action": "on",
+      "owner": "Маша",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_masha",
+      "action": "on",
+      "owner": "Маша",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:Маша|освещение|кухня|light_masha_kitchen",
+    "text": "Включи у Маши освещение на кухне",
+    "intent": {
+      "device": "освещение",
+      "action": "on",
+      "owner": "Маша",
+      "place": "кухня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_masha_kitchen",
+      "action": "on",
+      "owner": "Маша",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:Маша|освещение|спальня|light_masha_bedroom",
+    "text": "Включи у Маши освещение в спальне",
+    "intent": {
+      "device": "освещение",
+      "action": "on",
+      "owner": "Маша",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_masha_bedroom",
+      "action": "on",
+      "owner": "Маша",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:Маша|тв|спальня|tv_masha_bedroom",
+    "text": "Включи у Маши тв в спальне",
+    "intent": {
+      "device": "тв",
+      "action": "on",
+      "owner": "Маша",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "tv_masha_bedroom",
+      "action": "on",
+      "owner": "Маша",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:Маша|телек|спальня|tv_masha_bedroom",
+    "text": "Включи у Маши телек в спальне",
+    "intent": {
+      "device": "телек",
+      "action": "on",
+      "owner": "Маша",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "tv_masha_bedroom",
+      "action": "on",
+      "owner": "Маша",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:Маша|телик|спальня|tv_masha_bedroom",
+    "text": "Включи у Маши телик в спальне",
+    "intent": {
+      "device": "телик",
+      "action": "on",
+      "owner": "Маша",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "tv_masha_bedroom",
+      "action": "on",
+      "owner": "Маша",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:Маша|ящик|спальня|tv_masha_bedroom",
+    "text": "Включи у Маши ящик в спальне",
+    "intent": {
+      "device": "ящик",
+      "action": "on",
+      "owner": "Маша",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "tv_masha_bedroom",
+      "action": "on",
+      "owner": "Маша",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:мама|градусник||thermometer_mama",
+    "text": "Включи мамин градусник",
+    "intent": {
+      "device": "градусник",
+      "action": "on",
+      "owner": "мама",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "thermometer_mama",
+      "action": "on",
+      "owner": "мама",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:мама|градусник|кухня|thermometer_mama_kitchen",
+    "text": "Включи мамин градусник на кухне",
+    "intent": {
+      "device": "градусник",
+      "action": "on",
+      "owner": "мама",
+      "place": "кухня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "thermometer_mama_kitchen",
+      "action": "on",
+      "owner": "мама",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:мама|датчик температуры||thermometer_mama",
+    "text": "Включи мамин датчик температуры",
+    "intent": {
+      "device": "датчик температуры",
+      "action": "on",
+      "owner": "мама",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "thermometer_mama",
+      "action": "on",
+      "owner": "мама",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:мама|датчик температуры|кухня|thermometer_mama_kitchen",
+    "text": "Включи мамин датчик температуры на кухне",
+    "intent": {
+      "device": "датчик температуры",
+      "action": "on",
+      "owner": "мама",
+      "place": "кухня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "thermometer_mama_kitchen",
+      "action": "on",
+      "owner": "мама",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:мама|освещение||light_mama",
+    "text": "Включи мамин освещение",
+    "intent": {
+      "device": "освещение",
+      "action": "on",
+      "owner": "мама",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_mama",
+      "action": "on",
+      "owner": "мама",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:мама|освещение|кухня|light_mama_kitchen",
+    "text": "Включи мамин освещение на кухне",
+    "intent": {
+      "device": "освещение",
+      "action": "on",
+      "owner": "мама",
+      "place": "кухня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_mama_kitchen",
+      "action": "on",
+      "owner": "мама",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:мама|освещение|спальня|light_mama_bedroom",
+    "text": "Включи мамин освещение в спальне",
+    "intent": {
+      "device": "освещение",
+      "action": "on",
+      "owner": "мама",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_mama_bedroom",
+      "action": "on",
+      "owner": "мама",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:мама|увлажнитель воздуха||humidifier_mama",
+    "text": "Включи мамин увлажнитель воздуха",
+    "intent": {
+      "device": "увлажнитель воздуха",
+      "action": "on",
+      "owner": "мама",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "humidifier_mama",
+      "action": "on",
+      "owner": "мама",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:мама|увлажнитель воздуха|спальня|humidifier_mama_bedroom",
+    "text": "Включи мамин увлажнитель воздуха в спальне",
+    "intent": {
+      "device": "увлажнитель воздуха",
+      "action": "on",
+      "owner": "мама",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "humidifier_mama_bedroom",
+      "action": "on",
+      "owner": "мама",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|акустическая система||soundbar",
+    "text": "Включи акустическая система",
+    "intent": {
+      "device": "акустическая система",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "soundbar",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|акустическая система|гостиная|soundbar_living",
+    "text": "Включи акустическая система в гостиной",
+    "intent": {
+      "device": "акустическая система",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "soundbar_living",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|акустическая система|кухня|soundbar_kitchen",
+    "text": "Включи акустическая система на кухне",
+    "intent": {
+      "device": "акустическая система",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "soundbar_kitchen",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|аудиосистема||soundbar",
+    "text": "Включи аудиосистема",
+    "intent": {
+      "device": "аудиосистема",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "soundbar",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|аудиосистема|гостиная|soundbar_living",
+    "text": "Включи аудиосистема в гостиной",
+    "intent": {
+      "device": "аудиосистема",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "soundbar_living",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|аудиосистема|кухня|soundbar_kitchen",
+    "text": "Включи аудиосистема на кухне",
+    "intent": {
+      "device": "аудиосистема",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "soundbar_kitchen",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|вторая колонка||speaker_second",
+    "text": "Включи вторая колонка",
+    "intent": {
+      "device": "вторая колонка",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "speaker_second",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|вторая колонка|кухня|speaker_second_kitchen",
+    "text": "Включи вторая колонка на кухне",
+    "intent": {
+      "device": "вторая колонка",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "speaker_second_kitchen",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|гарнитура||headphones",
+    "text": "Включи гарнитура",
+    "intent": {
+      "device": "гарнитура",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "headphones",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|головные наушники||headphones",
+    "text": "Включи наушники",
+    "intent": {
+      "device": "головные наушники",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "headphones",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|звуковая панель||soundbar",
+    "text": "Включи звуковая панель",
+    "intent": {
+      "device": "звуковая панель",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "soundbar",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|звуковая панель|гостиная|soundbar_living",
+    "text": "Включи звуковая панель в гостиной",
+    "intent": {
+      "device": "звуковая панель",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "soundbar_living",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|звуковая панель|кухня|soundbar_kitchen",
+    "text": "Включи звуковая панель на кухне",
+    "intent": {
+      "device": "звуковая панель",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "soundbar_kitchen",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|компьютерный монитор||monitor",
+    "text": "Включи компьютерный монитор",
+    "intent": {
+      "device": "компьютерный монитор",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "monitor",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|кондей||conditioner_common",
+    "text": "Включи кондей",
+    "intent": {
+      "device": "кондей",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "conditioner_common",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|кондей|спальня|conditioner_bedroom",
+    "text": "Включи кондей в спальне",
+    "intent": {
+      "device": "кондей",
+      "action": "on",
+      "owner": "",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "conditioner_bedroom",
+      "action": "on",
+      "owner": "",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|микро||microphone",
+    "text": "Включи микро",
+    "intent": {
+      "device": "микро",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "microphone",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|микро|кабинет|microphone_cabinet",
+    "text": "Включи микро в кабинете",
+    "intent": {
+      "device": "микро",
+      "action": "on",
+      "owner": "",
+      "place": "кабинет",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "microphone_cabinet",
+      "action": "on",
+      "owner": "",
+      "place": "кабинет",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|музыкальный плеер||player",
+    "text": "Включи музыкальный плеер",
+    "intent": {
+      "device": "музыкальный плеер",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "player",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|музыкальный плеер|кухня|player_kitchen",
+    "text": "Включи музыкальный плеер на кухне",
+    "intent": {
+      "device": "музыкальный плеер",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "player_kitchen",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|музыкальный плеер|спальня|player_bedroom",
+    "text": "Включи музыкальный плеер в спальне",
+    "intent": {
+      "device": "музыкальный плеер",
+      "action": "on",
+      "owner": "",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "player_bedroom",
+      "action": "on",
+      "owner": "",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|освещение||light_common",
+    "text": "Включи освещение",
+    "intent": {
+      "device": "освещение",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_common",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|освещение|ванная|light_common_bath",
+    "text": "Включи освещение в ванной",
+    "intent": {
+      "device": "освещение",
+      "action": "on",
+      "owner": "",
+      "place": "ванная",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_common_bath",
+      "action": "on",
+      "owner": "",
+      "place": "ванная",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|освещение|гостиная|light_common_living",
+    "text": "Включи освещение в гостиной",
+    "intent": {
+      "device": "освещение",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_common_living",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|освещение|коридор|light_common_hallway",
+    "text": "Включи освещение в коридоре",
+    "intent": {
+      "device": "освещение",
+      "action": "on",
+      "owner": "",
+      "place": "коридор",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_common_hallway",
+      "action": "on",
+      "owner": "",
+      "place": "коридор",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|освещение|кухня|light_common_kitchen",
+    "text": "Включи освещение на кухне",
+    "intent": {
+      "device": "освещение",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_common_kitchen",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|освещение|спальня|light_common_bedroom",
+    "text": "Включи освещение в спальне",
+    "intent": {
+      "device": "освещение",
+      "action": "on",
+      "owner": "",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_common_bedroom",
+      "action": "on",
+      "owner": "",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|первая колонка||speaker_first",
+    "text": "Включи первая колонка",
+    "intent": {
+      "device": "первая колонка",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "speaker_first",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|первая колонка|гостиная|speaker_first_living",
+    "text": "Включи первая колонка в гостиной",
+    "intent": {
+      "device": "первая колонка",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "speaker_first_living",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|потолочная люстра||chandelier_common",
+    "text": "Включи потолочную люстру",
+    "intent": {
+      "device": "потолочная люстра",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "chandelier_common",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|потолочная люстра|гостиная|chandelier_living",
+    "text": "Включи потолочную люстру в гостиной",
+    "intent": {
+      "device": "потолочная люстра",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "chandelier_living",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|приемник||radio",
+    "text": "Включи приемник",
+    "intent": {
+      "device": "приемник",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "radio",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|приемник|кухня|radio_kitchen",
+    "text": "Включи приемник на кухне",
+    "intent": {
+      "device": "приемник",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "radio_kitchen",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|проигрыватель музыки||player",
+    "text": "Включи проигрыватель музыки",
+    "intent": {
+      "device": "проигрыватель музыки",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "player",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|проигрыватель музыки|кухня|player_kitchen",
+    "text": "Включи проигрыватель музыки на кухне",
+    "intent": {
+      "device": "проигрыватель музыки",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "player_kitchen",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|проигрыватель музыки|спальня|player_bedroom",
+    "text": "Включи проигрыватель музыки в спальне",
+    "intent": {
+      "device": "проигрыватель музыки",
+      "action": "on",
+      "owner": "",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "player_bedroom",
+      "action": "on",
+      "owner": "",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|проигрыватель||player",
+    "text": "Включи проигрыватель",
+    "intent": {
+      "device": "проигрыватель",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "player",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|проигрыватель|кухня|player_kitchen",
+    "text": "Включи проигрыватель на кухне",
+    "intent": {
+      "device": "проигрыватель",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "player_kitchen",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|проигрыватель|спальня|player_bedroom",
+    "text": "Включи проигрыватель в спальне",
+    "intent": {
+      "device": "проигрыватель",
+      "action": "on",
+      "owner": "",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "player_bedroom",
+      "action": "on",
+      "owner": "",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|радиоприемник||radio",
+    "text": "Включи радиоприемник",
+    "intent": {
+      "device": "радиоприемник",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "radio",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|радиоприемник|кухня|radio_kitchen",
+    "text": "Включи радиоприемник на кухне",
+    "intent": {
+      "device": "радиоприемник",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "radio_kitchen",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|робот пылесос||vacuum_common",
+    "text": "Включи робот-пылесос",
+    "intent": {
+      "device": "робот пылесос",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "vacuum_common",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|робот||vacuum_common",
+    "text": "Включи робот",
+    "intent": {
+      "device": "робот",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "vacuum_common",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|тв||tv",
+    "text": "Включи тв",
+    "intent": {
+      "device": "тв",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "tv",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|тв|гостиная|tv_living",
+    "text": "Включи тв в гостиной",
+    "intent": {
+      "device": "тв",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "tv_living",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|тв|кухня|tv_kitchen",
+    "text": "Включи тв на кухне",
+    "intent": {
+      "device": "тв",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "tv_kitchen",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|тв|спальня|tv_bedroom",
+    "text": "Включи тв в спальне",
+    "intent": {
+      "device": "тв",
+      "action": "on",
+      "owner": "",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "tv_bedroom",
+      "action": "on",
+      "owner": "",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|телек||tv",
+    "text": "Включи телек",
+    "intent": {
+      "device": "телек",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "tv",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|телек|гостиная|tv_living",
+    "text": "Включи телек в гостиной",
+    "intent": {
+      "device": "телек",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "tv_living",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|телек|кухня|tv_kitchen",
+    "text": "Включи телек на кухне",
+    "intent": {
+      "device": "телек",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "tv_kitchen",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|телек|спальня|tv_bedroom",
+    "text": "Включи телек в спальне",
+    "intent": {
+      "device": "телек",
+      "action": "on",
+      "owner": "",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "tv_bedroom",
+      "action": "on",
+      "owner": "",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|телик||tv",
+    "text": "Включи телик",
+    "intent": {
+      "device": "телик",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "tv",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|телик|гостиная|tv_living",
+    "text": "Включи телик в гостиной",
+    "intent": {
+      "device": "телик",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "tv_living",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|телик|кухня|tv_kitchen",
+    "text": "Включи телик на кухне",
+    "intent": {
+      "device": "телик",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "tv_kitchen",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|телик|спальня|tv_bedroom",
+    "text": "Включи телик в спальне",
+    "intent": {
+      "device": "телик",
+      "action": "on",
+      "owner": "",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "tv_bedroom",
+      "action": "on",
+      "owner": "",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|уши||headphones",
+    "text": "Включи уши",
+    "intent": {
+      "device": "уши",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "headphones",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|ящик||tv",
+    "text": "Включи ящик",
+    "intent": {
+      "device": "ящик",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "tv",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|ящик|гостиная|tv_living",
+    "text": "Включи ящик в гостиной",
+    "intent": {
+      "device": "ящик",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "tv_living",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|ящик|кухня|tv_kitchen",
+    "text": "Включи ящик на кухне",
+    "intent": {
+      "device": "ящик",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "tv_kitchen",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:общий|ящик|спальня|tv_bedroom",
+    "text": "Включи ящик в спальне",
+    "intent": {
+      "device": "ящик",
+      "action": "on",
+      "owner": "",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "tv_bedroom",
+      "action": "on",
+      "owner": "",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:папа|датчик влажности||hygrometer_papa",
+    "text": "Включи папин датчик влажности",
+    "intent": {
+      "device": "датчик влажности",
+      "action": "on",
+      "owner": "папа",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "hygrometer_papa",
+      "action": "on",
+      "owner": "папа",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:папа|датчик влажности|спальня|hygrometer_papa_bedroom",
+    "text": "Включи папин датчик влажности в спальне",
+    "intent": {
+      "device": "датчик влажности",
+      "action": "on",
+      "owner": "папа",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "hygrometer_papa_bedroom",
+      "action": "on",
+      "owner": "папа",
+      "place": "спальня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:папа|освещение||light_papa",
+    "text": "Включи папин освещение",
+    "intent": {
+      "device": "освещение",
+      "action": "on",
+      "owner": "папа",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_papa",
+      "action": "on",
+      "owner": "папа",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:папа|освещение|кабинет|light_papa_cabinet",
+    "text": "Включи папин освещение в кабинете",
+    "intent": {
+      "device": "освещение",
+      "action": "on",
+      "owner": "папа",
+      "place": "кабинет",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_papa_cabinet",
+      "action": "on",
+      "owner": "папа",
+      "place": "кабинет",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:я|компьютерный монитор|кабинет|monitor_me_cabinet",
+    "text": "Включи мой компьютерный монитор в кабинете",
+    "intent": {
+      "device": "компьютерный монитор",
+      "action": "on",
+      "owner": "я",
+      "place": "кабинет",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "monitor_me_cabinet",
+      "action": "on",
+      "owner": "я",
+      "place": "кабинет",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:я|освещение||light_me",
+    "text": "Включи мой освещение",
+    "intent": {
+      "device": "освещение",
+      "action": "on",
+      "owner": "я",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_me",
+      "action": "on",
+      "owner": "я",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:я|освещение|кабинет|light_me_cabinet",
+    "text": "Включи мой освещение в кабинете",
+    "intent": {
+      "device": "освещение",
+      "action": "on",
+      "owner": "я",
+      "place": "кабинет",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_me_cabinet",
+      "action": "on",
+      "owner": "я",
+      "place": "кабинет",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:я|освещение|кухня|light_me_kitchen",
+    "text": "Включи мой освещение на кухне",
+    "intent": {
+      "device": "освещение",
+      "action": "on",
+      "owner": "я",
+      "place": "кухня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_me_kitchen",
+      "action": "on",
+      "owner": "я",
+      "place": "кухня",
+      "value": ""
+    }
+  },
+  {
+    "id": "embed:synonym:я|освещение|спальня|light_me_bedroom",
+    "text": "Включи мой освещение в спальне",
+    "intent": {
+      "device": "освещение",
+      "action": "on",
+      "owner": "я",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_me_bedroom",
+      "action": "on",
+      "owner": "я",
+      "place": "спальня",
+      "value": ""
+    }
+  }
+]

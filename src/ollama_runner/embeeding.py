@@ -2,137 +2,11 @@ from __future__ import annotations
 
 import math
 import re
-from dataclasses import dataclass
 
 import fasttext
 import numpy as np
 
-
-@dataclass(frozen=True)
-class Owner:
-    id: str
-    name: str
-
-
-@dataclass(frozen=True)
-class Device:
-    id: str
-    name: str
-    owner_id: str
-
-
-OWNERS = [
-    Owner("common", "общий"),
-    Owner("me", "я"),
-
-    Owner("masha", "Маша"),
-    Owner("maria", "Мария"),
-    Owner("marina", "Марина"),
-
-    Owner("mama", "мама"),
-    Owner("papa", "папа"),
-
-    Owner("anton", "Антон"),
-    Owner("andrey", "Андрей"),
-]
-
-
-DEVICES = [
-    Device("soundbar", "саундбар", "common"),
-    Device("tv", "телевизор", "common"),
-    Device("projector", "проектор", "common"),
-    Device("player", "плеер", "common"),
-    Device("radio", "радио", "common"),
-    Device("speaker_first", "колонка первая", "common"),
-    Device("speaker_second", "колонка вторая", "common"),
-
-    Device("monitor", "монитор", "common"),
-    Device("headphones", "наушники", "common"),
-    Device("microphone", "микрофон", "common"),
-
-    Device("light_me", "свет", "me"),
-    Device("light_masha", "свет", "masha"),
-    Device("light_maria", "свет", "maria"),
-    Device("light_common", "свет", "common"),
-
-    Device("lamp_marina", "лампа", "marina"),
-    Device("chandelier_common", "люстра", "common"),
-    Device("floor_lamp_anton", "торшер", "anton"),
-    Device("led_strip_andrey", "светодиодная лента", "andrey"),
-
-    Device("thermometer_mama", "термометр", "mama"),
-    Device("hygrometer_papa", "гигрометр", "papa"),
-    Device("thermostat_common", "термостат", "common"),
-    Device("fan_common", "вентилятор", "common"),
-    Device("conditioner_common", "кондиционер", "common"),
-    Device("humidifier_mama", "увлажнитель", "mama"),
-    Device("purifier_papa", "очиститель воздуха", "papa"),
-    Device("vacuum_common", "пылесос", "common"),
-]
-
-
-TESTS = [
-    ("я", "свет", "light_me"),
-    ("Маша", "свет", "light_masha"),
-    ("Мария", "свет", "light_maria"),
-    ("общий", "свет", "light_common"),
-
-    ("общий", "телевизор", "tv"),
-    ("общий", "саундбар", "soundbar"),
-    ("общий", "проектор", "projector"),
-    ("общий", "плеер", "player"),
-    ("общий", "радио", "radio"),
-
-    ("общий", "первая колонка", "speaker_first"),
-    ("общий", "вторая колонка", "speaker_second"),
-    ("общий", "колонка первая", "speaker_first"),
-    ("общий", "колонка вторая", "speaker_second"),
-
-    ("общий", "телик", "tv"),
-    ("общий", "экран для телевизора", "tv"),
-    ("общий", "музыкальный плеер", "player"),
-    ("общий", "проигрыватель музыки", "player"),
-    ("общий", "акустическая система", "soundbar"),
-    ("общий", "звуковая панель", "soundbar"),
-    ("общий", "радиоприемник", "radio"),
-
-    ("общий", "компьютерный монитор", "monitor"),
-    ("общий", "головные наушники", "headphones"),
-    ("общий", "гарнитура", "headphones"),
-    ("общий", "микрофон", "microphone"),
-
-    ("Марина", "светильник", "lamp_marina"),
-    ("Марина", "лампа", "lamp_marina"),
-    ("общий", "люстра", "chandelier_common"),
-    ("Антон", "напольный светильник", "floor_lamp_anton"),
-    ("Антон", "торшер", "floor_lamp_anton"),
-    ("Андрей", "световая лента", "led_strip_andrey"),
-    ("Андрей", "светодиодная лента", "led_strip_andrey"),
-
-    ("мама", "термометр", "thermometer_mama"),
-    ("мама", "датчик температуры", "thermometer_mama"),
-    ("папа", "гигрометр", "hygrometer_papa"),
-    ("папа", "датчик влажности", "hygrometer_papa"),
-    ("общий", "термостат", "thermostat_common"),
-
-    ("общий", "вентилятор", "fan_common"),
-    ("общий", "кондиционер", "conditioner_common"),
-    ("мама", "увлажнитель воздуха", "humidifier_mama"),
-    ("папа", "очиститель воздуха", "purifier_papa"),
-
-    ("Маша", "лампа", "light_masha"),
-    ("Мария", "лампа", "light_maria"),
-    ("Марина", "лампа", "lamp_marina"),
-
-    ("общий", "робот пылесос", "vacuum_common"),
-    ("общий", "пылесос", "vacuum_common"),
-]
-
-
-OWNER_BY_ID = {
-    owner.id: owner
-    for owner in OWNERS
-}
+from ollama_runner.inventory.static import DEVICES, OWNERS
 
 
 def similarity(model, a: str, b: str) -> float:
@@ -185,11 +59,13 @@ def exact_match(query: str, candidate: str) -> bool:
     return query.strip().casefold() == candidate.strip().casefold()
 
 
-def owner_scores(model, owner_text: str) -> dict[str, float]:
+def owner_scores(model, owner_text: str, owners=None) -> dict[str, float]:
+    owners = list(OWNERS if owners is None else owners)
+
     exact_owner = next(
         (
             owner
-            for owner in OWNERS
+            for owner in owners
             if exact_match(owner_text, owner.name)
         ),
         None,
@@ -199,7 +75,7 @@ def owner_scores(model, owner_text: str) -> dict[str, float]:
     if exact_owner is not None:
         return {
             owner.id: 1.0 if owner.id == exact_owner.id else 0.0
-            for owner in OWNERS
+            for owner in owners
         }
 
     return {
@@ -208,17 +84,35 @@ def owner_scores(model, owner_text: str) -> dict[str, float]:
             owner_text,
             owner.name,
         )
-        for owner in OWNERS
+        for owner in owners
     }
+
+
+def place_score(model, query_place: str, device_place: str) -> float:
+    query = query_place.strip()
+    candidate = device_place.strip()
+
+    if not query:
+        return 1.0 if not candidate else 0.55
+
+    if not candidate:
+        return 0.25
+
+    if exact_match(query, candidate):
+        return 1.0
+
+    return text_similarity(model, query, candidate)
 
 
 def combine_scores(
     device_score: float,
     owner_score: float,
+    location_score: float = 1.0,
 ) -> float:
     return (
-        device_score ** 0.65
-        * owner_score ** 0.35
+        device_score ** 0.50
+        * owner_score ** 0.25
+        * location_score ** 0.25
     )
 
 
@@ -226,31 +120,24 @@ def resolve(
     model,
     owner_text: str,
     device_text: str,
+    place_text: str = "",
     top_k: int = 3,
+    devices=None,
+    owners=None,
 ):
-    owners = owner_scores(model, owner_text)
+    devices = list(DEVICES if devices is None else devices)
+    owners = list(OWNERS if owners is None else owners)
+    owner_by_id = {owner.id: owner for owner in owners}
+    owner_score_map = owner_scores(model, owner_text, owners=owners)
 
     results = []
 
-    # ВАЖНО:
-    # считаем score для КАЖДОГО реально существующего устройства.
-    # Никакого предварительного top-3 по device/owner.
-    for device in DEVICES:
-        owner = OWNER_BY_ID[device.owner_id]
-
-        device_score = text_similarity(
-            model,
-            device_text,
-            device.name,
-        )
-
-        owner_score = owners[owner.id]
-
-        score = combine_scores(
-            device_score,
-            owner_score,
-        )
-
+    for device in devices:
+        owner = owner_by_id[device.owner_id]
+        device_score = text_similarity(model, device_text, device.name)
+        owner_score = owner_score_map[owner.id]
+        location_score = place_score(model, place_text, device.place)
+        score = combine_scores(device_score, owner_score, location_score)
         results.append(
             (
                 device,
@@ -258,44 +145,59 @@ def resolve(
                 score,
                 device_score,
                 owner_score,
+                location_score,
             )
         )
 
-    results.sort(
-        key=lambda x: x[2],
-        reverse=True,
+    exact_owner = next(
+        (owner for owner in owners if exact_match(owner_text, owner.name)),
+        None,
     )
+    global_best_device = max(results, key=lambda row: row[3])
+    global_device_score = global_best_device[3]
+
+    if exact_owner is not None:
+        owned = [
+            row
+            for row in results
+            if row[0].owner_id == exact_owner.id
+        ]
+        if owned:
+            best_owned = max(owned, key=lambda row: row[3])
+            if best_owned[3] >= global_device_score * 0.8:
+                ranked = sorted(owned, key=lambda row: row[2], reverse=True)
+            else:
+                close = [
+                    row
+                    for row in results
+                    if row[3] >= global_device_score * 0.8
+                ]
+                ranked = sorted(close, key=lambda row: row[2], reverse=True)
+        else:
+            ranked = sorted(results, key=lambda row: row[2], reverse=True)
+    else:
+        ranked = sorted(results, key=lambda row: row[2], reverse=True)
 
     device_matches = sorted(
         (
-            (
-                device,
-                text_similarity(
-                    model,
-                    device_text,
-                    device.name,
-                ),
-            )
-            for device in DEVICES
+            (device, text_similarity(model, device_text, device.name))
+            for device in devices
         ),
-        key=lambda x: x[1],
+        key=lambda item: item[1],
         reverse=True,
     )[:top_k]
 
     owner_matches = sorted(
         (
-            (
-                owner,
-                owners[owner.id],
-            )
-            for owner in OWNERS
+            (owner, owner_score_map[owner.id])
+            for owner in owners
         ),
-        key=lambda x: x[1],
+        key=lambda item: item[1],
         reverse=True,
     )[:top_k]
 
     return (
-        results[:top_k],
+        ranked[:top_k],
         device_matches,
         owner_matches,
     )
@@ -309,72 +211,35 @@ def format_matches(matches) -> str:
 
 
 def main() -> None:
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--owner", default="общий")
+    parser.add_argument("--device", required=True)
+    parser.add_argument("--place", default="")
+    args = parser.parse_args()
+
     model = fasttext.load_model("cc.ru.300.bin")
+    results, device_matches, owner_matches = resolve(
+        model,
+        owner_text=args.owner,
+        device_text=args.device,
+        place_text=args.place,
+    )
 
-    passed = 0
+    print(f"devices: {format_matches(device_matches)}")
+    print(f"owners : {format_matches(owner_matches)}")
 
-    for owner_text, device_text, expected in TESTS:
-        results, device_matches, owner_matches = resolve(
-            model,
-            owner_text=owner_text,
-            device_text=device_text,
-        )
-
-        actual = results[0][0].id if results else None
-        score = results[0][2] if results else 0.0
-
-        ok = actual == expected
-        passed += ok
-
-        if ok:
-            print(
-                f"PASS | "
-                f"owner={owner_text!r} "
-                f"device={device_text!r} "
-                f"-> {actual} "
-                f"score={score:.3f}"
-            )
-            continue
-
+    for device, owner, total, device_score, owner_score, location_score in results:
         print(
-            f"FAIL | "
-            f"owner={owner_text!r} "
-            f"device={device_text!r} | "
-            f"expected={expected} "
-            f"actual={actual} "
-            f"score={score:.3f}"
+            f"{device.id}"
+            f" place={device.place!r}"
+            f" total={total:.3f}"
+            f" dev={device_score:.3f}"
+            f" owner={owner_score:.3f}"
+            f" loc={location_score:.3f}"
+            f" ({owner.name})"
         )
-
-        print(
-            f"     devices: {format_matches(device_matches)}"
-        )
-
-        print(
-            f"     owners : {format_matches(owner_matches)}"
-        )
-
-        if results:
-            print(
-                "     final  : "
-                + ", ".join(
-                    (
-                        f"{device.id}"
-                        f"(total={total:.3f},"
-                        f" dev={device_score:.3f},"
-                        f" owner={owner_score:.3f})"
-                    )
-                    for (
-                        device,
-                        owner,
-                        total,
-                        device_score,
-                        owner_score,
-                    ) in results
-                )
-            )
-
-    print()
-    print(f"{passed}/{len(TESTS)} passed")
 
 
 if __name__ == "__main__":

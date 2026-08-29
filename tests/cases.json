@@ -1,8 +1,16 @@
 [
   {
+    "id": "pipeline:0:Включи свет",
     "text": "Включи свет",
+    "intent": {
+      "device": "свет",
+      "action": "on",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
     "expected": {
-      "device": "light",
+      "device_id": "light_common",
       "action": "on",
       "owner": "",
       "place": "",
@@ -10,9 +18,17 @@
     }
   },
   {
+    "id": "pipeline:1:Перемотай сериал на 10 минут вперед",
     "text": "Перемотай сериал на 10 минут вперед",
+    "intent": {
+      "device": "телевизор",
+      "action": "increase",
+      "owner": "",
+      "place": "",
+      "value": "на 10 минут"
+    },
     "expected": {
-      "device": "tv",
+      "device_id": "tv",
       "action": "increase",
       "owner": "",
       "place": "",
@@ -20,9 +36,17 @@
     }
   },
   {
+    "id": "pipeline:2:Запусти мамин телевизор",
     "text": "Запусти мамин телевизор",
+    "intent": {
+      "device": "телевизор",
+      "action": "on",
+      "owner": "мама",
+      "place": "",
+      "value": ""
+    },
     "expected": {
-      "device": "tv",
+      "device_id": "tv",
       "action": "on",
       "owner": "мама",
       "place": "",
@@ -30,9 +54,17 @@
     }
   },
   {
+    "id": "pipeline:3:Сделай свет в спальне красным",
     "text": "Сделай свет в спальне красным",
+    "intent": {
+      "device": "свет",
+      "action": "set_state",
+      "owner": "",
+      "place": "спальня",
+      "value": "красный"
+    },
     "expected": {
-      "device": "light",
+      "device_id": "light_common_bedroom",
       "action": "set_state",
       "owner": "",
       "place": "спальня",
@@ -40,19 +72,35 @@
     }
   },
   {
+    "id": "pipeline:4:Включи у Маши Sonne",
     "text": "Включи у Маши Sonne",
+    "intent": {
+      "device": "аудиосистема",
+      "action": "run_content",
+      "owner": "Маша",
+      "place": "",
+      "value": "Sonne"
+    },
     "expected": {
-      "device": "media",
-      "action": "run",
+      "device_id": "soundbar",
+      "action": "run_content",
       "owner": "Маша",
       "place": "",
       "value": "Sonne"
     }
   },
   {
+    "id": "pipeline:5:Хочу фиолетовый свет",
     "text": "Хочу фиолетовый свет",
+    "intent": {
+      "device": "свет",
+      "action": "set_state",
+      "owner": "",
+      "place": "",
+      "value": "фиолетовый"
+    },
     "expected": {
-      "device": "light",
+      "device_id": "light_common",
       "action": "set_state",
       "owner": "",
       "place": "",
@@ -60,19 +108,35 @@
     }
   },
   {
+    "id": "pipeline:6:Включи Ведьмака",
     "text": "Включи Ведьмака",
+    "intent": {
+      "device": "телевизор",
+      "action": "run_content",
+      "owner": "",
+      "place": "",
+      "value": "Ведьмак"
+    },
     "expected": {
-      "device": "tv",
-      "action": "run",
+      "device_id": "tv",
+      "action": "run_content",
       "owner": "",
       "place": "",
       "value": "Ведьмак"
     }
   },
   {
+    "id": "pipeline:7:Включи мамин телевизор",
     "text": "Включи мамин телевизор",
+    "intent": {
+      "device": "телевизор",
+      "action": "on",
+      "owner": "мама",
+      "place": "",
+      "value": ""
+    },
     "expected": {
-      "device": "tv",
+      "device_id": "tv",
       "action": "on",
       "owner": "мама",
       "place": "",
@@ -80,9 +144,17 @@
     }
   },
   {
+    "id": "pipeline:8:Увеличь яркость на 20 процентов",
     "text": "Увеличь яркость на 20 процентов",
+    "intent": {
+      "device": "свет",
+      "action": "increase",
+      "owner": "",
+      "place": "",
+      "value": "на 20 процентов"
+    },
     "expected": {
-      "device": "light",
+      "device_id": "light_common",
       "action": "increase",
       "owner": "",
       "place": "",
@@ -90,9 +162,17 @@
     }
   },
   {
+    "id": "pipeline:9:Выключи свет на кухне",
     "text": "Выключи свет на кухне",
+    "intent": {
+      "device": "свет",
+      "action": "off",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    },
     "expected": {
-      "device": "light",
+      "device_id": "light_common_kitchen",
       "action": "off",
       "owner": "",
       "place": "кухня",
@@ -100,9 +180,17 @@
     }
   },
   {
+    "id": "pipeline:10:Сделай потемнее",
     "text": "Сделай потемнее",
+    "intent": {
+      "device": "свет",
+      "action": "decrease",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
     "expected": {
-      "device": "light",
+      "device_id": "light_common",
       "action": "decrease",
       "owner": "",
       "place": "",
@@ -110,9 +198,17 @@
     }
   },
   {
+    "id": "pipeline:11:Сделай свет немного ярче",
     "text": "Сделай свет немного ярче",
+    "intent": {
+      "device": "свет",
+      "action": "increase",
+      "owner": "",
+      "place": "",
+      "value": "немного"
+    },
     "expected": {
-      "device": "light",
+      "device_id": "light_common",
       "action": "increase",
       "owner": "",
       "place": "",
@@ -120,9 +216,17 @@
     }
   },
   {
+    "id": "pipeline:12:Убавь яркость на 30 процентов",
     "text": "Убавь яркость на 30 процентов",
+    "intent": {
+      "device": "свет",
+      "action": "decrease",
+      "owner": "",
+      "place": "",
+      "value": "на 30 процентов"
+    },
     "expected": {
-      "device": "light",
+      "device_id": "light_common",
       "action": "decrease",
       "owner": "",
       "place": "",
@@ -130,9 +234,17 @@
     }
   },
   {
+    "id": "pipeline:13:Поставь яркость 50 процентов",
     "text": "Поставь яркость 50 процентов",
+    "intent": {
+      "device": "свет",
+      "action": "set_state",
+      "owner": "",
+      "place": "",
+      "value": "50 процентов"
+    },
     "expected": {
-      "device": "light",
+      "device_id": "light_common",
       "action": "set_state",
       "owner": "",
       "place": "",
@@ -140,9 +252,17 @@
     }
   },
   {
+    "id": "pipeline:14:Сделай на кухне теплый белый",
     "text": "Сделай на кухне теплый белый",
+    "intent": {
+      "device": "свет",
+      "action": "set_state",
+      "owner": "",
+      "place": "кухня",
+      "value": "теплый белый"
+    },
     "expected": {
-      "device": "light",
+      "device_id": "light_common_kitchen",
       "action": "set_state",
       "owner": "",
       "place": "кухня",
@@ -150,9 +270,17 @@
     }
   },
   {
+    "id": "pipeline:15:Сделай мамин свет синим",
     "text": "Сделай мамин свет синим",
+    "intent": {
+      "device": "свет",
+      "action": "set_state",
+      "owner": "мама",
+      "place": "",
+      "value": "синий"
+    },
     "expected": {
-      "device": "light",
+      "device_id": "light_mama",
       "action": "set_state",
       "owner": "мама",
       "place": "",
@@ -160,9 +288,17 @@
     }
   },
   {
+    "id": "pipeline:16:Выруби Машин свет в спальне",
     "text": "Выруби Машин свет в спальне",
+    "intent": {
+      "device": "свет",
+      "action": "off",
+      "owner": "Маша",
+      "place": "спальня",
+      "value": ""
+    },
     "expected": {
-      "device": "light",
+      "device_id": "light_masha_bedroom",
       "action": "off",
       "owner": "Маша",
       "place": "спальня",
@@ -170,9 +306,17 @@
     }
   },
   {
+    "id": "pipeline:17:Включи телевизор в гостиной",
     "text": "Включи телевизор в гостиной",
+    "intent": {
+      "device": "телевизор",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    },
     "expected": {
-      "device": "tv",
+      "device_id": "tv_living",
       "action": "on",
       "owner": "",
       "place": "гостиная",
@@ -180,9 +324,17 @@
     }
   },
   {
+    "id": "pipeline:18:Запусти телевизор в гостиной",
     "text": "Запусти телевизор в гостиной",
+    "intent": {
+      "device": "телевизор",
+      "action": "on",
+      "owner": "",
+      "place": "гостиная",
+      "value": ""
+    },
     "expected": {
-      "device": "tv",
+      "device_id": "tv_living",
       "action": "on",
       "owner": "",
       "place": "гостиная",
@@ -190,9 +342,17 @@
     }
   },
   {
+    "id": "pipeline:19:Выруби Антонов телик",
     "text": "Выруби Антонов телик",
+    "intent": {
+      "device": "телевизор",
+      "action": "off",
+      "owner": "Антон",
+      "place": "",
+      "value": ""
+    },
     "expected": {
-      "device": "tv",
+      "device_id": "tv",
       "action": "off",
       "owner": "Антон",
       "place": "",
@@ -200,49 +360,89 @@
     }
   },
   {
+    "id": "pipeline:20:Поставь Интерстеллар",
     "text": "Поставь Интерстеллар",
+    "intent": {
+      "device": "телевизор",
+      "action": "run_content",
+      "owner": "",
+      "place": "",
+      "value": "Интерстеллар"
+    },
     "expected": {
-      "device": "tv",
-      "action": "run",
+      "device_id": "tv",
+      "action": "run_content",
       "owner": "",
       "place": "",
       "value": "Интерстеллар"
     }
   },
   {
+    "id": "pipeline:21:Запусти пятую серию второго сезона Доктора Кто",
     "text": "Запусти пятую серию второго сезона Доктора Кто",
+    "intent": {
+      "device": "телевизор",
+      "action": "run_content",
+      "owner": "",
+      "place": "",
+      "value": "пятая серия второго сезона Доктора Кто"
+    },
     "expected": {
-      "device": "tv",
-      "action": "run",
+      "device_id": "tv",
+      "action": "run_content",
       "owner": "",
       "place": "",
       "value": "пятая серия второго сезона Доктора Кто"
     }
   },
   {
+    "id": "pipeline:22:Запусти седьмую серию второго сезона Бен 10",
     "text": "Запусти седьмую серию второго сезона Бен 10",
+    "intent": {
+      "device": "телевизор",
+      "action": "run_content",
+      "owner": "",
+      "place": "",
+      "value": "седьмая серия второго сезона Бен 10"
+    },
     "expected": {
-      "device": "tv",
-      "action": "run",
+      "device_id": "tv",
+      "action": "run_content",
       "owner": "",
       "place": "",
       "value": "седьмая серия второго сезона Бен 10"
     }
   },
   {
+    "id": "pipeline:23:Поставь Ведьмака у мамы",
     "text": "Поставь Ведьмака у мамы",
+    "intent": {
+      "device": "телевизор",
+      "action": "run_content",
+      "owner": "мама",
+      "place": "",
+      "value": "Ведьмак"
+    },
     "expected": {
-      "device": "tv",
-      "action": "run",
+      "device_id": "tv",
+      "action": "run_content",
       "owner": "мама",
       "place": "",
       "value": "Ведьмак"
     }
   },
   {
+    "id": "pipeline:24:Поставь сериал на паузу",
     "text": "Поставь сериал на паузу",
+    "intent": {
+      "device": "телевизор",
+      "action": "stop",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
     "expected": {
-      "device": "tv",
+      "device_id": "tv",
       "action": "stop",
       "owner": "",
       "place": "",
@@ -250,9 +450,17 @@
     }
   },
   {
+    "id": "pipeline:25:Перемотай на пять минут назад",
     "text": "Перемотай на пять минут назад",
+    "intent": {
+      "device": "телевизор",
+      "action": "decrease",
+      "owner": "",
+      "place": "",
+      "value": "на пять минут"
+    },
     "expected": {
-      "device": "tv",
+      "device_id": "tv",
       "action": "decrease",
       "owner": "",
       "place": "",
@@ -260,9 +468,17 @@
     }
   },
   {
+    "id": "pipeline:26:Включи музыку на кухне",
     "text": "Включи музыку на кухне",
+    "intent": {
+      "device": "аудиосистема",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    },
     "expected": {
-      "device": "media",
+      "device_id": "soundbar_kitchen",
       "action": "on",
       "owner": "",
       "place": "кухня",
@@ -270,29 +486,53 @@
     }
   },
   {
+    "id": "pipeline:27:Вруби Rammstein",
     "text": "Вруби Rammstein",
+    "intent": {
+      "device": "аудиосистема",
+      "action": "run_content",
+      "owner": "",
+      "place": "",
+      "value": "Rammstein"
+    },
     "expected": {
-      "device": "media",
-      "action": "run",
+      "device_id": "soundbar",
+      "action": "run_content",
       "owner": "",
       "place": "",
       "value": "Rammstein"
     }
   },
   {
+    "id": "pipeline:28:Поставь альбом Meteora у Маши",
     "text": "Поставь альбом Meteora у Маши",
+    "intent": {
+      "device": "аудиосистема",
+      "action": "run_content",
+      "owner": "Маша",
+      "place": "",
+      "value": "альбом Meteora"
+    },
     "expected": {
-      "device": "media",
-      "action": "run",
+      "device_id": "soundbar",
+      "action": "run_content",
       "owner": "Маша",
       "place": "",
       "value": "альбом Meteora"
     }
   },
   {
+    "id": "pipeline:29:Сделай музыку погромче",
     "text": "Сделай музыку погромче",
+    "intent": {
+      "device": "аудиосистема",
+      "action": "increase",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
     "expected": {
-      "device": "media",
+      "device_id": "soundbar",
       "action": "increase",
       "owner": "",
       "place": "",
@@ -300,9 +540,17 @@
     }
   },
   {
+    "id": "pipeline:30:Убавь громкость на кухне на 15 процентов",
     "text": "Убавь громкость на кухне на 15 процентов",
+    "intent": {
+      "device": "аудиосистема",
+      "action": "decrease",
+      "owner": "",
+      "place": "кухня",
+      "value": "на 15 процентов"
+    },
     "expected": {
-      "device": "media",
+      "device_id": "soundbar_kitchen",
       "action": "decrease",
       "owner": "",
       "place": "кухня",
@@ -310,9 +558,17 @@
     }
   },
   {
+    "id": "pipeline:31:Поставь громкость на 40 процентов",
     "text": "Поставь громкость на 40 процентов",
+    "intent": {
+      "device": "аудиосистема",
+      "action": "set_state",
+      "owner": "",
+      "place": "",
+      "value": "40 процентов"
+    },
     "expected": {
-      "device": "media",
+      "device_id": "soundbar",
       "action": "set_state",
       "owner": "",
       "place": "",
@@ -320,9 +576,17 @@
     }
   },
   {
+    "id": "pipeline:32:Останови музыку у Антона",
     "text": "Останови музыку у Антона",
+    "intent": {
+      "device": "аудиосистема",
+      "action": "stop",
+      "owner": "Антон",
+      "place": "",
+      "value": ""
+    },
     "expected": {
-      "device": "media",
+      "device_id": "soundbar",
       "action": "stop",
       "owner": "Антон",
       "place": "",
@@ -330,9 +594,17 @@
     }
   },
   {
+    "id": "pipeline:33:Запусти папин телевизор",
     "text": "Запусти папин телевизор",
+    "intent": {
+      "device": "телевизор",
+      "action": "on",
+      "owner": "папа",
+      "place": "",
+      "value": ""
+    },
     "expected": {
-      "device": "tv",
+      "device_id": "tv",
       "action": "on",
       "owner": "папа",
       "place": "",
@@ -340,9 +612,17 @@
     }
   },
   {
+    "id": "pipeline:34:Включи телик Артема",
     "text": "Включи телик Артема",
+    "intent": {
+      "device": "телевизор",
+      "action": "on",
+      "owner": "Артем",
+      "place": "",
+      "value": ""
+    },
     "expected": {
-      "device": "tv",
+      "device_id": "tv",
       "action": "on",
       "owner": "Артем",
       "place": "",
@@ -350,9 +630,17 @@
     }
   },
   {
+    "id": "pipeline:35:Запусти телевизор на кухне",
     "text": "Запусти телевизор на кухне",
+    "intent": {
+      "device": "телевизор",
+      "action": "on",
+      "owner": "",
+      "place": "кухня",
+      "value": ""
+    },
     "expected": {
-      "device": "tv",
+      "device_id": "tv_kitchen",
       "action": "on",
       "owner": "",
       "place": "кухня",
@@ -360,9 +648,17 @@
     }
   },
   {
+    "id": "pipeline:36:Включи мой телевизор",
     "text": "Включи мой телевизор",
+    "intent": {
+      "device": "телевизор",
+      "action": "on",
+      "owner": "я",
+      "place": "",
+      "value": ""
+    },
     "expected": {
-      "device": "tv",
+      "device_id": "tv",
       "action": "on",
       "owner": "я",
       "place": "",
@@ -370,9 +666,17 @@
     }
   },
   {
+    "id": "pipeline:37:Вруби телевизор в спальне",
     "text": "Вруби телевизор в спальне",
+    "intent": {
+      "device": "телевизор",
+      "action": "on",
+      "owner": "",
+      "place": "спальня",
+      "value": ""
+    },
     "expected": {
-      "device": "tv",
+      "device_id": "tv_bedroom",
       "action": "on",
       "owner": "",
       "place": "спальня",
@@ -380,59 +684,107 @@
     }
   },
   {
+    "id": "pipeline:38:Запусти маме первую серию Ведьмака",
     "text": "Запусти маме первую серию Ведьмака",
+    "intent": {
+      "device": "телевизор",
+      "action": "run_content",
+      "owner": "мама",
+      "place": "",
+      "value": "первая серия Ведьмака"
+    },
     "expected": {
-      "device": "tv",
-      "action": "run",
+      "device_id": "tv",
+      "action": "run_content",
       "owner": "мама",
       "place": "",
       "value": "первая серия Ведьмака"
     }
   },
   {
+    "id": "pipeline:39:Включи Интерстеллар у Антона",
     "text": "Включи Интерстеллар у Антона",
+    "intent": {
+      "device": "телевизор",
+      "action": "run_content",
+      "owner": "Антон",
+      "place": "",
+      "value": "Интерстеллар"
+    },
     "expected": {
-      "device": "tv",
-      "action": "run",
+      "device_id": "tv",
+      "action": "run_content",
       "owner": "Антон",
       "place": "",
       "value": "Интерстеллар"
     }
   },
   {
+    "id": "pipeline:40:Запусти Доктора Кто в гостиной",
     "text": "Запусти Доктора Кто в гостиной",
+    "intent": {
+      "device": "телевизор",
+      "action": "run_content",
+      "owner": "",
+      "place": "гостиная",
+      "value": "Доктор Кто"
+    },
     "expected": {
-      "device": "tv",
-      "action": "run",
+      "device_id": "tv_living",
+      "action": "run_content",
       "owner": "",
       "place": "гостиная",
       "value": "Доктор Кто"
     }
   },
   {
+    "id": "pipeline:41:Включи вторую серию первого сезона Аркейна",
     "text": "Включи вторую серию первого сезона Аркейна",
+    "intent": {
+      "device": "телевизор",
+      "action": "run_content",
+      "owner": "",
+      "place": "",
+      "value": "вторая серия первого сезона Аркейна"
+    },
     "expected": {
-      "device": "tv",
-      "action": "run",
+      "device_id": "tv",
+      "action": "run_content",
       "owner": "",
       "place": "",
       "value": "вторая серия первого сезона Аркейна"
     }
   },
   {
+    "id": "pipeline:42:Поставь Шрека у Маши",
     "text": "Поставь Шрека у Маши",
+    "intent": {
+      "device": "телевизор",
+      "action": "run_content",
+      "owner": "Маша",
+      "place": "",
+      "value": "Шрек"
+    },
     "expected": {
-      "device": "tv",
-      "action": "run",
+      "device_id": "tv",
+      "action": "run_content",
       "owner": "Маша",
       "place": "",
       "value": "Шрек"
     }
   },
   {
+    "id": "pipeline:43:Запусти музыку у мамы",
     "text": "Запусти музыку у мамы",
+    "intent": {
+      "device": "аудиосистема",
+      "action": "on",
+      "owner": "мама",
+      "place": "",
+      "value": ""
+    },
     "expected": {
-      "device": "media",
+      "device_id": "soundbar",
       "action": "on",
       "owner": "мама",
       "place": "",
@@ -440,9 +792,17 @@
     }
   },
   {
+    "id": "pipeline:44:Включи плеер в спальне",
     "text": "Включи плеер в спальне",
+    "intent": {
+      "device": "плеер",
+      "action": "on",
+      "owner": "",
+      "place": "спальня",
+      "value": ""
+    },
     "expected": {
-      "device": "media",
+      "device_id": "player_bedroom",
       "action": "on",
       "owner": "",
       "place": "спальня",
@@ -450,9 +810,17 @@
     }
   },
   {
+    "id": "pipeline:45:Запусти мой плеер",
     "text": "Запусти мой плеер",
+    "intent": {
+      "device": "плеер",
+      "action": "on",
+      "owner": "я",
+      "place": "",
+      "value": ""
+    },
     "expected": {
-      "device": "media",
+      "device_id": "player",
       "action": "on",
       "owner": "я",
       "place": "",
@@ -460,9 +828,17 @@
     }
   },
   {
+    "id": "pipeline:46:Включи музыку у Антона",
     "text": "Включи музыку у Антона",
+    "intent": {
+      "device": "аудиосистема",
+      "action": "on",
+      "owner": "Антон",
+      "place": "",
+      "value": ""
+    },
     "expected": {
-      "device": "media",
+      "device_id": "soundbar",
       "action": "on",
       "owner": "Антон",
       "place": "",
@@ -470,49 +846,89 @@
     }
   },
   {
+    "id": "pipeline:47:Запусти Sonne у мамы",
     "text": "Запусти Sonne у мамы",
+    "intent": {
+      "device": "аудиосистема",
+      "action": "run_content",
+      "owner": "мама",
+      "place": "",
+      "value": "Sonne"
+    },
     "expected": {
-      "device": "media",
-      "action": "run",
+      "device_id": "soundbar",
+      "action": "run_content",
       "owner": "мама",
       "place": "",
       "value": "Sonne"
     }
   },
   {
+    "id": "pipeline:48:Включи Linkin Park на кухне",
     "text": "Включи Linkin Park на кухне",
+    "intent": {
+      "device": "аудиосистема",
+      "action": "run_content",
+      "owner": "",
+      "place": "кухня",
+      "value": "Linkin Park"
+    },
     "expected": {
-      "device": "media",
-      "action": "run",
+      "device_id": "soundbar_kitchen",
+      "action": "run_content",
       "owner": "",
       "place": "кухня",
       "value": "Linkin Park"
     }
   },
   {
+    "id": "pipeline:49:Поставь плейлист для уборки у Маши",
     "text": "Поставь плейлист для уборки у Маши",
+    "intent": {
+      "device": "аудиосистема",
+      "action": "run_content",
+      "owner": "Маша",
+      "place": "",
+      "value": "плейлист для уборки"
+    },
     "expected": {
-      "device": "media",
-      "action": "run",
+      "device_id": "soundbar",
+      "action": "run_content",
       "owner": "Маша",
       "place": "",
       "value": "плейлист для уборки"
     }
   },
   {
+    "id": "pipeline:50:Запусти альбом Mutter",
     "text": "Запусти альбом Mutter",
+    "intent": {
+      "device": "аудиосистема",
+      "action": "run_content",
+      "owner": "",
+      "place": "",
+      "value": "альбом Mutter"
+    },
     "expected": {
-      "device": "media",
-      "action": "run",
+      "device_id": "soundbar",
+      "action": "run_content",
       "owner": "",
       "place": "",
       "value": "альбом Mutter"
     }
   },
   {
+    "id": "pipeline:51:Сделай у папы зеленый свет",
     "text": "Сделай у папы зеленый свет",
+    "intent": {
+      "device": "свет",
+      "action": "set_state",
+      "owner": "папа",
+      "place": "",
+      "value": "зеленый"
+    },
     "expected": {
-      "device": "light",
+      "device_id": "light_papa",
       "action": "set_state",
       "owner": "папа",
       "place": "",
@@ -520,9 +936,17 @@
     }
   },
   {
+    "id": "pipeline:52:Прибавь у Маши яркость на 10 процентов",
     "text": "Прибавь у Маши яркость на 10 процентов",
+    "intent": {
+      "device": "свет",
+      "action": "increase",
+      "owner": "Маша",
+      "place": "",
+      "value": "на 10 процентов"
+    },
     "expected": {
-      "device": "light",
+      "device_id": "light_masha",
       "action": "increase",
       "owner": "Маша",
       "place": "",
@@ -530,9 +954,17 @@
     }
   },
   {
+    "id": "pipeline:53:У Антона в спальне сделай потемнее",
     "text": "У Антона в спальне сделай потемнее",
+    "intent": {
+      "device": "свет",
+      "action": "decrease",
+      "owner": "Антон",
+      "place": "спальня",
+      "value": ""
+    },
     "expected": {
-      "device": "light",
+      "device_id": "light_anton_bedroom",
       "action": "decrease",
       "owner": "Антон",
       "place": "спальня",
@@ -540,9 +972,17 @@
     }
   },
   {
+    "id": "pipeline:54:Поставь у меня на кухне яркость 25 процентов",
     "text": "Поставь у меня на кухне яркость 25 процентов",
+    "intent": {
+      "device": "свет",
+      "action": "set_state",
+      "owner": "я",
+      "place": "кухня",
+      "value": "25 процентов"
+    },
     "expected": {
-      "device": "light",
+      "device_id": "light_me_kitchen",
       "action": "set_state",
       "owner": "я",
       "place": "кухня",
@@ -550,9 +990,17 @@
     }
   },
   {
+    "id": "pipeline:55:Хочу в гостиной оранжевый",
     "text": "Хочу в гостиной оранжевый",
+    "intent": {
+      "device": "свет",
+      "action": "set_state",
+      "owner": "",
+      "place": "гостиная",
+      "value": "оранжевый"
+    },
     "expected": {
-      "device": "light",
+      "device_id": "light_common_living",
       "action": "set_state",
       "owner": "",
       "place": "гостиная",
@@ -560,13 +1008,111 @@
     }
   },
   {
+    "id": "pipeline:56:Убавь у мамы яркость немного",
     "text": "Убавь у мамы яркость немного",
-    "expected": {
-      "device": "light",
+    "intent": {
+      "device": "свет",
       "action": "decrease",
       "owner": "мама",
       "place": "",
       "value": "немного"
+    },
+    "expected": {
+      "device_id": "light_mama",
+      "action": "decrease",
+      "owner": "мама",
+      "place": "",
+      "value": "немного"
+    }
+  },
+  {
+    "id": "pipeline:57:Следующая серия",
+    "text": "Следующая серия",
+    "intent": {
+      "device": "телевизор",
+      "action": "increase",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "tv",
+      "action": "increase",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "pipeline:58:Предыдущая серия",
+    "text": "Предыдущая серия",
+    "intent": {
+      "device": "телевизор",
+      "action": "decrease",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "tv",
+      "action": "decrease",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "pipeline:59:Поставь на паузу",
+    "text": "Поставь на паузу",
+    "intent": {
+      "device": "телевизор",
+      "action": "stop",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "tv",
+      "action": "stop",
+      "owner": "",
+      "place": "",
+      "value": ""
+    }
+  },
+  {
+    "id": "pipeline:60:Включи новости",
+    "text": "Включи новости",
+    "intent": {
+      "device": "телевизор",
+      "action": "run_content",
+      "owner": "",
+      "place": "",
+      "value": "новости"
+    },
+    "expected": {
+      "device_id": "tv",
+      "action": "run_content",
+      "owner": "",
+      "place": "",
+      "value": "новости"
+    }
+  },
+  {
+    "id": "pipeline:61:Поставь мультики",
+    "text": "Поставь мультики",
+    "intent": {
+      "device": "телевизор",
+      "action": "run_content",
+      "owner": "",
+      "place": "",
+      "value": "мультики"
+    },
+    "expected": {
+      "device_id": "tv",
+      "action": "run_content",
+      "owner": "",
+      "place": "",
+      "value": "мультики"
     }
   }
 ]
