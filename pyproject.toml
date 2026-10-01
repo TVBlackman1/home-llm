@@ -10,12 +10,14 @@ dependencies = [
     "numpy>=2.5.2",
     "psycopg[binary]>=3.3.4",
     "pydantic-settings>=2.15.0",
+    "requests>=2.34.2",
     "returns>=0.29.0",
 ]
 
 [project.scripts]
 ollama-runner = "ollama_runner.main:main"
 emb = "ollama_runner.embeeding:main"
+toogle = "ollama_runner.toogle_light:main"
 
 [build-system]
 requires = ["uv_build>=0.12.5,<0.13.0"]

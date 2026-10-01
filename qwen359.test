@@ -1,0 +1,725 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-9.1.1, pluggy-1.6.0
+rootdir: /root/ollama-test/ollama-runner
+configfile: pyproject.toml
+plugins: returns-0.29.0, anyio-4.14.2
+collected 269 items
+
+tests/test_qwen359.py .................................................. [ 18%]
+........................................................................ [ 45%]
+........................................................................ [ 72%]
+.....................F...............F...............FF.F.........F...FF [ 98%]
+F.F                                                                      [100%]
+
+=================================== FAILURES ===================================
+___________________ test_qwen359[pipeline:6:Включи Ведьмака] ___________________
+{
+  "id": "pipeline:6:Включи Ведьмака",
+  "input": "Включи Ведьмака",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "tv",
+            "actual": "soundbar"
+          }
+        },
+        "command": {
+          "device_id": "soundbar",
+          "action": "run_content",
+          "value": "Ведьмак",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "tv",
+            "actual": "soundbar"
+          }
+        },
+        "command": {
+          "device_id": "soundbar",
+          "action": "run_content",
+          "value": "Ведьмак",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "tv",
+            "actual": "soundbar"
+          }
+        },
+        "command": {
+          "device_id": "soundbar",
+          "action": "run_content",
+          "value": "Ведьмак",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
+______________ test_qwen359[pipeline:23:Поставь Ведьмака у мамы] _______________
+{
+  "id": "pipeline:23:Поставь Ведьмака у мамы",
+  "input": "Поставь Ведьмака у мамы",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "tv",
+            "actual": "soundbar"
+          }
+        },
+        "command": {
+          "device_id": "soundbar",
+          "action": "run_content",
+          "value": "Ведьмак",
+          "owner": "мама",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "tv",
+            "actual": "soundbar"
+          }
+        },
+        "command": {
+          "device_id": "soundbar",
+          "action": "run_content",
+          "value": "Ведьмак",
+          "owner": "мама",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "tv",
+            "actual": "soundbar"
+          }
+        },
+        "command": {
+          "device_id": "soundbar",
+          "action": "run_content",
+          "value": "Ведьмак",
+          "owner": "мама",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
+____________ test_qwen359[pipeline:39:Включи Интерстеллар у Антона] ____________
+{
+  "id": "pipeline:39:Включи Интерстеллар у Антона",
+  "input": "Включи Интерстеллар у Антона",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "tv",
+            "actual": "light_anton"
+          },
+          "value": {
+            "expected": "Интерстеллар",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "light_anton",
+          "action": "run_content",
+          "value": "",
+          "owner": "Антон",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "tv",
+            "actual": "light_anton"
+          },
+          "value": {
+            "expected": "Интерстеллар",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "light_anton",
+          "action": "run_content",
+          "value": "",
+          "owner": "Антон",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "tv",
+            "actual": "light_anton"
+          },
+          "value": {
+            "expected": "Интерстеллар",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "light_anton",
+          "action": "run_content",
+          "value": "",
+          "owner": "Антон",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
+___________ test_qwen359[pipeline:40:Запусти Доктора Кто в гостиной] ___________
+{
+  "id": "pipeline:40:Запусти Доктора Кто в гостиной",
+  "input": "Запусти Доктора Кто в гостиной",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "value": {
+            "expected": "Доктор Кто",
+            "actual": "Доктора Кто"
+          }
+        },
+        "command": {
+          "device_id": "tv_living",
+          "action": "run_content",
+          "value": "Доктора Кто",
+          "owner": "",
+          "place": "гостиная",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "value": {
+            "expected": "Доктор Кто",
+            "actual": "Доктора Кто"
+          }
+        },
+        "command": {
+          "device_id": "tv_living",
+          "action": "run_content",
+          "value": "Доктора Кто",
+          "owner": "",
+          "place": "гостиная",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "value": {
+            "expected": "Доктор Кто",
+            "actual": "Доктора Кто"
+          }
+        },
+        "command": {
+          "device_id": "tv_living",
+          "action": "run_content",
+          "value": "Доктора Кто",
+          "owner": "",
+          "place": "гостиная",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
+________________ test_qwen359[pipeline:42:Поставь Шрека у Маши] ________________
+{
+  "id": "pipeline:42:Поставь Шрека у Маши",
+  "input": "Поставь Шрека у Маши",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "tv",
+            "actual": "soundbar"
+          }
+        },
+        "command": {
+          "device_id": "soundbar",
+          "action": "run_content",
+          "value": "Шрек",
+          "owner": "Маша",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "tv",
+            "actual": "soundbar"
+          }
+        },
+        "command": {
+          "device_id": "soundbar",
+          "action": "run_content",
+          "value": "Шрек",
+          "owner": "Маша",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "tv",
+            "actual": "soundbar"
+          }
+        },
+        "command": {
+          "device_id": "soundbar",
+          "action": "run_content",
+          "value": "Шрек",
+          "owner": "Маша",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
+_________ test_qwen359[pipeline:53:У Антона в спальне сделай потемнее] _________
+{
+  "id": "pipeline:53:У Антона в спальне сделай потемнее",
+  "input": "У Антона в спальне сделай потемнее",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "value": {
+            "expected": "",
+            "actual": "немного"
+          }
+        },
+        "command": {
+          "device_id": "light_anton_bedroom",
+          "action": "decrease",
+          "value": "немного",
+          "owner": "Антон",
+          "place": "спальня",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "value": {
+            "expected": "",
+            "actual": "немного"
+          }
+        },
+        "command": {
+          "device_id": "light_anton_bedroom",
+          "action": "decrease",
+          "value": "немного",
+          "owner": "Антон",
+          "place": "спальня",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "value": {
+            "expected": "",
+            "actual": "немного"
+          }
+        },
+        "command": {
+          "device_id": "light_anton_bedroom",
+          "action": "decrease",
+          "value": "немного",
+          "owner": "Антон",
+          "place": "спальня",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
+__________________ test_qwen359[pipeline:57:Следующая серия] ___________________
+{
+  "id": "pipeline:57:Следующая серия",
+  "input": "Следующая серия",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "value": {
+            "expected": "",
+            "actual": "на одну серию"
+          }
+        },
+        "command": {
+          "device_id": "tv",
+          "action": "increase",
+          "value": "на одну серию",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "value": {
+            "expected": "",
+            "actual": "на одну серию"
+          }
+        },
+        "command": {
+          "device_id": "tv",
+          "action": "increase",
+          "value": "на одну серию",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "value": {
+            "expected": "",
+            "actual": "на одну серию"
+          }
+        },
+        "command": {
+          "device_id": "tv",
+          "action": "increase",
+          "value": "на одну серию",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
+__________________ test_qwen359[pipeline:58:Предыдущая серия] __________________
+{
+  "id": "pipeline:58:Предыдущая серия",
+  "input": "Предыдущая серия",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "action": {
+            "expected": "decrease",
+            "actual": "increase"
+          },
+          "value": {
+            "expected": "",
+            "actual": "на одну серию"
+          }
+        },
+        "command": {
+          "device_id": "tv",
+          "action": "increase",
+          "value": "на одну серию",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "action": {
+            "expected": "decrease",
+            "actual": "increase"
+          },
+          "value": {
+            "expected": "",
+            "actual": "на одну серию"
+          }
+        },
+        "command": {
+          "device_id": "tv",
+          "action": "increase",
+          "value": "на одну серию",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "action": {
+            "expected": "decrease",
+            "actual": "increase"
+          },
+          "value": {
+            "expected": "",
+            "actual": "на одну серию"
+          }
+        },
+        "command": {
+          "device_id": "tv",
+          "action": "increase",
+          "value": "на одну серию",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
+__________________ test_qwen359[pipeline:59:Поставь на паузу] __________________
+{
+  "id": "pipeline:59:Поставь на паузу",
+  "input": "Поставь на паузу",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "tv",
+            "actual": "soundbar"
+          }
+        },
+        "command": {
+          "device_id": "soundbar",
+          "action": "stop",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "tv",
+            "actual": "soundbar"
+          }
+        },
+        "command": {
+          "device_id": "soundbar",
+          "action": "stop",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "tv",
+            "actual": "soundbar"
+          }
+        },
+        "command": {
+          "device_id": "soundbar",
+          "action": "stop",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
+__________________ test_qwen359[pipeline:61:Поставь мультики] __________________
+{
+  "id": "pipeline:61:Поставь мультики",
+  "input": "Поставь мультики",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "tv",
+            "actual": "soundbar"
+          }
+        },
+        "command": {
+          "device_id": "soundbar",
+          "action": "run_content",
+          "value": "мультики",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "tv",
+            "actual": "soundbar"
+          }
+        },
+        "command": {
+          "device_id": "soundbar",
+          "action": "run_content",
+          "value": "мультики",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "tv",
+            "actual": "soundbar"
+          }
+        },
+        "command": {
+          "device_id": "soundbar",
+          "action": "run_content",
+          "value": "мультики",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
+=========================== short test summary info ============================
+FAILED tests/test_qwen359.py::test_qwen359[pipeline:6:Включи Ведьмака] - Fail...
+FAILED tests/test_qwen359.py::test_qwen359[pipeline:23:Поставь Ведьмака у мамы]
+FAILED tests/test_qwen359.py::test_qwen359[pipeline:39:Включи Интерстеллар у Антона]
+FAILED tests/test_qwen359.py::test_qwen359[pipeline:40:Запусти Доктора Кто в гостиной]
+FAILED tests/test_qwen359.py::test_qwen359[pipeline:42:Поставь Шрека у Маши]
+FAILED tests/test_qwen359.py::test_qwen359[pipeline:53:У Антона в спальне сделай потемнее]
+FAILED tests/test_qwen359.py::test_qwen359[pipeline:57:Следующая серия] - Fai...
+FAILED tests/test_qwen359.py::test_qwen359[pipeline:58:Предыдущая серия] - Fa...
+FAILED tests/test_qwen359.py::test_qwen359[pipeline:59:Поставь на паузу] - Fa...
+FAILED tests/test_qwen359.py::test_qwen359[pipeline:61:Поставь мультики] - Fa...
+================= 10 failed, 259 passed in 9574.66s (2:39:34) ==================
+
+========================================================
+Pipeline latency: qwen3.5:9b
+========================================================
+cold start : 15.945 s
+
+requests   : 807
+mean       : 11.838 s
+min        : 10.012 s
+p50        : 11.832 s
+p90        : 12.158 s
+p95        : 12.301 s
+p99        : 12.465 s
+max        : 12.641 s
+========================================================

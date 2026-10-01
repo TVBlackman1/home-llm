@@ -59,6 +59,37 @@ def exact_match(query: str, candidate: str) -> bool:
     return query.strip().casefold() == candidate.strip().casefold()
 
 
+def canonical_owner(model, owner_text: str, owners=None) -> str:
+    owners = list(OWNERS if owners is None else owners)
+    query = owner_text.strip()
+    if not query:
+        return ""
+
+    scores = owner_scores(model, query, owners=owners)
+    best_id = max(scores, key=scores.get)
+    return next(owner.name for owner in owners if owner.id == best_id)
+
+
+def canonical_place(model, place_text: str, devices=None) -> str:
+    devices = list(DEVICES if devices is None else devices)
+    query = place_text.strip()
+    if not query:
+        return ""
+
+    places = sorted({device.place for device in devices if device.place})
+    if not places:
+        return ""
+
+    return max(
+        places,
+        key=lambda place: (
+            1.0
+            if exact_match(query, place)
+            else text_similarity(model, query, place)
+        ),
+    )
+
+
 def owner_scores(model, owner_text: str, owners=None) -> dict[str, float]:
     owners = list(OWNERS if owners is None else owners)
 

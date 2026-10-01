@@ -1,0 +1,44 @@
+@startuml
+
+start
+
+:Получить команду;
+:Распознать команду;
+
+:LLM;
+switch (Устройство?)
+case (Медиа)
+    switch (Тип команды)
+    case ( Контент\n Громкость\n Пауза)
+        switch (Явно устройство?)
+        case ( Да)
+            :Выбрать устройство;
+        case ( Нет)
+            :active_media_source;
+        endswitch
+    case ( Включение\n Выключение)
+        switch (Явно устройство?)
+        case ( Да)
+            :Выбрать устройство;
+        case ( Нет)
+            :Запросить уточнение;
+        endswitch
+    endswitch
+endswitch
+
+switch (не нужно уточнение)
+case (да)
+    :Vector embedding;
+    switch (Устройство?)
+    case (active_media_source)
+        :Выбрать устройство\nиз иерархии активных;
+    case (конкретное)
+        :Выбрать устройство;
+    endswitch
+case (нет)
+endswitch
+:Вернуть результат;
+
+stop
+
+@enduml

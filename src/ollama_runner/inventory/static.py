@@ -9,7 +9,6 @@ OWNERS = [
     Owner("common", "общий"),
     Owner("me", "я"),
     Owner("masha", "Маша"),
-    Owner("maria", "Мария"),
     Owner("marina", "Марина"),
     Owner("mama", "мама"),
     Owner("papa", "папа"),
@@ -30,7 +29,6 @@ DEVICES = [
     *_aliases("light_common", "common", "", "свет", "лампа", "освещение"),
     *_aliases("light_me", "me", "", "свет", "лампа", "освещение"),
     *_aliases("light_masha", "masha", "", "свет", "лампа", "освещение"),
-    *_aliases("light_maria", "maria", "", "свет", "лампа", "освещение"),
     *_aliases("light_mama", "mama", "", "свет", "лампа", "освещение"),
     *_aliases("light_papa", "papa", "", "свет", "лампа", "освещение"),
     *_aliases("light_anton", "anton", "", "свет", "лампа", "освещение"),
@@ -44,7 +42,6 @@ DEVICES = [
     *_aliases("light_me_kitchen", "me", "кухня", "свет", "лампа", "освещение"),
     *_aliases("light_masha_bedroom", "masha", "спальня", "свет", "лампа", "освещение"),
     *_aliases("light_masha_kitchen", "masha", "кухня", "свет", "лампа", "освещение"),
-    *_aliases("light_maria_living", "maria", "гостиная", "свет", "лампа", "освещение"),
     *_aliases("light_mama_bedroom", "mama", "спальня", "свет", "лампа", "освещение"),
     *_aliases("light_mama_kitchen", "mama", "кухня", "свет", "лампа", "освещение"),
     *_aliases("light_papa_cabinet", "papa", "кабинет", "свет", "лампа", "освещение"),
@@ -102,7 +99,7 @@ DEVICES = [
 
 
 class StaticInventory:
-    version = 3
+    version = 4
 
     def owners(self) -> Sequence[Owner]:
         return OWNERS

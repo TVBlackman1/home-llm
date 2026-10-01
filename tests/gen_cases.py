@@ -31,7 +31,6 @@ OWNER_PHRASE = {
     "мама": "мамин",
     "папа": "папин",
     "Маша": "у Маши",
-    "Мария": "у Марии",
     "Марина": "у Марины",
     "Антон": "у Антона",
     "Андрей": "у Андрея",
@@ -109,11 +108,9 @@ DEVICE_SYNONYMS: dict[str, list[str]] = {
 EDGE_QUERIES = [
     ("я", "свет", "", "light_me"),
     ("Маша", "свет", "", "light_masha"),
-    ("Мария", "свет", "", "light_maria"),
     ("Марина", "лампа", "", "lamp_marina"),
     ("Марина", "светильник", "", "lamp_marina"),
     ("Маша", "лампа", "", "light_masha"),
-    ("Мария", "лампа", "", "light_maria"),
     ("общий", "свет", "", "light_common"),
     ("общий", "телевизор", "", "tv"),
     ("общий", "телик", "", "tv"),
@@ -154,7 +151,6 @@ EDGE_QUERIES = [
     ("общий", "пылесос", "", "vacuum_common"),
     ("Маша", "свет", "спальня", "light_masha_bedroom"),
     ("Маша", "свет", "кухня", "light_masha_kitchen"),
-    ("Мария", "свет", "гостиная", "light_maria_living"),
     ("мама", "свет", "спальня", "light_mama_bedroom"),
     ("мама", "свет", "кухня", "light_mama_kitchen"),
     ("я", "свет", "спальня", "light_me_bedroom"),
@@ -205,7 +201,6 @@ EDGE_QUERIES = [
     ("", "музыка", "кухня", "soundbar_kitchen"),
     ("Маша", "лампа", "спальня", "light_masha_bedroom"),
     ("Маша", "лампа", "кухня", "light_masha_kitchen"),
-    ("Мария", "лампа", "гостиная", "light_maria_living"),
     ("Марина", "светильник", "спальня", "lamp_marina_bedroom"),
     ("мама", "лампа", "", "light_mama"),
     ("папа", "лампа", "", "light_papa"),
@@ -286,6 +281,7 @@ def make_case(
     tag: str,
 ) -> dict:
     owner_out = "" if owner in {"", "общий"} else owner
+    target = next(item for item in DEVICES if item.id == device_id)
     return {
         "id": f"embed:{tag}:{owner}|{device}|{place}|{device_id}",
         "text": make_text(owner, device, place),
@@ -300,7 +296,7 @@ def make_case(
             "device_id": device_id,
             "action": "on",
             "owner": owner_out,
-            "place": place,
+            "place": target.place if place else "",
             "value": "",
         },
     }

@@ -288,78 +288,6 @@
     }
   },
   {
-    "id": "embed:canonical:Мария|лампа||light_maria",
-    "text": "Включи у Марии лампа",
-    "intent": {
-      "device": "лампа",
-      "action": "on",
-      "owner": "Мария",
-      "place": "",
-      "value": ""
-    },
-    "expected": {
-      "device_id": "light_maria",
-      "action": "on",
-      "owner": "Мария",
-      "place": "",
-      "value": ""
-    }
-  },
-  {
-    "id": "embed:canonical:Мария|лампа|гостиная|light_maria_living",
-    "text": "Включи у Марии лампа в гостиной",
-    "intent": {
-      "device": "лампа",
-      "action": "on",
-      "owner": "Мария",
-      "place": "гостиная",
-      "value": ""
-    },
-    "expected": {
-      "device_id": "light_maria_living",
-      "action": "on",
-      "owner": "Мария",
-      "place": "гостиная",
-      "value": ""
-    }
-  },
-  {
-    "id": "embed:canonical:Мария|свет||light_maria",
-    "text": "Включи у Марии свет",
-    "intent": {
-      "device": "свет",
-      "action": "on",
-      "owner": "Мария",
-      "place": "",
-      "value": ""
-    },
-    "expected": {
-      "device_id": "light_maria",
-      "action": "on",
-      "owner": "Мария",
-      "place": "",
-      "value": ""
-    }
-  },
-  {
-    "id": "embed:canonical:Мария|свет|гостиная|light_maria_living",
-    "text": "Включи у Марии свет в гостиной",
-    "intent": {
-      "device": "свет",
-      "action": "on",
-      "owner": "Мария",
-      "place": "гостиная",
-      "value": ""
-    },
-    "expected": {
-      "device_id": "light_maria_living",
-      "action": "on",
-      "owner": "Мария",
-      "place": "гостиная",
-      "value": ""
-    }
-  },
-  {
     "id": "embed:canonical:Маша|лампа||light_masha",
     "text": "Включи у Маши лампа",
     "intent": {
@@ -1957,7 +1885,7 @@
       "device_id": "led_strip_andrey_cabinet",
       "action": "on",
       "owner": "Андрей",
-      "place": "офис",
+      "place": "кабинет",
       "value": ""
     }
   },
@@ -1975,7 +1903,7 @@
       "device_id": "led_strip_andrey_cabinet",
       "action": "on",
       "owner": "Андрей",
-      "place": "офис",
+      "place": "кабинет",
       "value": ""
     }
   },
@@ -1993,7 +1921,7 @@
       "device_id": "led_strip_andrey_cabinet",
       "action": "on",
       "owner": "Андрей",
-      "place": "офис",
+      "place": "кабинет",
       "value": ""
     }
   },
@@ -2011,7 +1939,7 @@
       "device_id": "led_strip_andrey_cabinet",
       "action": "on",
       "owner": "Андрей",
-      "place": "офис",
+      "place": "кабинет",
       "value": ""
     }
   },
@@ -2029,7 +1957,7 @@
       "device_id": "light_common_bath",
       "action": "on",
       "owner": "",
-      "place": "ванная комната",
+      "place": "ванная",
       "value": ""
     }
   },
@@ -2047,7 +1975,7 @@
       "device_id": "microphone_cabinet",
       "action": "on",
       "owner": "",
-      "place": "офис",
+      "place": "кабинет",
       "value": ""
     }
   },
@@ -2065,7 +1993,7 @@
       "device_id": "microphone_cabinet",
       "action": "on",
       "owner": "",
-      "place": "офис",
+      "place": "кабинет",
       "value": ""
     }
   },
@@ -2083,7 +2011,7 @@
       "device_id": "light_common_bath",
       "action": "on",
       "owner": "",
-      "place": "ванная комната",
+      "place": "ванная",
       "value": ""
     }
   },
@@ -2101,7 +2029,7 @@
       "device_id": "light_common_bath",
       "action": "on",
       "owner": "",
-      "place": "ванная комната",
+      "place": "ванная",
       "value": ""
     }
   },
@@ -2119,7 +2047,7 @@
       "device_id": "light_papa_cabinet",
       "action": "on",
       "owner": "папа",
-      "place": "офис",
+      "place": "кабинет",
       "value": ""
     }
   },
@@ -2137,7 +2065,7 @@
       "device_id": "light_papa_cabinet",
       "action": "on",
       "owner": "папа",
-      "place": "офис",
+      "place": "кабинет",
       "value": ""
     }
   },
@@ -2155,7 +2083,7 @@
       "device_id": "light_papa_cabinet",
       "action": "on",
       "owner": "папа",
-      "place": "офис",
+      "place": "кабинет",
       "value": ""
     }
   },
@@ -2173,7 +2101,7 @@
       "device_id": "monitor_me_cabinet",
       "action": "on",
       "owner": "я",
-      "place": "офис",
+      "place": "кабинет",
       "value": ""
     }
   },
@@ -2191,7 +2119,7 @@
       "device_id": "light_me_cabinet",
       "action": "on",
       "owner": "я",
-      "place": "офис",
+      "place": "кабинет",
       "value": ""
     }
   },
@@ -2209,7 +2137,7 @@
       "device_id": "monitor_me_cabinet",
       "action": "on",
       "owner": "я",
-      "place": "офис",
+      "place": "кабинет",
       "value": ""
     }
   },
@@ -2227,7 +2155,7 @@
       "device_id": "light_me_cabinet",
       "action": "on",
       "owner": "я",
-      "place": "офис",
+      "place": "кабинет",
       "value": ""
     }
   },
@@ -2245,7 +2173,7 @@
       "device_id": "light_me_cabinet",
       "action": "on",
       "owner": "я",
-      "place": "офис",
+      "place": "кабинет",
       "value": ""
     }
   },
@@ -2462,42 +2390,6 @@
       "action": "on",
       "owner": "Артем",
       "place": "детская",
-      "value": ""
-    }
-  },
-  {
-    "id": "embed:synonym:Мария|освещение||light_maria",
-    "text": "Включи у Марии освещение",
-    "intent": {
-      "device": "освещение",
-      "action": "on",
-      "owner": "Мария",
-      "place": "",
-      "value": ""
-    },
-    "expected": {
-      "device_id": "light_maria",
-      "action": "on",
-      "owner": "Мария",
-      "place": "",
-      "value": ""
-    }
-  },
-  {
-    "id": "embed:synonym:Мария|освещение|гостиная|light_maria_living",
-    "text": "Включи у Марии освещение в гостиной",
-    "intent": {
-      "device": "освещение",
-      "action": "on",
-      "owner": "Мария",
-      "place": "гостиная",
-      "value": ""
-    },
-    "expected": {
-      "device_id": "light_maria_living",
-      "action": "on",
-      "owner": "Мария",
-      "place": "гостиная",
       "value": ""
     }
   },

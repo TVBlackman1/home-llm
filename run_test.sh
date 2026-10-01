@@ -13,5 +13,8 @@
 # time uv run pytest tests/test_phi4mini.py -m pipeline > phi4mini.test
 # ollama stop phi4-mini
 
-time uv run pytest tests/test_mistral.py -m pipeline > ministral3.test
-ollama stop ministral-3:3b
+# time uv run pytest tests/test_mistral.py -m pipeline > ministral3.test
+# ollama stop ministral-3:3b
+
+time uv run pytest tests/test_qwen359.py -m pipeline > qwen359.test
+ollama stop qwen3.5:9b

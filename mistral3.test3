@@ -1,17 +1,63 @@
-============================= test session starts ==============================
-platform linux -- Python 3.14.7, pytest-9.1.1, pluggy-1.6.0
-rootdir: /root/ollama-test/ollama-runner
-configfile: pyproject.toml
-plugins: returns-0.29.0, anyio-4.14.2
-collected 269 items
-
-tests/test_mistral.py ...................................FF.F........... [ 18%]
-.F............................................F......................... [ 45%]
-..........................FF...................F........................ [ 72%]
-..FF.F..........F..F.F..................................F.........F...FF [ 98%]
-.F.                                                                      [100%]
-
+.F.....................................FFFF............F................ [ 26%]
+..............................F.................FF...................... [ 52%]
+..........F...................F......................................... [ 78%]
+F..F.F...................F.....F........F.............FFFF.              [100%]
 =================================== FAILURES ===================================
+____ test_mistral[embed:canonical:Андрей|свет|балкон|light_andrey_balcony] _____
+{
+  "id": "embed:canonical:Андрей|свет|балкон|light_andrey_balcony",
+  "input": "Включи у Андрея свет на балконе",
+  "repeats": 3,
+  "failed": 2,
+  "failures": [
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "light_andrey_balcony",
+            "actual": "light_anton_bedroom"
+          },
+          "owner": {
+            "expected": "Андрей",
+            "actual": "Антон"
+          }
+        },
+        "command": {
+          "device_id": "light_anton_bedroom",
+          "action": "on",
+          "value": "",
+          "owner": "Антон",
+          "place": "балкон",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "light_andrey_balcony",
+            "actual": "light_anton_bedroom"
+          },
+          "owner": {
+            "expected": "Андрей",
+            "actual": "Антон"
+          }
+        },
+        "command": {
+          "device_id": "light_anton_bedroom",
+          "action": "on",
+          "value": "",
+          "owner": "Антон",
+          "place": "балкон",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
 ______ test_mistral[embed:canonical:общий|колонка вторая||speaker_second] ______
 {
   "id": "embed:canonical:общий|колонка вторая||speaker_second",
@@ -144,6 +190,96 @@ _ test_mistral[embed:canonical:общий|колонка вторая|кухня
     }
   ]
 }
+______ test_mistral[embed:canonical:общий|колонка первая||speaker_first] _______
+{
+  "id": "embed:canonical:общий|колонка первая||speaker_first",
+  "input": "Включи первую колонку",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "speaker_first",
+            "actual": "soundbar"
+          },
+          "action": {
+            "expected": "on",
+            "actual": "run_content"
+          },
+          "value": {
+            "expected": "",
+            "actual": "первая колонка"
+          }
+        },
+        "command": {
+          "device_id": "soundbar",
+          "action": "run_content",
+          "value": "первая колонка",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "speaker_first",
+            "actual": "soundbar"
+          },
+          "action": {
+            "expected": "on",
+            "actual": "run_content"
+          },
+          "value": {
+            "expected": "",
+            "actual": "первая колонка"
+          }
+        },
+        "command": {
+          "device_id": "soundbar",
+          "action": "run_content",
+          "value": "первая колонка",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "speaker_first",
+            "actual": "soundbar"
+          },
+          "action": {
+            "expected": "on",
+            "actual": "run_content"
+          },
+          "value": {
+            "expected": "",
+            "actual": "первая колонка"
+          }
+        },
+        "command": {
+          "device_id": "soundbar",
+          "action": "run_content",
+          "value": "первая колонка",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
 _ test_mistral[embed:canonical:общий|колонка первая|гостиная|speaker_first_living] _
 {
   "id": "embed:canonical:общий|колонка первая|гостиная|speaker_first_living",
@@ -157,11 +293,11 @@ _ test_mistral[embed:canonical:общий|колонка первая|гости
         "diff": {
           "device_id": {
             "expected": "speaker_first_living",
-            "actual": "soundbar_living"
+            "actual": "light_common_living"
           }
         },
         "command": {
-          "device_id": "soundbar_living",
+          "device_id": "light_common_living",
           "action": "on",
           "value": "",
           "owner": "",
@@ -176,11 +312,11 @@ _ test_mistral[embed:canonical:общий|колонка первая|гости
         "diff": {
           "device_id": {
             "expected": "speaker_first_living",
-            "actual": "soundbar_living"
+            "actual": "light_common_living"
           }
         },
         "command": {
-          "device_id": "soundbar_living",
+          "device_id": "light_common_living",
           "action": "on",
           "value": "",
           "owner": "",
@@ -195,11 +331,11 @@ _ test_mistral[embed:canonical:общий|колонка первая|гости
         "diff": {
           "device_id": {
             "expected": "speaker_first_living",
-            "actual": "soundbar_living"
+            "actual": "light_common_living"
           }
         },
         "command": {
-          "device_id": "soundbar_living",
+          "device_id": "light_common_living",
           "action": "on",
           "value": "",
           "owner": "",
@@ -288,10 +424,10 @@ _____________ test_mistral[embed:canonical:общий|монитор||monitor] _
     }
   ]
 }
-___________ test_mistral[embed:edge:общий|экран для телевизора||tv] ____________
+___ test_mistral[embed:place-syn:Андрей|лента|офис|led_strip_andrey_cabinet] ___
 {
-  "id": "embed:edge:общий|экран для телевизора||tv",
-  "input": "Включи экран для телевизора",
+  "id": "embed:place-syn:Андрей|лента|офис|led_strip_andrey_cabinet",
+  "input": "Включи у Андрея лента в офисе",
   "repeats": 3,
   "failed": 3,
   "failures": [
@@ -300,15 +436,113 @@ ___________ test_mistral[embed:edge:общий|экран для телевиз�
       "error": {
         "diff": {
           "device_id": {
-            "expected": "tv",
-            "actual": "monitor"
+            "expected": "led_strip_andrey_cabinet",
+            "actual": "tv_masha_bedroom"
+          },
+          "action": {
+            "expected": "on",
+            "actual": "run_content"
+          },
+          "value": {
+            "expected": "",
+            "actual": "лента"
           }
         },
         "command": {
-          "device_id": "monitor",
-          "action": "on",
-          "value": "",
-          "owner": "",
+          "device_id": "tv_masha_bedroom",
+          "action": "run_content",
+          "value": "лента",
+          "owner": "Андрей",
+          "place": "кабинет",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "led_strip_andrey_cabinet",
+            "actual": "tv_masha_bedroom"
+          },
+          "action": {
+            "expected": "on",
+            "actual": "run_content"
+          },
+          "value": {
+            "expected": "",
+            "actual": "лента"
+          }
+        },
+        "command": {
+          "device_id": "tv_masha_bedroom",
+          "action": "run_content",
+          "value": "лента",
+          "owner": "Андрей",
+          "place": "кабинет",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "led_strip_andrey_cabinet",
+            "actual": "tv_masha_bedroom"
+          },
+          "action": {
+            "expected": "on",
+            "actual": "run_content"
+          },
+          "value": {
+            "expected": "",
+            "actual": "лента"
+          }
+        },
+        "command": {
+          "device_id": "tv_masha_bedroom",
+          "action": "run_content",
+          "value": "лента",
+          "owner": "Андрей",
+          "place": "кабинет",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
+__________ test_mistral[embed:synonym:Андрей|лента||led_strip_andrey] __________
+{
+  "id": "embed:synonym:Андрей|лента||led_strip_andrey",
+  "input": "Включи у Андрея лента",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "led_strip_andrey",
+            "actual": "soundbar"
+          },
+          "action": {
+            "expected": "on",
+            "actual": "run_content"
+          },
+          "value": {
+            "expected": "",
+            "actual": "лента"
+          }
+        },
+        "command": {
+          "device_id": "soundbar",
+          "action": "run_content",
+          "value": "лента",
+          "owner": "Андрей",
           "place": "",
           "kind": "device"
         }
@@ -319,15 +553,23 @@ ___________ test_mistral[embed:edge:общий|экран для телевиз�
       "error": {
         "diff": {
           "device_id": {
-            "expected": "tv",
-            "actual": "monitor"
+            "expected": "led_strip_andrey",
+            "actual": "soundbar"
+          },
+          "action": {
+            "expected": "on",
+            "actual": "run_content"
+          },
+          "value": {
+            "expected": "",
+            "actual": "лента"
           }
         },
         "command": {
-          "device_id": "monitor",
-          "action": "on",
-          "value": "",
-          "owner": "",
+          "device_id": "soundbar",
+          "action": "run_content",
+          "value": "лента",
+          "owner": "Андрей",
           "place": "",
           "kind": "device"
         }
@@ -338,16 +580,114 @@ ___________ test_mistral[embed:edge:общий|экран для телевиз�
       "error": {
         "diff": {
           "device_id": {
-            "expected": "tv",
-            "actual": "monitor"
+            "expected": "led_strip_andrey",
+            "actual": "soundbar"
+          },
+          "action": {
+            "expected": "on",
+            "actual": "run_content"
+          },
+          "value": {
+            "expected": "",
+            "actual": "лента"
           }
         },
         "command": {
-          "device_id": "monitor",
-          "action": "on",
-          "value": "",
-          "owner": "",
+          "device_id": "soundbar",
+          "action": "run_content",
+          "value": "лента",
+          "owner": "Андрей",
           "place": "",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
+__ test_mistral[embed:synonym:Андрей|лента|кабинет|led_strip_andrey_cabinet] ___
+{
+  "id": "embed:synonym:Андрей|лента|кабинет|led_strip_andrey_cabinet",
+  "input": "Включи у Андрея лента в кабинете",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "led_strip_andrey_cabinet",
+            "actual": "monitor_me_cabinet"
+          },
+          "action": {
+            "expected": "on",
+            "actual": "run_content"
+          },
+          "value": {
+            "expected": "",
+            "actual": "лента"
+          }
+        },
+        "command": {
+          "device_id": "monitor_me_cabinet",
+          "action": "run_content",
+          "value": "лента",
+          "owner": "Андрей",
+          "place": "кабинет",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "led_strip_andrey_cabinet",
+            "actual": "soundbar_living"
+          },
+          "action": {
+            "expected": "on",
+            "actual": "run_content"
+          },
+          "value": {
+            "expected": "",
+            "actual": "лента"
+          }
+        },
+        "command": {
+          "device_id": "soundbar_living",
+          "action": "run_content",
+          "value": "лента",
+          "owner": "Андрей",
+          "place": "кабинет",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "led_strip_andrey_cabinet",
+            "actual": "soundbar_living"
+          },
+          "action": {
+            "expected": "on",
+            "actual": "run_content"
+          },
+          "value": {
+            "expected": "",
+            "actual": "лента"
+          }
+        },
+        "command": {
+          "device_id": "soundbar_living",
+          "action": "run_content",
+          "value": "лента",
+          "owner": "Андрей",
+          "place": "кабинет",
           "kind": "device"
         }
       }
@@ -367,15 +707,19 @@ _______ test_mistral[embed:synonym:общий|вторая колонка||speak
         "diff": {
           "device_id": {
             "expected": "speaker_second",
-            "actual": "soundbar"
+            "actual": "soundbar_kitchen"
+          },
+          "place": {
+            "expected": "",
+            "actual": "кухня"
           }
         },
         "command": {
-          "device_id": "soundbar",
+          "device_id": "soundbar_kitchen",
           "action": "on",
           "value": "",
           "owner": "",
-          "place": "",
+          "place": "кухня",
           "kind": "device"
         }
       }
@@ -386,15 +730,19 @@ _______ test_mistral[embed:synonym:общий|вторая колонка||speak
         "diff": {
           "device_id": {
             "expected": "speaker_second",
-            "actual": "soundbar"
+            "actual": "soundbar_kitchen"
+          },
+          "place": {
+            "expected": "",
+            "actual": "кухня"
           }
         },
         "command": {
-          "device_id": "soundbar",
+          "device_id": "soundbar_kitchen",
           "action": "on",
           "value": "",
           "owner": "",
-          "place": "",
+          "place": "кухня",
           "kind": "device"
         }
       }
@@ -405,25 +753,29 @@ _______ test_mistral[embed:synonym:общий|вторая колонка||speak
         "diff": {
           "device_id": {
             "expected": "speaker_second",
-            "actual": "soundbar"
+            "actual": "soundbar_kitchen"
+          },
+          "place": {
+            "expected": "",
+            "actual": "кухня"
           }
         },
         "command": {
-          "device_id": "soundbar",
+          "device_id": "soundbar_kitchen",
           "action": "on",
           "value": "",
           "owner": "",
-          "place": "",
+          "place": "кухня",
           "kind": "device"
         }
       }
     }
   ]
 }
-_ test_mistral[embed:synonym:общий|вторая колонка|кухня|speaker_second_kitchen] _
+_______ test_mistral[embed:synonym:общий|первая колонка||speaker_first] ________
 {
-  "id": "embed:synonym:общий|вторая колонка|кухня|speaker_second_kitchen",
-  "input": "Включи вторая колонка на кухне",
+  "id": "embed:synonym:общий|первая колонка||speaker_first",
+  "input": "Включи первая колонка",
   "repeats": 3,
   "failed": 3,
   "failures": [
@@ -432,217 +784,7 @@ _ test_mistral[embed:synonym:общий|вторая колонка|кухня|s
       "error": {
         "diff": {
           "device_id": {
-            "expected": "speaker_second_kitchen",
-            "actual": "soundbar_kitchen"
-          }
-        },
-        "command": {
-          "device_id": "soundbar_kitchen",
-          "action": "on",
-          "value": "",
-          "owner": "",
-          "place": "кухня",
-          "kind": "device"
-        }
-      }
-    },
-    {
-      "attempt": 2,
-      "error": {
-        "diff": {
-          "device_id": {
-            "expected": "speaker_second_kitchen",
-            "actual": "soundbar_kitchen"
-          }
-        },
-        "command": {
-          "device_id": "soundbar_kitchen",
-          "action": "on",
-          "value": "",
-          "owner": "",
-          "place": "кухня",
-          "kind": "device"
-        }
-      }
-    },
-    {
-      "attempt": 3,
-      "error": {
-        "diff": {
-          "device_id": {
-            "expected": "speaker_second_kitchen",
-            "actual": "soundbar_kitchen"
-          }
-        },
-        "command": {
-          "device_id": "soundbar_kitchen",
-          "action": "on",
-          "value": "",
-          "owner": "",
-          "place": "кухня",
-          "kind": "device"
-        }
-      }
-    }
-  ]
-}
-_ test_mistral[embed:synonym:общий|первая колонка|гостиная|speaker_first_living] _
-{
-  "id": "embed:synonym:общий|первая колонка|гостиная|speaker_first_living",
-  "input": "Включи первая колонка в гостиной",
-  "repeats": 3,
-  "failed": 3,
-  "failures": [
-    {
-      "attempt": 1,
-      "error": {
-        "diff": {
-          "device_id": {
-            "expected": "speaker_first_living",
-            "actual": "soundbar_living"
-          }
-        },
-        "command": {
-          "device_id": "soundbar_living",
-          "action": "on",
-          "value": "",
-          "owner": "",
-          "place": "гостиная",
-          "kind": "device"
-        }
-      }
-    },
-    {
-      "attempt": 2,
-      "error": {
-        "diff": {
-          "device_id": {
-            "expected": "speaker_first_living",
-            "actual": "soundbar_living"
-          }
-        },
-        "command": {
-          "device_id": "soundbar_living",
-          "action": "on",
-          "value": "",
-          "owner": "",
-          "place": "гостиная",
-          "kind": "device"
-        }
-      }
-    },
-    {
-      "attempt": 3,
-      "error": {
-        "diff": {
-          "device_id": {
-            "expected": "speaker_first_living",
-            "actual": "soundbar_living"
-          }
-        },
-        "command": {
-          "device_id": "soundbar_living",
-          "action": "on",
-          "value": "",
-          "owner": "",
-          "place": "гостиная",
-          "kind": "device"
-        }
-      }
-    }
-  ]
-}
-______________ test_mistral[embed:synonym:общий|уши||headphones] _______________
-{
-  "id": "embed:synonym:общий|уши||headphones",
-  "input": "Включи уши",
-  "repeats": 3,
-  "failed": 3,
-  "failures": [
-    {
-      "attempt": 1,
-      "error": {
-        "diff": {
-          "device_id": {
-            "expected": "headphones",
-            "actual": "soundbar"
-          },
-          "owner": {
-            "expected": "",
-            "actual": "я"
-          }
-        },
-        "command": {
-          "device_id": "soundbar",
-          "action": "on",
-          "value": "",
-          "owner": "я",
-          "place": "",
-          "kind": "device"
-        }
-      }
-    },
-    {
-      "attempt": 2,
-      "error": {
-        "diff": {
-          "device_id": {
-            "expected": "headphones",
-            "actual": "soundbar"
-          },
-          "owner": {
-            "expected": "",
-            "actual": "я"
-          }
-        },
-        "command": {
-          "device_id": "soundbar",
-          "action": "on",
-          "value": "",
-          "owner": "я",
-          "place": "",
-          "kind": "device"
-        }
-      }
-    },
-    {
-      "attempt": 3,
-      "error": {
-        "diff": {
-          "device_id": {
-            "expected": "headphones",
-            "actual": "soundbar"
-          },
-          "owner": {
-            "expected": "",
-            "actual": "я"
-          }
-        },
-        "command": {
-          "device_id": "soundbar",
-          "action": "on",
-          "value": "",
-          "owner": "я",
-          "place": "",
-          "kind": "device"
-        }
-      }
-    }
-  ]
-}
-__________________ test_mistral[embed:synonym:общий|ящик||tv] __________________
-{
-  "id": "embed:synonym:общий|ящик||tv",
-  "input": "Включи ящик",
-  "repeats": 3,
-  "failed": 1,
-  "failures": [
-    {
-      "attempt": 1,
-      "error": {
-        "diff": {
-          "device_id": {
-            "expected": "tv",
+            "expected": "speaker_first",
             "actual": "soundbar"
           }
         },
@@ -655,31 +797,22 @@ __________________ test_mistral[embed:synonym:общий|ящик||tv] _________
           "kind": "device"
         }
       }
-    }
-  ]
-}
-___________ test_mistral[embed:synonym:общий|ящик|кухня|tv_kitchen] ____________
-{
-  "id": "embed:synonym:общий|ящик|кухня|tv_kitchen",
-  "input": "Включи ящик на кухне",
-  "repeats": 3,
-  "failed": 2,
-  "failures": [
+    },
     {
       "attempt": 2,
       "error": {
         "diff": {
           "device_id": {
-            "expected": "tv_kitchen",
-            "actual": "soundbar_kitchen"
+            "expected": "speaker_first",
+            "actual": "soundbar"
           }
         },
         "command": {
-          "device_id": "soundbar_kitchen",
+          "device_id": "soundbar",
           "action": "on",
           "value": "",
           "owner": "",
-          "place": "кухня",
+          "place": "",
           "kind": "device"
         }
       }
@@ -689,16 +822,16 @@ ___________ test_mistral[embed:synonym:общий|ящик|кухня|tv_kitchen
       "error": {
         "diff": {
           "device_id": {
-            "expected": "tv_kitchen",
-            "actual": "soundbar_kitchen"
+            "expected": "speaker_first",
+            "actual": "soundbar"
           }
         },
         "command": {
-          "device_id": "soundbar_kitchen",
+          "device_id": "soundbar",
           "action": "on",
           "value": "",
           "owner": "",
-          "place": "кухня",
+          "place": "",
           "kind": "device"
         }
       }
@@ -854,7 +987,7 @@ ___________________ test_mistral[pipeline:6:Включи Ведьмака] _____
   "id": "pipeline:6:Включи Ведьмака",
   "input": "Включи Ведьмака",
   "repeats": 3,
-  "failed": 3,
+  "failed": 1,
   "failures": [
     {
       "attempt": 1,
@@ -878,6 +1011,38 @@ ___________________ test_mistral[pipeline:6:Включи Ведьмака] _____
           "kind": "device"
         }
       }
+    }
+  ]
+}
+__________________ test_mistral[pipeline:27:Вруби Rammstein] ___________________
+{
+  "id": "pipeline:27:Вруби Rammstein",
+  "input": "Вруби Rammstein",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "action": {
+            "expected": "run_content",
+            "actual": "on"
+          },
+          "value": {
+            "expected": "Rammstein",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "soundbar",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
     },
     {
       "attempt": 2,
@@ -888,12 +1053,12 @@ ___________________ test_mistral[pipeline:6:Включи Ведьмака] _____
             "actual": "on"
           },
           "value": {
-            "expected": "Ведьмак",
+            "expected": "Rammstein",
             "actual": ""
           }
         },
         "command": {
-          "device_id": "tv",
+          "device_id": "soundbar",
           "action": "on",
           "value": "",
           "owner": "",
@@ -911,15 +1076,81 @@ ___________________ test_mistral[pipeline:6:Включи Ведьмака] _____
             "actual": "on"
           },
           "value": {
-            "expected": "Ведьмак",
+            "expected": "Rammstein",
             "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "soundbar",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
+______________ test_mistral[pipeline:33:Запусти папин телевизор] _______________
+{
+  "id": "pipeline:33:Запусти папин телевизор",
+  "input": "Запусти папин телевизор",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "owner": {
+            "expected": "папа",
+            "actual": "Антон"
           }
         },
         "command": {
           "device_id": "tv",
           "action": "on",
           "value": "",
-          "owner": "",
+          "owner": "Антон",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "owner": {
+            "expected": "папа",
+            "actual": "Антон"
+          }
+        },
+        "command": {
+          "device_id": "tv",
+          "action": "on",
+          "value": "",
+          "owner": "Антон",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "owner": {
+            "expected": "папа",
+            "actual": "Антон"
+          }
+        },
+        "command": {
+          "device_id": "tv",
+          "action": "on",
+          "value": "",
+          "owner": "Антон",
           "place": "",
           "kind": "device"
         }
@@ -999,84 +1230,6 @@ ________________ test_mistral[pipeline:42:Поставь Шрека у Маши]
           "value": "Шрека",
           "owner": "Маша",
           "place": "",
-          "kind": "device"
-        }
-      }
-    }
-  ]
-}
-_________ test_mistral[pipeline:53:У Антона в спальне сделай потемнее] _________
-{
-  "id": "pipeline:53:У Антона в спальне сделай потемнее",
-  "input": "У Антона в спальне сделай потемнее",
-  "repeats": 3,
-  "failed": 3,
-  "failures": [
-    {
-      "attempt": 1,
-      "error": {
-        "diff": {
-          "action": {
-            "expected": "decrease",
-            "actual": "set_state"
-          },
-          "value": {
-            "expected": "",
-            "actual": "потемнее"
-          }
-        },
-        "command": {
-          "device_id": "light_anton_bedroom",
-          "action": "set_state",
-          "value": "потемнее",
-          "owner": "Антон",
-          "place": "спальня",
-          "kind": "device"
-        }
-      }
-    },
-    {
-      "attempt": 2,
-      "error": {
-        "diff": {
-          "action": {
-            "expected": "decrease",
-            "actual": "set_state"
-          },
-          "value": {
-            "expected": "",
-            "actual": "потемнее"
-          }
-        },
-        "command": {
-          "device_id": "light_anton_bedroom",
-          "action": "set_state",
-          "value": "потемнее",
-          "owner": "Антон",
-          "place": "спальня",
-          "kind": "device"
-        }
-      }
-    },
-    {
-      "attempt": 3,
-      "error": {
-        "diff": {
-          "action": {
-            "expected": "decrease",
-            "actual": "set_state"
-          },
-          "value": {
-            "expected": "",
-            "actual": "потемнее"
-          }
-        },
-        "command": {
-          "device_id": "light_anton_bedroom",
-          "action": "set_state",
-          "value": "потемнее",
-          "owner": "Антон",
-          "place": "спальня",
           "kind": "device"
         }
       }
@@ -1172,9 +1325,17 @@ __________________ test_mistral[pipeline:58:Предыдущая серия] ___
       "attempt": 1,
       "error": {
         "diff": {
+          "device_id": {
+            "expected": "tv",
+            "actual": "tv_masha_bedroom"
+          },
           "action": {
             "expected": "decrease",
             "actual": "run_content"
+          },
+          "owner": {
+            "expected": "",
+            "actual": "Маша"
           },
           "value": {
             "expected": "",
@@ -1182,9 +1343,99 @@ __________________ test_mistral[pipeline:58:Предыдущая серия] ___
           }
         },
         "command": {
-          "device_id": "tv",
+          "device_id": "tv_masha_bedroom",
           "action": "run_content",
           "value": "предыдущая серия",
+          "owner": "Маша",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "tv",
+            "actual": "tv_masha_bedroom"
+          },
+          "action": {
+            "expected": "decrease",
+            "actual": "run_content"
+          },
+          "owner": {
+            "expected": "",
+            "actual": "Маша"
+          },
+          "value": {
+            "expected": "",
+            "actual": "предыдущая серия"
+          }
+        },
+        "command": {
+          "device_id": "tv_masha_bedroom",
+          "action": "run_content",
+          "value": "предыдущая серия",
+          "owner": "Маша",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "tv",
+            "actual": "tv_masha_bedroom"
+          },
+          "action": {
+            "expected": "decrease",
+            "actual": "run_content"
+          },
+          "owner": {
+            "expected": "",
+            "actual": "Маша"
+          },
+          "value": {
+            "expected": "",
+            "actual": "предыдущая серия"
+          }
+        },
+        "command": {
+          "device_id": "tv_masha_bedroom",
+          "action": "run_content",
+          "value": "предыдущая серия",
+          "owner": "Маша",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
+__________________ test_mistral[pipeline:59:Поставь на паузу] __________________
+{
+  "id": "pipeline:59:Поставь на паузу",
+  "input": "Поставь на паузу",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "tv",
+            "actual": "soundbar"
+          }
+        },
+        "command": {
+          "device_id": "soundbar",
+          "action": "stop",
+          "value": "",
           "owner": "",
           "place": "",
           "kind": "device"
@@ -1195,19 +1446,15 @@ __________________ test_mistral[pipeline:58:Предыдущая серия] ___
       "attempt": 2,
       "error": {
         "diff": {
-          "action": {
-            "expected": "decrease",
-            "actual": "run_content"
-          },
-          "value": {
-            "expected": "",
-            "actual": "предыдущая серия"
+          "device_id": {
+            "expected": "tv",
+            "actual": "soundbar"
           }
         },
         "command": {
-          "device_id": "tv",
-          "action": "run_content",
-          "value": "предыдущая серия",
+          "device_id": "soundbar",
+          "action": "stop",
+          "value": "",
           "owner": "",
           "place": "",
           "kind": "device"
@@ -1218,19 +1465,15 @@ __________________ test_mistral[pipeline:58:Предыдущая серия] ___
       "attempt": 3,
       "error": {
         "diff": {
-          "action": {
-            "expected": "decrease",
-            "actual": "run_content"
-          },
-          "value": {
-            "expected": "",
-            "actual": "предыдущая серия"
+          "device_id": {
+            "expected": "tv",
+            "actual": "soundbar"
           }
         },
         "command": {
-          "device_id": "tv",
-          "action": "run_content",
-          "value": "предыдущая серия",
+          "device_id": "soundbar",
+          "action": "stop",
+          "value": "",
           "owner": "",
           "place": "",
           "kind": "device"
@@ -1306,38 +1549,40 @@ ___________________ test_mistral[pipeline:60:Включи новости] ______
   ]
 }
 =========================== short test summary info ============================
+FAILED tests/test_mistral.py::test_mistral[embed:canonical:Андрей|свет|балкон|light_andrey_balcony]
 FAILED tests/test_mistral.py::test_mistral[embed:canonical:общий|колонка вторая||speaker_second]
 FAILED tests/test_mistral.py::test_mistral[embed:canonical:общий|колонка вторая|кухня|speaker_second_kitchen]
+FAILED tests/test_mistral.py::test_mistral[embed:canonical:общий|колонка первая||speaker_first]
 FAILED tests/test_mistral.py::test_mistral[embed:canonical:общий|колонка первая|гостиная|speaker_first_living]
 FAILED tests/test_mistral.py::test_mistral[embed:canonical:общий|монитор||monitor]
-FAILED tests/test_mistral.py::test_mistral[embed:edge:общий|экран для телевизора||tv]
+FAILED tests/test_mistral.py::test_mistral[embed:place-syn:Андрей|лента|офис|led_strip_andrey_cabinet]
+FAILED tests/test_mistral.py::test_mistral[embed:synonym:Андрей|лента||led_strip_andrey]
+FAILED tests/test_mistral.py::test_mistral[embed:synonym:Андрей|лента|кабинет|led_strip_andrey_cabinet]
 FAILED tests/test_mistral.py::test_mistral[embed:synonym:общий|вторая колонка||speaker_second]
-FAILED tests/test_mistral.py::test_mistral[embed:synonym:общий|вторая колонка|кухня|speaker_second_kitchen]
-FAILED tests/test_mistral.py::test_mistral[embed:synonym:общий|первая колонка|гостиная|speaker_first_living]
-FAILED tests/test_mistral.py::test_mistral[embed:synonym:общий|уши||headphones]
-FAILED tests/test_mistral.py::test_mistral[embed:synonym:общий|ящик||tv] - Fa...
-FAILED tests/test_mistral.py::test_mistral[embed:synonym:общий|ящик|кухня|tv_kitchen]
+FAILED tests/test_mistral.py::test_mistral[embed:synonym:общий|первая колонка||speaker_first]
 FAILED tests/test_mistral.py::test_mistral[pipeline:1:Перемотай сериал на 10 минут вперед]
 FAILED tests/test_mistral.py::test_mistral[pipeline:4:Включи у Маши Sonne] - ...
 FAILED tests/test_mistral.py::test_mistral[pipeline:6:Включи Ведьмака] - Fail...
+FAILED tests/test_mistral.py::test_mistral[pipeline:27:Вруби Rammstein] - Fai...
+FAILED tests/test_mistral.py::test_mistral[pipeline:33:Запусти папин телевизор]
 FAILED tests/test_mistral.py::test_mistral[pipeline:42:Поставь Шрека у Маши]
-FAILED tests/test_mistral.py::test_mistral[pipeline:53:У Антона в спальне сделай потемнее]
 FAILED tests/test_mistral.py::test_mistral[pipeline:57:Следующая серия] - Fai...
 FAILED tests/test_mistral.py::test_mistral[pipeline:58:Предыдущая серия] - Fa...
+FAILED tests/test_mistral.py::test_mistral[pipeline:59:Поставь на паузу] - Fa...
 FAILED tests/test_mistral.py::test_mistral[pipeline:60:Включи новости] - Fail...
-================= 19 failed, 250 passed in 1725.71s (0:28:45) ==================
+21 failed, 254 passed in 1042.01s (0:17:22)
 
 ========================================================
 Pipeline latency: ministral-3:3b
 ========================================================
-cold start : 19.926 s
+cold start : 1.195 s
 
-requests   : 807
-mean       : 2.105 s
-min        : 1.166 s
-p50        : 2.151 s
-p90        : 2.440 s
-p95        : 2.530 s
-p99        : 2.737 s
-max        : 2.915 s
+requests   : 825
+mean       : 1.255 s
+min        : 0.782 s
+p50        : 1.255 s
+p90        : 1.411 s
+p95        : 1.480 s
+p99        : 1.602 s
+max        : 2.101 s
 ========================================================
