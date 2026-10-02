@@ -1,0 +1,147 @@
+from __future__ import annotations
+
+from dataclasses import dataclass, field, replace
+from typing import Mapping
+
+
+@dataclass(frozen=True)
+class Target:
+    device_type: str | None = None
+    mention: str | None = None
+    owner: str | None = None
+    area: str | None = None
+    ordinal: int | None = None
+    explicit: bool = False
+
+    def unconstrained(self) -> bool:
+        return not any((
+            self.device_type,
+            self.mention,
+            self.owner,
+            self.area,
+            self.ordinal is not None,
+            self.explicit,
+        ))
+
+
+@dataclass(frozen=True)
+class SemanticCommand:
+    intent: str
+    target: Target = field(default_factory=Target)
+    arguments: Mapping[str, str] = field(default_factory=dict)
+
+
+@dataclass(frozen=True)
+class RequestContext:
+    source_device: str | None = None
+    source_area: str | None = None
+    user: str | None = None
+
+
+@dataclass(frozen=True)
+class DeviceRuntime:
+    media: str | None = None
+    power: str | None = None
+
+
+@dataclass(frozen=True)
+class ScoreWeights:
+    """Explicit fields are hard filters. These weights explain the survivors
+    and rank them. Contextual weights are what actually separate candidates.
+    """
+
+    exact_alias: int = 100
+    explicit_device_type: int = 80
+    explicit_owner: int = 50
+    explicit_area: int = 50
+    explicit_ordinal: int = 50
+    currently_active: int = 30
+    request_origin_area: int = 20
+    relationship_match: int = 20
+    user_default: int = 10
+    unscoped_area: int = 5
+    unscoped_owner: int = 5
+    ambiguity_margin: int = 1
+
+
+@dataclass(frozen=True)
+class ResolutionTrace:
+    text: str
+    intent: str
+    target: Target
+    constraint_lines: tuple[str, ...]
+    candidate_ids: tuple[str, ...]
+    capability_lines: tuple[str, ...]
+    state_lines: tuple[str, ...]
+    score_lines: tuple[str, ...]
+    status: str
+    semantic_target: str | None
+    execution_target: str | None
+    reason: str = ""
+    skill: str | None = None
+    ha_action: str | None = None
+
+    def with_execution(self, *, skill: str, ha_action: str) -> ResolutionTrace:
+        return replace(self, skill=skill, ha_action=ha_action)
+
+
+@dataclass(frozen=True)
+class ResolvedCommand:
+    status: str
+    intent: str
+    semantic_target_id: str | None
+    execution_target_id: str | None
+    arguments: Mapping[str, str]
+    candidates: tuple[str, ...]
+    owner: str = ""
+    area: str = ""
+    reason: str = ""
+    trace: ResolutionTrace | None = None
+
+
+def format_target(target: Target) -> str:
+    if target.unconstrained():
+        return "unspecified"
+
+    parts = [
+        f"device_type={target.device_type or ''}",
+        f"mention={target.mention or ''}",
+        f"owner={target.owner or ''}",
+        f"area={target.area or ''}",
+        f"ordinal={target.ordinal if target.ordinal is not None else ''}",
+        f"explicit={str(target.explicit).lower()}",
+    ]
+    return " ".join(parts)
+
+
+def format_trace(trace: ResolutionTrace) -> str:
+    lines = [
+        "INPUT:",
+        trace.text or "—",
+        "NLU:",
+        f"intent={trace.intent}",
+        f"target={format_target(trace.target)}",
+        "CONSTRAINTS:",
+        *(trace.constraint_lines or ("—",)),
+        "CANDIDATES:",
+        *(trace.candidate_ids or ("—",)),
+        "CAPABILITY FILTER:",
+        *(trace.capability_lines or ("—",)),
+        "STATE:",
+        *(trace.state_lines or ("—",)),
+        "SCORING:",
+        *(trace.score_lines or ("—",)),
+        "STATUS:",
+        trace.status,
+        "REASON:",
+        trace.reason or "—",
+        "SEMANTIC TARGET:",
+        trace.semantic_target or "—",
+        "EXECUTION TARGET:",
+        trace.execution_target or "—",
+    ]
+    if trace.skill:
+        lines.extend(("SKILL:", trace.skill))
+    if trace.ha_action:
+        lines.extend(("HA ACTION:", trace.ha_action))
+    return "\n".join(lines)

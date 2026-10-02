@@ -9,10 +9,16 @@ from typing import Any
 
 import pytest
 
-from ollama_runner.factory import close_resources, default_pipeline, get_resolver
+from ollama_runner.factory import (
+    close_resources,
+    default_pipeline,
+    get_resolver,
+    semantic_pipeline,
+)
 from ollama_runner.pipeline import Pipeline
+from ollama_runner.semantic_pipeline import SemanticPipeline
 from ollama_runner.sinks.expect import Expect
-from ollama_runner.types import Intent
+from ollama_runner.types import Intent, Result
 
 
 ROOT = Path(__file__).parent.parent
@@ -21,6 +27,7 @@ PIPELINE_CASES_PATH = CASES_DIR / "cases.json"
 EMBED_CASES_PATH = CASES_DIR / "embed_cases.json"
 
 _PIPELINES: dict[str, Pipeline] = {}
+_SEMANTIC_PIPELINES: dict[str, SemanticPipeline] = {}
 _COLD_STARTS: dict[str, float] = {}
 _LATENCIES: dict[str, list[float]] = {}
 
@@ -107,6 +114,106 @@ def get_pipeline(model: str) -> Pipeline:
     return pipeline
 
 
+def get_semantic_pipeline(model: str) -> SemanticPipeline:
+    key = f"{model} semantic"
+    pipeline = _SEMANTIC_PIPELINES.get(key)
+    if pipeline is not None:
+        return pipeline
+
+    pipeline = semantic_pipeline(model=model)
+    _LATENCIES[key] = []
+
+    started = time.perf_counter()
+    pipeline.warmup()
+    _COLD_STARTS[key] = time.perf_counter() - started
+
+    _SEMANTIC_PIPELINES[key] = pipeline
+    return pipeline
+
+
+def _failure_detail(result: Result) -> Any:
+    if not result.error:
+        return None
+    try:
+        return json.loads(result.error)
+    except json.JSONDecodeError:
+        payload = result.payload or {}
+        return {
+            "error": result.error,
+            "command": result.command.as_dict(),
+            "candidates": payload.get("candidates"),
+            "status": payload.get("status"),
+        }
+
+
+def _resolution_matches(result: Result, resolution: dict[str, Any] | None) -> bool:
+    if not resolution:
+        return False
+    payload = result.payload or {}
+    if payload.get("status") != resolution.get("status"):
+        return False
+    if "reason" in resolution and payload.get("reason") != resolution["reason"]:
+        return False
+    return True
+
+
+def run_semantic_case(model: str, case: dict[str, Any]) -> None:
+    key = f"{model} semantic"
+    pipeline = get_semantic_pipeline(model)
+    failures: list[dict[str, Any]] = []
+
+    for attempt in range(1, LLM_REPEATS + 1):
+        started = time.perf_counter()
+        result = pipeline.run(case["text"], Expect(case["expected"]))
+        _LATENCIES[key].append(time.perf_counter() - started)
+
+        resolution = case.get("resolution")
+        if resolution:
+            if _resolution_matches(result, resolution):
+                continue
+            detail = _failure_detail(result) or {}
+            if isinstance(detail, dict):
+                detail = {
+                    **detail,
+                    "expected_resolution": resolution,
+                }
+            failures.append(
+                {
+                    "attempt": attempt,
+                    "error": detail,
+                }
+            )
+            continue
+
+        if result.ok:
+            continue
+
+        failures.append(
+            {
+                "attempt": attempt,
+                "error": _failure_detail(result),
+            }
+        )
+
+    if not failures:
+        return
+
+    pytest.fail(
+        json.dumps(
+            {
+                "id": case["id"],
+                "input": case["text"],
+                "repeats": LLM_REPEATS,
+                "failed": len(failures),
+                "failures": failures,
+            },
+            ensure_ascii=False,
+            indent=2,
+        ),
+        pytrace=False,
+    )
+
+
 def run_case(model: str, case: dict[str, Any]) -> None:
     pipeline = get_pipeline(model)
     failures: list[dict[str, Any]] = []
@@ -176,6 +283,7 @@ def close_pipelines() -> None:
     print_latency_stats()
     close_resources()
     _PIPELINES.clear()
+    _SEMANTIC_PIPELINES.clear()
 
 
 atexit.register(close_pipelines)

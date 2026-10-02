@@ -1,0 +1,7183 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-9.1.1, pluggy-1.6.0
+rootdir: /root/ollama-test/ollama-runner
+configfile: pyproject.toml
+plugins: returns-0.29.0, anyio-4.14.2
+collected 269 items
+
+tests/test_mistral_semantic.py .............................FF.......... [ 15%]
+...........FFF.FFF...FFFFF............FF..........F.....FFFF.FF..FFFFFFF [ 42%]
+F..FF...............FFFFFF...FFFFFF...FFF....F.FF........FFFF...FFFFF... [ 68%]
+................FF..F.FFFFF.FFFFF.FFFF.F..F.FFFFFFFFF..FFF.F.FF.FFFFFFFF [ 95%]
+F...FF...FFF                                                             [100%]
+
+=================================== FAILURES ===================================
+___ test_mistral_semantic[embed:canonical:мама|термометр||thermometer_mama] ____
+{
+  "id": "embed:canonical:мама|термометр||thermometer_mama",
+  "input": "Включи мамин термометр",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "мама",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "thermometer_mama",
+          "thermometer_mama_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "мама",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "thermometer_mama",
+          "thermometer_mama_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "мама",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "thermometer_mama",
+          "thermometer_mama_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[embed:canonical:мама|термометр|кухня|thermometer_mama_kitchen] _
+{
+  "id": "embed:canonical:мама|термометр|кухня|thermometer_mama_kitchen",
+  "input": "Включи мамин термометр на кухне",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "мама",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "мама",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "мама",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+________ test_mistral_semantic[embed:canonical:общий|музыка||soundbar] _________
+{
+  "id": "embed:canonical:общий|музыка||soundbar",
+  "input": "Включи музыка",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "headphones",
+          "player",
+          "projector",
+          "radio",
+          "soundbar",
+          "speaker_first",
+          "speaker_second",
+          "tv"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "headphones",
+          "player",
+          "projector",
+          "radio",
+          "soundbar",
+          "speaker_first",
+          "speaker_second",
+          "tv"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "headphones",
+          "player",
+          "projector",
+          "radio",
+          "soundbar",
+          "speaker_first",
+          "speaker_second",
+          "tv"
+        ],
+        "status": "ambiguous"
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[embed:canonical:общий|музыка|гостиная|soundbar_living] _
+{
+  "id": "embed:canonical:общий|музыка|гостиная|soundbar_living",
+  "input": "Включи музыка в гостиной",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "гостиная",
+          "kind": "device"
+        },
+        "candidates": [
+          "projector_living",
+          "soundbar_living",
+          "speaker_first_living",
+          "tv_living"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "гостиная",
+          "kind": "device"
+        },
+        "candidates": [
+          "projector_living",
+          "soundbar_living",
+          "speaker_first_living",
+          "tv_living"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "гостиная",
+          "kind": "device"
+        },
+        "candidates": [
+          "projector_living",
+          "soundbar_living",
+          "speaker_first_living",
+          "tv_living"
+        ],
+        "status": "ambiguous"
+      }
+    }
+  ]
+}
+__ test_mistral_semantic[embed:canonical:общий|музыка|кухня|soundbar_kitchen] __
+{
+  "id": "embed:canonical:общий|музыка|кухня|soundbar_kitchen",
+  "input": "Включи музыка на кухне",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "candidates": [
+          "player_kitchen",
+          "radio_kitchen",
+          "soundbar_kitchen",
+          "speaker_second_kitchen",
+          "tv_kitchen"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "candidates": [
+          "player_kitchen",
+          "radio_kitchen",
+          "soundbar_kitchen",
+          "speaker_second_kitchen",
+          "tv_kitchen"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "candidates": [
+          "player_kitchen",
+          "radio_kitchen",
+          "soundbar_kitchen",
+          "speaker_second_kitchen",
+          "tv_kitchen"
+        ],
+        "status": "ambiguous"
+      }
+    }
+  ]
+}
+__________ test_mistral_semantic[embed:canonical:общий|плеер||player] __________
+{
+  "id": "embed:canonical:общий|плеер||player",
+  "input": "Включи плеер",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "player",
+          "player_kitchen",
+          "player_bedroom"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "player",
+          "player_kitchen",
+          "player_bedroom"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "player",
+          "player_kitchen",
+          "player_bedroom"
+        ],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+___ test_mistral_semantic[embed:canonical:общий|плеер|кухня|player_kitchen] ____
+{
+  "id": "embed:canonical:общий|плеер|кухня|player_kitchen",
+  "input": "Включи плеер на кухне",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "candidates": [
+          "player_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "candidates": [
+          "player_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "candidates": [
+          "player_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+__ test_mistral_semantic[embed:canonical:общий|плеер|спальня|player_bedroom] ___
+{
+  "id": "embed:canonical:общий|плеер|спальня|player_bedroom",
+  "input": "Включи плеер в спальне",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "спальня",
+          "kind": "device"
+        },
+        "candidates": [
+          "player_bedroom"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "спальня",
+          "kind": "device"
+        },
+        "candidates": [
+          "player_bedroom"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "спальня",
+          "kind": "device"
+        },
+        "candidates": [
+          "player_bedroom"
+        ],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+__________ test_mistral_semantic[embed:canonical:общий|радио||radio] ___________
+{
+  "id": "embed:canonical:общий|радио||radio",
+  "input": "Включи радио",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "radio",
+          "radio_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "radio",
+          "radio_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "radio",
+          "radio_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+____ test_mistral_semantic[embed:canonical:общий|радио|кухня|radio_kitchen] ____
+{
+  "id": "embed:canonical:общий|радио|кухня|radio_kitchen",
+  "input": "Включи радио на кухне",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "candidates": [
+          "radio_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "candidates": [
+          "radio_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "candidates": [
+          "radio_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+_______ test_mistral_semantic[embed:canonical:общий|саундбар||soundbar] ________
+{
+  "id": "embed:canonical:общий|саундбар||soundbar",
+  "input": "Включи саундбар",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "soundbar",
+          "soundbar_living",
+          "soundbar_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "soundbar",
+          "soundbar_living",
+          "soundbar_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "soundbar",
+          "soundbar_living",
+          "soundbar_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[embed:canonical:общий|саундбар|гостиная|soundbar_living] _
+{
+  "id": "embed:canonical:общий|саундбар|гостиная|soundbar_living",
+  "input": "Включи саундбар в гостиной",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "гостиная",
+          "kind": "device"
+        },
+        "candidates": [
+          "soundbar_living"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "гостиная",
+          "kind": "device"
+        },
+        "candidates": [
+          "soundbar_living"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "гостиная",
+          "kind": "device"
+        },
+        "candidates": [
+          "soundbar_living"
+        ],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[embed:canonical:общий|саундбар|кухня|soundbar_kitchen] _
+{
+  "id": "embed:canonical:общий|саундбар|кухня|soundbar_kitchen",
+  "input": "Включи саундбар на кухне",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "candidates": [
+          "soundbar_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "candidates": [
+          "soundbar_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "candidates": [
+          "soundbar_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+____ test_mistral_semantic[embed:canonical:папа|гигрометр||hygrometer_papa] ____
+{
+  "id": "embed:canonical:папа|гигрометр||hygrometer_papa",
+  "input": "Включи папин гигрометр",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "папа",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "hygrometer_papa",
+          "hygrometer_papa_bedroom"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "папа",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "hygrometer_papa",
+          "hygrometer_papa_bedroom"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "папа",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "hygrometer_papa",
+          "hygrometer_papa_bedroom"
+        ],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[embed:canonical:папа|гигрометр|спальня|hygrometer_papa_bedroom] _
+{
+  "id": "embed:canonical:папа|гигрометр|спальня|hygrometer_papa_bedroom",
+  "input": "Включи папин гигрометр в спальне",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "папа",
+          "place": "спальня",
+          "kind": "device"
+        },
+        "candidates": [
+          "hygrometer_papa_bedroom"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "папа",
+          "place": "спальня",
+          "kind": "device"
+        },
+        "candidates": [
+          "hygrometer_papa_bedroom"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "папа",
+          "place": "спальня",
+          "kind": "device"
+        },
+        "candidates": [
+          "hygrometer_papa_bedroom"
+        ],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[embed:canonical:я|монитор|кабинет|monitor_me_cabinet] __
+{
+  "id": "embed:canonical:я|монитор|кабинет|monitor_me_cabinet",
+  "input": "Включи мой монитор в кабинете",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "owner": {
+            "expected": "я",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "monitor_me_cabinet",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кабинет",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "owner": {
+            "expected": "я",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "monitor_me_cabinet",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кабинет",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "owner": {
+            "expected": "я",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "monitor_me_cabinet",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кабинет",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[embed:place-syn:Андрей|диодная лента|офис|led_strip_andrey_cabinet] _
+{
+  "id": "embed:place-syn:Андрей|диодная лента|офис|led_strip_andrey_cabinet",
+  "input": "Включи у Андрея диодную ленту в офисе",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "Андрей",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "Андрей",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "Андрей",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[embed:place-syn:Андрей|лента|офис|led_strip_andrey_cabinet] _
+{
+  "id": "embed:place-syn:Андрей|лента|офис|led_strip_andrey_cabinet",
+  "input": "Включи у Андрея лента в офисе",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "лента",
+          "owner": "Андрей",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "лента",
+          "owner": "Андрей",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "лента",
+          "owner": "Андрей",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[embed:place-syn:Андрей|световая лента|офис|led_strip_andrey_cabinet] _
+{
+  "id": "embed:place-syn:Андрей|световая лента|офис|led_strip_andrey_cabinet",
+  "input": "Включи у Андрея световую ленту в офисе",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "Андрей",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "Андрей",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "Андрей",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[embed:place-syn:Андрей|светодиодная лента|офис|led_strip_andrey_cabinet] _
+{
+  "id": "embed:place-syn:Андрей|светодиодная лента|офис|led_strip_andrey_cabinet",
+  "input": "Включи у Андрея светодиодную ленту в офисе",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "Андрей",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "Андрей",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "Андрей",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+__ test_mistral_semantic[embed:place-syn:общий|микро|офис|microphone_cabinet] __
+{
+  "id": "embed:place-syn:общий|микро|офис|microphone_cabinet",
+  "input": "Включи микро в офисе",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[embed:place-syn:общий|микрофон|офис|microphone_cabinet] _
+{
+  "id": "embed:place-syn:общий|микрофон|офис|microphone_cabinet",
+  "input": "Включи микрофон в офисе",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+__ test_mistral_semantic[embed:place-syn:папа|лампа|офис|light_papa_cabinet] ___
+{
+  "id": "embed:place-syn:папа|лампа|офис|light_papa_cabinet",
+  "input": "Включи папин лампа в офисе",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "папа",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "папа",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "папа",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[embed:place-syn:папа|освещение|офис|light_papa_cabinet] _
+{
+  "id": "embed:place-syn:папа|освещение|офис|light_papa_cabinet",
+  "input": "Включи папин освещение в офисе",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "папа",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "папа",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "папа",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+___ test_mistral_semantic[embed:place-syn:папа|свет|офис|light_papa_cabinet] ___
+{
+  "id": "embed:place-syn:папа|свет|офис|light_papa_cabinet",
+  "input": "Включи папин свет в офисе",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "папа",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "папа",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "папа",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[embed:place-syn:я|компьютерный монитор|офис|monitor_me_cabinet] _
+{
+  "id": "embed:place-syn:я|компьютерный монитор|офис|monitor_me_cabinet",
+  "input": "Включи мой компьютерный монитор в офисе",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+_____ test_mistral_semantic[embed:place-syn:я|лампа|офис|light_me_cabinet] _____
+{
+  "id": "embed:place-syn:я|лампа|офис|light_me_cabinet",
+  "input": "Включи мой лампа в офисе",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+___ test_mistral_semantic[embed:place-syn:я|монитор|офис|monitor_me_cabinet] ___
+{
+  "id": "embed:place-syn:я|монитор|офис|monitor_me_cabinet",
+  "input": "Включи мой монитор в офисе",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+___ test_mistral_semantic[embed:place-syn:я|освещение|офис|light_me_cabinet] ___
+{
+  "id": "embed:place-syn:я|освещение|офис|light_me_cabinet",
+  "input": "Включи мой освещение в офисе",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+_____ test_mistral_semantic[embed:place-syn:я|свет|офис|light_me_cabinet] ______
+{
+  "id": "embed:place-syn:я|свет|офис|light_me_cabinet",
+  "input": "Включи мой свет в офисе",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "офис",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+_____ test_mistral_semantic[embed:synonym:Андрей|лента||led_strip_andrey] ______
+{
+  "id": "embed:synonym:Андрей|лента||led_strip_andrey",
+  "input": "Включи у Андрея лента",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "лента",
+          "owner": "Андрей",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "Андрей",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "Андрей",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[embed:synonym:Андрей|лента|кабинет|led_strip_andrey_cabinet] _
+{
+  "id": "embed:synonym:Андрей|лента|кабинет|led_strip_andrey_cabinet",
+  "input": "Включи у Андрея лента в кабинете",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "Андрей",
+          "place": "кабинет",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "Андрей",
+          "place": "кабинет",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "Андрей",
+          "place": "кабинет",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+____ test_mistral_semantic[embed:synonym:мама|градусник||thermometer_mama] _____
+{
+  "id": "embed:synonym:мама|градусник||thermometer_mama",
+  "input": "Включи мамин градусник",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "мама",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "thermometer_mama",
+          "thermometer_mama_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "мама",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "thermometer_mama",
+          "thermometer_mama_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "мама",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "thermometer_mama",
+          "thermometer_mama_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[embed:synonym:мама|градусник|кухня|thermometer_mama_kitchen] _
+{
+  "id": "embed:synonym:мама|градусник|кухня|thermometer_mama_kitchen",
+  "input": "Включи мамин градусник на кухне",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "мама",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "мама",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "candidates": [
+          "thermometer_mama_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "мама",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[embed:synonym:мама|датчик температуры||thermometer_mama] _
+{
+  "id": "embed:synonym:мама|датчик температуры||thermometer_mama",
+  "input": "Включи мамин датчик температуры",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "мама",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "thermometer_mama",
+          "thermometer_mama_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "мама",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "thermometer_mama",
+          "thermometer_mama_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "мама",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "thermometer_mama",
+          "thermometer_mama_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[embed:synonym:мама|датчик температуры|кухня|thermometer_mama_kitchen] _
+{
+  "id": "embed:synonym:мама|датчик температуры|кухня|thermometer_mama_kitchen",
+  "input": "Включи мамин датчик температуры на кухне",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "мама",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "candidates": [
+          "thermometer_mama_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "мама",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "candidates": [
+          "thermometer_mama_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "мама",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "candidates": [
+          "thermometer_mama_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+_______ test_mistral_semantic[embed:synonym:мама|освещение||light_mama] ________
+{
+  "id": "embed:synonym:мама|освещение||light_mama",
+  "input": "Включи мамин освещение",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "chandelier_common",
+          "light_common"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "chandelier_common",
+          "light_common"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "chandelier_common",
+          "light_common"
+        ],
+        "status": "ambiguous"
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[embed:synonym:мама|освещение|кухня|light_mama_kitchen] _
+{
+  "id": "embed:synonym:мама|освещение|кухня|light_mama_kitchen",
+  "input": "Включи мамин освещение на кухне",
+  "repeats": 3,
+  "failed": 1,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "light_mama_kitchen",
+            "actual": "light_common_kitchen"
+          },
+          "owner": {
+            "expected": "мама",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "light_common_kitchen",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
+__ test_mistral_semantic[embed:synonym:общий|акустическая система||soundbar] ___
+{
+  "id": "embed:synonym:общий|акустическая система||soundbar",
+  "input": "Включи акустическая система",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "speaker_first",
+          "speaker_second"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "speaker_first",
+          "speaker_second"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "speaker_first",
+          "speaker_second"
+        ],
+        "status": "ambiguous"
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[embed:synonym:общий|акустическая система|гостиная|soundbar_living] _
+{
+  "id": "embed:synonym:общий|акустическая система|гостиная|soundbar_living",
+  "input": "Включи акустическая система в гостиной",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "soundbar_living",
+            "actual": "speaker_first_living"
+          }
+        },
+        "command": {
+          "device_id": "speaker_first_living",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "гостиная",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "soundbar_living",
+            "actual": "speaker_first_living"
+          }
+        },
+        "command": {
+          "device_id": "speaker_first_living",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "гостиная",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "soundbar_living",
+            "actual": "speaker_first_living"
+          }
+        },
+        "command": {
+          "device_id": "speaker_first_living",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "гостиная",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[embed:synonym:общий|акустическая система|кухня|soundbar_kitchen] _
+{
+  "id": "embed:synonym:общий|акустическая система|кухня|soundbar_kitchen",
+  "input": "Включи акустическая система на кухне",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "soundbar_kitchen",
+            "actual": "speaker_second_kitchen"
+          }
+        },
+        "command": {
+          "device_id": "speaker_second_kitchen",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "soundbar_kitchen",
+            "actual": "speaker_second_kitchen"
+          }
+        },
+        "command": {
+          "device_id": "speaker_second_kitchen",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "soundbar_kitchen",
+            "actual": "speaker_second_kitchen"
+          }
+        },
+        "command": {
+          "device_id": "speaker_second_kitchen",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
+______ test_mistral_semantic[embed:synonym:общий|аудиосистема||soundbar] _______
+{
+  "id": "embed:synonym:общий|аудиосистема||soundbar",
+  "input": "Включи аудиосистема",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "soundbar",
+          "soundbar_living",
+          "soundbar_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "soundbar",
+          "soundbar_living",
+          "soundbar_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "soundbar",
+          "soundbar_living",
+          "soundbar_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[embed:synonym:общий|аудиосистема|гостиная|soundbar_living] _
+{
+  "id": "embed:synonym:общий|аудиосистема|гостиная|soundbar_living",
+  "input": "Включи аудиосистема в гостиной",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "гостиная",
+          "kind": "device"
+        },
+        "candidates": [
+          "soundbar_living"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "гостиная",
+          "kind": "device"
+        },
+        "candidates": [
+          "soundbar_living"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "гостиная",
+          "kind": "device"
+        },
+        "candidates": [
+          "soundbar_living"
+        ],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[embed:synonym:общий|аудиосистема|кухня|soundbar_kitchen] _
+{
+  "id": "embed:synonym:общий|аудиосистема|кухня|soundbar_kitchen",
+  "input": "Включи аудиосистема на кухне",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "candidates": [
+          "soundbar_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "candidates": [
+          "soundbar_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "candidates": [
+          "soundbar_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+_____ test_mistral_semantic[embed:synonym:общий|звуковая панель||soundbar] _____
+{
+  "id": "embed:synonym:общий|звуковая панель||soundbar",
+  "input": "Включи звуковая панель",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "speaker_first",
+          "speaker_second"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "speaker_first",
+          "speaker_second"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "speaker_first",
+          "speaker_second"
+        ],
+        "status": "ambiguous"
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[embed:synonym:общий|звуковая панель|гостиная|soundbar_living] _
+{
+  "id": "embed:synonym:общий|звуковая панель|гостиная|soundbar_living",
+  "input": "Включи звуковая панель в гостиной",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "soundbar_living",
+            "actual": "speaker_first_living"
+          }
+        },
+        "command": {
+          "device_id": "speaker_first_living",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "гостиная",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "soundbar_living",
+            "actual": "speaker_first_living"
+          }
+        },
+        "command": {
+          "device_id": "speaker_first_living",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "гостиная",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "soundbar_living",
+            "actual": "speaker_first_living"
+          }
+        },
+        "command": {
+          "device_id": "speaker_first_living",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "гостиная",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[embed:synonym:общий|звуковая панель|кухня|soundbar_kitchen] _
+{
+  "id": "embed:synonym:общий|звуковая панель|кухня|soundbar_kitchen",
+  "input": "Включи звуковая панель на кухне",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "soundbar_kitchen",
+            "actual": "speaker_second_kitchen"
+          }
+        },
+        "command": {
+          "device_id": "speaker_second_kitchen",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "soundbar_kitchen",
+            "actual": "speaker_second_kitchen"
+          }
+        },
+        "command": {
+          "device_id": "speaker_second_kitchen",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "soundbar_kitchen",
+            "actual": "speaker_second_kitchen"
+          }
+        },
+        "command": {
+          "device_id": "speaker_second_kitchen",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[embed:synonym:общий|микро|кабинет|microphone_cabinet] __
+{
+  "id": "embed:synonym:общий|микро|кабинет|microphone_cabinet",
+  "input": "Включи микро в кабинете",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кабинет",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кабинет",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кабинет",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[embed:synonym:общий|музыкальный плеер|кухня|player_kitchen] _
+{
+  "id": "embed:synonym:общий|музыкальный плеер|кухня|player_kitchen",
+  "input": "Включи музыкальный плеер на кухне",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "candidates": [
+          "player_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "candidates": [
+          "player_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "candidates": [
+          "player_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[embed:synonym:общий|музыкальный плеер|спальня|player_bedroom] _
+{
+  "id": "embed:synonym:общий|музыкальный плеер|спальня|player_bedroom",
+  "input": "Включи музыкальный плеер в спальне",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "спальня",
+          "kind": "device"
+        },
+        "candidates": [
+          "player_bedroom"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "спальня",
+          "kind": "device"
+        },
+        "candidates": [
+          "player_bedroom"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "спальня",
+          "kind": "device"
+        },
+        "candidates": [
+          "player_bedroom"
+        ],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[embed:synonym:общий|потолочная люстра||chandelier_common] _
+{
+  "id": "embed:synonym:общий|потолочная люстра||chandelier_common",
+  "input": "Включи потолочную люстру",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "chandelier_common",
+          "light_common"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "chandelier_common",
+          "light_common"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "chandelier_common",
+          "light_common"
+        ],
+        "status": "ambiguous"
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[embed:synonym:общий|потолочная люстра|гостиная|chandelier_living] _
+{
+  "id": "embed:synonym:общий|потолочная люстра|гостиная|chandelier_living",
+  "input": "Включи потолочную люстру в гостиной",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "гостиная",
+          "kind": "device"
+        },
+        "candidates": [
+          "chandelier_living",
+          "light_common_living"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "гостиная",
+          "kind": "device"
+        },
+        "candidates": [
+          "chandelier_living",
+          "light_common_living"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "гостиная",
+          "kind": "device"
+        },
+        "candidates": [
+          "chandelier_living",
+          "light_common_living"
+        ],
+        "status": "ambiguous"
+      }
+    }
+  ]
+}
+__________ test_mistral_semantic[embed:synonym:общий|приемник||radio] __________
+{
+  "id": "embed:synonym:общий|приемник||radio",
+  "input": "Включи приемник",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "speaker_first",
+          "speaker_second"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "speaker_first",
+          "speaker_second"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "speaker_first",
+          "speaker_second"
+        ],
+        "status": "ambiguous"
+      }
+    }
+  ]
+}
+___ test_mistral_semantic[embed:synonym:общий|приемник|кухня|radio_kitchen] ____
+{
+  "id": "embed:synonym:общий|приемник|кухня|radio_kitchen",
+  "input": "Включи приемник на кухне",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "radio_kitchen",
+            "actual": "speaker_second_kitchen"
+          }
+        },
+        "command": {
+          "device_id": "speaker_second_kitchen",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "radio_kitchen",
+            "actual": "speaker_second_kitchen"
+          }
+        },
+        "command": {
+          "device_id": "speaker_second_kitchen",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "radio_kitchen",
+            "actual": "speaker_second_kitchen"
+          }
+        },
+        "command": {
+          "device_id": "speaker_second_kitchen",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
+_______ test_mistral_semantic[embed:synonym:общий|проигрыватель||player] _______
+{
+  "id": "embed:synonym:общий|проигрыватель||player",
+  "input": "Включи проигрыватель",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "player",
+          "player_kitchen",
+          "player_bedroom"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "player",
+          "player_kitchen",
+          "player_bedroom"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "player",
+          "player_kitchen",
+          "player_bedroom"
+        ],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[embed:synonym:общий|проигрыватель|кухня|player_kitchen] _
+{
+  "id": "embed:synonym:общий|проигрыватель|кухня|player_kitchen",
+  "input": "Включи проигрыватель на кухне",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "candidates": [
+          "player_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "candidates": [
+          "player_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "candidates": [
+          "player_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[embed:synonym:общий|проигрыватель|спальня|player_bedroom] _
+{
+  "id": "embed:synonym:общий|проигрыватель|спальня|player_bedroom",
+  "input": "Включи проигрыватель в спальне",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "спальня",
+          "kind": "device"
+        },
+        "candidates": [
+          "player_bedroom"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "спальня",
+          "kind": "device"
+        },
+        "candidates": [
+          "player_bedroom"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "спальня",
+          "kind": "device"
+        },
+        "candidates": [
+          "player_bedroom"
+        ],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+_______ test_mistral_semantic[embed:synonym:общий|радиоприемник||radio] ________
+{
+  "id": "embed:synonym:общий|радиоприемник||radio",
+  "input": "Включи радиоприемник",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "radio",
+          "radio_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "radio",
+          "radio_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "radio",
+          "radio_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[embed:synonym:общий|радиоприемник|кухня|radio_kitchen] _
+{
+  "id": "embed:synonym:общий|радиоприемник|кухня|radio_kitchen",
+  "input": "Включи радиоприемник на кухне",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "candidates": [
+          "radio_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "candidates": [
+          "radio_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "candidates": [
+          "radio_kitchen"
+        ],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[embed:synonym:папа|датчик влажности||hygrometer_papa] __
+{
+  "id": "embed:synonym:папа|датчик влажности||hygrometer_papa",
+  "input": "Включи папин датчик влажности",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "папа",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "hygrometer_papa",
+          "hygrometer_papa_bedroom"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "папа",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "hygrometer_papa",
+          "hygrometer_papa_bedroom"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "папа",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "hygrometer_papa",
+          "hygrometer_papa_bedroom"
+        ],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[embed:synonym:папа|датчик влажности|спальня|hygrometer_papa_bedroom] _
+{
+  "id": "embed:synonym:папа|датчик влажности|спальня|hygrometer_papa_bedroom",
+  "input": "Включи папин датчик влажности в спальне",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "папа",
+          "place": "спальня",
+          "kind": "device"
+        },
+        "candidates": [
+          "hygrometer_papa_bedroom"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "папа",
+          "place": "спальня",
+          "kind": "device"
+        },
+        "candidates": [
+          "hygrometer_papa_bedroom"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "папа",
+          "place": "спальня",
+          "kind": "device"
+        },
+        "candidates": [
+          "hygrometer_papa_bedroom"
+        ],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[embed:synonym:я|компьютерный монитор|кабинет|monitor_me_cabinet] _
+{
+  "id": "embed:synonym:я|компьютерный монитор|кабинет|monitor_me_cabinet",
+  "input": "Включи мой компьютерный монитор в кабинете",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "owner": {
+            "expected": "я",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "monitor_me_cabinet",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кабинет",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "owner": {
+            "expected": "я",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "monitor_me_cabinet",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кабинет",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "owner": {
+            "expected": "я",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "monitor_me_cabinet",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кабинет",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
+__ test_mistral_semantic[embed:synonym:я|освещение|кабинет|light_me_cabinet] ___
+{
+  "id": "embed:synonym:я|освещение|кабинет|light_me_cabinet",
+  "input": "Включи мой освещение в кабинете",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кабинет",
+          "kind": "device"
+        },
+        "candidates": [
+          "light_me_cabinet",
+          "light_papa_cabinet"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кабинет",
+          "kind": "device"
+        },
+        "candidates": [
+          "light_me_cabinet",
+          "light_papa_cabinet"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кабинет",
+          "kind": "device"
+        },
+        "candidates": [
+          "light_me_cabinet",
+          "light_papa_cabinet"
+        ],
+        "status": "ambiguous"
+      }
+    }
+  ]
+}
+___ test_mistral_semantic[embed:synonym:я|освещение|кухня|light_me_kitchen] ____
+{
+  "id": "embed:synonym:я|освещение|кухня|light_me_kitchen",
+  "input": "Включи мой освещение на кухне",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "light_me_kitchen",
+            "actual": "light_common_kitchen"
+          },
+          "owner": {
+            "expected": "я",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "light_common_kitchen",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "light_me_kitchen",
+            "actual": "light_common_kitchen"
+          },
+          "owner": {
+            "expected": "я",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "light_common_kitchen",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "light_me_kitchen",
+            "actual": "light_common_kitchen"
+          },
+          "owner": {
+            "expected": "я",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "light_common_kitchen",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
+__ test_mistral_semantic[embed:synonym:я|освещение|спальня|light_me_bedroom] ___
+{
+  "id": "embed:synonym:я|освещение|спальня|light_me_bedroom",
+  "input": "Включи мой освещение в спальне",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "light_me_bedroom",
+            "actual": "light_common_bedroom"
+          },
+          "owner": {
+            "expected": "я",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "light_common_bedroom",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "спальня",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "light_me_bedroom",
+            "actual": "light_common_bedroom"
+          },
+          "owner": {
+            "expected": "я",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "light_common_bedroom",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "спальня",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "light_me_bedroom",
+            "actual": "light_common_bedroom"
+          },
+          "owner": {
+            "expected": "я",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "light_common_bedroom",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "спальня",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
+____ test_mistral_semantic[pipeline:1:Перемотай сериал на 10 минут вперед] _____
+{
+  "id": "pipeline:1:Перемотай сериал на 10 минут вперед",
+  "input": "Перемотай сериал на 10 минут вперед",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "value": {
+            "expected": "на 10 минут",
+            "actual": "10 минут"
+          }
+        },
+        "command": {
+          "device_id": "tv",
+          "action": "increase",
+          "value": "10 минут",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "value": {
+            "expected": "на 10 минут",
+            "actual": "10 минут"
+          }
+        },
+        "command": {
+          "device_id": "tv",
+          "action": "increase",
+          "value": "10 минут",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "value": {
+            "expected": "на 10 минут",
+            "actual": "10 минут"
+          }
+        },
+        "command": {
+          "device_id": "tv",
+          "action": "increase",
+          "value": "10 минут",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
+__________ test_mistral_semantic[pipeline:2:Запусти мамин телевизор] ___________
+{
+  "id": "pipeline:2:Запусти мамин телевизор",
+  "input": "Запусти мамин телевизор",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "мама",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "мама",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "мама",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+____________ test_mistral_semantic[pipeline:4:Включи у Маши Sonne] _____________
+{
+  "id": "pipeline:4:Включи у Маши Sonne",
+  "input": "Включи у Маши Sonne",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "Маша",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "Маша",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "Маша",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+____________ test_mistral_semantic[pipeline:5:Хочу фиолетовый свет] ____________
+{
+  "id": "pipeline:5:Хочу фиолетовый свет",
+  "input": "Хочу фиолетовый свет",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "set_state",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "chandelier_common",
+          "light_common"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "set_state",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "chandelier_common",
+          "light_common"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "set_state",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "chandelier_common",
+          "light_common"
+        ],
+        "status": "ambiguous"
+      }
+    }
+  ]
+}
+______________ test_mistral_semantic[pipeline:6:Включи Ведьмака] _______________
+{
+  "id": "pipeline:6:Включи Ведьмака",
+  "input": "Включи Ведьмака",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "value": {
+            "expected": "Ведьмак",
+            "actual": "Ведьмака"
+          }
+        },
+        "command": {
+          "device_id": "tv",
+          "action": "run_content",
+          "value": "Ведьмака",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "value": {
+            "expected": "Ведьмак",
+            "actual": "Ведьмака"
+          }
+        },
+        "command": {
+          "device_id": "tv",
+          "action": "run_content",
+          "value": "Ведьмака",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "value": {
+            "expected": "Ведьмак",
+            "actual": "Ведьмака"
+          }
+        },
+        "command": {
+          "device_id": "tv",
+          "action": "run_content",
+          "value": "Ведьмака",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
+___________ test_mistral_semantic[pipeline:7:Включи мамин телевизор] ___________
+{
+  "id": "pipeline:7:Включи мамин телевизор",
+  "input": "Включи мамин телевизор",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "owner": {
+            "expected": "мама",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "tv",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "owner": {
+            "expected": "мама",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "tv",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "мама",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+______ test_mistral_semantic[pipeline:8:Увеличь яркость на 20 процентов] _______
+{
+  "id": "pipeline:8:Увеличь яркость на 20 процентов",
+  "input": "Увеличь яркость на 20 процентов",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "increase",
+          "value": "на 20 процентов",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "chandelier_common",
+          "light_common"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "increase",
+          "value": "на 20 процентов",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "chandelier_common",
+          "light_common"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "increase",
+          "value": "на 20 процентов",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "chandelier_common",
+          "light_common"
+        ],
+        "status": "ambiguous"
+      }
+    }
+  ]
+}
+______________ test_mistral_semantic[pipeline:10:Сделай потемнее] ______________
+{
+  "id": "pipeline:10:Сделай потемнее",
+  "input": "Сделай потемнее",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "decrease",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "chandelier_common",
+          "light_common"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "decrease",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "chandelier_common",
+          "light_common"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "decrease",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "chandelier_common",
+          "light_common"
+        ],
+        "status": "ambiguous"
+      }
+    }
+  ]
+}
+_________ test_mistral_semantic[pipeline:11:Сделай свет немного ярче] __________
+{
+  "id": "pipeline:11:Сделай свет немного ярче",
+  "input": "Сделай свет немного ярче",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "increase",
+          "value": "немного",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "chandelier_common",
+          "light_common"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "increase",
+          "value": "немного",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "chandelier_common",
+          "light_common"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "increase",
+          "value": "немного",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "chandelier_common",
+          "light_common"
+        ],
+        "status": "ambiguous"
+      }
+    }
+  ]
+}
+_______ test_mistral_semantic[pipeline:12:Убавь яркость на 30 процентов] _______
+{
+  "id": "pipeline:12:Убавь яркость на 30 процентов",
+  "input": "Убавь яркость на 30 процентов",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "decrease",
+          "value": "на 30 процентов",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "chandelier_common",
+          "light_common"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "decrease",
+          "value": "на 30 процентов",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "chandelier_common",
+          "light_common"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "decrease",
+          "value": "на 30 процентов",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "chandelier_common",
+          "light_common"
+        ],
+        "status": "ambiguous"
+      }
+    }
+  ]
+}
+_______ test_mistral_semantic[pipeline:13:Поставь яркость 50 процентов] ________
+{
+  "id": "pipeline:13:Поставь яркость 50 процентов",
+  "input": "Поставь яркость 50 процентов",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "set_state",
+          "value": "50 процентов",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "chandelier_common",
+          "light_common"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "set_state",
+          "value": "50 процентов",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "chandelier_common",
+          "light_common"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "set_state",
+          "value": "50 процентов",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "chandelier_common",
+          "light_common"
+        ],
+        "status": "ambiguous"
+      }
+    }
+  ]
+}
+__________ test_mistral_semantic[pipeline:15:Сделай мамин свет синим] __________
+{
+  "id": "pipeline:15:Сделай мамин свет синим",
+  "input": "Сделай мамин свет синим",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "set_state",
+          "value": "синий",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "chandelier_common",
+          "light_common"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "set_state",
+          "value": "синий",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "chandelier_common",
+          "light_common"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "set_state",
+          "value": "синий",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "chandelier_common",
+          "light_common"
+        ],
+        "status": "ambiguous"
+      }
+    }
+  ]
+}
+___________ test_mistral_semantic[pipeline:19:Выруби Антонов телик] ____________
+{
+  "id": "pipeline:19:Выруби Антонов телик",
+  "input": "Выруби Антонов телик",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "off",
+          "value": "",
+          "owner": "Антон",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "off",
+          "value": "",
+          "owner": "Антон",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "off",
+          "value": "",
+          "owner": "Антон",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[pipeline:21:Запусти пятую серию второго сезона Доктора Кто] _
+{
+  "id": "pipeline:21:Запусти пятую серию второго сезона Доктора Кто",
+  "input": "Запусти пятую серию второго сезона Доктора Кто",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "action": {
+            "expected": "run_content",
+            "actual": "increase"
+          },
+          "value": {
+            "expected": "пятая серия второго сезона Доктора Кто",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "tv",
+          "action": "increase",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "action": {
+            "expected": "run_content",
+            "actual": "increase"
+          },
+          "value": {
+            "expected": "пятая серия второго сезона Доктора Кто",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "tv",
+          "action": "increase",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "action": {
+            "expected": "run_content",
+            "actual": "increase"
+          },
+          "value": {
+            "expected": "пятая серия второго сезона Доктора Кто",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "tv",
+          "action": "increase",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[pipeline:22:Запусти седьмую серию второго сезона Бен 10] _
+{
+  "id": "pipeline:22:Запусти седьмую серию второго сезона Бен 10",
+  "input": "Запусти седьмую серию второго сезона Бен 10",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "action": {
+            "expected": "run_content",
+            "actual": "increase"
+          },
+          "value": {
+            "expected": "седьмая серия второго сезона Бен 10",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "tv",
+          "action": "increase",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "action": {
+            "expected": "run_content",
+            "actual": "increase"
+          },
+          "value": {
+            "expected": "седьмая серия второго сезона Бен 10",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "tv",
+          "action": "increase",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "action": {
+            "expected": "run_content",
+            "actual": "increase"
+          },
+          "value": {
+            "expected": "седьмая серия второго сезона Бен 10",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "tv",
+          "action": "increase",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
+__________ test_mistral_semantic[pipeline:23:Поставь Ведьмака у мамы] __________
+{
+  "id": "pipeline:23:Поставь Ведьмака у мамы",
+  "input": "Поставь Ведьмака у мамы",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "Ведьмака",
+          "owner": "мама",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "light_mama",
+          "light_mama_bedroom",
+          "light_mama_kitchen",
+          "thermometer_mama",
+          "thermometer_mama_kitchen",
+          "humidifier_mama",
+          "humidifier_mama_bedroom"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "Ведьмака",
+          "owner": "мама",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "light_mama",
+          "light_mama_bedroom",
+          "light_mama_kitchen",
+          "thermometer_mama",
+          "thermometer_mama_kitchen",
+          "humidifier_mama",
+          "humidifier_mama_bedroom"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "Ведьмака",
+          "owner": "мама",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "light_mama",
+          "light_mama_bedroom",
+          "light_mama_kitchen",
+          "thermometer_mama",
+          "thermometer_mama_kitchen",
+          "humidifier_mama",
+          "humidifier_mama_bedroom"
+        ],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+__________ test_mistral_semantic[pipeline:24:Поставь сериал на паузу] __________
+{
+  "id": "pipeline:24:Поставь сериал на паузу",
+  "input": "Поставь сериал на паузу",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "stop",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "headphones",
+          "player",
+          "projector",
+          "radio",
+          "soundbar",
+          "speaker_first",
+          "speaker_second",
+          "tv"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "stop",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "headphones",
+          "player",
+          "projector",
+          "radio",
+          "soundbar",
+          "speaker_first",
+          "speaker_second",
+          "tv"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "stop",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "headphones",
+          "player",
+          "projector",
+          "radio",
+          "soundbar",
+          "speaker_first",
+          "speaker_second",
+          "tv"
+        ],
+        "status": "ambiguous"
+      }
+    }
+  ]
+}
+_______ test_mistral_semantic[pipeline:25:Перемотай на пять минут назад] _______
+{
+  "id": "pipeline:25:Перемотай на пять минут назад",
+  "input": "Перемотай на пять минут назад",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "value": {
+            "expected": "на пять минут",
+            "actual": "5 минут"
+          }
+        },
+        "command": {
+          "device_id": "tv",
+          "action": "decrease",
+          "value": "5 минут",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "value": {
+            "expected": "на пять минут",
+            "actual": "5 минут"
+          }
+        },
+        "command": {
+          "device_id": "tv",
+          "action": "decrease",
+          "value": "5 минут",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "value": {
+            "expected": "на пять минут",
+            "actual": "5 минут"
+          }
+        },
+        "command": {
+          "device_id": "tv",
+          "action": "decrease",
+          "value": "5 минут",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
+__________ test_mistral_semantic[pipeline:26:Включи музыку на кухне] ___________
+{
+  "id": "pipeline:26:Включи музыку на кухне",
+  "input": "Включи музыку на кухне",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "candidates": [
+          "player_kitchen",
+          "radio_kitchen",
+          "soundbar_kitchen",
+          "speaker_second_kitchen",
+          "tv_kitchen"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "candidates": [
+          "player_kitchen",
+          "radio_kitchen",
+          "soundbar_kitchen",
+          "speaker_second_kitchen",
+          "tv_kitchen"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "candidates": [
+          "player_kitchen",
+          "radio_kitchen",
+          "soundbar_kitchen",
+          "speaker_second_kitchen",
+          "tv_kitchen"
+        ],
+        "status": "ambiguous"
+      }
+    }
+  ]
+}
+______________ test_mistral_semantic[pipeline:27:Вруби Rammstein] ______________
+{
+  "id": "pipeline:27:Вруби Rammstein",
+  "input": "Вруби Rammstein",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "speaker_first",
+          "speaker_second"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "speaker_first",
+          "speaker_second"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "speaker_first",
+          "speaker_second"
+        ],
+        "status": "ambiguous"
+      }
+    }
+  ]
+}
+_______ test_mistral_semantic[pipeline:28:Поставь альбом Meteora у Маши] _______
+{
+  "id": "pipeline:28:Поставь альбом Meteora у Маши",
+  "input": "Поставь альбом Meteora у Маши",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "soundbar",
+            "actual": "tv_masha_bedroom"
+          }
+        },
+        "command": {
+          "device_id": "tv_masha_bedroom",
+          "action": "run_content",
+          "value": "альбом Meteora",
+          "owner": "Маша",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "soundbar",
+            "actual": "tv_masha_bedroom"
+          }
+        },
+        "command": {
+          "device_id": "tv_masha_bedroom",
+          "action": "run_content",
+          "value": "альбом Meteora",
+          "owner": "Маша",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "soundbar",
+            "actual": "tv_masha_bedroom"
+          }
+        },
+        "command": {
+          "device_id": "tv_masha_bedroom",
+          "action": "run_content",
+          "value": "альбом Meteora",
+          "owner": "Маша",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
+__________ test_mistral_semantic[pipeline:29:Сделай музыку погромче] ___________
+{
+  "id": "pipeline:29:Сделай музыку погромче",
+  "input": "Сделай музыку погромче",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "increase",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "speaker_first",
+          "speaker_second"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "increase",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "speaker_first",
+          "speaker_second"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "increase",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "speaker_first",
+          "speaker_second"
+        ],
+        "status": "ambiguous"
+      }
+    }
+  ]
+}
+_________ test_mistral_semantic[pipeline:32:Останови музыку у Антона] __________
+{
+  "id": "pipeline:32:Останови музыку у Антона",
+  "input": "Останови музыку у Антона",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "stop",
+          "value": "",
+          "owner": "Антон",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "stop",
+          "value": "",
+          "owner": "Антон",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "stop",
+          "value": "",
+          "owner": "Антон",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+__________ test_mistral_semantic[pipeline:33:Запусти папин телевизор] __________
+{
+  "id": "pipeline:33:Запусти папин телевизор",
+  "input": "Запусти папин телевизор",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "папа",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "папа",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "папа",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+____________ test_mistral_semantic[pipeline:34:Включи телик Артема] ____________
+{
+  "id": "pipeline:34:Включи телик Артема",
+  "input": "Включи телик Артема",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "Артем",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "Артем",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "Артем",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+___________ test_mistral_semantic[pipeline:36:Включи мой телевизор] ____________
+{
+  "id": "pipeline:36:Включи мой телевизор",
+  "input": "Включи мой телевизор",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "я",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "я",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "owner": {
+            "expected": "я",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "tv",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
+____ test_mistral_semantic[pipeline:38:Запусти маме первую серию Ведьмака] _____
+{
+  "id": "pipeline:38:Запусти маме первую серию Ведьмака",
+  "input": "Запусти маме первую серию Ведьмака",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "action": {
+            "expected": "run_content",
+            "actual": "increase"
+          },
+          "owner": {
+            "expected": "мама",
+            "actual": ""
+          },
+          "value": {
+            "expected": "первая серия Ведьмака",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "tv",
+          "action": "increase",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "action": {
+            "expected": "run_content",
+            "actual": "increase"
+          },
+          "owner": {
+            "expected": "мама",
+            "actual": ""
+          },
+          "value": {
+            "expected": "первая серия Ведьмака",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "tv",
+          "action": "increase",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "action": {
+            "expected": "run_content",
+            "actual": "increase"
+          },
+          "owner": {
+            "expected": "мама",
+            "actual": ""
+          },
+          "value": {
+            "expected": "первая серия Ведьмака",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "tv",
+          "action": "increase",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
+_______ test_mistral_semantic[pipeline:39:Включи Интерстеллар у Антона] ________
+{
+  "id": "pipeline:39:Включи Интерстеллар у Антона",
+  "input": "Включи Интерстеллар у Антона",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "Интерстеллар",
+          "owner": "Антон",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "light_anton",
+          "light_anton_bedroom",
+          "floor_lamp_anton",
+          "floor_lamp_anton_living"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "Интерстеллар",
+          "owner": "Антон",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "light_anton",
+          "light_anton_bedroom",
+          "floor_lamp_anton",
+          "floor_lamp_anton_living"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "Интерстеллар",
+          "owner": "Антон",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "light_anton",
+          "light_anton_bedroom",
+          "floor_lamp_anton",
+          "floor_lamp_anton_living"
+        ],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[pipeline:41:Включи вторую серию первого сезона Аркейна] _
+{
+  "id": "pipeline:41:Включи вторую серию первого сезона Аркейна",
+  "input": "Включи вторую серию первого сезона Аркейна",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "action": {
+            "expected": "run_content",
+            "actual": "increase"
+          },
+          "value": {
+            "expected": "вторая серия первого сезона Аркейна",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "tv",
+          "action": "increase",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "action": {
+            "expected": "run_content",
+            "actual": "increase"
+          },
+          "value": {
+            "expected": "вторая серия первого сезона Аркейна",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "tv",
+          "action": "increase",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "action": {
+            "expected": "run_content",
+            "actual": "increase"
+          },
+          "value": {
+            "expected": "вторая серия первого сезона Аркейна",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "tv",
+          "action": "increase",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
+___________ test_mistral_semantic[pipeline:42:Поставь Шрека у Маши] ____________
+{
+  "id": "pipeline:42:Поставь Шрека у Маши",
+  "input": "Поставь Шрека у Маши",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "tv",
+            "actual": "tv_masha_bedroom"
+          },
+          "value": {
+            "expected": "Шрек",
+            "actual": "Шрека"
+          }
+        },
+        "command": {
+          "device_id": "tv_masha_bedroom",
+          "action": "run_content",
+          "value": "Шрека",
+          "owner": "Маша",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "tv",
+            "actual": "tv_masha_bedroom"
+          },
+          "value": {
+            "expected": "Шрек",
+            "actual": "Шрека"
+          }
+        },
+        "command": {
+          "device_id": "tv_masha_bedroom",
+          "action": "run_content",
+          "value": "Шрека",
+          "owner": "Маша",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "tv",
+            "actual": "tv_masha_bedroom"
+          },
+          "value": {
+            "expected": "Шрек",
+            "actual": "Шрека"
+          }
+        },
+        "command": {
+          "device_id": "tv_masha_bedroom",
+          "action": "run_content",
+          "value": "Шрека",
+          "owner": "Маша",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
+___________ test_mistral_semantic[pipeline:43:Запусти музыку у мамы] ___________
+{
+  "id": "pipeline:43:Запусти музыку у мамы",
+  "input": "Запусти музыку у мамы",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "мама",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "light_mama",
+          "light_mama_bedroom",
+          "light_mama_kitchen",
+          "thermometer_mama",
+          "thermometer_mama_kitchen",
+          "humidifier_mama",
+          "humidifier_mama_bedroom"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "мама",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "light_mama",
+          "light_mama_bedroom",
+          "light_mama_kitchen",
+          "thermometer_mama",
+          "thermometer_mama_kitchen",
+          "humidifier_mama",
+          "humidifier_mama_bedroom"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "мама",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "light_mama",
+          "light_mama_bedroom",
+          "light_mama_kitchen",
+          "thermometer_mama",
+          "thermometer_mama_kitchen",
+          "humidifier_mama",
+          "humidifier_mama_bedroom"
+        ],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+_____________ test_mistral_semantic[pipeline:45:Запусти мой плеер] _____________
+{
+  "id": "pipeline:45:Запусти мой плеер",
+  "input": "Запусти мой плеер",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "owner": {
+            "expected": "я",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "player",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "owner": {
+            "expected": "я",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "player",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "owner": {
+            "expected": "я",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "player",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
+__________ test_mistral_semantic[pipeline:46:Включи музыку у Антона] ___________
+{
+  "id": "pipeline:46:Включи музыку у Антона",
+  "input": "Включи музыку у Антона",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "Антон",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "light_anton",
+          "light_anton_bedroom",
+          "floor_lamp_anton",
+          "floor_lamp_anton_living"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "Антон",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "light_anton",
+          "light_anton_bedroom",
+          "floor_lamp_anton",
+          "floor_lamp_anton_living"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "Антон",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "light_anton",
+          "light_anton_bedroom",
+          "floor_lamp_anton",
+          "floor_lamp_anton_living"
+        ],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+___________ test_mistral_semantic[pipeline:47:Запусти Sonne у мамы] ____________
+{
+  "id": "pipeline:47:Запусти Sonne у мамы",
+  "input": "Запусти Sonne у мамы",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "Sonne",
+          "owner": "мама",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "light_mama",
+          "light_mama_bedroom",
+          "light_mama_kitchen",
+          "thermometer_mama",
+          "thermometer_mama_kitchen",
+          "humidifier_mama",
+          "humidifier_mama_bedroom"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "Sonne",
+          "owner": "мама",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "light_mama",
+          "light_mama_bedroom",
+          "light_mama_kitchen",
+          "thermometer_mama",
+          "thermometer_mama_kitchen",
+          "humidifier_mama",
+          "humidifier_mama_bedroom"
+        ],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "Sonne",
+          "owner": "мама",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "light_mama",
+          "light_mama_bedroom",
+          "light_mama_kitchen",
+          "thermometer_mama",
+          "thermometer_mama_kitchen",
+          "humidifier_mama",
+          "humidifier_mama_bedroom"
+        ],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+________ test_mistral_semantic[pipeline:48:Включи Linkin Park на кухне] ________
+{
+  "id": "pipeline:48:Включи Linkin Park на кухне",
+  "input": "Включи Linkin Park на кухне",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "soundbar_kitchen",
+            "actual": "tv_kitchen"
+          }
+        },
+        "command": {
+          "device_id": "tv_kitchen",
+          "action": "run_content",
+          "value": "Linkin Park",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "soundbar_kitchen",
+            "actual": "tv_kitchen"
+          }
+        },
+        "command": {
+          "device_id": "tv_kitchen",
+          "action": "run_content",
+          "value": "Linkin Park",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "soundbar_kitchen",
+            "actual": "tv_kitchen"
+          }
+        },
+        "command": {
+          "device_id": "tv_kitchen",
+          "action": "run_content",
+          "value": "Linkin Park",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
+____ test_mistral_semantic[pipeline:49:Поставь плейлист для уборки у Маши] _____
+{
+  "id": "pipeline:49:Поставь плейлист для уборки у Маши",
+  "input": "Поставь плейлист для уборки у Маши",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "плейлист для уборки",
+          "owner": "Маша",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "плейлист для уборки",
+          "owner": "Маша",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "unresolved",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "плейлист для уборки",
+          "owner": "Маша",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [],
+        "status": "unresolved"
+      }
+    }
+  ]
+}
+___________ test_mistral_semantic[pipeline:50:Запусти альбом Mutter] ___________
+{
+  "id": "pipeline:50:Запусти альбом Mutter",
+  "input": "Запусти альбом Mutter",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "soundbar",
+            "actual": "tv"
+          },
+          "value": {
+            "expected": "альбом Mutter",
+            "actual": "Mutter"
+          }
+        },
+        "command": {
+          "device_id": "tv",
+          "action": "run_content",
+          "value": "Mutter",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "soundbar",
+            "actual": "tv"
+          },
+          "value": {
+            "expected": "альбом Mutter",
+            "actual": "Mutter"
+          }
+        },
+        "command": {
+          "device_id": "tv",
+          "action": "run_content",
+          "value": "Mutter",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "soundbar",
+            "actual": "tv"
+          },
+          "value": {
+            "expected": "альбом Mutter",
+            "actual": "Mutter"
+          }
+        },
+        "command": {
+          "device_id": "tv",
+          "action": "run_content",
+          "value": "Mutter",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[pipeline:54:Поставь у меня на кухне яркость 25 процентов] _
+{
+  "id": "pipeline:54:Поставь у меня на кухне яркость 25 процентов",
+  "input": "Поставь у меня на кухне яркость 25 процентов",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "light_me_kitchen",
+            "actual": "light_common_kitchen"
+          },
+          "owner": {
+            "expected": "я",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "light_common_kitchen",
+          "action": "set_state",
+          "value": "25 процентов",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "light_me_kitchen",
+            "actual": "light_common_kitchen"
+          },
+          "owner": {
+            "expected": "я",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "light_common_kitchen",
+          "action": "set_state",
+          "value": "25 процентов",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "light_me_kitchen",
+            "actual": "light_common_kitchen"
+          },
+          "owner": {
+            "expected": "я",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "light_common_kitchen",
+          "action": "set_state",
+          "value": "25 процентов",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        }
+      }
+    }
+  ]
+}
+_________ test_mistral_semantic[pipeline:55:Хочу в гостиной оранжевый] _________
+{
+  "id": "pipeline:55:Хочу в гостиной оранжевый",
+  "input": "Хочу в гостиной оранжевый",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "set_state",
+          "value": "оранжевый",
+          "owner": "",
+          "place": "гостиная",
+          "kind": "device"
+        },
+        "candidates": [
+          "chandelier_living",
+          "light_common_living"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "set_state",
+          "value": "оранжевый",
+          "owner": "",
+          "place": "гостиная",
+          "kind": "device"
+        },
+        "candidates": [
+          "chandelier_living",
+          "light_common_living"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "set_state",
+          "value": "оранжевый",
+          "owner": "",
+          "place": "гостиная",
+          "kind": "device"
+        },
+        "candidates": [
+          "chandelier_living",
+          "light_common_living"
+        ],
+        "status": "ambiguous"
+      }
+    }
+  ]
+}
+_____________ test_mistral_semantic[pipeline:59:Поставь на паузу] ______________
+{
+  "id": "pipeline:59:Поставь на паузу",
+  "input": "Поставь на паузу",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "stop",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "headphones",
+          "player",
+          "projector",
+          "radio",
+          "soundbar",
+          "speaker_first",
+          "speaker_second",
+          "tv"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "stop",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "headphones",
+          "player",
+          "projector",
+          "radio",
+          "soundbar",
+          "speaker_first",
+          "speaker_second",
+          "tv"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "stop",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "headphones",
+          "player",
+          "projector",
+          "radio",
+          "soundbar",
+          "speaker_first",
+          "speaker_second",
+          "tv"
+        ],
+        "status": "ambiguous"
+      }
+    }
+  ]
+}
+______________ test_mistral_semantic[pipeline:60:Включи новости] _______________
+{
+  "id": "pipeline:60:Включи новости",
+  "input": "Включи новости",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "headphones",
+          "player",
+          "projector",
+          "radio",
+          "soundbar",
+          "speaker_first",
+          "speaker_second",
+          "tv"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "headphones",
+          "player",
+          "projector",
+          "radio",
+          "soundbar",
+          "speaker_first",
+          "speaker_second",
+          "tv"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "headphones",
+          "player",
+          "projector",
+          "radio",
+          "soundbar",
+          "speaker_first",
+          "speaker_second",
+          "tv"
+        ],
+        "status": "ambiguous"
+      }
+    }
+  ]
+}
+_____________ test_mistral_semantic[pipeline:61:Поставь мультики] ______________
+{
+  "id": "pipeline:61:Поставь мультики",
+  "input": "Поставь мультики",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "headphones",
+          "player",
+          "projector",
+          "radio",
+          "soundbar",
+          "speaker_first",
+          "speaker_second",
+          "tv"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "headphones",
+          "player",
+          "projector",
+          "radio",
+          "soundbar",
+          "speaker_first",
+          "speaker_second",
+          "tv"
+        ],
+        "status": "ambiguous"
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "candidates": [
+          "headphones",
+          "player",
+          "projector",
+          "radio",
+          "soundbar",
+          "speaker_first",
+          "speaker_second",
+          "tv"
+        ],
+        "status": "ambiguous"
+      }
+    }
+  ]
+}
+=========================== short test summary info ============================
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:canonical:мама|термометр||thermometer_mama]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:canonical:мама|термометр|кухня|thermometer_mama_kitchen]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:canonical:общий|музыка||soundbar]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:canonical:общий|музыка|гостиная|soundbar_living]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:canonical:общий|музыка|кухня|soundbar_kitchen]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:canonical:общий|плеер||player]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:canonical:общий|плеер|кухня|player_kitchen]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:canonical:общий|плеер|спальня|player_bedroom]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:canonical:общий|радио||radio]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:canonical:общий|радио|кухня|radio_kitchen]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:canonical:общий|саундбар||soundbar]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:canonical:общий|саундбар|гостиная|soundbar_living]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:canonical:общий|саундбар|кухня|soundbar_kitchen]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:canonical:папа|гигрометр||hygrometer_papa]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:canonical:папа|гигрометр|спальня|hygrometer_papa_bedroom]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:canonical:я|монитор|кабинет|monitor_me_cabinet]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:place-syn:Андрей|диодная лента|офис|led_strip_andrey_cabinet]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:place-syn:Андрей|лента|офис|led_strip_andrey_cabinet]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:place-syn:Андрей|световая лента|офис|led_strip_andrey_cabinet]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:place-syn:Андрей|светодиодная лента|офис|led_strip_andrey_cabinet]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:place-syn:общий|микро|офис|microphone_cabinet]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:place-syn:общий|микрофон|офис|microphone_cabinet]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:place-syn:папа|лампа|офис|light_papa_cabinet]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:place-syn:папа|освещение|офис|light_papa_cabinet]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:place-syn:папа|свет|офис|light_papa_cabinet]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:place-syn:я|компьютерный монитор|офис|monitor_me_cabinet]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:place-syn:я|лампа|офис|light_me_cabinet]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:place-syn:я|монитор|офис|monitor_me_cabinet]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:place-syn:я|освещение|офис|light_me_cabinet]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:place-syn:я|свет|офис|light_me_cabinet]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:synonym:Андрей|лента||led_strip_andrey]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:synonym:Андрей|лента|кабинет|led_strip_andrey_cabinet]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:synonym:мама|градусник||thermometer_mama]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:synonym:мама|градусник|кухня|thermometer_mama_kitchen]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:synonym:мама|датчик температуры||thermometer_mama]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:synonym:мама|датчик температуры|кухня|thermometer_mama_kitchen]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:synonym:мама|освещение||light_mama]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:synonym:мама|освещение|кухня|light_mama_kitchen]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:synonym:общий|акустическая система||soundbar]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:synonym:общий|акустическая система|гостиная|soundbar_living]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:synonym:общий|акустическая система|кухня|soundbar_kitchen]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:synonym:общий|аудиосистема||soundbar]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:synonym:общий|аудиосистема|гостиная|soundbar_living]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:synonym:общий|аудиосистема|кухня|soundbar_kitchen]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:synonym:общий|звуковая панель||soundbar]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:synonym:общий|звуковая панель|гостиная|soundbar_living]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:synonym:общий|звуковая панель|кухня|soundbar_kitchen]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:synonym:общий|микро|кабинет|microphone_cabinet]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:synonym:общий|музыкальный плеер|кухня|player_kitchen]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:synonym:общий|музыкальный плеер|спальня|player_bedroom]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:synonym:общий|потолочная люстра||chandelier_common]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:synonym:общий|потолочная люстра|гостиная|chandelier_living]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:synonym:общий|приемник||radio]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:synonym:общий|приемник|кухня|radio_kitchen]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:synonym:общий|проигрыватель||player]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:synonym:общий|проигрыватель|кухня|player_kitchen]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:synonym:общий|проигрыватель|спальня|player_bedroom]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:synonym:общий|радиоприемник||radio]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:synonym:общий|радиоприемник|кухня|radio_kitchen]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:synonym:папа|датчик влажности||hygrometer_papa]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:synonym:папа|датчик влажности|спальня|hygrometer_papa_bedroom]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:synonym:я|компьютерный монитор|кабинет|monitor_me_cabinet]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:synonym:я|освещение|кабинет|light_me_cabinet]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:synonym:я|освещение|кухня|light_me_kitchen]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[embed:synonym:я|освещение|спальня|light_me_bedroom]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:1:Перемотай сериал на 10 минут вперед]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:2:Запусти мамин телевизор]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:4:Включи у Маши Sonne]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:5:Хочу фиолетовый свет]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:6:Включи Ведьмака]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:7:Включи мамин телевизор]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:8:Увеличь яркость на 20 процентов]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:10:Сделай потемнее]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:11:Сделай свет немного ярче]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:12:Убавь яркость на 30 процентов]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:13:Поставь яркость 50 процентов]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:15:Сделай мамин свет синим]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:19:Выруби Антонов телик]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:21:Запусти пятую серию второго сезона Доктора Кто]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:22:Запусти седьмую серию второго сезона Бен 10]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:23:Поставь Ведьмака у мамы]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:24:Поставь сериал на паузу]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:25:Перемотай на пять минут назад]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:26:Включи музыку на кухне]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:27:Вруби Rammstein]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:28:Поставь альбом Meteora у Маши]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:29:Сделай музыку погромче]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:32:Останови музыку у Антона]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:33:Запусти папин телевизор]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:34:Включи телик Артема]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:36:Включи мой телевизор]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:38:Запусти маме первую серию Ведьмака]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:39:Включи Интерстеллар у Антона]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:41:Включи вторую серию первого сезона Аркейна]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:42:Поставь Шрека у Маши]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:43:Запусти музыку у мамы]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:45:Запусти мой плеер]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:46:Включи музыку у Антона]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:47:Запусти Sonne у мамы]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:48:Включи Linkin Park на кухне]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:49:Поставь плейлист для уборки у Маши]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:50:Запусти альбом Mutter]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:54:Поставь у меня на кухне яркость 25 процентов]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:55:Хочу в гостиной оранжевый]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:59:Поставь на паузу]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:60:Включи новости]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:61:Поставь мультики]
+================= 107 failed, 162 passed in 1238.73s (0:20:38) =================
+
+========================================================
+Pipeline latency: ministral-3:3b semantic
+========================================================
+cold start : 5.254 s
+
+requests   : 807
+mean       : 1.527 s
+min        : 1.161 s
+p50        : 1.480 s
+p90        : 1.762 s
+p95        : 1.818 s
+p99        : 1.885 s
+max        : 1.929 s
+========================================================

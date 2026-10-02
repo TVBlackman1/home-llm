@@ -447,6 +447,10 @@
       "owner": "",
       "place": "",
       "value": ""
+    },
+    "resolution": {
+      "status": "clarify",
+      "reason": "no_active_device"
     }
   },
   {
@@ -1041,6 +1045,10 @@
       "owner": "",
       "place": "",
       "value": ""
+    },
+    "resolution": {
+      "status": "clarify",
+      "reason": "no_active_device"
     }
   },
   {
@@ -1059,6 +1067,10 @@
       "owner": "",
       "place": "",
       "value": ""
+    },
+    "resolution": {
+      "status": "clarify",
+      "reason": "no_active_device"
     }
   },
   {
@@ -1077,6 +1089,10 @@
       "owner": "",
       "place": "",
       "value": ""
+    },
+    "resolution": {
+      "status": "clarify",
+      "reason": "no_active_device"
     }
   },
   {

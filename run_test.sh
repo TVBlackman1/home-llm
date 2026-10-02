@@ -16,5 +16,8 @@
 # time uv run pytest tests/test_mistral.py -m pipeline > ministral3.test
 # ollama stop ministral-3:3b
 
-time uv run pytest tests/test_qwen359.py -m pipeline > qwen359.test
-ollama stop qwen3.5:9b
+time uv run pytest tests/test_mistral_semantic.py -m pipeline > ministral3.semantic.test2
+ollama stop ministral-3:3b
+
+# time uv run pytest tests/test_qwen359.py -m pipeline > qwen359.test
+# ollama stop qwen3.5:9b
