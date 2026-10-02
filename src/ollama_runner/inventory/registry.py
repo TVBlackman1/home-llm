@@ -31,9 +31,9 @@ TV = POWER | TRANSPORT | frozenset({
     "media.previous",
     "media.seek_forward",
     "media.seek_backward",
-    "content.play",
+    "video.play",
 })
-AUDIO = VOLUME | TRANSPORT
+AUDIO = VOLUME | TRANSPORT | frozenset({"audio.play"})
 SPEAKER = POWER | AUDIO
 
 _CAPABILITIES = {
@@ -43,7 +43,7 @@ _CAPABILITIES = {
     "speaker": SPEAKER,
     "headphones": SPEAKER,
     "player": AUDIO,
-    "radio": AUDIO,
+    "radio": AUDIO | frozenset({"radio.play"}),
     "projector": POWER | TRANSPORT,
     "monitor": POWER,
     "microphone": POWER,
@@ -139,7 +139,15 @@ _TYPE_STEMS = (
     ("телик", "tv"),
     ("телек", "tv"),
     ("плеер", "player"),
+    ("радиоприемник", "radio"),
+    ("приемник", "radio"),
+    ("микрофон", "microphone"),
+    ("градусник", "sensor"),
+    ("термометр", "sensor"),
+    ("гигрометр", "sensor"),
     ("радио", "radio"),
+    ("лент", "light"),
+    ("микро", "microphone"),
 )
 
 _EXACT_TOKENS = {
@@ -161,7 +169,6 @@ _VOLUME_INTENTS = frozenset({
     "volume.set",
 })
 _RENDER_INTENTS = frozenset({
-    "content.play",
     "photos.show",
     "media.play",
     "media.pause",
@@ -170,6 +177,59 @@ _RENDER_INTENTS = frozenset({
     "media.next",
     "media.previous",
 })
+
+# Household names. Speakers in this home are «колонка», so «акустическая система»
+# is the soundbar, the device already called «аудиосистема».
+_TYPE_PHRASES = (
+    ("компьютерный монитор", "monitor"),
+    ("компьютерного монитора", "monitor"),
+    ("светодиодную ленту", "light"),
+    ("светодиодная лента", "light"),
+    ("световую ленту", "light"),
+    ("световая лента", "light"),
+    ("диодную ленту", "light"),
+    ("диодная лента", "light"),
+    ("потолочную люстру", "light"),
+    ("потолочная люстра", "light"),
+    ("акустическую систему", "soundbar"),
+    ("акустическая система", "soundbar"),
+    ("акустической системы", "soundbar"),
+    ("звуковую панель", "soundbar"),
+    ("звуковая панель", "soundbar"),
+    ("звуковой панели", "soundbar"),
+    ("датчик температуры", "sensor"),
+    ("датчик влажности", "sensor"),
+)
+
+_AREAS = {
+    "кухня": ("кухня", "кухне", "кухню", "кухни"),
+    "спальня": ("спальня", "спальне", "спальню", "спальни"),
+    "гостиная": ("гостиная", "гостиной", "гостиную"),
+    "коридор": ("коридор", "коридоре", "коридора"),
+    "ванная": ("ванная", "ванной", "ванную"),
+    "кабинет": ("кабинет", "кабинете", "кабинета", "офис", "офисе", "офиса"),
+    "балкон": ("балкон", "балконе", "балкона"),
+    "детская": ("детская", "детской", "детскую"),
+}
+
+_OWNER_ALIASES = {
+    "me": ("я", "мой", "моя", "мои", "моё", "мое", "моего", "мою", "у меня"),
+    "mama": ("мама", "мамы", "маме", "маму", "мамин", "мамина", "мамино", "маминого", "мамину", "у мамы"),
+    "papa": ("папа", "папы", "папе", "папу", "папин", "папина", "папино", "у папы"),
+    "masha": ("маша", "маши", "маше", "машу", "машин", "машина", "машину", "у маши"),
+    "anton": ("антон", "антона", "антону", "антонов", "антона", "у антона"),
+    "andrey": ("андрей", "андрея", "андрею", "андреев", "у андрея"),
+    "artem": ("артем", "артема", "артему", "артемов", "у артема"),
+    "marina": ("марина", "марины", "марине", "марину", "маринин", "у марины"),
+    "common": ("общий", "общая", "общее", "общие"),
+}
+
+_ENDINGS = (
+    "ого", "ему", "ому", "ами", "ями", "ах", "ях", "ам", "ям",
+    "ую", "ая", "яя", "ое", "ее", "ые", "ие", "ой", "ий", "ый", "ою", "ею",
+    "ом", "ем", "ов", "ев", "ию", "ью", "ия", "ья",
+    "а", "я", "у", "ю", "ы", "и", "е", "о",
+)
 
 
 @dataclass(frozen=True)
@@ -208,13 +268,96 @@ def capabilities_for(device_type: str) -> frozenset[str]:
         raise ValueError(f"unknown device type: {device_type}") from exc
 
 
+def fold(text: str) -> str:
+    return text.casefold().replace("ё", "е")
+
+
+def stem_token(token: str) -> str:
+    for ending in _ENDINGS:
+        if token.endswith(ending) and len(token) - len(ending) >= 3:
+            return token[: -len(ending)]
+    return token
+
+
+def token_stems(text: str) -> set[str]:
+    tokens = re.findall(r"[0-9a-zа-яе]+", fold(text))
+    return {stem_token(token) for token in tokens}
+
+
+def _bounded(alias: str) -> re.Pattern[str]:
+    return re.compile(
+        r"(?<![0-9a-zа-яе])" + re.escape(fold(alias)) + r"(?![0-9a-zа-яе])"
+    )
+
+
 def canonicalize_device_type(value: str | None) -> str | None:
     if value is None:
         return None
-    key = value.strip().casefold().replace("ё", "е")
+    key = fold(value.strip())
     if not key:
         return None
+    phrase = device_type_from_text(key)
+    if phrase is not None and phrase[1] == key:
+        return phrase[0]
     return _TYPE_ALIASES.get(key)
+
+
+def device_type_from_text(text: str) -> tuple[str, str] | None:
+    folded = fold(text)
+    best: tuple[int, str, str] | None = None
+    for phrase, type_name in _TYPE_PHRASES:
+        match = _bounded(phrase).search(folded)
+        if match is None:
+            continue
+        raw = text[match.start():match.end()]
+        if best is None or len(phrase) > best[0]:
+            best = (len(phrase), type_name, raw)
+    if best is not None:
+        return best[1], best[2]
+
+    tokens = re.findall(r"[0-9a-zа-яе]+", folded)
+    raw_tokens = re.findall(r"[0-9A-Za-zА-Яа-яЁё]+", text)
+    stem_hit: tuple[int, str, str] | None = None
+    for index, token in enumerate(tokens):
+        exact = _EXACT_TOKENS.get(token)
+        if exact and (stem_hit is None or len(token) > stem_hit[0]):
+            raw = raw_tokens[index] if index < len(raw_tokens) else token
+            stem_hit = (len(token), exact, raw)
+        for stem, type_name in _TYPE_STEMS:
+            if token.startswith(stem) and (stem_hit is None or len(stem) > stem_hit[0]):
+                raw = raw_tokens[index] if index < len(raw_tokens) else token
+                stem_hit = (len(stem), type_name, raw)
+    if stem_hit is None:
+        return None
+    return stem_hit[1], stem_hit[2]
+
+
+def area_from_text(text: str) -> tuple[str, str] | None:
+    folded = fold(text)
+    best: tuple[int, str, str] | None = None
+    for canonical, aliases in _AREAS.items():
+        for alias in aliases:
+            match = _bounded(alias).search(folded)
+            if match is None:
+                continue
+            if best is None or len(alias) > best[0]:
+                best = (len(alias), canonical, text[match.start():match.end()])
+    if best is None:
+        return None
+    return best[1], best[2]
+
+
+def canonicalize_area(value: str | None) -> str | None:
+    if value is None or not value.strip():
+        return None
+    found = area_from_text(value)
+    if found is not None:
+        return found[0]
+    folded = fold(value.strip())
+    for canonical in _AREAS:
+        if fold(canonical) == folded:
+            return canonical
+    return None
 
 
 def type_from_mention(mention: str | None) -> str | None:
@@ -260,8 +403,10 @@ class DeviceRegistry:
         self._owners = tuple(OWNERS if owners is None else owners)
         self._owner_by_key = {}
         for owner in self._owners:
-            self._owner_by_key[owner.id.casefold()] = owner
-            self._owner_by_key[owner.name.casefold()] = owner
+            self._owner_by_key[fold(owner.id)] = owner
+            self._owner_by_key[fold(owner.name)] = owner
+            for alias in _OWNER_ALIASES.get(owner.id, ()):
+                self._owner_by_key[fold(alias)] = owner
 
     @classmethod
     def from_static(cls) -> DeviceRegistry:
@@ -296,14 +441,60 @@ class DeviceRegistry:
     def owner_id_for(self, name: str | None) -> str | None:
         if not name or not name.strip():
             return None
-        owner = self._owner_by_key.get(name.strip().casefold())
+        owner = self._owner_by_key.get(fold(name.strip()))
         return owner.id if owner else None
 
     def owner_name(self, owner_id: str | None) -> str:
         if not owner_id:
             return ""
-        owner = self._owner_by_key.get(owner_id.casefold())
+        owner = self._owner_by_key.get(fold(owner_id))
         return owner.name if owner else owner_id
+
+    def canonicalize_owner(self, name: str | None) -> str | None:
+        owner_id = self.owner_id_for(name)
+        if owner_id is None:
+            return None
+        return self.owner_name(owner_id) or None
+
+    def owner_from_text(self, text: str) -> tuple[str, str] | None:
+        folded = fold(text)
+        best: tuple[int, str, str] | None = None
+        for owner in self._owners:
+            aliases = (owner.name, *_OWNER_ALIASES.get(owner.id, ()))
+            for alias in aliases:
+                match = _bounded(alias).search(folded)
+                if match is None:
+                    continue
+                if best is None or len(alias) > best[0]:
+                    best = (len(alias), owner.id, text[match.start():match.end()])
+        if best is None:
+            return None
+        return self.owner_name(best[1]), best[2]
+
+    def unique_alias_type(self, text: str) -> str | None:
+        stems = token_stems(text)
+        if not stems:
+            return None
+        types: set[str] = set()
+        for device in self._devices:
+            for alias in device.aliases:
+                alias_stems = token_stems(alias)
+                if alias_stems and alias_stems <= stems:
+                    types.add(device.type)
+        if len(types) == 1:
+            return next(iter(types))
+        return None
+
+    def alias_mentioned(self, text: str) -> bool:
+        stems = token_stems(text)
+        if not stems:
+            return False
+        for device in self._devices:
+            for alias in device.aliases:
+                alias_stems = token_stems(alias)
+                if alias_stems and alias_stems <= stems:
+                    return True
+        return False
 
     def with_device(self, device: RegistryDevice) -> DeviceRegistry:
         devices = [item for item in self._devices if item.id != device.id]

@@ -75,7 +75,7 @@ def test_speaker_without_ordinal_is_ambiguous(resolver: CapabilityResolver) -> N
 def test_shrek_at_masha_keeps_raw_content(resolver: CapabilityResolver) -> None:
     resolved = resolver.resolve(
         _command(
-            "content.play",
+            "video.play",
             owner="Маша",
             explicit=True,
             arguments={"content": "Шрека"},
@@ -148,7 +148,7 @@ def test_pause_with_two_active_devices_asks_later(resolver: CapabilityResolver) 
         },
     )
 
-    assert resolved.status == "clarify"
+    assert resolved.status == "ambiguous"
     assert resolved.reason == "multiple_active_devices"
     assert resolved.execution_target_id is None
     assert set(resolved.candidates) == {"tv_living", "tv_bedroom"}
@@ -246,6 +246,7 @@ def test_tv_louder_executes_on_soundbar(resolver: CapabilityResolver) -> None:
             explicit=True,
         ),
         text="Сделай телевизор погромче",
+        state={"tv": DeviceRuntime(media="playing")},
     )
 
     assert resolved.status == "resolved"
@@ -367,4 +368,99 @@ def test_registry_covers_every_static_device() -> None:
     assert "media.next" in registry.get("tv_living").capabilities
     assert "volume.increase" not in registry.get("tv").capabilities
     assert "volume.increase" in registry.get("soundbar").capabilities
-    assert "content.play" not in registry.get("soundbar").capabilities
+    assert "video.play" in registry.get("tv").capabilities
+    assert "audio.play" in registry.get("soundbar").capabilities
+    assert "video.play" not in registry.get("soundbar").capabilities
+    assert "audio.play" not in registry.get("tv").capabilities
+
+
+@pytest.mark.unit
+def test_volume_without_an_active_device_does_not_guess(resolver: CapabilityResolver) -> None:
+    resolved = resolver.resolve(
+        _command("volume.increase", device_type="tv", mention="телевизор", explicit=True),
+        text="Сделай телевизор погромче",
+    )
+
+    assert resolved.status == "clarify"
+    assert resolved.reason == "no_active_device"
+    assert resolved.execution_target_id is None
+
+
+@pytest.mark.unit
+def test_office_is_the_cabinet(resolver: CapabilityResolver) -> None:
+    resolved = resolver.resolve(
+        _command(
+            "device.turn_on",
+            device_type="light",
+            owner="я",
+            area="офис",
+            explicit=True,
+        ),
+        text="Включи мой свет в офисе",
+    )
+
+    assert resolved.status == "resolved"
+    assert resolved.execution_target_id == "light_me_cabinet"
+    assert resolved.area == "кабинет"
+    assert resolved.trace is not None
+    assert 'raw_area="офис"' in "\n".join(resolved.trace.normalization_lines) or resolved.area == "кабинет"
+
+
+@pytest.mark.unit
+def test_thermometer_is_unsupported(resolver: CapabilityResolver) -> None:
+    resolved = resolver.resolve(
+        _command("device.turn_on", device_type="sensor", owner="мама", mention="термометр", explicit=True),
+        text="Включи мамин термометр",
+    )
+
+    assert resolved.status == "unsupported"
+    assert resolved.reason == "capability"
+    assert resolved.execution_target_id is None
+    assert "thermometer_mama" in resolved.candidates
+
+
+@pytest.mark.unit
+def test_missing_owned_tv_is_not_found(resolver: CapabilityResolver) -> None:
+    resolved = resolver.resolve(
+        _command("device.turn_on", device_type="tv", owner="мама", explicit=True),
+        text="Включи мамин телевизор",
+    )
+
+    assert resolved.status == "not_found"
+    assert resolved.execution_target_id is None
+    assert resolved.candidates == ()
+
+
+@pytest.mark.unit
+def test_soundbar_phrase_is_not_a_speaker(resolver: CapabilityResolver) -> None:
+    resolved = resolver.resolve(
+        _command("device.turn_on", device_type="soundbar", mention="звуковая панель", explicit=True),
+        text="Включи звуковая панель",
+    )
+
+    assert resolved.status == "resolved"
+    assert resolved.execution_target_id == "soundbar"
+    assert resolved.intent == "media.play"
+
+
+@pytest.mark.unit
+def test_audio_does_not_use_a_television(resolver: CapabilityResolver) -> None:
+    resolved = resolver.resolve(
+        _command("audio.play", area="кухня", explicit=True, arguments={"content": "Linkin Park"}),
+        text="Включи Linkin Park на кухне",
+    )
+
+    assert resolved.status == "ambiguous"
+    assert resolved.execution_target_id is None
+    assert "tv_kitchen" not in resolved.candidates
+
+
+@pytest.mark.unit
+def test_seek_without_a_session_does_not_pick_a_tv(resolver: CapabilityResolver) -> None:
+    resolved = resolver.resolve(
+        _command("media.seek_forward", arguments={"value": "на 10 минут"}),
+        text="Перемотай сериал на 10 минут вперед",
+    )
+
+    assert resolved.status == "clarify"
+    assert resolved.reason == "no_active_device"

@@ -4,6 +4,26 @@ from dataclasses import dataclass, field, replace
 from typing import Mapping
 
 
+RESOLVED = "resolved"
+AMBIGUOUS = "ambiguous"
+NOT_FOUND = "not_found"
+UNSUPPORTED = "unsupported"
+CLARIFY = "clarify"
+
+
+@dataclass(frozen=True)
+class ExplicitSlots:
+    """Slots read from the utterance itself, before the model is trusted."""
+
+    owner: str | None = None
+    raw_owner: str | None = None
+    area: str | None = None
+    raw_area: str | None = None
+    ordinal: int | None = None
+    device_type: str | None = None
+    raw_device_type: str | None = None
+
+
 @dataclass(frozen=True)
 class Target:
     device_type: str | None = None
@@ -12,6 +32,9 @@ class Target:
     area: str | None = None
     ordinal: int | None = None
     explicit: bool = False
+    raw_owner: str | None = None
+    raw_area: str | None = None
+    raw_device_type: str | None = None
 
     def unconstrained(self) -> bool:
         return not any((
@@ -80,6 +103,10 @@ class ResolutionTrace:
     reason: str = ""
     skill: str | None = None
     ha_action: str | None = None
+    nlu_intent: str = ""
+    explicit_lines: tuple[str, ...] = ()
+    normalization_lines: tuple[str, ...] = ()
+    policy: str = ""
 
     def with_execution(self, *, skill: str, ha_action: str) -> ResolutionTrace:
         return replace(self, skill=skill, ha_action=ha_action)
@@ -96,6 +123,7 @@ class ResolvedCommand:
     owner: str = ""
     area: str = ""
     reason: str = ""
+    missing: tuple[str, ...] = ()
     trace: ResolutionTrace | None = None
 
 
@@ -118,9 +146,15 @@ def format_trace(trace: ResolutionTrace) -> str:
     lines = [
         "INPUT:",
         trace.text or "—",
+        "EXPLICIT SLOTS:",
+        *(trace.explicit_lines or ("—",)),
         "NLU:",
-        f"intent={trace.intent}",
+        f"intent={trace.nlu_intent or trace.intent}",
         f"target={format_target(trace.target)}",
+        "NORMALIZATION:",
+        *(trace.normalization_lines or ("—",)),
+        "POLICY:",
+        trace.policy or "—",
         "CONSTRAINTS:",
         *(trace.constraint_lines or ("—",)),
         "CANDIDATES:",

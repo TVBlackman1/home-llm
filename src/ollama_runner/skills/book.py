@@ -25,6 +25,8 @@ LEGACY_ACTION = {
     "media.previous": "decrease",
     "media.seek_forward": "increase",
     "media.seek_backward": "decrease",
+    "audio.play": "run_content",
+    "video.play": "run_content",
     "content.play": "run_content",
     "photos.show": "run_content",
     "app.launch": "on",
@@ -51,6 +53,8 @@ HA_ACTION = {
     "media.previous": "media_player.media_previous_track",
     "media.seek_forward": "media_player.media_seek",
     "media.seek_backward": "media_player.media_seek",
+    "audio.play": "media_player.play_media",
+    "video.play": "media_player.play_media",
     "content.play": "media_player.play_media",
     "photos.show": "media_player.play_media",
     "app.launch": "media_player.select_source",
@@ -71,6 +75,8 @@ SKILL_NAME = {
     "volume.increase": "VolumeSkill",
     "volume.decrease": "VolumeSkill",
     "volume.set": "VolumeSkill",
+    "audio.play": "MediaSkill",
+    "video.play": "MediaSkill",
     "content.play": "MediaSkill",
     "photos.show": "PhotoSkill",
     "screen.share": "ScreenShareSkill",
@@ -85,10 +91,27 @@ class SkillOutcome:
     command: Command
 
 
+_CONTENT_INTENTS = frozenset({"audio.play", "video.play", "content.play", "photos.show"})
+
+
 def legacy_value(intent: str, arguments: dict) -> str:
-    if intent in {"content.play", "photos.show"}:
+    if intent in _CONTENT_INTENTS:
         return str(arguments.get("content") or "")
     return str(arguments.get("value") or "")
+
+
+def _semantic_view(resolved: ResolvedCommand) -> dict:
+    target = resolved.trace.target if resolved.trace is not None else None
+    return {
+        "intent": resolved.intent,
+        "nlu_intent": resolved.trace.nlu_intent if resolved.trace is not None else "",
+        "device_type": target.device_type if target is not None else None,
+        "owner": target.owner if target is not None else None,
+        "area": target.area if target is not None else None,
+        "ordinal": target.ordinal if target is not None else None,
+        "content": resolved.arguments.get("content", ""),
+        "missing": list(resolved.missing),
+    }
 
 
 def skill_name(intent: str) -> str:
@@ -157,8 +180,10 @@ class Executor:
                 payload={
                     "trace": trace_text,
                     "candidates": list(resolved.candidates),
+                    "missing": list(resolved.missing),
                     "status": resolved.status,
                     "reason": resolved.reason,
+                    "semantic": _semantic_view(resolved),
                 },
             )
 
@@ -169,7 +194,7 @@ class Executor:
             return self._rejected(resolved, trace_text, "execution target lacks capability")
         if resolved.intent not in HA_ACTION:
             return self._rejected(resolved, trace_text, "HA action does not exist")
-        if resolved.intent == "content.play" and not (arguments.get("content") or "").strip():
+        if resolved.intent in _CONTENT_INTENTS and not (arguments.get("content") or "").strip():
             return self._rejected(resolved, trace_text, "content is missing")
 
         outcome = self._skills.apply(resolved)
@@ -190,6 +215,7 @@ class Executor:
                 "execution_target": resolved.execution_target_id,
                 "status": resolved.status,
                 "reason": resolved.reason,
+                "semantic": _semantic_view(resolved),
             },
         )
 

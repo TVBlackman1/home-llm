@@ -37,6 +37,7 @@ def semantic_pipeline(*, model: str | None = None) -> SemanticPipeline:
         _get_semantic_parser(chosen),
         CapabilityResolver(registry),
         Executor(registry),
+        registry,
     )
 
 

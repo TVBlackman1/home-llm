@@ -14,7 +14,7 @@ _CONTEXT_INTENTS = frozenset({
     "media.pause",
     "media.resume",
 })
-_CONTENT_INTENTS = frozenset({"content.play", "photos.show"})
+_CONTENT_INTENTS = frozenset({"audio.play", "video.play", "content.play", "photos.show"})
 
 
 def _blank(value: object) -> str | None:

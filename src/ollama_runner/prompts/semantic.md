@@ -32,8 +32,12 @@
 - `media.stop` — остановить воспроизведение.
 - `media.next` / `media.previous` — следующая или предыдущая серия/трек. Не `content.play`.
 - `media.seek_forward` / `media.seek_backward` — перемотка.
-- `content.play` — запустить конкретный фильм, сериал, песню, альбом. В `content` положи сырой фрагмент.
+- `video.play` — конкретное видео: фильм, сериал, серия с номером, мультфильм, новости. В `content` сырой фрагмент, без нормализации («Шрека», «пятую серию Доктора Кто»).
+- `audio.play` — конкретная музыка: песня, альбом, плейлист, исполнитель. В `content` сырой фрагмент («Linkin Park», «альбом Mutter»).
 - `media.play` — начать воспроизведение без названия контента.
+- «Следующая серия» и «предыдущая серия» без названия и номера — это `media.next` / `media.previous`, не `video.play`.
+- «Пятую серию …», «серия 4», название фильма — это `video.play`, не `media.next`.
+- «музыка» без названия трека — устройство, `device.turn_on`, не `audio.play`.
 
 Если устройство не названо, `device_type`, `mention`, `owner`, `area` остаются пустыми.
 «Следующая серия» и «поставь на паузу» не называют устройство.
@@ -54,7 +58,19 @@
 Поставь Шрека у Маши
 
 Выход:
-{"intent":"content.play","device_type":"","mention":"","owner":"Маша","area":"","ordinal":0,"explicit":true,"content":"Шрека","value":""}
+{"intent":"video.play","device_type":"","mention":"","owner":"Маша","area":"","ordinal":0,"explicit":true,"content":"Шрека","value":""}
+
+Вход:
+Поставь Linkin Park
+
+Выход:
+{"intent":"audio.play","device_type":"","mention":"","owner":"","area":"","ordinal":0,"explicit":false,"content":"Linkin Park","value":""}
+
+Вход:
+Запусти пятую серию Доктора Кто
+
+Выход:
+{"intent":"video.play","device_type":"","mention":"","owner":"","area":"","ordinal":0,"explicit":false,"content":"пятую серию Доктора Кто","value":""}
 
 Вход:
 Следующая серия

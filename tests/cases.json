@@ -33,6 +33,10 @@
       "owner": "",
       "place": "",
       "value": "на 10 минут"
+    },
+    "resolution": {
+      "status": "clarify",
+      "reason": "no_active_device"
     }
   },
   {
@@ -51,6 +55,9 @@
       "owner": "мама",
       "place": "",
       "value": ""
+    },
+    "resolution": {
+      "status": "not_found"
     }
   },
   {
@@ -87,6 +94,10 @@
       "owner": "Маша",
       "place": "",
       "value": "Sonne"
+    },
+    "resolution": {
+      "status": "ambiguous",
+      "reason": "media_type"
     }
   },
   {
@@ -123,6 +134,10 @@
       "owner": "",
       "place": "",
       "value": "Ведьмак"
+    },
+    "resolution": {
+      "status": "ambiguous",
+      "reason": "media_type"
     }
   },
   {
@@ -141,6 +156,9 @@
       "owner": "мама",
       "place": "",
       "value": ""
+    },
+    "resolution": {
+      "status": "not_found"
     }
   },
   {
@@ -159,6 +177,9 @@
       "owner": "",
       "place": "",
       "value": "на 20 процентов"
+    },
+    "resolution": {
+      "status": "ambiguous"
     }
   },
   {
@@ -195,6 +216,9 @@
       "owner": "",
       "place": "",
       "value": ""
+    },
+    "resolution": {
+      "status": "ambiguous"
     }
   },
   {
@@ -231,6 +255,9 @@
       "owner": "",
       "place": "",
       "value": "на 30 процентов"
+    },
+    "resolution": {
+      "status": "ambiguous"
     }
   },
   {
@@ -249,6 +276,9 @@
       "owner": "",
       "place": "",
       "value": "50 процентов"
+    },
+    "resolution": {
+      "status": "ambiguous"
     }
   },
   {
@@ -357,6 +387,9 @@
       "owner": "Антон",
       "place": "",
       "value": ""
+    },
+    "resolution": {
+      "status": "not_found"
     }
   },
   {
@@ -393,6 +426,13 @@
       "owner": "",
       "place": "",
       "value": "пятая серия второго сезона Доктора Кто"
+    },
+    "semantic_expected": {
+      "device_id": "tv",
+      "action": "run_content",
+      "owner": "",
+      "place": "",
+      "value": "пятую серию второго сезона Доктора Кто"
     }
   },
   {
@@ -411,6 +451,13 @@
       "owner": "",
       "place": "",
       "value": "седьмая серия второго сезона Бен 10"
+    },
+    "semantic_expected": {
+      "device_id": "tv",
+      "action": "run_content",
+      "owner": "",
+      "place": "",
+      "value": "седьмую серию второго сезона Бен 10"
     }
   },
   {
@@ -429,6 +476,9 @@
       "owner": "мама",
       "place": "",
       "value": "Ведьмак"
+    },
+    "resolution": {
+      "status": "not_found"
     }
   },
   {
@@ -469,6 +519,10 @@
       "owner": "",
       "place": "",
       "value": "на пять минут"
+    },
+    "resolution": {
+      "status": "clarify",
+      "reason": "no_active_device"
     }
   },
   {
@@ -505,6 +559,9 @@
       "owner": "",
       "place": "",
       "value": "Rammstein"
+    },
+    "resolution": {
+      "status": "ambiguous"
     }
   },
   {
@@ -523,6 +580,9 @@
       "owner": "Маша",
       "place": "",
       "value": "альбом Meteora"
+    },
+    "resolution": {
+      "status": "not_found"
     }
   },
   {
@@ -541,6 +601,10 @@
       "owner": "",
       "place": "",
       "value": ""
+    },
+    "resolution": {
+      "status": "clarify",
+      "reason": "no_active_device"
     }
   },
   {
@@ -559,6 +623,10 @@
       "owner": "",
       "place": "кухня",
       "value": "на 15 процентов"
+    },
+    "resolution": {
+      "status": "clarify",
+      "reason": "no_active_device"
     }
   },
   {
@@ -577,6 +645,10 @@
       "owner": "",
       "place": "",
       "value": "40 процентов"
+    },
+    "resolution": {
+      "status": "clarify",
+      "reason": "no_active_device"
     }
   },
   {
@@ -595,6 +667,9 @@
       "owner": "Антон",
       "place": "",
       "value": ""
+    },
+    "resolution": {
+      "status": "not_found"
     }
   },
   {
@@ -613,6 +688,9 @@
       "owner": "папа",
       "place": "",
       "value": ""
+    },
+    "resolution": {
+      "status": "not_found"
     }
   },
   {
@@ -631,6 +709,9 @@
       "owner": "Артем",
       "place": "",
       "value": ""
+    },
+    "resolution": {
+      "status": "not_found"
     }
   },
   {
@@ -667,6 +748,9 @@
       "owner": "я",
       "place": "",
       "value": ""
+    },
+    "resolution": {
+      "status": "not_found"
     }
   },
   {
@@ -703,6 +787,9 @@
       "owner": "мама",
       "place": "",
       "value": "первая серия Ведьмака"
+    },
+    "resolution": {
+      "status": "not_found"
     }
   },
   {
@@ -721,6 +808,9 @@
       "owner": "Антон",
       "place": "",
       "value": "Интерстеллар"
+    },
+    "resolution": {
+      "status": "not_found"
     }
   },
   {
@@ -739,6 +829,13 @@
       "owner": "",
       "place": "гостиная",
       "value": "Доктор Кто"
+    },
+    "semantic_expected": {
+      "device_id": "tv_living",
+      "action": "run_content",
+      "owner": "",
+      "place": "гостиная",
+      "value": "Доктора Кто"
     }
   },
   {
@@ -757,6 +854,13 @@
       "owner": "",
       "place": "",
       "value": "вторая серия первого сезона Аркейна"
+    },
+    "semantic_expected": {
+      "device_id": "tv",
+      "action": "run_content",
+      "owner": "",
+      "place": "",
+      "value": "вторую серию первого сезона Аркейна"
     }
   },
   {
@@ -775,6 +879,13 @@
       "owner": "Маша",
       "place": "",
       "value": "Шрек"
+    },
+    "semantic_expected": {
+      "device_id": "tv_masha_bedroom",
+      "action": "run_content",
+      "owner": "Маша",
+      "place": "",
+      "value": "Шрека"
     }
   },
   {
@@ -793,6 +904,9 @@
       "owner": "мама",
       "place": "",
       "value": ""
+    },
+    "resolution": {
+      "status": "not_found"
     }
   },
   {
@@ -829,6 +943,9 @@
       "owner": "я",
       "place": "",
       "value": ""
+    },
+    "resolution": {
+      "status": "not_found"
     }
   },
   {
@@ -847,6 +964,9 @@
       "owner": "Антон",
       "place": "",
       "value": ""
+    },
+    "resolution": {
+      "status": "not_found"
     }
   },
   {
@@ -865,6 +985,9 @@
       "owner": "мама",
       "place": "",
       "value": "Sonne"
+    },
+    "resolution": {
+      "status": "not_found"
     }
   },
   {
@@ -883,6 +1006,9 @@
       "owner": "",
       "place": "кухня",
       "value": "Linkin Park"
+    },
+    "resolution": {
+      "status": "ambiguous"
     }
   },
   {
@@ -901,6 +1027,9 @@
       "owner": "Маша",
       "place": "",
       "value": "плейлист для уборки"
+    },
+    "resolution": {
+      "status": "not_found"
     }
   },
   {
@@ -919,6 +1048,9 @@
       "owner": "",
       "place": "",
       "value": "альбом Mutter"
+    },
+    "resolution": {
+      "status": "ambiguous"
     }
   },
   {
@@ -1009,6 +1141,9 @@
       "owner": "",
       "place": "гостиная",
       "value": "оранжевый"
+    },
+    "resolution": {
+      "status": "ambiguous"
     }
   },
   {

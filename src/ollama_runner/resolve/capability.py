@@ -6,12 +6,20 @@ from typing import Mapping
 from ollama_runner.inventory.registry import (
     DeviceRegistry,
     RegistryDevice,
+    canonicalize_area,
     canonicalize_device_type,
     relation_supports,
+    stem_token,
 )
-from ollama_runner.resolve.active import SESSION_INTENTS, ActiveSession
+from ollama_runner.resolve.active import ActiveSession, policy_for
 from ollama_runner.semantic import (
+    AMBIGUOUS,
+    CLARIFY,
+    NOT_FOUND,
+    RESOLVED,
+    UNSUPPORTED,
     DeviceRuntime,
+    ExplicitSlots,
     RequestContext,
     ResolutionTrace,
     ResolvedCommand,
@@ -20,16 +28,6 @@ from ollama_runner.semantic import (
     Target,
 )
 
-
-_ACTIVE_WHEN_PLAYING = frozenset({
-    "media.pause",
-    "media.next",
-    "media.previous",
-    "media.stop",
-    "volume.increase",
-    "volume.decrease",
-    "volume.set",
-})
 
 # Used only when the device cannot do the asked power action itself.
 _POWER_FALLBACK = {
@@ -40,7 +38,7 @@ _POWER_FALLBACK = {
 
 def _phrase_key(text: str) -> str:
     tokens = re.findall(r"[0-9a-zа-яе]+", text.casefold().replace("ё", "е"))
-    return " ".join(sorted(tokens))
+    return " ".join(sorted(stem_token(token) for token in tokens))
 
 
 class CapabilityResolver:
@@ -51,6 +49,10 @@ class CapabilityResolver:
     ) -> None:
         self._registry = registry
         self._weights = weights or ScoreWeights()
+        self._slots = ExplicitSlots()
+        self._nlu_intent = ""
+        self._normalization: tuple[str, ...] = ()
+        self._policy = ""
 
     def resolve(
         self,
@@ -59,22 +61,45 @@ class CapabilityResolver:
         context: RequestContext | None = None,
         state: Mapping[str, DeviceRuntime] | None = None,
         text: str = "",
+        slots: ExplicitSlots | None = None,
+        nlu_intent: str = "",
+        normalization: tuple[str, ...] = (),
     ) -> ResolvedCommand:
         context = context or RequestContext()
         state = dict(state or {})
         weights = self._weights
         target = self._canonicalize_target(command.target)
         command = SemanticCommand(intent=command.intent, target=target, arguments=command.arguments)
+        self._slots = slots or ExplicitSlots()
+        self._nlu_intent = nlu_intent or command.intent
+        self._normalization = normalization
 
         owner_id = self._registry.owner_id_for(target.owner) if target.owner else None
         owner_unknown = bool(target.owner) and owner_id is None
         constraints = self._constraint_lines(command, owner_unknown)
 
+        if command.intent == "content.play":
+            return self._finish(
+                command,
+                text=text,
+                status=AMBIGUOUS,
+                constraints=constraints,
+                candidates=(),
+                capability_lines=("content.play does not distinguish audio and video",),
+                state_lines=self._state_lines(state),
+                score_lines=(),
+                semantic_id=None,
+                execution_id=None,
+                tied=(),
+                reason="media_type",
+                missing=("media_type",),
+            )
+
         if owner_unknown:
             return self._finish(
                 command,
                 text=text,
-                status="unresolved",
+                status=NOT_FOUND,
                 constraints=constraints,
                 candidates=(),
                 capability_lines=("owner is not in the registry",),
@@ -83,6 +108,7 @@ class CapabilityResolver:
                 semantic_id=None,
                 execution_id=None,
                 tied=(),
+                reason="unknown_owner",
             )
 
         pool = [
@@ -116,6 +142,39 @@ class CapabilityResolver:
             supported.append((device, execution, via, effective))
 
         state_lines = self._state_lines(state)
+        if not pool:
+            return self._finish(
+                command,
+                text=text,
+                status=NOT_FOUND,
+                constraints=constraints,
+                candidates=(),
+                capability_lines=tuple(capability_lines) or ("no device matches explicit constraints",),
+                state_lines=state_lines,
+                score_lines=(),
+                semantic_id=None,
+                execution_id=None,
+                tied=(),
+                reason="no_match",
+            )
+        if not supported:
+            named = bool(command.target.device_type or command.target.mention)
+            return self._finish(
+                command,
+                text=text,
+                status=UNSUPPORTED if named else NOT_FOUND,
+                constraints=constraints,
+                candidates=tuple(device.id for device in pool),
+                capability_lines=tuple(capability_lines) or ("no device supports the capability",),
+                state_lines=state_lines,
+                score_lines=(),
+                semantic_id=None,
+                execution_id=None,
+                tied=(),
+                reason="capability" if named else "no_capable_device",
+                missing=(command.intent,) if named else (),
+            )
+
         session = self._session_decision(
             command,
             supported,
@@ -148,28 +207,14 @@ class CapabilityResolver:
         )
 
         supported_ids = tuple(device.id for _, device, _, _, _ in scored)
-        if not scored:
-            return self._finish(
-                command,
-                text=text,
-                status="unresolved",
-                constraints=constraints,
-                candidates=tuple(device.id for device in pool),
-                capability_lines=tuple(capability_lines) or ("no device supports the capability",),
-                state_lines=state_lines,
-                score_lines=score_lines,
-                semantic_id=None,
-                execution_id=None,
-                tied=(),
-            )
-
         best = scored[0][0]
         tied = [item for item in scored if best - item[0] < weights.ambiguity_margin]
         if len(tied) > 1:
+            tied_devices = tuple(item[1] for item in tied)
             return self._finish(
                 command,
                 text=text,
-                status="ambiguous",
+                status=AMBIGUOUS,
                 constraints=constraints,
                 candidates=supported_ids,
                 capability_lines=tuple(capability_lines),
@@ -177,14 +222,15 @@ class CapabilityResolver:
                 score_lines=score_lines,
                 semantic_id=None,
                 execution_id=None,
-                tied=tuple(item[1].id for item in tied),
+                tied=tuple(device.id for device in tied_devices),
+                missing=self._missing(tied_devices, command.target),
             )
 
         _, semantic, execution, effective, _ = scored[0]
         return self._finish(
             command,
             text=text,
-            status="resolved",
+            status=RESOLVED,
             constraints=constraints,
             candidates=supported_ids,
             capability_lines=tuple(capability_lines),
@@ -197,18 +243,27 @@ class CapabilityResolver:
         )
 
     def _canonicalize_target(self, target: Target) -> Target:
-        device_type = canonicalize_device_type(target.device_type)
-        area = target.area.strip() if target.area else None
-        owner = target.owner.strip() if target.owner else None
+        device_type = canonicalize_device_type(target.device_type) or target.device_type
+        if target.device_type and canonicalize_device_type(target.device_type):
+            device_type = canonicalize_device_type(target.device_type)
+        area = canonicalize_area(target.area) if target.area else None
+        if target.area and area is None:
+            area = target.area.strip().casefold()
+        owner = self._registry.canonicalize_owner(target.owner) if target.owner else None
+        if target.owner and owner is None:
+            owner = target.owner.strip()
         mention = target.mention.strip() if target.mention else None
         explicit = any((device_type, mention, owner, area, target.ordinal is not None))
         return Target(
             device_type=device_type,
             mention=mention,
             owner=owner,
-            area=area.casefold() if area else None,
+            area=area,
             ordinal=target.ordinal,
             explicit=explicit,
+            raw_owner=target.raw_owner,
+            raw_area=target.raw_area,
+            raw_device_type=target.raw_device_type,
         )
 
     def _matches_explicit(
@@ -269,22 +324,25 @@ class CapabilityResolver:
         capability_lines: tuple[str, ...],
         state_lines: tuple[str, ...],
     ) -> ResolvedCommand | None:
-        if command.intent not in SESSION_INTENTS or len(supported) == 1:
+        policy = policy_for(command.intent)
+        if policy is None or len(supported) == 1:
+            self._policy = ""
             return None
+        self._policy = policy.description
 
         session = ActiveSession(state)
         active = [
             item
             for item in supported
-            if session.is_active(item[0].id, command.intent)
+            if session.is_active(item[0].id, item[1].id, policy)
         ]
         if len(active) == 1:
             device, execution, _, effective = active[0]
-            note = "currently paused" if command.intent == "media.resume" else "currently playing"
+            note = "currently paused" if "paused" in policy.active_media and "playing" not in policy.active_media else "currently playing"
             return self._finish(
                 command,
                 text=text,
-                status="resolved",
+                status=RESOLVED,
                 constraints=constraints,
                 candidates=(device.id,),
                 capability_lines=capability_lines,
@@ -297,21 +355,38 @@ class CapabilityResolver:
                 reason="active_device",
             )
 
-        reason = "no_active_device" if not active else "multiple_active_devices"
-        active_ids = tuple(item[0].id for item in active)
+        if not active:
+            return self._finish(
+                command,
+                text=text,
+                status=CLARIFY,
+                constraints=constraints,
+                candidates=(),
+                capability_lines=capability_lines,
+                state_lines=state_lines,
+                score_lines=("no_active_device",),
+                semantic_id=None,
+                execution_id=None,
+                tied=(),
+                reason="no_active_device",
+                missing=("active_device",),
+            )
+
+        active_devices = tuple(item[0] for item in active)
         return self._finish(
             command,
             text=text,
-            status="clarify",
+            status=AMBIGUOUS,
             constraints=constraints,
-            candidates=active_ids,
+            candidates=tuple(device.id for device in active_devices),
             capability_lines=capability_lines,
             state_lines=state_lines,
-            score_lines=(reason,),
+            score_lines=("multiple_active_devices",),
             semantic_id=None,
             execution_id=None,
-            tied=active_ids,
-            reason=reason,
+            tied=tuple(device.id for device in active_devices),
+            reason="multiple_active_devices",
+            missing=self._missing(active_devices, command.target) or ("device",),
         )
 
     def _score(
@@ -348,13 +423,6 @@ class CapabilityResolver:
             add(weights.exact_alias, "exact alias")
         if via:
             add(weights.relationship_match, f"relationship {via}")
-
-        runtime = state.get(device.id)
-        media = runtime.media if runtime else None
-        if command.intent in _ACTIVE_WHEN_PLAYING and media == "playing":
-            add(weights.currently_active, "currently playing")
-        elif command.intent == "media.resume" and media == "paused":
-            add(weights.currently_active, "currently paused")
 
         if not target.area and context.source_area and device.area.casefold() == context.source_area.casefold():
             add(weights.request_origin_area, "request area")
@@ -412,7 +480,15 @@ class CapabilityResolver:
         tied: tuple[str, ...],
         intent: str | None = None,
         reason: str = "",
+        missing: tuple[str, ...] = (),
     ) -> ResolvedCommand:
+        slots = self._slots
+        explicit_lines = (
+            f"owner={slots.owner or 'null'}",
+            f"area={slots.area or 'null'}",
+            f"ordinal={slots.ordinal if slots.ordinal is not None else 'null'}",
+            f"device_type={slots.device_type or 'null'}",
+        )
         trace = ResolutionTrace(
             text=text,
             intent=intent or command.intent,
@@ -426,6 +502,10 @@ class CapabilityResolver:
             semantic_target=semantic_id,
             execution_target=execution_id,
             reason=reason,
+            nlu_intent=self._nlu_intent,
+            explicit_lines=explicit_lines,
+            normalization_lines=self._normalization,
+            policy=self._policy,
         )
         owner = ""
         area = ""
@@ -444,5 +524,18 @@ class CapabilityResolver:
             candidates=reported,
             owner=owner,
             area=area,
+            missing=missing,
             trace=trace,
         )
+
+    def _missing(self, devices: tuple[RegistryDevice, ...], target: Target) -> tuple[str, ...]:
+        missing: list[str] = []
+        if not target.area and len({device.area for device in devices}) > 1:
+            missing.append("area")
+        if not target.owner and len({device.owner_id for device in devices}) > 1:
+            missing.append("owner")
+        if target.ordinal is None and len({device.ordinal for device in devices}) > 1:
+            missing.append("ordinal")
+        if not target.device_type and len({device.type for device in devices}) > 1:
+            missing.append("device_type")
+        return tuple(missing)

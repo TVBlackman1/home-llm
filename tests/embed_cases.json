@@ -537,6 +537,9 @@
       "owner": "мама",
       "place": "",
       "value": ""
+    },
+    "resolution": {
+      "status": "unsupported"
     }
   },
   {
@@ -555,6 +558,9 @@
       "owner": "мама",
       "place": "кухня",
       "value": ""
+    },
+    "resolution": {
+      "status": "unsupported"
     }
   },
   {
@@ -1437,6 +1443,9 @@
       "owner": "папа",
       "place": "",
       "value": ""
+    },
+    "resolution": {
+      "status": "unsupported"
     }
   },
   {
@@ -1455,6 +1464,9 @@
       "owner": "папа",
       "place": "спальня",
       "value": ""
+    },
+    "resolution": {
+      "status": "unsupported"
     }
   },
   {
@@ -2535,6 +2547,9 @@
       "owner": "мама",
       "place": "",
       "value": ""
+    },
+    "resolution": {
+      "status": "unsupported"
     }
   },
   {
@@ -2553,6 +2568,9 @@
       "owner": "мама",
       "place": "кухня",
       "value": ""
+    },
+    "resolution": {
+      "status": "unsupported"
     }
   },
   {
@@ -2571,6 +2589,9 @@
       "owner": "мама",
       "place": "",
       "value": ""
+    },
+    "resolution": {
+      "status": "unsupported"
     }
   },
   {
@@ -2589,6 +2610,9 @@
       "owner": "мама",
       "place": "кухня",
       "value": ""
+    },
+    "resolution": {
+      "status": "unsupported"
     }
   },
   {
@@ -3777,6 +3801,9 @@
       "owner": "папа",
       "place": "",
       "value": ""
+    },
+    "resolution": {
+      "status": "unsupported"
     }
   },
   {
@@ -3795,6 +3822,9 @@
       "owner": "папа",
       "place": "спальня",
       "value": ""
+    },
+    "resolution": {
+      "status": "unsupported"
     }
   },
   {

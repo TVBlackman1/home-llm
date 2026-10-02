@@ -132,18 +132,22 @@ def get_semantic_pipeline(model: str) -> SemanticPipeline:
 
 
 def _failure_detail(result: Result) -> Any:
+    payload = result.payload or {}
     if not result.error:
         return None
     try:
-        return json.loads(result.error)
+        parsed = json.loads(result.error)
     except json.JSONDecodeError:
-        payload = result.payload or {}
-        return {
+        parsed = {
             "error": result.error,
             "command": result.command.as_dict(),
-            "candidates": payload.get("candidates"),
-            "status": payload.get("status"),
         }
+    if isinstance(parsed, dict):
+        parsed.setdefault("status", payload.get("status"))
+        parsed.setdefault("reason", payload.get("reason"))
+        parsed.setdefault("candidates", payload.get("candidates"))
+        parsed.setdefault("semantic", payload.get("semantic"))
+    return parsed
 
 
 def _resolution_matches(result: Result, resolution: dict[str, Any] | None) -> bool:
@@ -164,7 +168,8 @@ def run_semantic_case(model: str, case: dict[str, Any]) -> None:
 
     for attempt in range(1, LLM_REPEATS + 1):
         started = time.perf_counter()
-        result = pipeline.run(case["text"], Expect(case["expected"]))
+        expected = case.get("semantic_expected", case["expected"])
+        result = pipeline.run(case["text"], Expect(expected))
         _LATENCIES[key].append(time.perf_counter() - started)
 
         resolution = case.get("resolution")
