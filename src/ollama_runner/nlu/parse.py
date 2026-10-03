@@ -1,0 +1,183 @@
+"""Deterministic semantic parse. Ministral runs only when intent stays unknown."""
+
+from __future__ import annotations
+
+import re
+from dataclasses import dataclass
+
+from ollama_runner.inventory.registry import DeviceRegistry, device_type_from_text, fold
+from ollama_runner.nlu.slots import (
+    _is_episode,
+    _is_relative,
+    _media_kind,
+    _residual_content,
+    _unknown_leftover,
+    read_slots,
+    spoken_mention,
+)
+from ollama_runner.nlu.values import canonical_color, parameter_value
+from ollama_runner.semantic import ExplicitSlots, SemanticCommand, Target
+
+
+_POWER_ON = re.compile(r"^(?:пожалуйста\s+)?(?:включи|запусти|вруби|поставь)\b", re.IGNORECASE)
+_POWER_OFF = re.compile(r"^(?:пожалуйста\s+)?(?:выключи|выруби)\b", re.IGNORECASE)
+_PAUSE = re.compile(r"(?<![0-9a-zа-яе])пауз", re.IGNORECASE)
+_STOP = re.compile(r"(?<![0-9a-zа-яе])останови", re.IGNORECASE)
+_SEEK = re.compile(r"(?<![0-9a-zа-яе])перемотай", re.IGNORECASE)
+_FORWARD = re.compile(r"(?<![0-9a-zа-яе])вперед", re.IGNORECASE)
+_BACKWARD = re.compile(r"(?<![0-9a-zа-яе])назад", re.IGNORECASE)
+_DARKER = re.compile(r"(?<![0-9a-zа-яе])потемнее", re.IGNORECASE)
+_BRIGHTER = re.compile(r"(?<![0-9a-zа-яе])ярче", re.IGNORECASE)
+_BRIGHTNESS = re.compile(r"(?<![0-9a-zа-яе])яркост", re.IGNORECASE)
+_LOUDER = re.compile(r"(?<![0-9a-zа-яе])(?:по)?громче", re.IGNORECASE)
+_VOLUME = re.compile(r"(?<![0-9a-zа-яе])громкост", re.IGNORECASE)
+_DECREASE = re.compile(r"(?<![0-9a-zа-яе])убавь", re.IGNORECASE)
+_INCREASE = re.compile(r"(?<![0-9a-zа-яе])(?:увеличь|прибавь)", re.IGNORECASE)
+_SET = re.compile(r"(?<![0-9a-zа-яе])поставь", re.IGNORECASE)
+
+
+@dataclass(frozen=True)
+class DeterministicParse:
+    """`intent is None` means the grammar declined. An empty slot is known absence."""
+
+    intent: str | None
+    slots: ExplicitSlots
+    mention: str | None
+    content: str | None
+    value: str | None
+    handled: bool
+    evidence: tuple[str, ...]
+    reason: str
+
+    def command(self) -> SemanticCommand:
+        if self.intent is None:
+            raise RuntimeError("deterministic parse has no intent")
+        target_bits = (self.slots.device_type, self.mention, self.slots.owner, self.slots.area, self.slots.ordinal is not None)
+        arguments: dict[str, str] = {}
+        if self.content:
+            arguments["content"] = self.content
+        if self.value:
+            arguments["value"] = self.value
+        return SemanticCommand(
+            intent=self.intent,
+            target=Target(
+                device_type=self.slots.device_type,
+                mention=self.mention,
+                owner=self.slots.owner,
+                area=self.slots.area,
+                ordinal=self.slots.ordinal,
+                explicit=any(target_bits),
+                raw_owner=self.slots.raw_owner,
+                raw_area=self.slots.raw_area,
+                raw_device_type=self.slots.raw_device_type,
+            ),
+            arguments=arguments,
+        )
+
+
+def parse_deterministic(text: str, registry: DeviceRegistry) -> DeterministicParse:
+    slots = read_slots(text, registry)
+    mention = spoken_mention(text, registry)
+    folded = fold(text)
+    kind = _media_kind(text)
+    residual = _residual_content(text, registry)
+    value = _value_for(text, registry)
+
+    decision = _decide(text, folded, registry, kind, residual, value)
+    if decision is None:
+        return DeterministicParse(
+            intent=None,
+            slots=slots,
+            mention=mention,
+            content=None,
+            value=value[0] if value else None,
+            handled=False,
+            evidence=(),
+            reason="no_intent_cue",
+        )
+    intent, content, chosen_value, evidence = decision
+    return DeterministicParse(
+        intent=intent,
+        slots=slots,
+        mention=mention,
+        content=content,
+        value=chosen_value,
+        handled=True,
+        evidence=evidence,
+        reason="handled",
+    )
+
+
+def _value_for(text: str, registry: DeviceRegistry) -> tuple[str, str] | None:
+    from ollama_runner.nlu.slots import _unconsumed_span
+
+    color = canonical_color(_unconsumed_span(text, registry))
+    if color:
+        return color, "color"
+    hit = parameter_value(text)
+    if hit is None:
+        return None
+    return hit.canonical, hit.kind
+
+
+def _decide(
+    text: str,
+    folded: str,
+    registry: DeviceRegistry,
+    kind: str | None,
+    residual: str,
+    value: tuple[str, str] | None,
+) -> tuple[str, str | None, str | None, tuple[str, ...]] | None:
+    amount = value[0] if value and value[1] != "color" else None
+    color = value[0] if value and value[1] == "color" else None
+
+    if _is_episode(text):
+        return "video.play", residual or None, None, ("episode",)
+    if _PAUSE.search(folded):
+        return "media.pause", None, None, ("pause",)
+    if _SEEK.search(folded) and _FORWARD.search(folded):
+        return "media.seek_forward", None, amount, ("seek_forward",)
+    if _SEEK.search(folded) and _BACKWARD.search(folded):
+        return "media.seek_backward", None, amount, ("seek_backward",)
+    if _is_relative(text):
+        intent = "media.previous" if re.search(r"предыдущ", folded) else "media.next"
+        return intent, None, None, (intent,)
+    if _STOP.search(folded):
+        return "media.stop", None, None, ("stop",)
+    if color:
+        return "color.set", None, color, ("color",)
+    if _DARKER.search(folded):
+        return "brightness.decrease", None, amount, ("darker",)
+    if _BRIGHTER.search(folded):
+        return "brightness.increase", None, amount, ("brighter",)
+    if _BRIGHTNESS.search(folded) and _DECREASE.search(folded):
+        return "brightness.decrease", None, amount, ("brightness_decrease",)
+    if _BRIGHTNESS.search(folded) and _INCREASE.search(folded):
+        return "brightness.increase", None, amount, ("brightness_increase",)
+    if _BRIGHTNESS.search(folded) and (_SET.search(folded) or amount):
+        return "brightness.set", None, amount, ("brightness_set",)
+    if _LOUDER.search(folded):
+        return "volume.increase", None, amount, ("louder",)
+    if _VOLUME.search(folded) and _DECREASE.search(folded):
+        return "volume.decrease", None, amount, ("volume_decrease",)
+    if _VOLUME.search(folded) and (_SET.search(folded) or amount):
+        return "volume.set", None, amount, ("volume_set",)
+    if kind == "audio.play":
+        return "audio.play", residual or None, None, ("audio_marker",)
+    if kind == "video.play":
+        return "video.play", residual or None, None, ("video_marker",)
+    if _POWER_OFF.search(text) and _known_device(text, registry):
+        return "device.turn_off", None, None, ("power_off",)
+    if _POWER_ON.search(text) and _known_device(text, registry):
+        return "device.turn_on", None, None, ("power_on",)
+    if _POWER_ON.search(text) and _unknown_leftover(text, registry):
+        return "content.play", residual or _unknown_leftover(text, registry), None, ("bare_content",)
+    return None
+
+
+def _known_device(text: str, registry: DeviceRegistry) -> bool:
+    if _unknown_leftover(text, registry):
+        return False
+    if device_type_from_text(text) is not None:
+        return True
+    return registry.unique_alias_type(text) is not None

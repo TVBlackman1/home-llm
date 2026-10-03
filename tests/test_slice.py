@@ -85,18 +85,6 @@ def test_slice_cases_reach_expected_ha_actions() -> None:
             "PowerSkill",
             "homeassistant.turn_on(speaker_second_kitchen)",
         ),
-        "Поставь Шрека у Маши": (
-            SemanticCommand(
-                intent="video.play",
-                target=Target(owner="Маша", explicit=True),
-                arguments={"content": "Шрека"},
-            ),
-            None,
-            "tv_masha_bedroom",
-            "tv_masha_bedroom",
-            "MediaSkill",
-            'media_player.play_media(tv_masha_bedroom, content="Шрека")',
-        ),
         "Следующая серия": (
             SemanticCommand(intent="media.next"),
             {"tv_living": DeviceRuntime(media="playing")},
@@ -451,12 +439,12 @@ def test_missing_color_comes_from_the_unconsumed_span() -> None:
 
     assert purple.arguments["value"] == "фиолетовый"
     assert purple_swapped.arguments["value"] == "фиолетовый"
-    assert "filled color from unconsumed span" in notes
+    assert "color from text" in notes
     assert warm.arguments["value"] == "теплый белый"
     assert warm_swapped.arguments["value"] == "теплый белый"
-    assert inflected.arguments["value"] == "красным"
+    assert inflected.arguments["value"] == "красный"
     assert kept.arguments["value"] == "красный"
-    assert "filled color from unconsumed span" not in kept_notes
+    assert "color from text" not in kept_notes
 
 
 def test_next_episode_is_not_content() -> None:

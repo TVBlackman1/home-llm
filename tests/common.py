@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import atexit
+import dataclasses
 import json
 import statistics
 import time
@@ -310,11 +311,59 @@ def print_latency_stats() -> None:
         print("=" * 56)
 
 
+def _print_nlu_split(pipeline) -> None:
+    traces = getattr(pipeline, "traces", None) or []
+    if not traces:
+        return
+    handled = [item for item in traces if item.handled]
+    fallback = [item for item in traces if not item.handled]
+    calls = getattr(pipeline._nlu, "calls", None)
+    print()
+    print("deterministic handled :", len(handled))
+    print("fallback requests     :", len(fallback))
+    if traces:
+        print(f"fallback rate         : {100 * len(fallback) / len(traces):.1f}%")
+    if calls is not None:
+        print(f"llm calls             : {calls}")
+        print(f"calls/request         : {calls / len(traces):.3f}")
+    reasons: Counter[str] = Counter(item.reason for item in fallback)
+    if reasons:
+        print("fallback reasons:")
+        for label, count in reasons.most_common():
+            print(f"  {label:<24} {count}")
+    intents: Counter[str] = Counter(item.final_intent for item in fallback)
+    if intents:
+        print("fallback intents:")
+        for label, count in intents.most_common():
+            print(f"  {label:<24} {count}")
+
+    def _show(title: str, values: list[float]) -> None:
+        if not values:
+            return
+        print(f"{title}")
+        print(f"  n    : {len(values)}")
+        print(f"  mean : {statistics.fmean(values):.3f} s")
+        print(f"  p50  : {percentile(values, 50):.3f} s")
+        print(f"  p90  : {percentile(values, 90):.3f} s")
+        print(f"  p95  : {percentile(values, 95):.3f} s")
+        print(f"  p99  : {percentile(values, 99):.3f} s")
+
+    _show("deterministic latency", [item.deterministic_s for item in traces])
+    _show("fallback latency", [item.fallback_s for item in fallback])
+    _show("overall latency", [item.total_s for item in traces])
+    if len(traces) >= 100:
+        Path("ministral3.semantic.det-first.traces.json").write_text(
+            json.dumps([dataclasses.asdict(item) for item in traces], ensure_ascii=False),
+            encoding="utf-8",
+        )
+
+
 def close_pipelines() -> None:
     for pipeline in _SEMANTIC_PIPELINES.values():
         calls = getattr(pipeline._nlu, "calls", None)
         if calls is not None:
             print(f"llm calls  : {calls}")
+        _print_nlu_split(pipeline)
     print_latency_stats()
     close_resources()
     _PIPELINES.clear()

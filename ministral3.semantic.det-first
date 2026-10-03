@@ -1,0 +1,55 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-9.1.1, pluggy-1.6.0
+rootdir: /root/ollama-test/ollama-runner
+configfile: pyproject.toml
+plugins: returns-0.29.0, anyio-4.14.2
+collected 279 items
+
+tests/test_mistral_semantic.py .......................................................................................................................................................................................................................................................................................
+
+============================= 279 passed in 7.74s ==============================
+llm calls  : 1
+
+deterministic handled : 837
+fallback requests     : 0
+fallback rate         : 0.0%
+llm calls             : 1
+calls/request         : 0.001
+deterministic latency
+  n    : 837
+  mean : 0.001 s
+  p50  : 0.001 s
+  p90  : 0.001 s
+  p95  : 0.002 s
+  p99  : 0.002 s
+overall latency
+  n    : 837
+  mean : 0.001 s
+  p50  : 0.001 s
+  p90  : 0.001 s
+  p95  : 0.002 s
+  p99  : 0.002 s
+
+========================================================
+Pipeline latency: ministral-3:3b semantic
+========================================================
+cold start : 5.597 s
+
+requests   : 837
+mean       : 0.001 s
+min        : 0.001 s
+p50        : 0.001 s
+p90        : 0.001 s
+p95        : 0.002 s
+p99        : 0.002 s
+max        : 0.003 s
+
+passing cases : 279
+  resolved                     223
+  ambiguous/media_type         18
+  not_found/no_match           10
+  unsupported/capability       10
+  clarify/no_active_device     9
+  ambiguous                    6
+  not_found/no_capable_device  3
+========================================================

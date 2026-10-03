@@ -8,8 +8,10 @@ from ollama_runner.inventory.registry import (
     device_type_from_text,
     fold,
     ordinal_from_mention,
+    stem_token,
     token_stems,
 )
+from ollama_runner.nlu.values import canonical_color
 from ollama_runner.semantic import ExplicitSlots, SemanticCommand, Target
 
 
@@ -53,11 +55,9 @@ _ORDINALS = (
 )
 
 
-def apply_explicit(
-    text: str,
-    command: SemanticCommand,
-    registry: DeviceRegistry,
-) -> tuple[SemanticCommand, ExplicitSlots, tuple[str, ...]]:
+def read_slots(text: str, registry: DeviceRegistry) -> ExplicitSlots:
+    """Owner, room, ordinal and device type read from the utterance."""
+
     owner_hit = registry.owner_from_text(text)
     area_hit = area_from_text(text)
     type_hit = device_type_from_text(text)
@@ -65,17 +65,39 @@ def apply_explicit(
         alias_type = registry.unique_alias_type(text)
         if alias_type:
             type_hit = (alias_type, None)
-    ordinal = _device_ordinal(text)
-
-    slots = ExplicitSlots(
+    return ExplicitSlots(
         owner=owner_hit[0] if owner_hit else None,
         raw_owner=owner_hit[1] if owner_hit else None,
         area=area_hit[0] if area_hit else None,
         raw_area=area_hit[1] if area_hit else None,
-        ordinal=ordinal,
+        ordinal=_device_ordinal(text),
         device_type=type_hit[0] if type_hit else None,
         raw_device_type=type_hit[1] if type_hit else None,
     )
+
+
+def spoken_mention(text: str, registry: DeviceRegistry) -> str | None:
+    """Device words as the user said them, including a neighboring ordinal.
+
+    A longer inventory alias wins over the bare type token, so
+    «напольный светильник» stays the whole phrase rather than «светильник».
+    """
+
+    hit = device_type_from_text(text)
+    typed = _extend_ordinal(text, hit[1]) if hit is not None and hit[1] else None
+    alias = _alias_span(text, registry)
+    if alias and typed:
+        return alias if len(alias) >= len(typed) else typed
+    return alias or typed
+
+
+def apply_explicit(
+    text: str,
+    command: SemanticCommand,
+    registry: DeviceRegistry,
+) -> tuple[SemanticCommand, ExplicitSlots, tuple[str, ...]]:
+    slots = read_slots(text, registry)
+    ordinal = slots.ordinal
 
     intent = command.intent
     arguments = dict(command.arguments)
@@ -132,11 +154,17 @@ def apply_explicit(
             notes.append("dropped device name from value")
             arguments.pop("value", None)
 
-    if intent == "color.set" and not arguments.get("value"):
-        color = _unconsumed_span(text, registry)
+    if intent == "color.set":
+        color = canonical_color(_unconsumed_span(text, registry))
         if color:
-            notes.append("filled color from unconsumed span")
+            if arguments.get("value") != color:
+                notes.append("color from text")
             arguments["value"] = color
+        elif not arguments.get("value"):
+            raw_color = _unconsumed_span(text, registry)
+            if raw_color:
+                notes.append("filled color from unconsumed span")
+                arguments["value"] = raw_color
 
     if intent in _CONTENT_INTENTS:
         residual = _residual_content(text, registry)
@@ -153,18 +181,7 @@ def apply_explicit(
 
     area = slots.area
     device_type = slots.device_type
-    if device_type is None and type_hit is None:
-        attested = device_type_from_text(command.target.mention or "")
-        if attested is not None:
-            device_type = attested[0]
-        elif command.target.device_type and device_type_from_text(text) is None:
-            device_type = None
-        else:
-            device_type = command.target.device_type
-
-    mention = command.target.mention
-    if not mention and slots.raw_device_type:
-        mention = slots.raw_device_type
+    mention = spoken_mention(text, registry)
 
     if slots.raw_area and slots.area and fold(slots.raw_area) != fold(slots.area):
         notes.append(f'raw_area="{slots.raw_area}"')
@@ -193,6 +210,55 @@ def apply_explicit(
         arguments={key: value for key, value in arguments.items() if value},
     )
     return merged, slots, tuple(notes)
+
+
+def _extend_ordinal(text: str, raw: str) -> str:
+    folded = fold(text)
+    needle = fold(raw)
+    start = folded.find(needle)
+    if start < 0 or _device_ordinal(text) is None:
+        return raw if start < 0 else text[start:start + len(needle)]
+    end = start + len(needle)
+    previous = re.search(r"([0-9a-zа-яе]+)\s+$", folded[:start])
+    if previous and any(previous.group(1).startswith(stem) for stem, _number in _ORDINALS):
+        start = previous.start(1)
+    else:
+        following = re.match(r"\s+([0-9a-zа-яе]+)", folded[end:])
+        if following and any(following.group(1).startswith(stem) for stem, _number in _ORDINALS):
+            end += following.end(1)
+    return text[start:end]
+
+
+def _alias_span(text: str, registry: DeviceRegistry) -> str | None:
+    stems = token_stems(text)
+    best_alias: str | None = None
+    best_size = -1
+    for device in registry.devices():
+        for alias in device.aliases:
+            alias_stems = token_stems(alias)
+            if not alias_stems or not alias_stems <= stems:
+                continue
+            if len(alias_stems) > best_size or (len(alias_stems) == best_size and best_alias and len(alias) > len(best_alias)):
+                best_alias = alias
+                best_size = len(alias_stems)
+    if best_alias is None:
+        return None
+    wanted = token_stems(best_alias)
+    tokens = list(re.finditer(r"[0-9A-Za-zА-Яа-яЁё]+", text))
+    window: tuple[int, int, int] | None = None
+    for left in range(len(tokens)):
+        found: set[str] = set()
+        for right in range(left, len(tokens)):
+            found.add(stem_token(fold(tokens[right].group())))
+            if not wanted <= found:
+                continue
+            length = right - left
+            if window is None or length < window[0]:
+                window = (length, tokens[left].start(), tokens[right].end())
+            break
+    if window is None:
+        return None
+    return text[window[1]:window[2]]
 
 
 def _is_episode(text: str) -> bool:
