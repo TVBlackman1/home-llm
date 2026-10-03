@@ -139,7 +139,8 @@
     },
     "resolution": {
       "status": "ambiguous",
-      "reason": "media_type"
+      "reason": "media_type",
+      "content": "Ведьмака"
     }
   },
   {
@@ -410,6 +411,11 @@
       "owner": "",
       "place": "",
       "value": "Интерстеллар"
+    },
+    "resolution": {
+      "status": "ambiguous",
+      "reason": "media_type",
+      "content": "Интерстеллар"
     }
   },
   {
@@ -566,7 +572,9 @@
       "value": "Rammstein"
     },
     "resolution": {
-      "status": "ambiguous"
+      "status": "ambiguous",
+      "reason": "media_type",
+      "content": "Rammstein"
     }
   },
   {

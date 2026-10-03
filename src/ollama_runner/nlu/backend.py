@@ -30,6 +30,7 @@ INTENTS = (
     "media.seek_backward",
     "audio.play",
     "video.play",
+    "content.play",
     "app.launch",
     "screen.share",
     "photos.show",

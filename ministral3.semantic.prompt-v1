@@ -1,0 +1,991 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-9.1.1, pluggy-1.6.0
+rootdir: /root/ollama-test/ollama-runner
+configfile: pyproject.toml
+plugins: returns-0.29.0, anyio-4.14.2
+collected 279 items
+
+tests/test_mistral_semantic.py ............................................................................................................................................................................................................................F.......F...................F.F....F...F.F.F........F......
+
+=================================== FAILURES ===================================
+_________ test_mistral_semantic[pipeline:11:Сделай свет немного ярче] __________
+{
+  "id": "pipeline:11:Сделай свет немного ярче",
+  "input": "Сделай свет немного ярче",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "value": {
+            "expected": "немного",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "light_common",
+          "action": "increase",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "status": "resolved",
+        "reason": "",
+        "candidates": null,
+        "semantic": {
+          "intent": "brightness.increase",
+          "nlu_intent": "brightness.increase",
+          "device_type": "light",
+          "owner": null,
+          "area": null,
+          "ordinal": null,
+          "content": "",
+          "missing": []
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "value": {
+            "expected": "немного",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "light_common",
+          "action": "increase",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "status": "resolved",
+        "reason": "",
+        "candidates": null,
+        "semantic": {
+          "intent": "brightness.increase",
+          "nlu_intent": "brightness.increase",
+          "device_type": "light",
+          "owner": null,
+          "area": null,
+          "ordinal": null,
+          "content": "",
+          "missing": []
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "value": {
+            "expected": "немного",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "light_common",
+          "action": "increase",
+          "value": "",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "status": "resolved",
+        "reason": "",
+        "candidates": null,
+        "semantic": {
+          "intent": "brightness.increase",
+          "nlu_intent": "brightness.increase",
+          "device_type": "light",
+          "owner": null,
+          "area": null,
+          "ordinal": null,
+          "content": "",
+          "missing": []
+        }
+      }
+    }
+  ]
+}
+___________ test_mistral_semantic[pipeline:20:Поставь Интерстеллар] ____________
+{
+  "id": "pipeline:20:Поставь Интерстеллар",
+  "input": "Поставь Интерстеллар",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "Интерстеллар",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "status": "ambiguous",
+        "reason": "media_type",
+        "candidates": [],
+        "semantic": {
+          "intent": "content.play",
+          "nlu_intent": "content.play",
+          "device_type": null,
+          "owner": null,
+          "area": null,
+          "ordinal": null,
+          "content": "Интерстеллар",
+          "missing": [
+            "media_type"
+          ]
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "Интерстеллар",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "status": "ambiguous",
+        "reason": "media_type",
+        "candidates": [],
+        "semantic": {
+          "intent": "content.play",
+          "nlu_intent": "content.play",
+          "device_type": null,
+          "owner": null,
+          "area": null,
+          "ordinal": null,
+          "content": "Интерстеллар",
+          "missing": [
+            "media_type"
+          ]
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "Интерстеллар",
+          "owner": "",
+          "place": "",
+          "kind": "device"
+        },
+        "status": "ambiguous",
+        "reason": "media_type",
+        "candidates": [],
+        "semantic": {
+          "intent": "content.play",
+          "nlu_intent": "content.play",
+          "device_type": null,
+          "owner": null,
+          "area": null,
+          "ordinal": null,
+          "content": "Интерстеллар",
+          "missing": [
+            "media_type"
+          ]
+        }
+      }
+    }
+  ]
+}
+______ test_mistral_semantic[pipeline:40:Запусти Доктора Кто в гостиной] _______
+{
+  "id": "pipeline:40:Запусти Доктора Кто в гостиной",
+  "input": "Запусти Доктора Кто в гостиной",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "гостиная",
+          "kind": "device"
+        },
+        "status": "ambiguous",
+        "reason": "",
+        "candidates": [
+          "projector_living",
+          "soundbar_living",
+          "speaker_first_living",
+          "tv_living"
+        ],
+        "semantic": {
+          "intent": "media.play",
+          "nlu_intent": "media.play",
+          "device_type": null,
+          "owner": null,
+          "area": "гостиная",
+          "ordinal": null,
+          "content": "",
+          "missing": [
+            "ordinal",
+            "device_type"
+          ]
+        },
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "area": "гостиная",
+          "content": "Доктора Кто"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "гостиная",
+          "kind": "device"
+        },
+        "status": "ambiguous",
+        "reason": "",
+        "candidates": [
+          "projector_living",
+          "soundbar_living",
+          "speaker_first_living",
+          "tv_living"
+        ],
+        "semantic": {
+          "intent": "media.play",
+          "nlu_intent": "media.play",
+          "device_type": null,
+          "owner": null,
+          "area": "гостиная",
+          "ordinal": null,
+          "content": "",
+          "missing": [
+            "ordinal",
+            "device_type"
+          ]
+        },
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "area": "гостиная",
+          "content": "Доктора Кто"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "on",
+          "value": "",
+          "owner": "",
+          "place": "гостиная",
+          "kind": "device"
+        },
+        "status": "ambiguous",
+        "reason": "",
+        "candidates": [
+          "projector_living",
+          "soundbar_living",
+          "speaker_first_living",
+          "tv_living"
+        ],
+        "semantic": {
+          "intent": "media.play",
+          "nlu_intent": "media.play",
+          "device_type": null,
+          "owner": null,
+          "area": "гостиная",
+          "ordinal": null,
+          "content": "",
+          "missing": [
+            "ordinal",
+            "device_type"
+          ]
+        },
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "area": "гостиная",
+          "content": "Доктора Кто"
+        }
+      }
+    }
+  ]
+}
+___________ test_mistral_semantic[pipeline:42:Поставь Шрека у Маши] ____________
+{
+  "id": "pipeline:42:Поставь Шрека у Маши",
+  "input": "Поставь Шрека у Маши",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "tv",
+            "actual": "tv_masha_bedroom"
+          }
+        },
+        "command": {
+          "device_id": "tv_masha_bedroom",
+          "action": "run_content",
+          "value": "Шрека",
+          "owner": "Маша",
+          "place": "",
+          "kind": "device"
+        },
+        "status": "resolved",
+        "reason": "",
+        "candidates": null,
+        "semantic": {
+          "intent": "video.play",
+          "nlu_intent": "video.play",
+          "device_type": null,
+          "owner": "Маша",
+          "area": null,
+          "ordinal": null,
+          "content": "Шрека",
+          "missing": []
+        },
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "owner": "Маша",
+          "content": "Шрека"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "tv",
+            "actual": "tv_masha_bedroom"
+          }
+        },
+        "command": {
+          "device_id": "tv_masha_bedroom",
+          "action": "run_content",
+          "value": "Шрека",
+          "owner": "Маша",
+          "place": "",
+          "kind": "device"
+        },
+        "status": "resolved",
+        "reason": "",
+        "candidates": null,
+        "semantic": {
+          "intent": "video.play",
+          "nlu_intent": "video.play",
+          "device_type": null,
+          "owner": "Маша",
+          "area": null,
+          "ordinal": null,
+          "content": "Шрека",
+          "missing": []
+        },
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "owner": "Маша",
+          "content": "Шрека"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "tv",
+            "actual": "tv_masha_bedroom"
+          }
+        },
+        "command": {
+          "device_id": "tv_masha_bedroom",
+          "action": "run_content",
+          "value": "Шрека",
+          "owner": "Маша",
+          "place": "",
+          "kind": "device"
+        },
+        "status": "resolved",
+        "reason": "",
+        "candidates": null,
+        "semantic": {
+          "intent": "video.play",
+          "nlu_intent": "video.play",
+          "device_type": null,
+          "owner": "Маша",
+          "area": null,
+          "ordinal": null,
+          "content": "Шрека",
+          "missing": []
+        },
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "owner": "Маша",
+          "content": "Шрека"
+        }
+      }
+    }
+  ]
+}
+________ test_mistral_semantic[pipeline:48:Включи Linkin Park на кухне] ________
+{
+  "id": "pipeline:48:Включи Linkin Park на кухне",
+  "input": "Включи Linkin Park на кухне",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "Linkin Park",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "status": "ambiguous",
+        "reason": "",
+        "candidates": [
+          "player_kitchen",
+          "radio_kitchen",
+          "soundbar_kitchen",
+          "speaker_second_kitchen"
+        ],
+        "semantic": {
+          "intent": "audio.play",
+          "nlu_intent": "audio.play",
+          "device_type": null,
+          "owner": null,
+          "area": "кухня",
+          "ordinal": null,
+          "content": "Linkin Park",
+          "missing": [
+            "ordinal",
+            "device_type"
+          ]
+        },
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "area": "кухня",
+          "content": "Linkin Park"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "Linkin Park",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "status": "ambiguous",
+        "reason": "",
+        "candidates": [
+          "player_kitchen",
+          "radio_kitchen",
+          "soundbar_kitchen",
+          "speaker_second_kitchen"
+        ],
+        "semantic": {
+          "intent": "audio.play",
+          "nlu_intent": "audio.play",
+          "device_type": null,
+          "owner": null,
+          "area": "кухня",
+          "ordinal": null,
+          "content": "Linkin Park",
+          "missing": [
+            "ordinal",
+            "device_type"
+          ]
+        },
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "area": "кухня",
+          "content": "Linkin Park"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "Linkin Park",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "status": "ambiguous",
+        "reason": "",
+        "candidates": [
+          "player_kitchen",
+          "radio_kitchen",
+          "soundbar_kitchen",
+          "speaker_second_kitchen"
+        ],
+        "semantic": {
+          "intent": "audio.play",
+          "nlu_intent": "audio.play",
+          "device_type": null,
+          "owner": null,
+          "area": "кухня",
+          "ordinal": null,
+          "content": "Linkin Park",
+          "missing": [
+            "ordinal",
+            "device_type"
+          ]
+        },
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "area": "кухня",
+          "content": "Linkin Park"
+        }
+      }
+    }
+  ]
+}
+__ test_mistral_semantic[pipeline:52:Прибавь у Маши яркость на 10 процентов] ___
+{
+  "id": "pipeline:52:Прибавь у Маши яркость на 10 процентов",
+  "input": "Прибавь у Маши яркость на 10 процентов",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "value": {
+            "expected": "на 10 процентов",
+            "actual": "10"
+          }
+        },
+        "command": {
+          "device_id": "light_masha",
+          "action": "increase",
+          "value": "10",
+          "owner": "Маша",
+          "place": "",
+          "kind": "device"
+        },
+        "status": "resolved",
+        "reason": "",
+        "candidates": null,
+        "semantic": {
+          "intent": "brightness.increase",
+          "nlu_intent": "brightness.increase",
+          "device_type": null,
+          "owner": "Маша",
+          "area": null,
+          "ordinal": null,
+          "content": "",
+          "missing": []
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "value": {
+            "expected": "на 10 процентов",
+            "actual": "10"
+          }
+        },
+        "command": {
+          "device_id": "light_masha",
+          "action": "increase",
+          "value": "10",
+          "owner": "Маша",
+          "place": "",
+          "kind": "device"
+        },
+        "status": "resolved",
+        "reason": "",
+        "candidates": null,
+        "semantic": {
+          "intent": "brightness.increase",
+          "nlu_intent": "brightness.increase",
+          "device_type": null,
+          "owner": "Маша",
+          "area": null,
+          "ordinal": null,
+          "content": "",
+          "missing": []
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "value": {
+            "expected": "на 10 процентов",
+            "actual": "10"
+          }
+        },
+        "command": {
+          "device_id": "light_masha",
+          "action": "increase",
+          "value": "10",
+          "owner": "Маша",
+          "place": "",
+          "kind": "device"
+        },
+        "status": "resolved",
+        "reason": "",
+        "candidates": null,
+        "semantic": {
+          "intent": "brightness.increase",
+          "nlu_intent": "brightness.increase",
+          "device_type": null,
+          "owner": "Маша",
+          "area": null,
+          "ordinal": null,
+          "content": "",
+          "missing": []
+        }
+      }
+    }
+  ]
+}
+_ test_mistral_semantic[pipeline:54:Поставь у меня на кухне яркость 25 процентов] _
+{
+  "id": "pipeline:54:Поставь у меня на кухне яркость 25 процентов",
+  "input": "Поставь у меня на кухне яркость 25 процентов",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "value": {
+            "expected": "25 процентов",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "light_me_kitchen",
+          "action": "set_state",
+          "value": "",
+          "owner": "я",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "status": "resolved",
+        "reason": "",
+        "candidates": null,
+        "semantic": {
+          "intent": "brightness.set",
+          "nlu_intent": "brightness.set",
+          "device_type": null,
+          "owner": "я",
+          "area": "кухня",
+          "ordinal": null,
+          "content": "",
+          "missing": []
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "value": {
+            "expected": "25 процентов",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "light_me_kitchen",
+          "action": "set_state",
+          "value": "",
+          "owner": "я",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "status": "resolved",
+        "reason": "",
+        "candidates": null,
+        "semantic": {
+          "intent": "brightness.set",
+          "nlu_intent": "brightness.set",
+          "device_type": null,
+          "owner": "я",
+          "area": "кухня",
+          "ordinal": null,
+          "content": "",
+          "missing": []
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "value": {
+            "expected": "25 процентов",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "light_me_kitchen",
+          "action": "set_state",
+          "value": "",
+          "owner": "я",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "status": "resolved",
+        "reason": "",
+        "candidates": null,
+        "semantic": {
+          "intent": "brightness.set",
+          "nlu_intent": "brightness.set",
+          "device_type": null,
+          "owner": "я",
+          "area": "кухня",
+          "ordinal": null,
+          "content": "",
+          "missing": []
+        }
+      }
+    }
+  ]
+}
+_______ test_mistral_semantic[pipeline:56:Убавь у мамы яркость немного] ________
+{
+  "id": "pipeline:56:Убавь у мамы яркость немного",
+  "input": "Убавь у мамы яркость немного",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "value": {
+            "expected": "немного",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "light_mama",
+          "action": "decrease",
+          "value": "",
+          "owner": "мама",
+          "place": "",
+          "kind": "device"
+        },
+        "status": "resolved",
+        "reason": "",
+        "candidates": null,
+        "semantic": {
+          "intent": "brightness.decrease",
+          "nlu_intent": "brightness.decrease",
+          "device_type": null,
+          "owner": "мама",
+          "area": null,
+          "ordinal": null,
+          "content": "",
+          "missing": []
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "value": {
+            "expected": "немного",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "light_mama",
+          "action": "decrease",
+          "value": "",
+          "owner": "мама",
+          "place": "",
+          "kind": "device"
+        },
+        "status": "resolved",
+        "reason": "",
+        "candidates": null,
+        "semantic": {
+          "intent": "brightness.decrease",
+          "nlu_intent": "brightness.decrease",
+          "device_type": null,
+          "owner": "мама",
+          "area": null,
+          "ordinal": null,
+          "content": "",
+          "missing": []
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "value": {
+            "expected": "немного",
+            "actual": ""
+          }
+        },
+        "command": {
+          "device_id": "light_mama",
+          "action": "decrease",
+          "value": "",
+          "owner": "мама",
+          "place": "",
+          "kind": "device"
+        },
+        "status": "resolved",
+        "reason": "",
+        "candidates": null,
+        "semantic": {
+          "intent": "brightness.decrease",
+          "nlu_intent": "brightness.decrease",
+          "device_type": null,
+          "owner": "мама",
+          "area": null,
+          "ordinal": null,
+          "content": "",
+          "missing": []
+        }
+      }
+    }
+  ]
+}
+______ test_mistral_semantic[pipeline:65:Запусти в гостиной Доктора Кто] _______
+{
+  "id": "pipeline:65:Запусти в гостиной Доктора Кто",
+  "input": "Запусти в гостиной Доктора Кто",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "area": "гостиная",
+          "content": "Доктора Кто"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "area": "гостиная",
+          "content": "Доктора Кто"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "area": "гостиная",
+          "content": "Доктора Кто"
+        }
+      }
+    }
+  ]
+}
+=========================== short test summary info ============================
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:11:Сделай свет немного ярче]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:20:Поставь Интерстеллар]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:40:Запусти Доктора Кто в гостиной]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:42:Поставь Шрека у Маши]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:48:Включи Linkin Park на кухне]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:52:Прибавь у Маши яркость на 10 процентов]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:54:Поставь у меня на кухне яркость 25 процентов]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:56:Убавь у мамы яркость немного]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:65:Запусти в гостиной Доктора Кто]
+================== 9 failed, 270 passed in 1280.92s (0:21:20) ==================
+llm calls  : 838
+
+========================================================
+Pipeline latency: ministral-3:3b semantic
+========================================================
+cold start : 4.601 s
+
+requests   : 837
+mean       : 1.523 s
+min        : 1.182 s
+p50        : 1.473 s
+p90        : 1.781 s
+p95        : 1.822 s
+p99        : 1.918 s
+max        : 1.977 s
+
+passing cases : 270
+  resolved                     219
+  ambiguous/media_type         13
+  not_found/no_match           10
+  unsupported/capability       10
+  clarify/no_active_device     9
+  ambiguous                    6
+  not_found/no_capable_device  3
+========================================================
