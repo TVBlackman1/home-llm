@@ -34,10 +34,14 @@ _VIDEO = re.compile(
     r"(?<![0-9a-zа-яе])(?:фильм\w*|кино|сериал\w*|мультик\w*|новост\w*|сезон\w*)(?![0-9a-zа-яе])",
     re.IGNORECASE,
 )
+# The verb is cut only from the start. «Ведьмака включи у Маши» is a known
+# limitation of this backend: the verb stays inside the residual. That must
+# not turn into a power command for some other device of the named owner.
 _VERB = re.compile(
     r"^(?:пожалуйста\s+)?(?:запусти|включи|выключи|поставь|вруби|покажи|перемотай|сделай|хочу|убавь|увеличь|выруби)\b\s*",
     re.IGNORECASE,
 )
+_SLOT_PREPOSITION = r"(?:на|в|у|для)\s+"
 _DEVICE_NOUN = re.compile(
     r"колонк|ламп|светильник|телевиз|телик|телек|монитор|плеер|проектор|саундбар|микрофон|люстр|торшер"
 )
@@ -128,10 +132,18 @@ def apply_explicit(
             notes.append("dropped device name from value")
             arguments.pop("value", None)
 
-    if intent in {"audio.play", "video.play", "photos.show"} and not arguments.get("content"):
-        leftover = _leftover(text, registry)
-        if leftover:
-            arguments["content"] = leftover
+    if intent == "color.set" and not arguments.get("value"):
+        color = _unconsumed_span(text, registry)
+        if color:
+            notes.append("filled color from unconsumed span")
+            arguments["value"] = color
+
+    if intent in _CONTENT_INTENTS:
+        residual = _residual_content(text, registry)
+        if residual:
+            if arguments.get("content") != residual:
+                notes.append("content from user span")
+            arguments["content"] = residual
 
     owner = slots.owner
     if owner is None:
@@ -242,14 +254,67 @@ def _device_ordinal(text: str) -> int | None:
 
 
 def _episode_span(text: str) -> str:
-    match = _EPISODE.search(text)
-    if match is None:
-        match = _EPISODE.search(fold(text))
-    if match is None:
-        return _leftover(text, DeviceRegistry.from_static())
-    span = text[match.start():].strip(" .,!")
-    span = re.sub(r"\s+у\s+\S+\s*$", "", span)
-    return span.strip()
+    return _residual_content(text, DeviceRegistry.from_static())
+
+
+def _unconsumed_span(text: str, registry: DeviceRegistry) -> str:
+    """Text left after the verb, owner, area and device type.
+
+    Those spans already chose the intent target, so they are not the color.
+    The remainder stays raw: «красным» is not rewritten to «красный».
+    A later color resolver decides whether this fragment is a supported color.
+    """
+
+    span = _leftover(text, registry)
+    hit = device_type_from_text(span)
+    if hit is not None and hit[1]:
+        span = re.sub(re.escape(hit[1]), " ", span, count=1, flags=re.IGNORECASE)
+    return re.sub(r"\s+", " ", span).strip(" ,.")
+
+
+def _cut_hit(span: str, hit: tuple[str, str] | None) -> str:
+    """Drop an already-found owner or area span, wherever it sits.
+
+    A preposition that only introduces that span goes with it.
+    «для» inside «плейлист для уборки» is not an owner or an area, so it stays.
+    """
+
+    if hit is None or not hit[1]:
+        return span
+    pattern = (
+        r"(?<![0-9a-zа-яе])(?:"
+        + _SLOT_PREPOSITION
+        + r")?"
+        + re.escape(hit[1])
+        + r"(?![0-9a-zа-яе])"
+    )
+    return re.sub(pattern, " ", span, count=1, flags=re.IGNORECASE)
+
+
+def _cut_device_ordinal(span: str, text: str) -> str:
+    if _device_ordinal(text) is None:
+        return span
+    folded = fold(span)
+    for stem, _number in _ORDINALS:
+        match = re.search(r"(?<![0-9a-zа-яе])" + stem + r"\w*", folded)
+        if match is None:
+            continue
+        return span[:match.start()] + " " + span[match.end():]
+    return span
+
+
+def _residual_content(text: str, registry: DeviceRegistry) -> str:
+    """User-text fragment left after the verb and explicit slots.
+
+    Owner, area and a device ordinal are removed in any position.
+    The fragment keeps the user's letters: «ведьмака» is not «Ведьмака».
+    """
+
+    span = _VERB.sub("", text.strip())
+    span = _cut_hit(span, registry.owner_from_text(span))
+    span = _cut_hit(span, area_from_text(span))
+    span = _cut_device_ordinal(span, text)
+    return re.sub(r"\s+", " ", span).strip(" ,.")
 
 
 def _leftover(text: str, registry: DeviceRegistry) -> str:

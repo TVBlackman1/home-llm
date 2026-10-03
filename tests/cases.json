@@ -97,7 +97,9 @@
     },
     "resolution": {
       "status": "ambiguous",
-      "reason": "media_type"
+      "reason": "media_type",
+      "owner": "Маша",
+      "content": "Sonne"
     }
   },
   {
@@ -478,7 +480,10 @@
       "value": "Ведьмак"
     },
     "resolution": {
-      "status": "not_found"
+      "status": "ambiguous",
+      "reason": "media_type",
+      "owner": "мама",
+      "content": "Ведьмака"
     }
   },
   {
@@ -810,7 +815,10 @@
       "value": "Интерстеллар"
     },
     "resolution": {
-      "status": "not_found"
+      "status": "ambiguous",
+      "reason": "media_type",
+      "owner": "Антон",
+      "content": "Интерстеллар"
     }
   },
   {
@@ -828,14 +836,13 @@
       "action": "run_content",
       "owner": "",
       "place": "гостиная",
-      "value": "Доктор Кто"
-    },
-    "semantic_expected": {
-      "device_id": "tv_living",
-      "action": "run_content",
-      "owner": "",
-      "place": "гостиная",
       "value": "Доктора Кто"
+    },
+    "resolution": {
+      "status": "ambiguous",
+      "reason": "media_type",
+      "area": "гостиная",
+      "content": "Доктора Кто"
     }
   },
   {
@@ -878,14 +885,13 @@
       "action": "run_content",
       "owner": "Маша",
       "place": "",
-      "value": "Шрек"
-    },
-    "semantic_expected": {
-      "device_id": "tv_masha_bedroom",
-      "action": "run_content",
-      "owner": "Маша",
-      "place": "",
       "value": "Шрека"
+    },
+    "resolution": {
+      "status": "ambiguous",
+      "reason": "media_type",
+      "owner": "Маша",
+      "content": "Шрека"
     }
   },
   {
@@ -987,7 +993,10 @@
       "value": "Sonne"
     },
     "resolution": {
-      "status": "not_found"
+      "status": "ambiguous",
+      "reason": "media_type",
+      "owner": "мама",
+      "content": "Sonne"
     }
   },
   {
@@ -1008,7 +1017,10 @@
       "value": "Linkin Park"
     },
     "resolution": {
-      "status": "ambiguous"
+      "status": "ambiguous",
+      "reason": "media_type",
+      "area": "кухня",
+      "content": "Linkin Park"
     }
   },
   {
@@ -1264,6 +1276,234 @@
       "owner": "",
       "place": "",
       "value": "мультики"
+    }
+  },
+  {
+    "id": "pipeline:62:Включи ведьмака у Маши",
+    "text": "Включи ведьмака у Маши",
+    "intent": {
+      "device": "телевизор",
+      "action": "run_content",
+      "owner": "Маша",
+      "place": "",
+      "value": "Ведьмака"
+    },
+    "expected": {
+      "device_id": "tv",
+      "action": "run_content",
+      "owner": "Маша",
+      "place": "",
+      "value": "ведьмака"
+    },
+    "resolution": {
+      "status": "ambiguous",
+      "reason": "media_type",
+      "owner": "Маша",
+      "content": "ведьмака"
+    }
+  },
+  {
+    "id": "pipeline:63:Включи Sonne у Маши",
+    "text": "Включи Sonne у Маши",
+    "intent": {
+      "device": "аудиосистема",
+      "action": "run_content",
+      "owner": "Маша",
+      "place": "",
+      "value": "Sonne"
+    },
+    "expected": {
+      "device_id": "soundbar",
+      "action": "run_content",
+      "owner": "Маша",
+      "place": "",
+      "value": "Sonne"
+    },
+    "resolution": {
+      "status": "ambiguous",
+      "reason": "media_type",
+      "owner": "Маша",
+      "content": "Sonne"
+    }
+  },
+  {
+    "id": "pipeline:64:Поставь у мамы Ведьмака",
+    "text": "Поставь у мамы Ведьмака",
+    "intent": {
+      "device": "телевизор",
+      "action": "run_content",
+      "owner": "мама",
+      "place": "",
+      "value": "Ведьмака"
+    },
+    "expected": {
+      "device_id": "tv",
+      "action": "run_content",
+      "owner": "мама",
+      "place": "",
+      "value": "Ведьмака"
+    },
+    "resolution": {
+      "status": "ambiguous",
+      "reason": "media_type",
+      "owner": "мама",
+      "content": "Ведьмака"
+    }
+  },
+  {
+    "id": "pipeline:65:Запусти в гостиной Доктора Кто",
+    "text": "Запусти в гостиной Доктора Кто",
+    "intent": {
+      "device": "телевизор",
+      "action": "run_content",
+      "owner": "",
+      "place": "гостиная",
+      "value": "Доктора Кто"
+    },
+    "expected": {
+      "device_id": "tv_living",
+      "action": "run_content",
+      "owner": "",
+      "place": "гостиная",
+      "value": "Доктора Кто"
+    },
+    "resolution": {
+      "status": "ambiguous",
+      "reason": "media_type",
+      "area": "гостиная",
+      "content": "Доктора Кто"
+    }
+  },
+  {
+    "id": "pipeline:66:Поставь у Маши Шрека",
+    "text": "Поставь у Маши Шрека",
+    "intent": {
+      "device": "телевизор",
+      "action": "run_content",
+      "owner": "Маша",
+      "place": "",
+      "value": "Шрека"
+    },
+    "expected": {
+      "device_id": "tv",
+      "action": "run_content",
+      "owner": "Маша",
+      "place": "",
+      "value": "Шрека"
+    },
+    "resolution": {
+      "status": "ambiguous",
+      "reason": "media_type",
+      "owner": "Маша",
+      "content": "Шрека"
+    }
+  },
+  {
+    "id": "pipeline:67:Включи у Антона Интерстеллар",
+    "text": "Включи у Антона Интерстеллар",
+    "intent": {
+      "device": "телевизор",
+      "action": "run_content",
+      "owner": "Антон",
+      "place": "",
+      "value": "Интерстеллар"
+    },
+    "expected": {
+      "device_id": "tv",
+      "action": "run_content",
+      "owner": "Антон",
+      "place": "",
+      "value": "Интерстеллар"
+    },
+    "resolution": {
+      "status": "ambiguous",
+      "reason": "media_type",
+      "owner": "Антон",
+      "content": "Интерстеллар"
+    }
+  },
+  {
+    "id": "pipeline:68:Запусти у мамы Sonne",
+    "text": "Запусти у мамы Sonne",
+    "intent": {
+      "device": "аудиосистема",
+      "action": "run_content",
+      "owner": "мама",
+      "place": "",
+      "value": "Sonne"
+    },
+    "expected": {
+      "device_id": "soundbar",
+      "action": "run_content",
+      "owner": "мама",
+      "place": "",
+      "value": "Sonne"
+    },
+    "resolution": {
+      "status": "ambiguous",
+      "reason": "media_type",
+      "owner": "мама",
+      "content": "Sonne"
+    }
+  },
+  {
+    "id": "pipeline:69:Включи на кухне Linkin Park",
+    "text": "Включи на кухне Linkin Park",
+    "intent": {
+      "device": "аудиосистема",
+      "action": "run_content",
+      "owner": "",
+      "place": "кухня",
+      "value": "Linkin Park"
+    },
+    "expected": {
+      "device_id": "soundbar_kitchen",
+      "action": "run_content",
+      "owner": "",
+      "place": "кухня",
+      "value": "Linkin Park"
+    },
+    "resolution": {
+      "status": "ambiguous",
+      "reason": "media_type",
+      "area": "кухня",
+      "content": "Linkin Park"
+    }
+  },
+  {
+    "id": "pipeline:70:Сделай теплый белый на кухне",
+    "text": "Сделай теплый белый на кухне",
+    "intent": {
+      "device": "свет",
+      "action": "set_state",
+      "owner": "",
+      "place": "кухня",
+      "value": "теплый белый"
+    },
+    "expected": {
+      "device_id": "light_common_kitchen",
+      "action": "set_state",
+      "owner": "",
+      "place": "кухня",
+      "value": "теплый белый"
+    }
+  },
+  {
+    "id": "pipeline:71:Хочу свет фиолетовый",
+    "text": "Хочу свет фиолетовый",
+    "intent": {
+      "device": "свет",
+      "action": "set_state",
+      "owner": "",
+      "place": "",
+      "value": "фиолетовый"
+    },
+    "expected": {
+      "device_id": "light_common",
+      "action": "set_state",
+      "owner": "",
+      "place": "",
+      "value": "фиолетовый"
     }
   }
 ]

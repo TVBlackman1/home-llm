@@ -1,0 +1,1284 @@
+============================= test session starts ==============================
+platform linux -- Python 3.14.7, pytest-9.1.1, pluggy-1.6.0
+rootdir: /root/ollama-test/ollama-runner
+configfile: pyproject.toml
+plugins: returns-0.29.0, anyio-4.14.2
+collected 279 items
+
+tests/test_mistral_semantic.py .......................................................................................................................................................................................................................................F...............FF.F...FF.............F.FFF..F..
+
+=================================== FAILURES ===================================
+__________ test_mistral_semantic[pipeline:23:Поставь Ведьмака у мамы] __________
+{
+  "id": "pipeline:23:Поставь Ведьмака у мамы",
+  "input": "Поставь Ведьмака у мамы",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "not_found",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "Ведьмака",
+          "owner": "мама",
+          "place": "",
+          "kind": "device"
+        },
+        "status": "not_found",
+        "reason": "no_capable_device",
+        "candidates": [
+          "light_mama",
+          "light_mama_bedroom",
+          "light_mama_kitchen",
+          "thermometer_mama",
+          "thermometer_mama_kitchen",
+          "humidifier_mama",
+          "humidifier_mama_bedroom"
+        ],
+        "semantic": {
+          "intent": "video.play",
+          "nlu_intent": "video.play",
+          "device_type": null,
+          "owner": "мама",
+          "area": null,
+          "ordinal": null,
+          "content": "Ведьмака",
+          "missing": []
+        },
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "owner": "мама",
+          "content": "Ведьмака"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "not_found",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "Ведьмака",
+          "owner": "мама",
+          "place": "",
+          "kind": "device"
+        },
+        "status": "not_found",
+        "reason": "no_capable_device",
+        "candidates": [
+          "light_mama",
+          "light_mama_bedroom",
+          "light_mama_kitchen",
+          "thermometer_mama",
+          "thermometer_mama_kitchen",
+          "humidifier_mama",
+          "humidifier_mama_bedroom"
+        ],
+        "semantic": {
+          "intent": "video.play",
+          "nlu_intent": "video.play",
+          "device_type": null,
+          "owner": "мама",
+          "area": null,
+          "ordinal": null,
+          "content": "Ведьмака",
+          "missing": []
+        },
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "owner": "мама",
+          "content": "Ведьмака"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "not_found",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "Ведьмака",
+          "owner": "мама",
+          "place": "",
+          "kind": "device"
+        },
+        "status": "not_found",
+        "reason": "no_capable_device",
+        "candidates": [
+          "light_mama",
+          "light_mama_bedroom",
+          "light_mama_kitchen",
+          "thermometer_mama",
+          "thermometer_mama_kitchen",
+          "humidifier_mama",
+          "humidifier_mama_bedroom"
+        ],
+        "semantic": {
+          "intent": "video.play",
+          "nlu_intent": "video.play",
+          "device_type": null,
+          "owner": "мама",
+          "area": null,
+          "ordinal": null,
+          "content": "Ведьмака",
+          "missing": []
+        },
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "owner": "мама",
+          "content": "Ведьмака"
+        }
+      }
+    }
+  ]
+}
+_______ test_mistral_semantic[pipeline:39:Включи Интерстеллар у Антона] ________
+{
+  "id": "pipeline:39:Включи Интерстеллар у Антона",
+  "input": "Включи Интерстеллар у Антона",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "not_found",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "Интерстеллар",
+          "owner": "Антон",
+          "place": "",
+          "kind": "device"
+        },
+        "status": "not_found",
+        "reason": "no_capable_device",
+        "candidates": [
+          "light_anton",
+          "light_anton_bedroom",
+          "floor_lamp_anton",
+          "floor_lamp_anton_living"
+        ],
+        "semantic": {
+          "intent": "video.play",
+          "nlu_intent": "video.play",
+          "device_type": null,
+          "owner": "Антон",
+          "area": null,
+          "ordinal": null,
+          "content": "Интерстеллар",
+          "missing": []
+        },
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "owner": "Антон",
+          "content": "Интерстеллар"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "not_found",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "Интерстеллар",
+          "owner": "Антон",
+          "place": "",
+          "kind": "device"
+        },
+        "status": "not_found",
+        "reason": "no_capable_device",
+        "candidates": [
+          "light_anton",
+          "light_anton_bedroom",
+          "floor_lamp_anton",
+          "floor_lamp_anton_living"
+        ],
+        "semantic": {
+          "intent": "video.play",
+          "nlu_intent": "video.play",
+          "device_type": null,
+          "owner": "Антон",
+          "area": null,
+          "ordinal": null,
+          "content": "Интерстеллар",
+          "missing": []
+        },
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "owner": "Антон",
+          "content": "Интерстеллар"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "not_found",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "Интерстеллар",
+          "owner": "Антон",
+          "place": "",
+          "kind": "device"
+        },
+        "status": "not_found",
+        "reason": "no_capable_device",
+        "candidates": [
+          "light_anton",
+          "light_anton_bedroom",
+          "floor_lamp_anton",
+          "floor_lamp_anton_living"
+        ],
+        "semantic": {
+          "intent": "video.play",
+          "nlu_intent": "video.play",
+          "device_type": null,
+          "owner": "Антон",
+          "area": null,
+          "ordinal": null,
+          "content": "Интерстеллар",
+          "missing": []
+        },
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "owner": "Антон",
+          "content": "Интерстеллар"
+        }
+      }
+    }
+  ]
+}
+______ test_mistral_semantic[pipeline:40:Запусти Доктора Кто в гостиной] _______
+{
+  "id": "pipeline:40:Запусти Доктора Кто в гостиной",
+  "input": "Запусти Доктора Кто в гостиной",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "area": "гостиная",
+          "content": "Доктора Кто"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "area": "гостиная",
+          "content": "Доктора Кто"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "area": "гостиная",
+          "content": "Доктора Кто"
+        }
+      }
+    }
+  ]
+}
+___________ test_mistral_semantic[pipeline:42:Поставь Шрека у Маши] ____________
+{
+  "id": "pipeline:42:Поставь Шрека у Маши",
+  "input": "Поставь Шрека у Маши",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "tv",
+            "actual": "tv_masha_bedroom"
+          }
+        },
+        "command": {
+          "device_id": "tv_masha_bedroom",
+          "action": "run_content",
+          "value": "Шрека",
+          "owner": "Маша",
+          "place": "",
+          "kind": "device"
+        },
+        "status": "resolved",
+        "reason": "",
+        "candidates": null,
+        "semantic": {
+          "intent": "video.play",
+          "nlu_intent": "video.play",
+          "device_type": null,
+          "owner": "Маша",
+          "area": null,
+          "ordinal": null,
+          "content": "Шрека",
+          "missing": []
+        },
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "owner": "Маша",
+          "content": "Шрека"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "tv",
+            "actual": "tv_masha_bedroom"
+          }
+        },
+        "command": {
+          "device_id": "tv_masha_bedroom",
+          "action": "run_content",
+          "value": "Шрека",
+          "owner": "Маша",
+          "place": "",
+          "kind": "device"
+        },
+        "status": "resolved",
+        "reason": "",
+        "candidates": null,
+        "semantic": {
+          "intent": "video.play",
+          "nlu_intent": "video.play",
+          "device_type": null,
+          "owner": "Маша",
+          "area": null,
+          "ordinal": null,
+          "content": "Шрека",
+          "missing": []
+        },
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "owner": "Маша",
+          "content": "Шрека"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "tv",
+            "actual": "tv_masha_bedroom"
+          }
+        },
+        "command": {
+          "device_id": "tv_masha_bedroom",
+          "action": "run_content",
+          "value": "Шрека",
+          "owner": "Маша",
+          "place": "",
+          "kind": "device"
+        },
+        "status": "resolved",
+        "reason": "",
+        "candidates": null,
+        "semantic": {
+          "intent": "video.play",
+          "nlu_intent": "video.play",
+          "device_type": null,
+          "owner": "Маша",
+          "area": null,
+          "ordinal": null,
+          "content": "Шрека",
+          "missing": []
+        },
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "owner": "Маша",
+          "content": "Шрека"
+        }
+      }
+    }
+  ]
+}
+___________ test_mistral_semantic[pipeline:47:Запусти Sonne у мамы] ____________
+{
+  "id": "pipeline:47:Запусти Sonne у мамы",
+  "input": "Запусти Sonne у мамы",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "not_found",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "Sonne",
+          "owner": "мама",
+          "place": "",
+          "kind": "device"
+        },
+        "status": "not_found",
+        "reason": "no_capable_device",
+        "candidates": [
+          "light_mama",
+          "light_mama_bedroom",
+          "light_mama_kitchen",
+          "thermometer_mama",
+          "thermometer_mama_kitchen",
+          "humidifier_mama",
+          "humidifier_mama_bedroom"
+        ],
+        "semantic": {
+          "intent": "audio.play",
+          "nlu_intent": "audio.play",
+          "device_type": null,
+          "owner": "мама",
+          "area": null,
+          "ordinal": null,
+          "content": "Sonne",
+          "missing": []
+        },
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "owner": "мама",
+          "content": "Sonne"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "not_found",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "Sonne",
+          "owner": "мама",
+          "place": "",
+          "kind": "device"
+        },
+        "status": "not_found",
+        "reason": "no_capable_device",
+        "candidates": [
+          "light_mama",
+          "light_mama_bedroom",
+          "light_mama_kitchen",
+          "thermometer_mama",
+          "thermometer_mama_kitchen",
+          "humidifier_mama",
+          "humidifier_mama_bedroom"
+        ],
+        "semantic": {
+          "intent": "audio.play",
+          "nlu_intent": "audio.play",
+          "device_type": null,
+          "owner": "мама",
+          "area": null,
+          "ordinal": null,
+          "content": "Sonne",
+          "missing": []
+        },
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "owner": "мама",
+          "content": "Sonne"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "not_found",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "Sonne",
+          "owner": "мама",
+          "place": "",
+          "kind": "device"
+        },
+        "status": "not_found",
+        "reason": "no_capable_device",
+        "candidates": [
+          "light_mama",
+          "light_mama_bedroom",
+          "light_mama_kitchen",
+          "thermometer_mama",
+          "thermometer_mama_kitchen",
+          "humidifier_mama",
+          "humidifier_mama_bedroom"
+        ],
+        "semantic": {
+          "intent": "audio.play",
+          "nlu_intent": "audio.play",
+          "device_type": null,
+          "owner": "мама",
+          "area": null,
+          "ordinal": null,
+          "content": "Sonne",
+          "missing": []
+        },
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "owner": "мама",
+          "content": "Sonne"
+        }
+      }
+    }
+  ]
+}
+________ test_mistral_semantic[pipeline:48:Включи Linkin Park на кухне] ________
+{
+  "id": "pipeline:48:Включи Linkin Park на кухне",
+  "input": "Включи Linkin Park на кухне",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "Linkin Park",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "status": "ambiguous",
+        "reason": "",
+        "candidates": [
+          "player_kitchen",
+          "radio_kitchen",
+          "soundbar_kitchen",
+          "speaker_second_kitchen"
+        ],
+        "semantic": {
+          "intent": "audio.play",
+          "nlu_intent": "audio.play",
+          "device_type": null,
+          "owner": null,
+          "area": "кухня",
+          "ordinal": null,
+          "content": "Linkin Park",
+          "missing": [
+            "ordinal",
+            "device_type"
+          ]
+        },
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "area": "кухня",
+          "content": "Linkin Park"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "Linkin Park",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "status": "ambiguous",
+        "reason": "",
+        "candidates": [
+          "player_kitchen",
+          "radio_kitchen",
+          "soundbar_kitchen",
+          "speaker_second_kitchen"
+        ],
+        "semantic": {
+          "intent": "audio.play",
+          "nlu_intent": "audio.play",
+          "device_type": null,
+          "owner": null,
+          "area": "кухня",
+          "ordinal": null,
+          "content": "Linkin Park",
+          "missing": [
+            "ordinal",
+            "device_type"
+          ]
+        },
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "area": "кухня",
+          "content": "Linkin Park"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "Linkin Park",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "status": "ambiguous",
+        "reason": "",
+        "candidates": [
+          "player_kitchen",
+          "radio_kitchen",
+          "soundbar_kitchen",
+          "speaker_second_kitchen"
+        ],
+        "semantic": {
+          "intent": "audio.play",
+          "nlu_intent": "audio.play",
+          "device_type": null,
+          "owner": null,
+          "area": "кухня",
+          "ordinal": null,
+          "content": "Linkin Park",
+          "missing": [
+            "ordinal",
+            "device_type"
+          ]
+        },
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "area": "кухня",
+          "content": "Linkin Park"
+        }
+      }
+    }
+  ]
+}
+__________ test_mistral_semantic[pipeline:62:Включи ведьмака у Маши] ___________
+{
+  "id": "pipeline:62:Включи ведьмака у Маши",
+  "input": "Включи ведьмака у Маши",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "tv",
+            "actual": "tv_masha_bedroom"
+          }
+        },
+        "command": {
+          "device_id": "tv_masha_bedroom",
+          "action": "run_content",
+          "value": "ведьмака",
+          "owner": "Маша",
+          "place": "",
+          "kind": "device"
+        },
+        "status": "resolved",
+        "reason": "",
+        "candidates": null,
+        "semantic": {
+          "intent": "video.play",
+          "nlu_intent": "video.play",
+          "device_type": null,
+          "owner": "Маша",
+          "area": null,
+          "ordinal": null,
+          "content": "ведьмака",
+          "missing": []
+        },
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "owner": "Маша",
+          "content": "ведьмака"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "tv",
+            "actual": "tv_masha_bedroom"
+          }
+        },
+        "command": {
+          "device_id": "tv_masha_bedroom",
+          "action": "run_content",
+          "value": "ведьмака",
+          "owner": "Маша",
+          "place": "",
+          "kind": "device"
+        },
+        "status": "resolved",
+        "reason": "",
+        "candidates": null,
+        "semantic": {
+          "intent": "video.play",
+          "nlu_intent": "video.play",
+          "device_type": null,
+          "owner": "Маша",
+          "area": null,
+          "ordinal": null,
+          "content": "ведьмака",
+          "missing": []
+        },
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "owner": "Маша",
+          "content": "ведьмака"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "tv",
+            "actual": "tv_masha_bedroom"
+          }
+        },
+        "command": {
+          "device_id": "tv_masha_bedroom",
+          "action": "run_content",
+          "value": "ведьмака",
+          "owner": "Маша",
+          "place": "",
+          "kind": "device"
+        },
+        "status": "resolved",
+        "reason": "",
+        "candidates": null,
+        "semantic": {
+          "intent": "video.play",
+          "nlu_intent": "video.play",
+          "device_type": null,
+          "owner": "Маша",
+          "area": null,
+          "ordinal": null,
+          "content": "ведьмака",
+          "missing": []
+        },
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "owner": "Маша",
+          "content": "ведьмака"
+        }
+      }
+    }
+  ]
+}
+__________ test_mistral_semantic[pipeline:64:Поставь у мамы Ведьмака] __________
+{
+  "id": "pipeline:64:Поставь у мамы Ведьмака",
+  "input": "Поставь у мамы Ведьмака",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "not_found",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "Ведьмака",
+          "owner": "мама",
+          "place": "",
+          "kind": "device"
+        },
+        "status": "not_found",
+        "reason": "no_capable_device",
+        "candidates": [
+          "light_mama",
+          "light_mama_bedroom",
+          "light_mama_kitchen",
+          "thermometer_mama",
+          "thermometer_mama_kitchen",
+          "humidifier_mama",
+          "humidifier_mama_bedroom"
+        ],
+        "semantic": {
+          "intent": "audio.play",
+          "nlu_intent": "audio.play",
+          "device_type": null,
+          "owner": "мама",
+          "area": null,
+          "ordinal": null,
+          "content": "Ведьмака",
+          "missing": []
+        },
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "owner": "мама",
+          "content": "Ведьмака"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "not_found",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "Ведьмака",
+          "owner": "мама",
+          "place": "",
+          "kind": "device"
+        },
+        "status": "not_found",
+        "reason": "no_capable_device",
+        "candidates": [
+          "light_mama",
+          "light_mama_bedroom",
+          "light_mama_kitchen",
+          "thermometer_mama",
+          "thermometer_mama_kitchen",
+          "humidifier_mama",
+          "humidifier_mama_bedroom"
+        ],
+        "semantic": {
+          "intent": "audio.play",
+          "nlu_intent": "audio.play",
+          "device_type": null,
+          "owner": "мама",
+          "area": null,
+          "ordinal": null,
+          "content": "Ведьмака",
+          "missing": []
+        },
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "owner": "мама",
+          "content": "Ведьмака"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "not_found",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "Ведьмака",
+          "owner": "мама",
+          "place": "",
+          "kind": "device"
+        },
+        "status": "not_found",
+        "reason": "no_capable_device",
+        "candidates": [
+          "light_mama",
+          "light_mama_bedroom",
+          "light_mama_kitchen",
+          "thermometer_mama",
+          "thermometer_mama_kitchen",
+          "humidifier_mama",
+          "humidifier_mama_bedroom"
+        ],
+        "semantic": {
+          "intent": "audio.play",
+          "nlu_intent": "audio.play",
+          "device_type": null,
+          "owner": "мама",
+          "area": null,
+          "ordinal": null,
+          "content": "Ведьмака",
+          "missing": []
+        },
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "owner": "мама",
+          "content": "Ведьмака"
+        }
+      }
+    }
+  ]
+}
+______ test_mistral_semantic[pipeline:65:Запусти в гостиной Доктора Кто] _______
+{
+  "id": "pipeline:65:Запусти в гостиной Доктора Кто",
+  "input": "Запусти в гостиной Доктора Кто",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "area": "гостиная",
+          "content": "Доктора Кто"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "area": "гостиная",
+          "content": "Доктора Кто"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "area": "гостиная",
+          "content": "Доктора Кто"
+        }
+      }
+    }
+  ]
+}
+___________ test_mistral_semantic[pipeline:66:Поставь у Маши Шрека] ____________
+{
+  "id": "pipeline:66:Поставь у Маши Шрека",
+  "input": "Поставь у Маши Шрека",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "tv",
+            "actual": "tv_masha_bedroom"
+          }
+        },
+        "command": {
+          "device_id": "tv_masha_bedroom",
+          "action": "run_content",
+          "value": "Шрека",
+          "owner": "Маша",
+          "place": "",
+          "kind": "device"
+        },
+        "status": "resolved",
+        "reason": "",
+        "candidates": null,
+        "semantic": {
+          "intent": "video.play",
+          "nlu_intent": "video.play",
+          "device_type": null,
+          "owner": "Маша",
+          "area": null,
+          "ordinal": null,
+          "content": "Шрека",
+          "missing": []
+        },
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "owner": "Маша",
+          "content": "Шрека"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "tv",
+            "actual": "tv_masha_bedroom"
+          }
+        },
+        "command": {
+          "device_id": "tv_masha_bedroom",
+          "action": "run_content",
+          "value": "Шрека",
+          "owner": "Маша",
+          "place": "",
+          "kind": "device"
+        },
+        "status": "resolved",
+        "reason": "",
+        "candidates": null,
+        "semantic": {
+          "intent": "video.play",
+          "nlu_intent": "video.play",
+          "device_type": null,
+          "owner": "Маша",
+          "area": null,
+          "ordinal": null,
+          "content": "Шрека",
+          "missing": []
+        },
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "owner": "Маша",
+          "content": "Шрека"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "diff": {
+          "device_id": {
+            "expected": "tv",
+            "actual": "tv_masha_bedroom"
+          }
+        },
+        "command": {
+          "device_id": "tv_masha_bedroom",
+          "action": "run_content",
+          "value": "Шрека",
+          "owner": "Маша",
+          "place": "",
+          "kind": "device"
+        },
+        "status": "resolved",
+        "reason": "",
+        "candidates": null,
+        "semantic": {
+          "intent": "video.play",
+          "nlu_intent": "video.play",
+          "device_type": null,
+          "owner": "Маша",
+          "area": null,
+          "ordinal": null,
+          "content": "Шрека",
+          "missing": []
+        },
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "owner": "Маша",
+          "content": "Шрека"
+        }
+      }
+    }
+  ]
+}
+________ test_mistral_semantic[pipeline:69:Включи на кухне Linkin Park] ________
+{
+  "id": "pipeline:69:Включи на кухне Linkin Park",
+  "input": "Включи на кухне Linkin Park",
+  "repeats": 3,
+  "failed": 3,
+  "failures": [
+    {
+      "attempt": 1,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "Linkin Park",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "status": "ambiguous",
+        "reason": "",
+        "candidates": [
+          "player_kitchen",
+          "radio_kitchen",
+          "soundbar_kitchen",
+          "speaker_second_kitchen"
+        ],
+        "semantic": {
+          "intent": "audio.play",
+          "nlu_intent": "audio.play",
+          "device_type": null,
+          "owner": null,
+          "area": "кухня",
+          "ordinal": null,
+          "content": "Linkin Park",
+          "missing": [
+            "ordinal",
+            "device_type"
+          ]
+        },
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "area": "кухня",
+          "content": "Linkin Park"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "Linkin Park",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "status": "ambiguous",
+        "reason": "",
+        "candidates": [
+          "player_kitchen",
+          "radio_kitchen",
+          "soundbar_kitchen",
+          "speaker_second_kitchen"
+        ],
+        "semantic": {
+          "intent": "audio.play",
+          "nlu_intent": "audio.play",
+          "device_type": null,
+          "owner": null,
+          "area": "кухня",
+          "ordinal": null,
+          "content": "Linkin Park",
+          "missing": [
+            "ordinal",
+            "device_type"
+          ]
+        },
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "area": "кухня",
+          "content": "Linkin Park"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "error": {
+        "error": "ambiguous",
+        "command": {
+          "device_id": "",
+          "action": "run_content",
+          "value": "Linkin Park",
+          "owner": "",
+          "place": "кухня",
+          "kind": "device"
+        },
+        "status": "ambiguous",
+        "reason": "",
+        "candidates": [
+          "player_kitchen",
+          "radio_kitchen",
+          "soundbar_kitchen",
+          "speaker_second_kitchen"
+        ],
+        "semantic": {
+          "intent": "audio.play",
+          "nlu_intent": "audio.play",
+          "device_type": null,
+          "owner": null,
+          "area": "кухня",
+          "ordinal": null,
+          "content": "Linkin Park",
+          "missing": [
+            "ordinal",
+            "device_type"
+          ]
+        },
+        "expected_resolution": {
+          "status": "ambiguous",
+          "reason": "media_type",
+          "area": "кухня",
+          "content": "Linkin Park"
+        }
+      }
+    }
+  ]
+}
+=========================== short test summary info ============================
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:23:Поставь Ведьмака у мамы]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:39:Включи Интерстеллар у Антона]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:40:Запусти Доктора Кто в гостиной]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:42:Поставь Шрека у Маши]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:47:Запусти Sonne у мамы]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:48:Включи Linkin Park на кухне]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:62:Включи ведьмака у Маши]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:64:Поставь у мамы Ведьмака]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:65:Запусти в гостиной Доктора Кто]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:66:Поставь у Маши Шрека]
+FAILED tests/test_mistral_semantic.py::test_mistral_semantic[pipeline:69:Включи на кухне Linkin Park]
+================= 11 failed, 268 passed in 1275.73s (0:21:15) ==================
+llm calls  : 838
+
+========================================================
+Pipeline latency: ministral-3:3b semantic
+========================================================
+cold start : 5.810 s
+
+requests   : 837
+mean       : 1.516 s
+min        : 1.187 s
+p50        : 1.475 s
+p90        : 1.763 s
+p95        : 1.816 s
+p99        : 1.993 s
+max        : 2.069 s
+
+passing cases : 268
+  resolved                     224
+  not_found/no_match           10
+  unsupported/capability       10
+  clarify/no_active_device     9
+  ambiguous                    6
+  ambiguous/media_type         6
+  not_found/no_capable_device  3
+========================================================

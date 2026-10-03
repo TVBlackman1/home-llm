@@ -4,6 +4,7 @@ import atexit
 import json
 import statistics
 import time
+from collections import Counter
 from pathlib import Path
 from typing import Any
 
@@ -30,6 +31,7 @@ _PIPELINES: dict[str, Pipeline] = {}
 _SEMANTIC_PIPELINES: dict[str, SemanticPipeline] = {}
 _COLD_STARTS: dict[str, float] = {}
 _LATENCIES: dict[str, list[float]] = {}
+_CASE_OUTCOMES: dict[str, Counter[str]] = {}
 
 
 def load_cases(path: Path) -> list[dict[str, Any]]:
@@ -156,21 +158,38 @@ def _resolution_matches(result: Result, resolution: dict[str, Any] | None) -> bo
     payload = result.payload or {}
     if payload.get("status") != resolution.get("status"):
         return False
-    if "reason" in resolution and payload.get("reason") != resolution["reason"]:
+    if "reason" in resolution and (payload.get("reason") or "") != resolution["reason"]:
         return False
+    semantic = payload.get("semantic") or {}
+    for key in ("content", "owner", "area"):
+        if key not in resolution:
+            continue
+        if (semantic.get(key) or "") != resolution[key]:
+            return False
     return True
+
+
+def _outcome_label(result: Result) -> str:
+    payload = result.payload or {}
+    status = str(payload.get("status") or "missing")
+    reason = payload.get("reason") or ""
+    if reason and status in {"clarify", "ambiguous", "not_found", "unsupported"}:
+        return f"{status}/{reason}"
+    return status
 
 
 def run_semantic_case(model: str, case: dict[str, Any]) -> None:
     key = f"{model} semantic"
     pipeline = get_semantic_pipeline(model)
     failures: list[dict[str, Any]] = []
+    last_label = "missing"
 
     for attempt in range(1, LLM_REPEATS + 1):
         started = time.perf_counter()
         expected = case.get("semantic_expected", case["expected"])
         result = pipeline.run(case["text"], Expect(expected))
         _LATENCIES[key].append(time.perf_counter() - started)
+        last_label = _outcome_label(result)
 
         resolution = case.get("resolution")
         if resolution:
@@ -201,6 +220,7 @@ def run_semantic_case(model: str, case: dict[str, Any]) -> None:
         )
 
     if not failures:
+        _CASE_OUTCOMES.setdefault(key, Counter())[last_label] += 1
         return
 
     pytest.fail(
@@ -281,10 +301,20 @@ def print_latency_stats() -> None:
         print(f"p95        : {percentile(values, 95):.3f} s")
         print(f"p99        : {percentile(values, 99):.3f} s")
         print(f"max        : {max(values):.3f} s")
+        outcomes = _CASE_OUTCOMES.get(model)
+        if outcomes:
+            print()
+            print(f"passing cases : {sum(outcomes.values())}")
+            for label, count in sorted(outcomes.items(), key=lambda item: (-item[1], item[0])):
+                print(f"  {label:<28} {count}")
         print("=" * 56)
 
 
 def close_pipelines() -> None:
+    for pipeline in _SEMANTIC_PIPELINES.values():
+        calls = getattr(pipeline._nlu, "calls", None)
+        if calls is not None:
+            print(f"llm calls  : {calls}")
     print_latency_stats()
     close_resources()
     _PIPELINES.clear()

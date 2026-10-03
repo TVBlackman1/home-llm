@@ -289,7 +289,17 @@ def test_explicit_owner_and_office_come_from_the_text() -> None:
 
 
 @pytest.mark.unit
-def test_unknown_title_is_not_a_power_command() -> None:
+@pytest.mark.parametrize(
+    ("text", "content"),
+    [
+        ("Включи у Маши Sonne", "Sonne"),
+        ("Включи Sonne у Маши", "Sonne"),
+        ("Включи ведьмака у Маши", "ведьмака"),
+        ("Включи у Маши ведьмака", "ведьмака"),
+        ("включи ведьмака у маши", "ведьмака"),
+    ],
+)
+def test_unknown_title_is_not_a_power_command(text: str, content: str) -> None:
     registry = DeviceRegistry.from_static()
     parsed = semantic_command_from_dict({
         "intent": "device.turn_on",
@@ -302,14 +312,75 @@ def test_unknown_title_is_not_a_power_command() -> None:
         "content": "",
         "value": "",
     })
-    merged, _, _ = apply_explicit("Включи у Маши Sonne", parsed, registry)
-    resolved = CapabilityResolver(registry).resolve(merged, text="Включи у Маши Sonne")
+    merged, _, _ = apply_explicit(text, parsed, registry)
+    resolved = CapabilityResolver(registry).resolve(merged, text=text)
 
     assert merged.intent == "content.play"
-    assert merged.arguments["content"] == "Sonne"
+    assert merged.arguments["content"] == content
+    assert merged.target.owner == "Маша"
     assert resolved.status == "ambiguous"
     assert resolved.reason == "media_type"
     assert resolved.execution_target_id is None
+
+
+@pytest.mark.unit
+@pytest.mark.parametrize(
+    ("left", "right", "content", "owner", "area"),
+    [
+        ("Включи Интерстеллар у Антона", "Включи у Антона Интерстеллар", "Интерстеллар", "Антон", None),
+        ("Запусти Sonne у мамы", "Запусти у мамы Sonne", "Sonne", "мама", None),
+        ("Поставь Ведьмака у мамы", "Поставь у мамы Ведьмака", "Ведьмака", "мама", None),
+        ("Поставь Шрека у Маши", "Поставь у Маши Шрека", "Шрека", "Маша", None),
+        ("Запусти Доктора Кто в гостиной", "Запусти в гостиной Доктора Кто", "Доктора Кто", None, "гостиная"),
+        ("Включи Linkin Park на кухне", "Включи на кухне Linkin Park", "Linkin Park", None, "кухня"),
+        ("Включи у Маши Sonne", "Включи Sonne у Маши", "Sonne", "Маша", None),
+        ("Включи ведьмака у Маши", "Включи у Маши ведьмака", "ведьмака", "Маша", None),
+    ],
+)
+def test_word_order_keeps_the_same_raw_slots(
+    left: str,
+    right: str,
+    content: str,
+    owner: str | None,
+    area: str | None,
+) -> None:
+    registry = DeviceRegistry.from_static()
+
+    def slots_for(text: str, intent: str) -> SemanticCommand:
+        parsed = semantic_command_from_dict({
+            "intent": intent,
+            "device_type": "",
+            "mention": "",
+            "owner": "",
+            "area": "",
+            "ordinal": 0,
+            "explicit": False,
+            "content": "Ведьмака" if content == "ведьмака" else f"у кого-то {content}",
+            "value": "",
+        })
+        merged, _, _ = apply_explicit(text, parsed, registry)
+        return merged
+
+    for intent in ("device.turn_on", "video.play", "audio.play"):
+        first = slots_for(left, intent)
+        second = slots_for(right, intent)
+        assert first.arguments.get("content") == content
+        assert second.arguments.get("content") == content
+        assert first.target.owner == second.target.owner == owner
+        assert first.target.area == second.target.area == area
+        assert first.intent == second.intent
+        if intent == "device.turn_on":
+            assert first.intent == "content.play"
+            resolved = CapabilityResolver(registry).resolve(first, text=left)
+            assert resolved.status == "ambiguous"
+            assert resolved.reason == "media_type"
+            assert resolved.execution_target_id is None
+        else:
+            assert first.intent == intent
+
+    playlist = slots_for("Поставь плейлист для уборки у Маши", "audio.play")
+    assert playlist.arguments["content"] == "плейлист для уборки"
+    assert playlist.target.owner == "Маша"
 
 
 @pytest.mark.unit
@@ -331,6 +402,61 @@ def test_power_value_drops_a_repeated_device_name() -> None:
     assert merged.intent == "device.turn_on"
     assert "value" not in merged.arguments
     assert "dropped device name from value" in notes
+
+
+@pytest.mark.unit
+def test_missing_color_comes_from_the_unconsumed_span() -> None:
+    registry = DeviceRegistry.from_static()
+    empty = {
+        "intent": "color.set",
+        "device_type": "light",
+        "mention": "",
+        "owner": "",
+        "area": "",
+        "ordinal": 0,
+        "explicit": True,
+        "content": "",
+        "value": "",
+    }
+    purple, _, notes = apply_explicit(
+        "Хочу фиолетовый свет",
+        semantic_command_from_dict(empty),
+        registry,
+    )
+    purple_swapped, _, _ = apply_explicit(
+        "Хочу свет фиолетовый",
+        semantic_command_from_dict(empty),
+        registry,
+    )
+    warm, _, _ = apply_explicit(
+        "Сделай на кухне теплый белый",
+        semantic_command_from_dict({**empty, "device_type": "", "area": "кухня", "explicit": True}),
+        registry,
+    )
+    warm_swapped, _, _ = apply_explicit(
+        "Сделай теплый белый на кухне",
+        semantic_command_from_dict({**empty, "device_type": "", "area": "кухня", "explicit": True}),
+        registry,
+    )
+    inflected, _, _ = apply_explicit(
+        "Сделай свет в спальне красным",
+        semantic_command_from_dict({**empty, "area": "спальня"}),
+        registry,
+    )
+    kept, _, kept_notes = apply_explicit(
+        "Сделай свет в спальне красным",
+        semantic_command_from_dict({**empty, "area": "спальня", "value": "красный"}),
+        registry,
+    )
+
+    assert purple.arguments["value"] == "фиолетовый"
+    assert purple_swapped.arguments["value"] == "фиолетовый"
+    assert "filled color from unconsumed span" in notes
+    assert warm.arguments["value"] == "теплый белый"
+    assert warm_swapped.arguments["value"] == "теплый белый"
+    assert inflected.arguments["value"] == "красным"
+    assert kept.arguments["value"] == "красный"
+    assert "filled color from unconsumed span" not in kept_notes
 
 
 def test_next_episode_is_not_content() -> None:

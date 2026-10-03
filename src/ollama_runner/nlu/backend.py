@@ -96,8 +96,10 @@ class LLMNLUBackend:
         self.system_prompt = prompt_path.read_text(encoding="utf-8")
         self.client = client or httpx.Client(base_url=base_url, timeout=timeout)
         self._owns_client = client is None
+        self.calls = 0
 
     def parse(self, text: str, context: RequestContext | None = None) -> SemanticCommand:
+        self.calls += 1
         del context  # reserved for a later prompt section; resolver owns context
         response = self.client.post(
             "/api/chat",
