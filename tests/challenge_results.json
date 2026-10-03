@@ -56,7 +56,9 @@
       "correct": false,
       "false_handled": false,
       "reason": "no_intent_cue",
-      "evidence": [],
+      "evidence": [
+        "coordination"
+      ],
       "note": "device, filler, verb, area",
       "template": "N DEV пожалуйста включи на AREA"
     },
@@ -130,8 +132,10 @@
       "predicted_intent": null,
       "correct": false,
       "false_handled": false,
-      "reason": "no_intent_cue",
-      "evidence": [],
+      "reason": "partial",
+      "evidence": [
+        "coordination"
+      ],
       "note": "filler before device",
       "template": "ну DEV в AREA включи"
     },
@@ -145,8 +149,10 @@
       "predicted_intent": null,
       "correct": false,
       "false_handled": false,
-      "reason": "no_intent_cue",
-      "evidence": [],
+      "reason": "partial",
+      "evidence": [
+        "coordination"
+      ],
       "note": "polite filler, owner, area, verb last",
       "template": "пожалуйста у OWNER в AREA DEV включи"
     },
@@ -220,8 +226,10 @@
       "predicted_intent": null,
       "correct": false,
       "false_handled": false,
-      "reason": "no_intent_cue",
-      "evidence": [],
+      "reason": "partial",
+      "evidence": [
+        "coordination"
+      ],
       "note": "area, filler, then verb",
       "template": "на AREA слушай включи DEV"
     },
@@ -311,7 +319,9 @@
       "correct": false,
       "false_handled": false,
       "reason": "no_intent_cue",
-      "evidence": [],
+      "evidence": [
+        "coordination"
+      ],
       "note": "device, filler, verb, area",
       "template": "DEV пожалуйста выключи в AREA"
     },
@@ -865,7 +875,9 @@
       "correct": false,
       "false_handled": false,
       "reason": "no_intent_cue",
-      "evidence": [],
+      "evidence": [
+        "coordination"
+      ],
       "note": "parenthetical between device and verb",
       "template": "DEV тот что в AREA включи"
     },
@@ -880,7 +892,9 @@
       "correct": false,
       "false_handled": false,
       "reason": "no_intent_cue",
-      "evidence": [],
+      "evidence": [
+        "coordination"
+      ],
       "note": "dash filler between device and verb",
       "template": "DEV ну на AREA включи"
     },
@@ -894,8 +908,10 @@
       "predicted_intent": null,
       "correct": false,
       "false_handled": false,
-      "reason": "no_intent_cue",
-      "evidence": [],
+      "reason": "partial",
+      "evidence": [
+        "coordination"
+      ],
       "note": "owner, parenthetical filler, device, verb last",
       "template": "у OWNER кстати DEV выключи"
     },
@@ -910,7 +926,9 @@
       "correct": false,
       "false_handled": false,
       "reason": "no_intent_cue",
-      "evidence": [],
+      "evidence": [
+        "coordination"
+      ],
       "note": "apposition ordinal",
       "template": "DEV N на AREA включи"
     },
@@ -924,8 +942,10 @@
       "predicted_intent": null,
       "correct": false,
       "false_handled": false,
-      "reason": "no_intent_cue",
-      "evidence": [],
+      "reason": "partial",
+      "evidence": [
+        "coordination"
+      ],
       "note": "area, parenthetical place, device, verb last",
       "template": "в AREA у окна DEV включи"
     },
@@ -1734,14 +1754,12 @@
       "origin": "hand",
       "text": "Кинь сериал на паузу",
       "expected_intent": "media.pause",
-      "handled": true,
-      "predicted_intent": "media.pause",
-      "correct": true,
+      "handled": false,
+      "predicted_intent": null,
+      "correct": false,
       "false_handled": false,
-      "reason": "pause",
-      "evidence": [
-        "pause"
-      ],
+      "reason": "no_intent_cue",
+      "evidence": [],
       "note": "кинь на паузу",
       "template": "кинь сериал на паузу"
     },
@@ -1752,12 +1770,12 @@
       "text": "Приостанови кино",
       "expected_intent": "media.pause",
       "handled": true,
-      "predicted_intent": "video.play",
-      "correct": false,
-      "false_handled": true,
-      "reason": "video_marker",
+      "predicted_intent": "media.pause",
+      "correct": true,
+      "false_handled": false,
+      "reason": "pause",
       "evidence": [
-        "video_marker"
+        "pause"
       ],
       "note": "приостанови",
       "template": "приостанови кино"
@@ -1783,14 +1801,12 @@
       "origin": "hand",
       "text": "Повремени с фильмом",
       "expected_intent": "media.pause",
-      "handled": true,
-      "predicted_intent": "video.play",
+      "handled": false,
+      "predicted_intent": null,
       "correct": false,
-      "false_handled": true,
-      "reason": "video_marker",
-      "evidence": [
-        "video_marker"
-      ],
+      "false_handled": false,
+      "reason": "no_intent_cue",
+      "evidence": [],
       "note": "повремени",
       "template": "повремени с фильмом"
     },
@@ -1800,14 +1816,12 @@
       "origin": "hand",
       "text": "Остановись на секунду",
       "expected_intent": "media.pause",
-      "handled": true,
-      "predicted_intent": "media.stop",
+      "handled": false,
+      "predicted_intent": null,
       "correct": false,
-      "false_handled": true,
-      "reason": "stop",
-      "evidence": [
-        "stop"
-      ],
+      "false_handled": false,
+      "reason": "no_intent_cue",
+      "evidence": [],
       "note": "brief hold, not a full stop",
       "template": "остановись на секунду"
     },
@@ -1832,14 +1846,12 @@
       "origin": "hand",
       "text": "Давай дальше кино",
       "expected_intent": "media.resume",
-      "handled": true,
-      "predicted_intent": "video.play",
+      "handled": false,
+      "predicted_intent": null,
       "correct": false,
-      "false_handled": true,
-      "reason": "video_marker",
-      "evidence": [
-        "video_marker"
-      ],
+      "false_handled": false,
+      "reason": "no_intent_cue",
+      "evidence": [],
       "note": "continue the film, not next item",
       "template": "давай дальше кино"
     },
@@ -1849,14 +1861,12 @@
       "origin": "hand",
       "text": "Сними с паузы",
       "expected_intent": "media.resume",
-      "handled": true,
-      "predicted_intent": "media.pause",
+      "handled": false,
+      "predicted_intent": null,
       "correct": false,
-      "false_handled": true,
-      "reason": "pause",
-      "evidence": [
-        "pause"
-      ],
+      "false_handled": false,
+      "reason": "no_intent_cue",
+      "evidence": [],
       "note": "leave pause",
       "template": "сними с паузы"
     },
@@ -1881,14 +1891,12 @@
       "origin": "hand",
       "text": "Хватит кино",
       "expected_intent": "media.stop",
-      "handled": true,
-      "predicted_intent": "video.play",
+      "handled": false,
+      "predicted_intent": null,
       "correct": false,
-      "false_handled": true,
-      "reason": "video_marker",
-      "evidence": [
-        "video_marker"
-      ],
+      "false_handled": false,
+      "reason": "no_intent_cue",
+      "evidence": [],
       "note": "хватит plus media",
       "template": "хватит кино"
     },
@@ -1898,14 +1906,12 @@
       "origin": "hand",
       "text": "Закончь фильм",
       "expected_intent": "media.stop",
-      "handled": true,
-      "predicted_intent": "video.play",
+      "handled": false,
+      "predicted_intent": null,
       "correct": false,
-      "false_handled": true,
-      "reason": "video_marker",
-      "evidence": [
-        "video_marker"
-      ],
+      "false_handled": false,
+      "reason": "no_intent_cue",
+      "evidence": [],
       "note": "закончь",
       "template": "закончь фильм"
     },
@@ -1961,12 +1967,12 @@
       "text": "Перескочи эту песню",
       "expected_intent": "media.next",
       "handled": true,
-      "predicted_intent": "audio.play",
-      "correct": false,
-      "false_handled": true,
-      "reason": "audio_marker",
+      "predicted_intent": "media.next",
+      "correct": true,
+      "false_handled": false,
+      "reason": "media.next",
       "evidence": [
-        "audio_marker"
+        "media.next"
       ],
       "note": "перескочи, song is the current item",
       "template": "перескочи эту песню"
@@ -1977,14 +1983,12 @@
       "origin": "hand",
       "text": "Давай другой трек",
       "expected_intent": "media.next",
-      "handled": true,
-      "predicted_intent": "audio.play",
+      "handled": false,
+      "predicted_intent": null,
       "correct": false,
-      "false_handled": true,
-      "reason": "audio_marker",
-      "evidence": [
-        "audio_marker"
-      ],
+      "false_handled": false,
+      "reason": "no_intent_cue",
+      "evidence": [],
       "note": "another track means next, not a title",
       "template": "давай другой трек"
     },
@@ -1994,14 +1998,12 @@
       "origin": "hand",
       "text": "Листай дальше по плейлисту",
       "expected_intent": "media.next",
-      "handled": true,
-      "predicted_intent": "audio.play",
+      "handled": false,
+      "predicted_intent": null,
       "correct": false,
-      "false_handled": true,
-      "reason": "audio_marker",
-      "evidence": [
-        "audio_marker"
-      ],
+      "false_handled": false,
+      "reason": "no_intent_cue",
+      "evidence": [],
       "note": "листай дальше",
       "template": "листай дальше по плейлисту"
     },
@@ -2041,14 +2043,12 @@
       "origin": "hand",
       "text": "Отмотай к прошлому треку",
       "expected_intent": "media.previous",
-      "handled": true,
-      "predicted_intent": "audio.play",
+      "handled": false,
+      "predicted_intent": null,
       "correct": false,
-      "false_handled": true,
-      "reason": "audio_marker",
-      "evidence": [
-        "audio_marker"
-      ],
+      "false_handled": false,
+      "reason": "no_intent_cue",
+      "evidence": [],
       "note": "прошлый трек means previous",
       "template": "отмотай к прошлому треку"
     },
@@ -2120,12 +2120,14 @@
       "origin": "hand",
       "text": "Перескочи минуту вперёд",
       "expected_intent": "media.seek_forward",
-      "handled": false,
-      "predicted_intent": null,
+      "handled": true,
+      "predicted_intent": "media.next",
       "correct": false,
-      "false_handled": false,
-      "reason": "no_intent_cue",
-      "evidence": [],
+      "false_handled": true,
+      "reason": "media.next",
+      "evidence": [
+        "media.next"
+      ],
       "note": "skip a minute forward, not next item",
       "template": "перескочи минуту вперед"
     },
@@ -2604,14 +2606,12 @@
       "origin": "hand",
       "text": "Поставь пять",
       "expected_intent": "NEEDS_CONTEXT",
-      "handled": true,
-      "predicted_intent": "content.play",
-      "correct": false,
-      "false_handled": true,
-      "reason": "bare_content",
-      "evidence": [
-        "bare_content"
-      ],
+      "handled": false,
+      "predicted_intent": null,
+      "correct": true,
+      "false_handled": false,
+      "reason": "no_intent_cue",
+      "evidence": [],
       "note": "five what",
       "template": "поставь N"
     },
@@ -2711,14 +2711,12 @@
       "origin": "hand",
       "text": "Включи что-нибудь",
       "expected_intent": "NEEDS_CONTEXT",
-      "handled": true,
-      "predicted_intent": "content.play",
-      "correct": false,
-      "false_handled": true,
-      "reason": "bare_content",
-      "evidence": [
-        "bare_content"
-      ],
+      "handled": false,
+      "predicted_intent": null,
+      "correct": true,
+      "false_handled": false,
+      "reason": "no_intent_cue",
+      "evidence": [],
       "note": "device or content unspecified",
       "template": "включи что нибудь"
     },
@@ -2728,14 +2726,12 @@
       "origin": "hand",
       "text": "Поставь что-нибудь",
       "expected_intent": "NEEDS_CONTEXT",
-      "handled": true,
-      "predicted_intent": "content.play",
-      "correct": false,
-      "false_handled": true,
-      "reason": "bare_content",
-      "evidence": [
-        "bare_content"
-      ],
+      "handled": false,
+      "predicted_intent": null,
+      "correct": true,
+      "false_handled": false,
+      "reason": "no_intent_cue",
+      "evidence": [],
       "note": "unspecified object",
       "template": "поставь что нибудь"
     },
@@ -2940,14 +2936,12 @@
       "origin": "hand",
       "text": "Верни предыдущее состояние",
       "expected_intent": "NEEDS_CONTEXT",
-      "handled": true,
-      "predicted_intent": "media.previous",
-      "correct": false,
-      "false_handled": true,
-      "reason": "media.previous",
-      "evidence": [
-        "media.previous"
-      ],
+      "handled": false,
+      "predicted_intent": null,
+      "correct": true,
+      "false_handled": false,
+      "reason": "no_intent_cue",
+      "evidence": [],
       "note": "state restore, not media.previous",
       "template": "верни предыдущее состояние"
     },
@@ -3002,14 +2996,12 @@
       "origin": "hand",
       "text": "Телевизор в новостях опять показывает политику",
       "expected_intent": "NEEDS_CONTEXT",
-      "handled": true,
-      "predicted_intent": "video.play",
-      "correct": false,
-      "false_handled": true,
-      "reason": "video_marker",
-      "evidence": [
-        "video_marker"
-      ],
+      "handled": false,
+      "predicted_intent": null,
+      "correct": true,
+      "false_handled": false,
+      "reason": "no_intent_cue",
+      "evidence": [],
       "note": "statement, новостей is not a play request",
       "template": "DEV в новостях опять показывает политику"
     },
@@ -3019,14 +3011,12 @@
       "origin": "hand",
       "text": "Пауза в разговоре затянулась",
       "expected_intent": "NEEDS_CONTEXT",
-      "handled": true,
-      "predicted_intent": "media.pause",
-      "correct": false,
-      "false_handled": true,
-      "reason": "pause",
-      "evidence": [
-        "pause"
-      ],
+      "handled": false,
+      "predicted_intent": null,
+      "correct": true,
+      "false_handled": false,
+      "reason": "no_intent_cue",
+      "evidence": [],
       "note": "пауза is a conversational gap",
       "template": "пауза в разговоре затянулась"
     },
@@ -3036,14 +3026,12 @@
       "origin": "hand",
       "text": "Ярче солнца только твоя улыбка",
       "expected_intent": "NEEDS_CONTEXT",
-      "handled": true,
-      "predicted_intent": "brightness.increase",
-      "correct": false,
-      "false_handled": true,
-      "reason": "brighter",
-      "evidence": [
-        "brighter"
-      ],
+      "handled": false,
+      "predicted_intent": null,
+      "correct": true,
+      "false_handled": false,
+      "reason": "no_intent_cue",
+      "evidence": [],
       "note": "ярче is a compliment",
       "template": "ярче солнца только твоя улыбка"
     },
@@ -3053,14 +3041,12 @@
       "origin": "hand",
       "text": "Включи голову, пожалуйста",
       "expected_intent": "NEEDS_CONTEXT",
-      "handled": true,
-      "predicted_intent": "content.play",
-      "correct": false,
-      "false_handled": true,
-      "reason": "bare_content",
-      "evidence": [
-        "bare_content"
-      ],
+      "handled": false,
+      "predicted_intent": null,
+      "correct": true,
+      "false_handled": false,
+      "reason": "no_intent_cue",
+      "evidence": [],
       "note": "idiom, голова is not a device or a title",
       "template": "включи голову пожалуйста"
     },
@@ -3070,14 +3056,12 @@
       "origin": "hand",
       "text": "Поставь точку в этом разговоре",
       "expected_intent": "NEEDS_CONTEXT",
-      "handled": true,
-      "predicted_intent": "content.play",
-      "correct": false,
-      "false_handled": true,
-      "reason": "bare_content",
-      "evidence": [
-        "bare_content"
-      ],
+      "handled": false,
+      "predicted_intent": null,
+      "correct": true,
+      "false_handled": false,
+      "reason": "no_intent_cue",
+      "evidence": [],
       "note": "idiom, точка is not a title",
       "template": "поставь точку в этом разговоре"
     },
@@ -3117,14 +3101,12 @@
       "origin": "hand",
       "text": "Сериал, который ты советовал, я уже видел, не надо его ставить",
       "expected_intent": "NEEDS_CONTEXT",
-      "handled": true,
-      "predicted_intent": "video.play",
-      "correct": false,
-      "false_handled": true,
-      "reason": "video_marker",
-      "evidence": [
-        "video_marker"
-      ],
+      "handled": false,
+      "predicted_intent": null,
+      "correct": true,
+      "false_handled": false,
+      "reason": "no_intent_cue",
+      "evidence": [],
       "note": "negated, сериал is mentioned to refuse it",
       "template": "сериал который ты советовал я уже видел не надо его ставить"
     },
@@ -3164,14 +3146,12 @@
       "origin": "hand",
       "text": "Громче кричать не стоит",
       "expected_intent": "NEEDS_CONTEXT",
-      "handled": true,
-      "predicted_intent": "volume.increase",
-      "correct": false,
-      "false_handled": true,
-      "reason": "louder",
-      "evidence": [
-        "louder"
-      ],
+      "handled": false,
+      "predicted_intent": null,
+      "correct": true,
+      "false_handled": false,
+      "reason": "no_intent_cue",
+      "evidence": [],
       "note": "громче is about shouting",
       "template": "громче кричать не стоит"
     },
@@ -3181,14 +3161,12 @@
       "origin": "hand",
       "text": "Перемотай разговор к началу, это не про фильм",
       "expected_intent": "NEEDS_CONTEXT",
-      "handled": true,
-      "predicted_intent": "video.play",
-      "correct": false,
-      "false_handled": true,
-      "reason": "video_marker",
-      "evidence": [
-        "video_marker"
-      ],
+      "handled": false,
+      "predicted_intent": null,
+      "correct": true,
+      "false_handled": false,
+      "reason": "no_intent_cue",
+      "evidence": [],
       "note": "перемотай is metaphorical",
       "template": "перемотай разговор к началу это не про фильм"
     },
@@ -3198,14 +3176,12 @@
       "origin": "hand",
       "text": "Альбом моей жизни не включай",
       "expected_intent": "NEEDS_CONTEXT",
-      "handled": true,
-      "predicted_intent": "audio.play",
-      "correct": false,
-      "false_handled": true,
-      "reason": "audio_marker",
-      "evidence": [
-        "audio_marker"
-      ],
+      "handled": false,
+      "predicted_intent": null,
+      "correct": true,
+      "false_handled": false,
+      "reason": "no_intent_cue",
+      "evidence": [],
       "note": "metaphor plus prohibition",
       "template": "альбом моей жизни не включай"
     },
@@ -3215,13 +3191,13 @@
       "origin": "hand",
       "text": "Остановись и подумай, это не плеер",
       "expected_intent": "NEEDS_CONTEXT",
-      "handled": true,
-      "predicted_intent": "media.stop",
-      "correct": false,
-      "false_handled": true,
-      "reason": "stop",
+      "handled": false,
+      "predicted_intent": null,
+      "correct": true,
+      "false_handled": false,
+      "reason": "no_intent_cue",
       "evidence": [
-        "stop"
+        "coordination"
       ],
       "note": "остановись addresses the listener",
       "template": "остановись и подумай это не плеер"
@@ -3232,13 +3208,13 @@
       "origin": "hand",
       "text": "Следующая остановка — кухня, я про маршрут",
       "expected_intent": "NEEDS_CONTEXT",
-      "handled": true,
-      "predicted_intent": "media.next",
-      "correct": false,
-      "false_handled": true,
-      "reason": "media.next",
+      "handled": false,
+      "predicted_intent": null,
+      "correct": true,
+      "false_handled": false,
+      "reason": "no_intent_cue",
       "evidence": [
-        "media.next"
+        "coordination"
       ],
       "note": "следующая is a transit stop",
       "template": "следующая остановка AREA я про маршрут"
@@ -3249,14 +3225,12 @@
       "origin": "hand",
       "text": "Предыдущая мысль была лучше",
       "expected_intent": "NEEDS_CONTEXT",
-      "handled": true,
-      "predicted_intent": "media.previous",
-      "correct": false,
-      "false_handled": true,
-      "reason": "media.previous",
-      "evidence": [
-        "media.previous"
-      ],
+      "handled": false,
+      "predicted_intent": null,
+      "correct": true,
+      "false_handled": false,
+      "reason": "no_intent_cue",
+      "evidence": [],
       "note": "предыдущая is about an idea",
       "template": "предыдущая мысль была лучше"
     },
@@ -3281,14 +3255,12 @@
       "origin": "hand",
       "text": "Потемнее шутки больше не шути",
       "expected_intent": "NEEDS_CONTEXT",
-      "handled": true,
-      "predicted_intent": "brightness.decrease",
-      "correct": false,
-      "false_handled": true,
-      "reason": "darker",
-      "evidence": [
-        "darker"
-      ],
+      "handled": false,
+      "predicted_intent": null,
+      "correct": true,
+      "false_handled": false,
+      "reason": "no_intent_cue",
+      "evidence": [],
       "note": "потемнее describes jokes",
       "template": "потемнее шутки больше не шути"
     },
@@ -3303,7 +3275,9 @@
       "correct": true,
       "false_handled": false,
       "reason": "no_intent_cue",
-      "evidence": [],
+      "evidence": [
+        "coordination"
+      ],
       "note": "музыка is not the soundbar",
       "template": "музыка сфер это не DEV"
     },
@@ -3318,7 +3292,9 @@
       "correct": true,
       "false_handled": false,
       "reason": "no_intent_cue",
-      "evidence": [],
+      "evidence": [
+        "coordination"
+      ],
       "note": "narrative past, not a request",
       "template": "включился сам я ничего не просил"
     },
@@ -3365,7 +3341,9 @@
       "correct": true,
       "false_handled": false,
       "reason": "no_intent_cue",
-      "evidence": [],
+      "evidence": [
+        "coordination"
+      ],
       "note": "сделай вид is pretend, not a light command",
       "template": "сделай вид что DEV не горит"
     },
@@ -3375,14 +3353,12 @@
       "origin": "hand",
       "text": "Фильм ужасов на улице, не включай ничего",
       "expected_intent": "NEEDS_CONTEXT",
-      "handled": true,
-      "predicted_intent": "video.play",
-      "correct": false,
-      "false_handled": true,
-      "reason": "video_marker",
-      "evidence": [
-        "video_marker"
-      ],
+      "handled": false,
+      "predicted_intent": null,
+      "correct": true,
+      "false_handled": false,
+      "reason": "no_intent_cue",
+      "evidence": [],
       "note": "фильм is a metaphor, plus prohibition",
       "template": "фильм ужасов на улице не включай ничего"
     },
@@ -3397,7 +3373,9 @@
       "correct": true,
       "false_handled": false,
       "reason": "no_intent_cue",
-      "evidence": [],
+      "evidence": [
+        "coordination"
+      ],
       "note": "красный is a description",
       "template": "красный как помидор это про лицо не про DEV"
     },
@@ -3431,58 +3409,58 @@
     },
     "semantic_paraphrase": {
       "n": 92,
-      "handled": 16,
-      "unhandled": 76,
-      "correct_handled": 4,
-      "incorrect_handled": 12,
-      "coverage": "17.4%",
-      "handled_accuracy": "25.0%",
-      "false_handled": 12,
+      "handled": 7,
+      "unhandled": 85,
+      "correct_handled": 5,
+      "incorrect_handled": 2,
+      "coverage": "7.6%",
+      "handled_accuracy": "71.4%",
+      "false_handled": 2,
       "correct_rejection": 0
     },
     "ambiguous": {
       "n": 40,
-      "handled": 4,
-      "unhandled": 36,
+      "handled": 0,
+      "unhandled": 40,
       "correct_handled": 0,
-      "incorrect_handled": 4,
-      "coverage": "10.0%",
-      "handled_accuracy": "0.0%",
-      "false_handled": 4,
-      "correct_rejection": 36
+      "incorrect_handled": 0,
+      "coverage": "0.0%",
+      "handled_accuracy": "n/a",
+      "false_handled": 0,
+      "correct_rejection": 40
     },
     "adversarial": {
       "n": 28,
-      "handled": 15,
-      "unhandled": 13,
+      "handled": 1,
+      "unhandled": 27,
       "correct_handled": 0,
-      "incorrect_handled": 15,
-      "coverage": "53.6%",
+      "incorrect_handled": 1,
+      "coverage": "3.6%",
       "handled_accuracy": "0.0%",
-      "false_handled": 15,
-      "correct_rejection": 13
+      "false_handled": 1,
+      "correct_rejection": 27
     }
   },
   "overall": {
     "n": 220,
-    "handled": 58,
-    "unhandled": 162,
-    "correct_handled": 27,
-    "incorrect_handled": 31,
-    "coverage": "26.4%",
-    "handled_accuracy": "46.6%",
-    "false_handled": 31,
-    "correct_rejection": 49
+    "handled": 31,
+    "unhandled": 189,
+    "correct_handled": 28,
+    "incorrect_handled": 3,
+    "coverage": "14.1%",
+    "handled_accuracy": "90.3%",
+    "false_handled": 3,
+    "correct_rejection": 67
   },
   "actionable": {
     "n": 152,
-    "handled": 39,
-    "unhandled": 113,
-    "correct_handled": 27,
-    "incorrect_handled": 12,
-    "coverage": "25.7%",
-    "handled_accuracy": "69.2%",
-    "false_handled": 12,
+    "handled": 30,
+    "unhandled": 122,
+    "correct_handled": 28,
+    "incorrect_handled": 2,
+    "coverage": "19.7%",
+    "handled_accuracy": "93.3%",
+    "false_handled": 2,
     "correct_rejection": 0
   },
   "unique_templates": 219,

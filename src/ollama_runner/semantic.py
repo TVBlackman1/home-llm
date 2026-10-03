@@ -55,6 +55,22 @@ class SemanticCommand:
 
 
 @dataclass(frozen=True)
+class SemanticPlan:
+    """One utterance expanded into atomic commands before the resolver.
+
+    A coordinated area or device is already a separate command here.
+    `fully_parsed` is false when any span was left unresolved: the caller
+    must not execute the understood prefix on its own.
+    """
+
+    commands: tuple[SemanticCommand, ...] = ()
+    fully_parsed: bool = False
+    unresolved_spans: tuple[str, ...] = ()
+    reason: str = "no_intent_cue"
+    evidence: tuple[str, ...] = ()
+
+
+@dataclass(frozen=True)
 class RequestContext:
     source_device: str | None = None
     source_area: str | None = None

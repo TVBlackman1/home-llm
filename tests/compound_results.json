@@ -1,0 +1,2216 @@
+[
+  {
+    "id": "K-01",
+    "category": "device_coordination",
+    "text": "Выключи свет и телевизор",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "tv"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": null,
+        "owner": null
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "tv",
+        "area": null,
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-02",
+    "category": "comma_coordination",
+    "text": "Выключи свет, телевизор",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "tv"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": null,
+        "owner": null
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "tv",
+        "area": null,
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-03",
+    "category": "3plus",
+    "text": "Выключи свет, телевизор и колонку",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "tv"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "speaker"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": null,
+        "owner": null
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "tv",
+        "area": null,
+        "owner": null
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "speaker",
+        "area": null,
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-04",
+    "category": "device_coordination",
+    "text": "Включи телевизор и колонку",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_on",
+        "device_type": "tv"
+      },
+      {
+        "intent": "device.turn_on",
+        "device_type": "speaker"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_on",
+        "device_type": "tv",
+        "area": null,
+        "owner": null
+      },
+      {
+        "intent": "device.turn_on",
+        "device_type": "speaker",
+        "area": null,
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-05",
+    "category": "device_coordination",
+    "text": "Выключи колонку и телевизор",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "speaker"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "tv"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "speaker",
+        "area": null,
+        "owner": null
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "tv",
+        "area": null,
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-06",
+    "category": "device_coordination",
+    "text": "Выключи музыку и свет",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "soundbar"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "light"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "soundbar",
+        "area": null,
+        "owner": null
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": null,
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-07",
+    "category": "device_coordination",
+    "text": "Включи торшер и лампу",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_on",
+        "device_type": "light"
+      },
+      {
+        "intent": "device.turn_on",
+        "device_type": "light"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_on",
+        "device_type": "light",
+        "area": null,
+        "owner": null
+      },
+      {
+        "intent": "device.turn_on",
+        "device_type": "light",
+        "area": null,
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-08",
+    "category": "и_coordination",
+    "text": "Выключи свет и колонку",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "speaker"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": null,
+        "owner": null
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "speaker",
+        "area": null,
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-09",
+    "category": "comma_coordination",
+    "text": "Выключи телевизор, свет и колонку",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "tv"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "light"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "speaker"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "tv",
+        "area": null,
+        "owner": null
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": null,
+        "owner": null
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "speaker",
+        "area": null,
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-10",
+    "category": "predicate_ellipsis",
+    "text": "Выруби телевизор, колонку",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "tv"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "speaker"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "tv",
+        "area": null,
+        "owner": null
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "speaker",
+        "area": null,
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-11",
+    "category": "3plus",
+    "text": "Выключи свет и телевизор и колонку",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "tv"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "speaker"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": null,
+        "owner": null
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "tv",
+        "area": null,
+        "owner": null
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "speaker",
+        "area": null,
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-12",
+    "category": "area_coordination",
+    "text": "Выключи свет в гостиной и ванной",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "гостиная"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "ванная"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "гостиная",
+        "owner": null
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "ванная",
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-13",
+    "category": "area_coordination",
+    "text": "Выключи свет на кухне, в ванной и спальне",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "кухня"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "ванная"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "спальня"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "кухня",
+        "owner": null
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "ванная",
+        "owner": null
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "спальня",
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-14",
+    "category": "area_coordination",
+    "text": "Включи колонку в спальне и гостиной",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_on",
+        "device_type": "speaker",
+        "area": "спальня"
+      },
+      {
+        "intent": "device.turn_on",
+        "device_type": "speaker",
+        "area": "гостиная"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_on",
+        "device_type": "speaker",
+        "area": "спальня",
+        "owner": null
+      },
+      {
+        "intent": "device.turn_on",
+        "device_type": "speaker",
+        "area": "гостиная",
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-15",
+    "category": "area_coordination",
+    "text": "Выключи телевизор на кухне и в спальне",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "tv",
+        "area": "кухня"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "tv",
+        "area": "спальня"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "tv",
+        "area": "кухня",
+        "owner": null
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "tv",
+        "area": "спальня",
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-16",
+    "category": "area_coordination",
+    "text": "Выключи свет в детской и кабинете",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "детская"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "кабинет"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "детская",
+        "owner": null
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "кабинет",
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-17",
+    "category": "3plus",
+    "text": "Включи свет в ванной, на кухне и в спальне",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_on",
+        "device_type": "light",
+        "area": "ванная"
+      },
+      {
+        "intent": "device.turn_on",
+        "device_type": "light",
+        "area": "кухня"
+      },
+      {
+        "intent": "device.turn_on",
+        "device_type": "light",
+        "area": "спальня"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_on",
+        "device_type": "light",
+        "area": "ванная",
+        "owner": null
+      },
+      {
+        "intent": "device.turn_on",
+        "device_type": "light",
+        "area": "кухня",
+        "owner": null
+      },
+      {
+        "intent": "device.turn_on",
+        "device_type": "light",
+        "area": "спальня",
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-18",
+    "category": "shared_area",
+    "text": "На кухне выключи свет и телевизор",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "кухня"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "tv",
+        "area": "кухня"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "кухня",
+        "owner": null
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "tv",
+        "area": "кухня",
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-19",
+    "category": "shared_area",
+    "text": "В спальне выключи телевизор и колонку",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "tv",
+        "area": "спальня"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "speaker",
+        "area": "спальня"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "tv",
+        "area": "спальня",
+        "owner": null
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "speaker",
+        "area": "спальня",
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-20",
+    "category": "shared_area",
+    "text": "В гостиной включи свет и музыку",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_on",
+        "device_type": "light",
+        "area": "гостиная"
+      },
+      {
+        "intent": "device.turn_on",
+        "device_type": "soundbar",
+        "area": "гостиная"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_on",
+        "device_type": "light",
+        "area": "гостиная",
+        "owner": null
+      },
+      {
+        "intent": "device.turn_on",
+        "device_type": "soundbar",
+        "area": "гостиная",
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-21",
+    "category": "shared_area",
+    "text": "На балконе выключи колонку и свет",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "speaker",
+        "area": "балкон"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "балкон"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "speaker",
+        "area": "балкон",
+        "owner": null
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "балкон",
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-22",
+    "category": "shared_area",
+    "text": "В гостиной и на кухне выключи свет",
+    "expected_status": "fully_parsed",
+    "status": "partially_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "гостиная"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "кухня"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "кухня",
+        "owner": null
+      }
+    ],
+    "unresolved": [
+      "В гостиной"
+    ],
+    "correct": false,
+    "extra": 0,
+    "missing": 1
+  },
+  {
+    "id": "K-23",
+    "category": "local_areas",
+    "text": "Выключи свет на кухне и телевизор в спальне",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "кухня"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "tv",
+        "area": "спальня"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "кухня",
+        "owner": null
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "tv",
+        "area": "спальня",
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-24",
+    "category": "local_areas",
+    "text": "Включи колонку в гостиной и свет в ванной",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_on",
+        "device_type": "speaker",
+        "area": "гостиная"
+      },
+      {
+        "intent": "device.turn_on",
+        "device_type": "light",
+        "area": "ванная"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_on",
+        "device_type": "speaker",
+        "area": "гостиная",
+        "owner": null
+      },
+      {
+        "intent": "device.turn_on",
+        "device_type": "light",
+        "area": "ванная",
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-25",
+    "category": "local_areas",
+    "text": "Выключи свет и колонку на балконе",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "speaker",
+        "area": "балкон"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": null,
+        "owner": null
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "speaker",
+        "area": "балкон",
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-26",
+    "category": "shared_predicate",
+    "text": "Выруби колонку и свет",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "speaker"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "light"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "speaker",
+        "area": null,
+        "owner": null
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": null,
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-27",
+    "category": "shared_predicate",
+    "text": "Выключи свет и музыку",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "soundbar"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": null,
+        "owner": null
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "soundbar",
+        "area": null,
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-28",
+    "category": "predicate_ellipsis",
+    "text": "Выключи свет, а телевизор",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "tv"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": null,
+        "owner": null
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "tv",
+        "area": null,
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-29",
+    "category": "independent_predicates",
+    "text": "Выруби свет и музыку потише",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light"
+      },
+      {
+        "intent": "volume.decrease",
+        "device_type": "soundbar"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": null,
+        "owner": null
+      },
+      {
+        "intent": "volume.decrease",
+        "device_type": "soundbar",
+        "area": null,
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-30",
+    "category": "independent_predicates",
+    "text": "Выключи свет и сделай музыку потише",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light"
+      },
+      {
+        "intent": "volume.decrease",
+        "device_type": "soundbar"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": null,
+        "owner": null
+      },
+      {
+        "intent": "volume.decrease",
+        "device_type": "soundbar",
+        "area": null,
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-31",
+    "category": "independent_predicates",
+    "text": "Включи телевизор и сделай колонку погромче",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_on",
+        "device_type": "tv"
+      },
+      {
+        "intent": "volume.increase",
+        "device_type": "speaker"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_on",
+        "device_type": "tv",
+        "area": null,
+        "owner": null
+      },
+      {
+        "intent": "volume.increase",
+        "device_type": "speaker",
+        "area": null,
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-32",
+    "category": "independent_predicates",
+    "text": "Выключи свет и телевизор погромче",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light"
+      },
+      {
+        "intent": "volume.increase",
+        "device_type": "tv"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": null,
+        "owner": null
+      },
+      {
+        "intent": "volume.increase",
+        "device_type": "tv",
+        "area": null,
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-33",
+    "category": "independent_predicates",
+    "text": "Сделай музыку потише и выключи свет",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "volume.decrease",
+        "device_type": "soundbar"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "light"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "volume.decrease",
+        "device_type": "soundbar",
+        "area": null,
+        "owner": null
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": null,
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-34",
+    "category": "independent_predicates",
+    "text": "Выключи свет в спальне и включи телевизор на кухне",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "спальня"
+      },
+      {
+        "intent": "device.turn_on",
+        "device_type": "tv",
+        "area": "кухня"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "спальня",
+        "owner": null
+      },
+      {
+        "intent": "device.turn_on",
+        "device_type": "tv",
+        "area": "кухня",
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-35",
+    "category": "shared_owner",
+    "text": "У Маши выключи свет и телевизор",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "owner": "Маша"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "tv",
+        "owner": "Маша"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": null,
+        "owner": "Маша"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "tv",
+        "area": null,
+        "owner": "Маша"
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-36",
+    "category": "shared_owner",
+    "text": "У Антона включи колонку и телевизор",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_on",
+        "device_type": "speaker",
+        "owner": "Антон"
+      },
+      {
+        "intent": "device.turn_on",
+        "device_type": "tv",
+        "owner": "Антон"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_on",
+        "device_type": "speaker",
+        "area": null,
+        "owner": "Антон"
+      },
+      {
+        "intent": "device.turn_on",
+        "device_type": "tv",
+        "area": null,
+        "owner": "Антон"
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-37",
+    "category": "shared_owner",
+    "text": "У папы выключи монитор и свет",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "monitor",
+        "owner": "папа"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "owner": "папа"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "monitor",
+        "area": null,
+        "owner": "папа"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": null,
+        "owner": "папа"
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-38",
+    "category": "local_owner",
+    "text": "Выключи свет у Маши и телевизор у Антона",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "owner": "Маша"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "tv",
+        "owner": "Антон"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": null,
+        "owner": "Маша"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "tv",
+        "area": null,
+        "owner": "Антон"
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-39",
+    "category": "local_owner",
+    "text": "Включи колонку у Марины и свет у папы",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_on",
+        "device_type": "speaker",
+        "owner": "Марина"
+      },
+      {
+        "intent": "device.turn_on",
+        "device_type": "light",
+        "owner": "папа"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_on",
+        "device_type": "speaker",
+        "area": null,
+        "owner": "Марина"
+      },
+      {
+        "intent": "device.turn_on",
+        "device_type": "light",
+        "area": null,
+        "owner": "папа"
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-40",
+    "category": "local_owner",
+    "text": "Выключи музыку у Маши и свет у Антона",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "soundbar",
+        "owner": "Маша"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "owner": "Антон"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "soundbar",
+        "area": null,
+        "owner": "Маша"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": null,
+        "owner": "Антон"
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-41",
+    "category": "shared_owner",
+    "text": "У Маши на кухне выключи свет и колонку",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "кухня",
+        "owner": "Маша"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "speaker",
+        "area": "кухня",
+        "owner": "Маша"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "кухня",
+        "owner": "Маша"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "speaker",
+        "area": "кухня",
+        "owner": "Маша"
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-42",
+    "category": "local_owner",
+    "text": "Выключи свет у Маши на кухне и телевизор у Антона в спальне",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "кухня",
+        "owner": "Маша"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "tv",
+        "area": "спальня",
+        "owner": "Антон"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "кухня",
+        "owner": "Маша"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "tv",
+        "area": "спальня",
+        "owner": "Антон"
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-43",
+    "category": "compound_area",
+    "text": "Выключи свет в кухне и ванной, а музыку сделай потише",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "кухня"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "ванная"
+      },
+      {
+        "intent": "volume.decrease",
+        "device_type": "soundbar"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "кухня",
+        "owner": null
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "ванная",
+        "owner": null
+      },
+      {
+        "intent": "volume.decrease",
+        "device_type": "soundbar",
+        "area": null,
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-44",
+    "category": "compound_area",
+    "text": "На кухне выключи свет и колонку, а телевизор в спальне сделай потише",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "кухня"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "speaker",
+        "area": "кухня"
+      },
+      {
+        "intent": "volume.decrease",
+        "device_type": "tv",
+        "area": "спальня"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "кухня",
+        "owner": null
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "speaker",
+        "area": "кухня",
+        "owner": null
+      },
+      {
+        "intent": "volume.decrease",
+        "device_type": "tv",
+        "area": "спальня",
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-45",
+    "category": "3plus",
+    "text": "Включи свет, колонку и телевизор в гостиной",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_on",
+        "device_type": "light"
+      },
+      {
+        "intent": "device.turn_on",
+        "device_type": "speaker"
+      },
+      {
+        "intent": "device.turn_on",
+        "device_type": "tv",
+        "area": "гостиная"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_on",
+        "device_type": "light",
+        "area": null,
+        "owner": null
+      },
+      {
+        "intent": "device.turn_on",
+        "device_type": "speaker",
+        "area": null,
+        "owner": null
+      },
+      {
+        "intent": "device.turn_on",
+        "device_type": "tv",
+        "area": "гостиная",
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-46",
+    "category": "ambiguous_scope",
+    "text": "Выключи свет и телевизор в гостиной и спальне",
+    "expected_status": "unhandled",
+    "status": "unhandled",
+    "expected": [],
+    "actual": [],
+    "unresolved": [
+      "Выключи свет и телевизор в гостиной и спальне"
+    ],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-47",
+    "category": "ambiguous_scope",
+    "text": "Включи колонку и свет в кухне и ванной",
+    "expected_status": "unhandled",
+    "status": "unhandled",
+    "expected": [],
+    "actual": [],
+    "unresolved": [
+      "Включи колонку и свет в кухне и ванной"
+    ],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-48",
+    "category": "ambiguous_scope",
+    "text": "Выключи свет и музыку в спальне и гостиной",
+    "expected_status": "unhandled",
+    "status": "unhandled",
+    "expected": [],
+    "actual": [],
+    "unresolved": [
+      "Выключи свет и музыку в спальне и гостиной"
+    ],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-49",
+    "category": "partial_parse",
+    "text": "Выключи свет и сделай Кварис фиолетово-весёлым",
+    "expected_status": "partially_parsed",
+    "status": "partially_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": null,
+        "owner": null
+      }
+    ],
+    "unresolved": [
+      "сделай Кварис фиолетово-весёлым"
+    ],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-50",
+    "category": "partial_parse",
+    "text": "Включи свет и сделай тут как вчера",
+    "expected_status": "partially_parsed",
+    "status": "partially_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_on",
+        "device_type": "light"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_on",
+        "device_type": "light",
+        "area": null,
+        "owner": null
+      }
+    ],
+    "unresolved": [
+      "сделай тут как вчера"
+    ],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-51",
+    "category": "partial_parse",
+    "text": "Выключи телевизор и сделай Норвен странным",
+    "expected_status": "partially_parsed",
+    "status": "partially_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "tv"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "tv",
+        "area": null,
+        "owner": null
+      }
+    ],
+    "unresolved": [
+      "сделай Норвен странным"
+    ],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-52",
+    "category": "negation",
+    "text": "Не включай телевизор",
+    "expected_status": "unhandled",
+    "status": "unhandled",
+    "expected": [],
+    "actual": [],
+    "unresolved": [
+      "Не включай телевизор"
+    ],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-53",
+    "category": "negation",
+    "text": "Не выключай свет",
+    "expected_status": "unhandled",
+    "status": "unhandled",
+    "expected": [],
+    "actual": [],
+    "unresolved": [
+      "Не выключай свет"
+    ],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-54",
+    "category": "negation",
+    "text": "Выключи свет и не включай телевизор",
+    "expected_status": "partially_parsed",
+    "status": "partially_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": null,
+        "owner": null
+      }
+    ],
+    "unresolved": [
+      "не включай телевизор"
+    ],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-55",
+    "category": "negation",
+    "text": "Не включай свет и телевизор",
+    "expected_status": "unhandled",
+    "status": "unhandled",
+    "expected": [],
+    "actual": [],
+    "unresolved": [
+      "Не включай свет и телевизор"
+    ],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-56",
+    "category": "negation",
+    "text": "Не выключай свет на кухне и в ванной",
+    "expected_status": "unhandled",
+    "status": "unhandled",
+    "expected": [],
+    "actual": [],
+    "unresolved": [
+      "Не выключай свет на кухне и в ванной"
+    ],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-57",
+    "category": "negation",
+    "text": "Выключи свет и не колонку",
+    "expected_status": "partially_parsed",
+    "status": "partially_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": null,
+        "owner": null
+      }
+    ],
+    "unresolved": [
+      "не колонку"
+    ],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-58",
+    "category": "device_coordination",
+    "text": "Включи вторую колонку и телевизор",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_on",
+        "device_type": "speaker"
+      },
+      {
+        "intent": "device.turn_on",
+        "device_type": "tv"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_on",
+        "device_type": "speaker",
+        "area": null,
+        "owner": null
+      },
+      {
+        "intent": "device.turn_on",
+        "device_type": "tv",
+        "area": null,
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-59",
+    "category": "area_coordination",
+    "text": "Выключи свет в коридоре и на балконе",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "коридор"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "балкон"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "коридор",
+        "owner": null
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": "балкон",
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-60",
+    "category": "shared_area",
+    "text": "В ванной включи свет и колонку",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_on",
+        "device_type": "light",
+        "area": "ванная"
+      },
+      {
+        "intent": "device.turn_on",
+        "device_type": "speaker",
+        "area": "ванная"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_on",
+        "device_type": "light",
+        "area": "ванная",
+        "owner": null
+      },
+      {
+        "intent": "device.turn_on",
+        "device_type": "speaker",
+        "area": "ванная",
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-61",
+    "category": "independent_predicates",
+    "text": "Выключи музыку и сделай телевизор погромче",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "soundbar"
+      },
+      {
+        "intent": "volume.increase",
+        "device_type": "tv"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "soundbar",
+        "area": null,
+        "owner": null
+      },
+      {
+        "intent": "volume.increase",
+        "device_type": "tv",
+        "area": null,
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-62",
+    "category": "comma_coordination",
+    "text": "Выключи свет, музыку, телевизор",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "soundbar"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "tv"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": null,
+        "owner": null
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "soundbar",
+        "area": null,
+        "owner": null
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "tv",
+        "area": null,
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-63",
+    "category": "predicate_ellipsis",
+    "text": "Выключи колонку а свет",
+    "expected_status": "fully_parsed",
+    "status": "fully_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "speaker"
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "light"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "speaker",
+        "area": null,
+        "owner": null
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
+        "area": null,
+        "owner": null
+      }
+    ],
+    "unresolved": [],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-64",
+    "category": "partial_parse",
+    "text": "Выключи колонку и поставь точку в разговоре",
+    "expected_status": "partially_parsed",
+    "status": "partially_parsed",
+    "expected": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "speaker"
+      }
+    ],
+    "actual": [
+      {
+        "intent": "device.turn_off",
+        "device_type": "speaker",
+        "area": null,
+        "owner": null
+      }
+    ],
+    "unresolved": [
+      "поставь точку в разговоре"
+    ],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  },
+  {
+    "id": "K-65",
+    "category": "ambiguous_scope",
+    "text": "Выключи свет и колонку у Маши и у Антона",
+    "expected_status": "unhandled",
+    "status": "unhandled",
+    "expected": [],
+    "actual": [],
+    "unresolved": [
+      "Выключи свет и колонку у Маши и у Антона"
+    ],
+    "correct": true,
+    "extra": 0,
+    "missing": 0
+  }
+]

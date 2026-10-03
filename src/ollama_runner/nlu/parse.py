@@ -21,19 +21,54 @@ from ollama_runner.semantic import ExplicitSlots, SemanticCommand, Target
 
 _POWER_ON = re.compile(r"^(?:пожалуйста\s+)?(?:включи|запусти|вруби|поставь)\b", re.IGNORECASE)
 _POWER_OFF = re.compile(r"^(?:пожалуйста\s+)?(?:выключи|выруби)\b", re.IGNORECASE)
-_PAUSE = re.compile(r"(?<![0-9a-zа-яе])пауз", re.IGNORECASE)
-_STOP = re.compile(r"(?<![0-9a-zа-яе])останови", re.IGNORECASE)
+_PAUSE = re.compile(r"(?<![0-9a-zа-яе])(?:пауз\w*|приостанови\w*)", re.IGNORECASE)
+_STOP = re.compile(r"(?<![0-9a-zа-яе])останови(?!сь)", re.IGNORECASE)
 _SEEK = re.compile(r"(?<![0-9a-zа-яе])перемотай", re.IGNORECASE)
 _FORWARD = re.compile(r"(?<![0-9a-zа-яе])вперед", re.IGNORECASE)
 _BACKWARD = re.compile(r"(?<![0-9a-zа-яе])назад", re.IGNORECASE)
+_SKIP = re.compile(r"(?<![0-9a-zа-яе])перескочи", re.IGNORECASE)
 _DARKER = re.compile(r"(?<![0-9a-zа-яе])потемнее", re.IGNORECASE)
 _BRIGHTER = re.compile(r"(?<![0-9a-zа-яе])ярче", re.IGNORECASE)
 _BRIGHTNESS = re.compile(r"(?<![0-9a-zа-яе])яркост", re.IGNORECASE)
+_QUIETER = re.compile(r"(?<![0-9a-zа-яе])потише", re.IGNORECASE)
 _LOUDER = re.compile(r"(?<![0-9a-zа-яе])(?:по)?громче", re.IGNORECASE)
 _VOLUME = re.compile(r"(?<![0-9a-zа-яе])громкост", re.IGNORECASE)
 _DECREASE = re.compile(r"(?<![0-9a-zа-яе])убавь", re.IGNORECASE)
 _INCREASE = re.compile(r"(?<![0-9a-zа-яе])(?:увеличь|прибавь)", re.IGNORECASE)
 _SET = re.compile(r"(?<![0-9a-zа-яе])поставь", re.IGNORECASE)
+_NEGATION = re.compile(r"(?<![0-9a-zа-яе])(?:не|нельзя)(?![0-9a-zа-яе])", re.IGNORECASE)
+_PLAY = re.compile(
+    r"(?<![0-9a-zа-яе])(?:включи|запусти|вруби|поставь|покажи|хочу)\w*",
+    re.IGNORECASE,
+)
+_FRAME_VERB = re.compile(
+    r"(?<![0-9a-zа-яе])(?:включи|выключи|запусти|поставь|вруби|выруби|сделай|перемотай|"
+    r"убавь|увеличь|прибавь|покажи|останови|приостанови|перескочи|хочу)\w*",
+    re.IGNORECASE,
+)
+_DOMAIN_TOKEN = re.compile(
+    r"пауз\w*|приостанови\w*|перемотай\w*|вперед\w*|назад\w*|следующ\w*|предыдущ\w*|"
+    r"перескочи\w*|останови\w*|потемнее|ярче|потише|(?:по)?громче|яркост\w*|громкост\w*|"
+    r"убавь\w*|увеличь\w*|прибавь\w*|пожалуйста|чуть|немного|ну|уже|мне|тут|здесь|"
+    r"сери\w*|фильм\w*|кино|альбом\w*|плейлист\w*|песн\w*|трек\w*|мультик\w*|"
+    r"новост\w*|сезон\w*|исполнител\w*|процент\w*|минут\w*|"
+    r"красн\w*|синим|синий|синяя|синее|синие|фиолетов\w*|зелен\w*|оранж\w*|"
+    r"теплый|тёплый|бел\w*|перв\w*|втор\w*|трет\w*|четвер\w*|\d+",
+    re.IGNORECASE,
+)
+_FUNCTION_WORD = frozenset({
+    "в", "на", "у", "для", "с", "по", "к", "из", "от", "про", "о", "и", "а",
+    "что", "нибудь", "что-нибудь", "что-то", "что-либо", "чего-нибудь",
+    "ничего", "ничто", "это", "этот", "эта", "эту", "этом", "этой", "эти", "этого",
+    "пожалуйста", "мне",
+})
+_NON_TITLE = ("голов", "точк", "разговор")
+_NUMBER_TOKEN = re.compile(
+    r"^(?:\d+|один|одна|одну|два|две|три|четыре|пять|шесть|семь|восемь|девять|десять|"
+    r"одиннадцать|двенадцать|тринадцать|четырнадцать|пятнадцать|шестнадцать|"
+    r"семнадцать|восемнадцать|девятнадцать|двадцать|тридцать|сорок|пятьдесят|шестьдесят)$",
+    re.IGNORECASE,
+)
 
 
 @dataclass(frozen=True)
@@ -75,7 +110,9 @@ class DeterministicParse:
         )
 
 
-def parse_deterministic(text: str, registry: DeviceRegistry) -> DeterministicParse:
+def parse_clause(text: str, registry: DeviceRegistry) -> DeterministicParse:
+    """One clause, no coordination. Callers that see «и» use parse_plan."""
+
     slots = read_slots(text, registry)
     mention = spoken_mention(text, registry)
     folded = fold(text)
@@ -108,6 +145,45 @@ def parse_deterministic(text: str, registry: DeviceRegistry) -> DeterministicPar
     )
 
 
+def parse_deterministic(text: str, registry: DeviceRegistry) -> DeterministicParse:
+    """Single-command view. A coordinated utterance is not one command."""
+
+    from ollama_runner.nlu.structure import parse_plan
+
+    plan = parse_plan(text, registry)
+    if plan.fully_parsed and len(plan.commands) == 1:
+        command = plan.commands[0]
+        target = command.target
+        return DeterministicParse(
+            intent=command.intent,
+            slots=ExplicitSlots(
+                owner=target.owner,
+                raw_owner=target.raw_owner,
+                area=target.area,
+                raw_area=target.raw_area,
+                ordinal=target.ordinal,
+                device_type=target.device_type,
+                raw_device_type=target.raw_device_type,
+            ),
+            mention=target.mention,
+            content=command.arguments.get("content"),
+            value=command.arguments.get("value"),
+            handled=True,
+            evidence=plan.evidence,
+            reason="handled",
+        )
+    return DeterministicParse(
+        intent=None,
+        slots=read_slots(text, registry),
+        mention=spoken_mention(text, registry),
+        content=None,
+        value=None,
+        handled=False,
+        evidence=plan.evidence,
+        reason=plan.reason or "no_intent_cue",
+    )
+
+
 def _value_for(text: str, registry: DeviceRegistry) -> tuple[str, str] | None:
     from ollama_runner.nlu.slots import _unconsumed_span
 
@@ -130,6 +206,8 @@ def _decide(
 ) -> tuple[str, str | None, str | None, tuple[str, ...]] | None:
     amount = value[0] if value and value[1] != "color" else None
     color = value[0] if value and value[1] == "color" else None
+    if _NEGATION.search(folded) or not _command_frame(text, registry):
+        return None
 
     if _is_episode(text):
         return "video.play", residual or None, None, ("episode",)
@@ -139,8 +217,11 @@ def _decide(
         return "media.seek_forward", None, amount, ("seek_forward",)
     if _SEEK.search(folded) and _BACKWARD.search(folded):
         return "media.seek_backward", None, amount, ("seek_backward",)
-    if _is_relative(text):
-        intent = "media.previous" if re.search(r"предыдущ", folded) else "media.next"
+    if _SKIP.search(folded) or _is_relative(text):
+        if _is_relative(text):
+            intent = "media.previous" if re.search(r"предыдущ", folded) else "media.next"
+        else:
+            intent = "media.next"
         return intent, None, None, (intent,)
     if _STOP.search(folded):
         return "media.stop", None, None, ("stop",)
@@ -156,23 +237,66 @@ def _decide(
         return "brightness.increase", None, amount, ("brightness_increase",)
     if _BRIGHTNESS.search(folded) and (_SET.search(folded) or amount):
         return "brightness.set", None, amount, ("brightness_set",)
+    if _QUIETER.search(folded):
+        return "volume.decrease", None, amount, ("quieter",)
     if _LOUDER.search(folded):
         return "volume.increase", None, amount, ("louder",)
     if _VOLUME.search(folded) and _DECREASE.search(folded):
         return "volume.decrease", None, amount, ("volume_decrease",)
     if _VOLUME.search(folded) and (_SET.search(folded) or amount):
         return "volume.set", None, amount, ("volume_set",)
-    if kind == "audio.play":
+    if kind == "audio.play" and _PLAY.search(folded):
         return "audio.play", residual or None, None, ("audio_marker",)
-    if kind == "video.play":
+    if kind == "video.play" and _PLAY.search(folded):
         return "video.play", residual or None, None, ("video_marker",)
     if _POWER_OFF.search(text) and _known_device(text, registry):
         return "device.turn_off", None, None, ("power_off",)
     if _POWER_ON.search(text) and _known_device(text, registry):
         return "device.turn_on", None, None, ("power_on",)
-    if _POWER_ON.search(text) and _unknown_leftover(text, registry):
+    if _POWER_ON.search(text) and _unknown_leftover(text, registry) and _plausible_title(residual or _unknown_leftover(text, registry) or ""):
         return "content.play", residual or _unknown_leftover(text, registry), None, ("bare_content",)
     return None
+
+
+def _command_frame(text: str, registry: DeviceRegistry) -> bool:
+    """A lone keyword is not a command. A verb, or only domain words, is."""
+
+    if _FRAME_VERB.search(fold(text)):
+        return True
+    return _domain_only(text, registry)
+
+
+def _domain_only(text: str, registry: DeviceRegistry) -> bool:
+    from ollama_runner.inventory.registry import area_from_text
+
+    span = _DOMAIN_TOKEN.sub(" ", text)
+    for _ in range(8):
+        owner = registry.owner_from_text(span)
+        area = area_from_text(span)
+        device = device_type_from_text(span)
+        if owner is None and area is None and device is None:
+            break
+        for hit in (owner, area, device):
+            if hit is not None and hit[1]:
+                span = re.sub(re.escape(hit[1]), " ", span, count=1, flags=re.IGNORECASE)
+    tokens = re.findall(r"[0-9a-zа-яе]+", fold(span))
+    return all(token in _FUNCTION_WORD for token in tokens)
+
+
+def _plausible_title(residual: str) -> bool:
+    """A bare leftover is a title only when it is not a number, a pronoun, or a discourse word."""
+
+    tokens = re.findall(r"[0-9A-Za-zА-Яа-яЁё-]+", residual)
+    if not tokens:
+        return False
+    folded = [fold(token) for token in tokens]
+    return not all(_functionish(token) for token in folded)
+
+
+def _functionish(token: str) -> bool:
+    if token in _FUNCTION_WORD or _NUMBER_TOKEN.match(token):
+        return True
+    return any(token.startswith(prefix) for prefix in _NON_TITLE)
 
 
 def _known_device(text: str, registry: DeviceRegistry) -> bool:
