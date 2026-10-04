@@ -811,7 +811,7 @@
     "category": "shared_area",
     "text": "В гостиной и на кухне выключи свет",
     "expected_status": "fully_parsed",
-    "status": "partially_parsed",
+    "status": "fully_parsed",
     "expected": [
       {
         "intent": "device.turn_off",
@@ -828,16 +828,20 @@
       {
         "intent": "device.turn_off",
         "device_type": "light",
+        "area": "гостиная",
+        "owner": null
+      },
+      {
+        "intent": "device.turn_off",
+        "device_type": "light",
         "area": "кухня",
         "owner": null
       }
     ],
-    "unresolved": [
-      "В гостиной"
-    ],
-    "correct": false,
+    "unresolved": [],
+    "correct": true,
     "extra": 0,
-    "missing": 1
+    "missing": 0
   },
   {
     "id": "K-23",

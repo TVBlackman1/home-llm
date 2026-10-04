@@ -141,11 +141,22 @@ def _pieces(text: str) -> list[str]:
     for index, coord in enumerate(coords):
         later = coords[index + 1].start() if index + 1 < len(coords) else len(text)
         conjunct = text[coord.end():later]
-        if _starts_new_clause(conjunct):
+        # «в гостиной и на кухне выключи свет» is one predicate with a fronted
+        # area list. A coordinator opens a new clause only after a predicate
+        # has already appeared on the left.
+        if _starts_new_clause(conjunct) and _has_predicate(text[start:coord.start()]):
             pieces.append(text[start:coord.start()])
             start = coord.end()
     pieces.append(text[start:])
     return [piece.strip(" ,") for piece in pieces if piece.strip(" ,")]
+
+
+def _has_predicate(text: str) -> bool:
+    """True when this span already contains a verb or a bare command cue."""
+
+    if _local_intent(text):
+        return True
+    return bool(_FRAME_VERB.search(fold(text)))
 
 
 def _starts_new_clause(text: str) -> bool:
@@ -200,9 +211,11 @@ def _expand_piece(
             return [parsed.command()], parsed.intent, True
         return [], intent, False
 
-    area_shared, area_local, area_ambiguous = _attach(devices, areas)
-    owner_shared, owner_local, owner_ambiguous = _attach(devices, owners)
+    area_shared, area_local, area_ambiguous = _attach(devices, areas, piece)
+    owner_shared, owner_local, owner_ambiguous = _attach(devices, owners, piece)
     if area_ambiguous or owner_ambiguous:
+        return [], intent, False
+    if len(devices) > 1 and (len(area_shared) > 1 or len(owner_shared) > 1):
         return [], intent, False
     if not devices:
         return [], intent, False
@@ -219,9 +232,14 @@ def _expand_piece(
     return commands, intent, True
 
 
+def _coordinator_between(text: str, left: int, right: int) -> bool:
+    return bool(_COORD.search(fold(text[left:right])))
+
+
 def _attach(
     devices: list[_Span],
     modifiers: list[_Span],
+    text: str,
 ) -> tuple[list[_Span], dict[_Span, list[_Span]], bool]:
     if not modifiers:
         return [], {device: [] for device in devices}, False
@@ -235,6 +253,14 @@ def _attach(
             shared.append(modifier)
             continue
         previous = [device for device in devices if device.end <= modifier.start]
+        following = [device for device in devices if device.start >= modifier.end]
+        if (
+            previous
+            and following
+            and _coordinator_between(text, previous[-1].end, modifier.start)
+        ):
+            local[following[0]].append(modifier)
+            continue
         if not previous:
             shared.append(modifier)
             continue

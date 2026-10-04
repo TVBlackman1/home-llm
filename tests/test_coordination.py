@@ -101,6 +101,43 @@ def test_adjacent_nouns_are_not_coordination(registry: DeviceRegistry) -> None:
 
 
 @pytest.mark.unit
+def test_fronted_areas_share_one_predicate(registry: DeviceRegistry) -> None:
+    assert _rows("В гостиной и на кухне выключи свет", registry) == [
+        ("device.turn_off", "light", "гостиная", None),
+        ("device.turn_off", "light", "кухня", None),
+    ]
+    assert _rows("В гостиной и на кухне включи свет", registry) == [
+        ("device.turn_on", "light", "гостиная", None),
+        ("device.turn_on", "light", "кухня", None),
+    ]
+    assert _rows("В спальне и в кабинете выключи свет", registry) == [
+        ("device.turn_off", "light", "спальня", None),
+        ("device.turn_off", "light", "кабинет", None),
+    ]
+    assert _rows("На кухне, в спальне и в гостиной включи свет", registry) == [
+        ("device.turn_on", "light", "кухня", None),
+        ("device.turn_on", "light", "спальня", None),
+        ("device.turn_on", "light", "гостиная", None),
+    ]
+    assert _rows("в гостиной и кухне выключи свет", registry) == [
+        ("device.turn_off", "light", "гостиная", None),
+        ("device.turn_off", "light", "кухня", None),
+    ]
+
+
+@pytest.mark.unit
+def test_local_branch_does_not_take_the_other_area(registry: DeviceRegistry) -> None:
+    assert _rows("выключи свет в гостиной и телевизор на кухне", registry) == [
+        ("device.turn_off", "light", "гостиная", None),
+        ("device.turn_off", "tv", "кухня", None),
+    ]
+    assert _rows("в гостиной включи свет, а на кухне телевизор", registry) == [
+        ("device.turn_on", "light", "гостиная", None),
+        ("device.turn_on", "tv", "кухня", None),
+    ]
+
+
+@pytest.mark.unit
 def test_ambiguous_scope_is_not_a_cartesian_product(registry: DeviceRegistry) -> None:
     plan = parse_plan("Выключи свет и телевизор в гостиной и спальне", registry)
     assert not plan.fully_parsed
