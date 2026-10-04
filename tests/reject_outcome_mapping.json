@@ -1,0 +1,1788 @@
+{
+  "name": "reject-semantics-v1-expected-outcomes",
+  "frozen": true,
+  "assigned_before_benchmark": true,
+  "note": "Labeled from the utterance and the COMMAND / NOT_COMMAND / NEEDS_CONTEXT definitions before any model run. challenge_cases.json expected_intent is unchanged. Parser robustness and semantic paraphrase stay COMMAND plus that intent.",
+  "counts": {
+    "command": 152,
+    "needs_context": 32,
+    "not_command": 36
+  },
+  "by_category": {
+    "parser_robustness": {
+      "command": 60
+    },
+    "semantic_paraphrase": {
+      "command": 92
+    },
+    "ambiguous": {
+      "needs_context": 32,
+      "not_command": 8
+    },
+    "adversarial": {
+      "not_command": 28
+    }
+  },
+  "cases": [
+    {
+      "id": "A-01",
+      "category": "parser_robustness",
+      "text": "У Маши включи телевизор",
+      "outcome": "command",
+      "intent": "device.turn_on",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-02",
+      "category": "parser_robustness",
+      "text": "Телевизор у Маши включи",
+      "outcome": "command",
+      "intent": "device.turn_on",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-03",
+      "category": "parser_robustness",
+      "text": "На кухне включи вторую колонку",
+      "outcome": "command",
+      "intent": "device.turn_on",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-04",
+      "category": "parser_robustness",
+      "text": "Вторую колонку, пожалуйста, включи на кухне",
+      "outcome": "command",
+      "intent": "device.turn_on",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-05",
+      "category": "parser_robustness",
+      "text": "Мне на кухне свет включи",
+      "outcome": "command",
+      "intent": "device.turn_on",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-06",
+      "category": "parser_robustness",
+      "text": "Свет в спальне, будь добр, включи",
+      "outcome": "command",
+      "intent": "device.turn_on",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-07",
+      "category": "parser_robustness",
+      "text": "В гостиной у Марины свет включи",
+      "outcome": "command",
+      "intent": "device.turn_on",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-08",
+      "category": "parser_robustness",
+      "text": "Антону монитор в кабинете включи",
+      "outcome": "command",
+      "intent": "device.turn_on",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-09",
+      "category": "parser_robustness",
+      "text": "Ну, телевизор в детской включи",
+      "outcome": "command",
+      "intent": "device.turn_on",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-10",
+      "category": "parser_robustness",
+      "text": "Пожалуйста, у папы в коридоре свет включи",
+      "outcome": "command",
+      "intent": "device.turn_on",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-11",
+      "category": "parser_robustness",
+      "text": "Торшер у Антона включи",
+      "outcome": "command",
+      "intent": "device.turn_on",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-12",
+      "category": "parser_robustness",
+      "text": "В ванной свет мне включи",
+      "outcome": "command",
+      "intent": "device.turn_on",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-13",
+      "category": "parser_robustness",
+      "text": "Третью колонку в гостиной включи",
+      "outcome": "command",
+      "intent": "device.turn_on",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-14",
+      "category": "parser_robustness",
+      "text": "Наушники Андрея включи",
+      "outcome": "command",
+      "intent": "device.turn_on",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-15",
+      "category": "parser_robustness",
+      "text": "На балконе, слушай, включи свет",
+      "outcome": "command",
+      "intent": "device.turn_on",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-16",
+      "category": "parser_robustness",
+      "text": "Проектор в кабинете, пожалуйста, включи",
+      "outcome": "command",
+      "intent": "device.turn_on",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-17",
+      "category": "parser_robustness",
+      "text": "У Артёма в детской телевизор включи",
+      "outcome": "command",
+      "intent": "device.turn_on",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-18",
+      "category": "parser_robustness",
+      "text": "Пылесос на кухне включи",
+      "outcome": "command",
+      "intent": "device.turn_on",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-19",
+      "category": "parser_robustness",
+      "text": "Телевизор у Маши выключи",
+      "outcome": "command",
+      "intent": "device.turn_off",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-20",
+      "category": "parser_robustness",
+      "text": "На кухне свет выключи",
+      "outcome": "command",
+      "intent": "device.turn_off",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-21",
+      "category": "parser_robustness",
+      "text": "Свет, пожалуйста, выключи в спальне",
+      "outcome": "command",
+      "intent": "device.turn_off",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-22",
+      "category": "parser_robustness",
+      "text": "Колонку в гостиной выключи уже",
+      "outcome": "command",
+      "intent": "device.turn_off",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-23",
+      "category": "parser_robustness",
+      "text": "У Антона в кабинете монитор выключи",
+      "outcome": "command",
+      "intent": "device.turn_off",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-24",
+      "category": "parser_robustness",
+      "text": "В ванной выключи свет, будь добр",
+      "outcome": "command",
+      "intent": "device.turn_off",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-25",
+      "category": "parser_robustness",
+      "text": "Второй светильник на кухне выключи",
+      "outcome": "command",
+      "intent": "device.turn_off",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-26",
+      "category": "parser_robustness",
+      "text": "Наушники выключи у Марины",
+      "outcome": "command",
+      "intent": "device.turn_off",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-27",
+      "category": "parser_robustness",
+      "text": "Свет ярче сделай в гостиной",
+      "outcome": "command",
+      "intent": "brightness.increase",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-28",
+      "category": "parser_robustness",
+      "text": "В спальне сделай чуть потемнее",
+      "outcome": "command",
+      "intent": "brightness.decrease",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-29",
+      "category": "parser_robustness",
+      "text": "Яркость на кухне поставь на 40 процентов",
+      "outcome": "command",
+      "intent": "brightness.set",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-30",
+      "category": "parser_robustness",
+      "text": "На 20 процентов яркость в кабинете увеличь",
+      "outcome": "command",
+      "intent": "brightness.increase",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-31",
+      "category": "parser_robustness",
+      "text": "У Маши в спальне яркость убавь",
+      "outcome": "command",
+      "intent": "brightness.decrease",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-32",
+      "category": "parser_robustness",
+      "text": "Потемнее, пожалуйста, в детской",
+      "outcome": "command",
+      "intent": "brightness.decrease",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-33",
+      "category": "parser_robustness",
+      "text": "Свет в спальне красным сделай",
+      "outcome": "command",
+      "intent": "color.set",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-34",
+      "category": "parser_robustness",
+      "text": "Лампу на кухне синим поставь",
+      "outcome": "command",
+      "intent": "color.set",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-35",
+      "category": "parser_robustness",
+      "text": "В гостиной свет зелёным сделай",
+      "outcome": "command",
+      "intent": "color.set",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-36",
+      "category": "parser_robustness",
+      "text": "Тёплый белый на торшер в спальне поставь",
+      "outcome": "command",
+      "intent": "color.set",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-37",
+      "category": "parser_robustness",
+      "text": "Телевизор погромче сделай",
+      "outcome": "command",
+      "intent": "volume.increase",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-38",
+      "category": "parser_robustness",
+      "text": "Громкость колонки убавь на кухне",
+      "outcome": "command",
+      "intent": "volume.decrease",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-39",
+      "category": "parser_robustness",
+      "text": "На 30 процентов громкость в гостиной поставь",
+      "outcome": "command",
+      "intent": "volume.set",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-40",
+      "category": "parser_robustness",
+      "text": "Колонку чуть погромче на балконе",
+      "outcome": "command",
+      "intent": "volume.increase",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-41",
+      "category": "parser_robustness",
+      "text": "У Маши телевизор громкость поставь на 10 процентов",
+      "outcome": "command",
+      "intent": "volume.set",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-42",
+      "category": "parser_robustness",
+      "text": "Громкость в ванной убавь немного",
+      "outcome": "command",
+      "intent": "volume.decrease",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-43",
+      "category": "parser_robustness",
+      "text": "Сериал на паузу поставь",
+      "outcome": "command",
+      "intent": "media.pause",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-44",
+      "category": "parser_robustness",
+      "text": "Кино, пожалуйста, останови",
+      "outcome": "command",
+      "intent": "media.stop",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-45",
+      "category": "parser_robustness",
+      "text": "На десять минут вперед сериал перемотай",
+      "outcome": "command",
+      "intent": "media.seek_forward",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-46",
+      "category": "parser_robustness",
+      "text": "Сериал назад на пять минут перемотай",
+      "outcome": "command",
+      "intent": "media.seek_backward",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-47",
+      "category": "parser_robustness",
+      "text": "Следующую серию поставь",
+      "outcome": "command",
+      "intent": "media.next",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-48",
+      "category": "parser_robustness",
+      "text": "Предыдущий трек включи",
+      "outcome": "command",
+      "intent": "media.previous",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-49",
+      "category": "parser_robustness",
+      "text": "Фильм Кварис поставь",
+      "outcome": "command",
+      "intent": "video.play",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-50",
+      "category": "parser_robustness",
+      "text": "Альбом Норвен включи на колонке",
+      "outcome": "command",
+      "intent": "audio.play",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-51",
+      "category": "parser_robustness",
+      "text": "Кварис поставь",
+      "outcome": "command",
+      "intent": "content.play",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-52",
+      "category": "parser_robustness",
+      "text": "На кухне поставь Элидар",
+      "outcome": "command",
+      "intent": "content.play",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-53",
+      "category": "parser_robustness",
+      "text": "Третью серию Норвена включи",
+      "outcome": "command",
+      "intent": "video.play",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-54",
+      "category": "parser_robustness",
+      "text": "Песню Элидар, пожалуйста, поставь",
+      "outcome": "command",
+      "intent": "audio.play",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-55",
+      "category": "parser_robustness",
+      "text": "Телевизор (тот, что в спальне) включи",
+      "outcome": "command",
+      "intent": "device.turn_on",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-56",
+      "category": "parser_robustness",
+      "text": "Свет — ну, на кухне — включи",
+      "outcome": "command",
+      "intent": "device.turn_on",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-57",
+      "category": "parser_robustness",
+      "text": "У Маши, кстати, телевизор выключи",
+      "outcome": "command",
+      "intent": "device.turn_off",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-58",
+      "category": "parser_robustness",
+      "text": "Колонку, вторую, на кухне включи",
+      "outcome": "command",
+      "intent": "device.turn_on",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-59",
+      "category": "parser_robustness",
+      "text": "В гостиной, у окна, торшер включи",
+      "outcome": "command",
+      "intent": "device.turn_on",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "A-60",
+      "category": "parser_robustness",
+      "text": "Запусти-ка Норвен",
+      "outcome": "command",
+      "intent": "content.play",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-01",
+      "category": "semantic_paraphrase",
+      "text": "Зажги свет на кухне",
+      "outcome": "command",
+      "intent": "device.turn_on",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-02",
+      "category": "semantic_paraphrase",
+      "text": "Дай свет в ванной",
+      "outcome": "command",
+      "intent": "device.turn_on",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-03",
+      "category": "semantic_paraphrase",
+      "text": "Пусть в гостиной горит свет",
+      "outcome": "command",
+      "intent": "device.turn_on",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-04",
+      "category": "semantic_paraphrase",
+      "text": "Разбуди телевизор у Маши",
+      "outcome": "command",
+      "intent": "device.turn_on",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-05",
+      "category": "semantic_paraphrase",
+      "text": "Хочу чтобы в спальне загорелся свет",
+      "outcome": "command",
+      "intent": "device.turn_on",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-06",
+      "category": "semantic_paraphrase",
+      "text": "Засвети коридор",
+      "outcome": "command",
+      "intent": "device.turn_on",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-07",
+      "category": "semantic_paraphrase",
+      "text": "Лампу в детской зажги",
+      "outcome": "command",
+      "intent": "device.turn_on",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-08",
+      "category": "semantic_paraphrase",
+      "text": "Можешь зажечь торшер в спальне",
+      "outcome": "command",
+      "intent": "device.turn_on",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-09",
+      "category": "semantic_paraphrase",
+      "text": "Погаси свет",
+      "outcome": "command",
+      "intent": "device.turn_off",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-10",
+      "category": "semantic_paraphrase",
+      "text": "Потуши лампу в спальне",
+      "outcome": "command",
+      "intent": "device.turn_off",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-11",
+      "category": "semantic_paraphrase",
+      "text": "Гаси телевизор у Маши",
+      "outcome": "command",
+      "intent": "device.turn_off",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-12",
+      "category": "semantic_paraphrase",
+      "text": "Хватит светить на кухне",
+      "outcome": "command",
+      "intent": "device.turn_off",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-13",
+      "category": "semantic_paraphrase",
+      "text": "Свет в ванной больше не нужен",
+      "outcome": "command",
+      "intent": "device.turn_off",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-14",
+      "category": "semantic_paraphrase",
+      "text": "Телевизор можно уже гасить",
+      "outcome": "command",
+      "intent": "device.turn_off",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-15",
+      "category": "semantic_paraphrase",
+      "text": "Погаси всё освещение в гостиной",
+      "outcome": "command",
+      "intent": "device.turn_off",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-16",
+      "category": "semantic_paraphrase",
+      "text": "Усыпи колонку на балконе",
+      "outcome": "command",
+      "intent": "device.turn_off",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-17",
+      "category": "semantic_paraphrase",
+      "text": "Сделай здесь посветлее",
+      "outcome": "command",
+      "intent": "brightness.increase",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-18",
+      "category": "semantic_paraphrase",
+      "text": "Добавь света на кухне",
+      "outcome": "command",
+      "intent": "brightness.increase",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-19",
+      "category": "semantic_paraphrase",
+      "text": "Пусть в спальне будет светлее",
+      "outcome": "command",
+      "intent": "brightness.increase",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-20",
+      "category": "semantic_paraphrase",
+      "text": "Маловато света в гостиной",
+      "outcome": "command",
+      "intent": "brightness.increase",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-21",
+      "category": "semantic_paraphrase",
+      "text": "Освети кабинет получше",
+      "outcome": "command",
+      "intent": "brightness.increase",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-22",
+      "category": "semantic_paraphrase",
+      "text": "Света не хватает в ванной",
+      "outcome": "command",
+      "intent": "brightness.increase",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-23",
+      "category": "semantic_paraphrase",
+      "text": "Здесь слишком ярко",
+      "outcome": "command",
+      "intent": "brightness.decrease",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-24",
+      "category": "semantic_paraphrase",
+      "text": "Приглуши свет в спальне",
+      "outcome": "command",
+      "intent": "brightness.decrease",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-25",
+      "category": "semantic_paraphrase",
+      "text": "Свет режет глаза на кухне",
+      "outcome": "command",
+      "intent": "brightness.decrease",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-26",
+      "category": "semantic_paraphrase",
+      "text": "Сбавь освещение в гостиной",
+      "outcome": "command",
+      "intent": "brightness.decrease",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-27",
+      "category": "semantic_paraphrase",
+      "text": "Слишком светло в детской",
+      "outcome": "command",
+      "intent": "brightness.decrease",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-28",
+      "category": "semantic_paraphrase",
+      "text": "Притемни торшер в спальне",
+      "outcome": "command",
+      "intent": "brightness.decrease",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-29",
+      "category": "semantic_paraphrase",
+      "text": "Освещение наполовину в гостиной",
+      "outcome": "command",
+      "intent": "brightness.set",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-30",
+      "category": "semantic_paraphrase",
+      "text": "Свет процентов на тридцать в спальне",
+      "outcome": "command",
+      "intent": "brightness.set",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-31",
+      "category": "semantic_paraphrase",
+      "text": "Сделай яркость средней на кухне",
+      "outcome": "command",
+      "intent": "brightness.set",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-32",
+      "category": "semantic_paraphrase",
+      "text": "Хочу свет на 15 процентов в детской",
+      "outcome": "command",
+      "intent": "brightness.set",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-33",
+      "category": "semantic_paraphrase",
+      "text": "Хочу тёплый свет в спальне",
+      "outcome": "command",
+      "intent": "color.set",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-34",
+      "category": "semantic_paraphrase",
+      "text": "Перекрась лампу в синий",
+      "outcome": "command",
+      "intent": "color.set",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-35",
+      "category": "semantic_paraphrase",
+      "text": "Пусть торшер будет зелёным",
+      "outcome": "command",
+      "intent": "color.set",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-36",
+      "category": "semantic_paraphrase",
+      "text": "Сделай ночник красным",
+      "outcome": "command",
+      "intent": "color.set",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-37",
+      "category": "semantic_paraphrase",
+      "text": "Сделай свет в ванной фиолетовым",
+      "outcome": "command",
+      "intent": "color.set",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-38",
+      "category": "semantic_paraphrase",
+      "text": "Добавь звука на телевизоре",
+      "outcome": "command",
+      "intent": "volume.increase",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-39",
+      "category": "semantic_paraphrase",
+      "text": "Плохо слышно колонку в гостиной",
+      "outcome": "command",
+      "intent": "volume.increase",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-40",
+      "category": "semantic_paraphrase",
+      "text": "Сделай звук сильнее",
+      "outcome": "command",
+      "intent": "volume.increase",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-41",
+      "category": "semantic_paraphrase",
+      "text": "Телевизор слишком тихий",
+      "outcome": "command",
+      "intent": "volume.increase",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-42",
+      "category": "semantic_paraphrase",
+      "text": "Подними звук у Маши",
+      "outcome": "command",
+      "intent": "volume.increase",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-43",
+      "category": "semantic_paraphrase",
+      "text": "Прибавь звук в кабинете",
+      "outcome": "command",
+      "intent": "volume.increase",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-44",
+      "category": "semantic_paraphrase",
+      "text": "Можно немного потише?",
+      "outcome": "command",
+      "intent": "volume.decrease",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-45",
+      "category": "semantic_paraphrase",
+      "text": "Что-то музыка орёт",
+      "outcome": "command",
+      "intent": "volume.decrease",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-46",
+      "category": "semantic_paraphrase",
+      "text": "Слишком громко здесь",
+      "outcome": "command",
+      "intent": "volume.decrease",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-47",
+      "category": "semantic_paraphrase",
+      "text": "Сделай тише телевизор",
+      "outcome": "command",
+      "intent": "volume.decrease",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-48",
+      "category": "semantic_paraphrase",
+      "text": "Прикрути звук на кухне",
+      "outcome": "command",
+      "intent": "volume.decrease",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-49",
+      "category": "semantic_paraphrase",
+      "text": "Колонка орёт на балконе",
+      "outcome": "command",
+      "intent": "volume.decrease",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-50",
+      "category": "semantic_paraphrase",
+      "text": "Звук на половину в гостиной",
+      "outcome": "command",
+      "intent": "volume.set",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-51",
+      "category": "semantic_paraphrase",
+      "text": "Сделай средний звук на телевизоре",
+      "outcome": "command",
+      "intent": "volume.set",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-52",
+      "category": "semantic_paraphrase",
+      "text": "Колонку процентов на двадцать",
+      "outcome": "command",
+      "intent": "volume.set",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-53",
+      "category": "semantic_paraphrase",
+      "text": "Кинь сериал на паузу",
+      "outcome": "command",
+      "intent": "media.pause",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-54",
+      "category": "semantic_paraphrase",
+      "text": "Приостанови кино",
+      "outcome": "command",
+      "intent": "media.pause",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-55",
+      "category": "semantic_paraphrase",
+      "text": "Замри на этом кадре",
+      "outcome": "command",
+      "intent": "media.pause",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-56",
+      "category": "semantic_paraphrase",
+      "text": "Повремени с фильмом",
+      "outcome": "command",
+      "intent": "media.pause",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-57",
+      "category": "semantic_paraphrase",
+      "text": "Остановись на секунду",
+      "outcome": "command",
+      "intent": "media.pause",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-58",
+      "category": "semantic_paraphrase",
+      "text": "Продолжай смотреть",
+      "outcome": "command",
+      "intent": "media.resume",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-59",
+      "category": "semantic_paraphrase",
+      "text": "Давай дальше кино",
+      "outcome": "command",
+      "intent": "media.resume",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-60",
+      "category": "semantic_paraphrase",
+      "text": "Сними с паузы",
+      "outcome": "command",
+      "intent": "media.resume",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-61",
+      "category": "semantic_paraphrase",
+      "text": "Верни воспроизведение",
+      "outcome": "command",
+      "intent": "media.resume",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-62",
+      "category": "semantic_paraphrase",
+      "text": "Хватит кино",
+      "outcome": "command",
+      "intent": "media.stop",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-63",
+      "category": "semantic_paraphrase",
+      "text": "Закончь фильм",
+      "outcome": "command",
+      "intent": "media.stop",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-64",
+      "category": "semantic_paraphrase",
+      "text": "Всё, хватит смотреть",
+      "outcome": "command",
+      "intent": "media.stop",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-65",
+      "category": "semantic_paraphrase",
+      "text": "Прекрати воспроизведение",
+      "outcome": "command",
+      "intent": "media.stop",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-66",
+      "category": "semantic_paraphrase",
+      "text": "Эта серия надоела, дальше",
+      "outcome": "command",
+      "intent": "media.next",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-67",
+      "category": "semantic_paraphrase",
+      "text": "Перескочи эту песню",
+      "outcome": "command",
+      "intent": "media.next",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-68",
+      "category": "semantic_paraphrase",
+      "text": "Давай другой трек",
+      "outcome": "command",
+      "intent": "media.next",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-69",
+      "category": "semantic_paraphrase",
+      "text": "Листай дальше по плейлисту",
+      "outcome": "command",
+      "intent": "media.next",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-70",
+      "category": "semantic_paraphrase",
+      "text": "Пропусти этот кусок",
+      "outcome": "command",
+      "intent": "media.next",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-71",
+      "category": "semantic_paraphrase",
+      "text": "Верни то, что было до этого",
+      "outcome": "command",
+      "intent": "media.previous",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-72",
+      "category": "semantic_paraphrase",
+      "text": "Отмотай к прошлому треку",
+      "outcome": "command",
+      "intent": "media.previous",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-73",
+      "category": "semantic_paraphrase",
+      "text": "Вернись на одну назад",
+      "outcome": "command",
+      "intent": "media.previous",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-74",
+      "category": "semantic_paraphrase",
+      "text": "Перемотай чуть назад",
+      "outcome": "command",
+      "intent": "media.seek_backward",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-75",
+      "category": "semantic_paraphrase",
+      "text": "Промотай немного вперёд",
+      "outcome": "command",
+      "intent": "media.seek_forward",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-76",
+      "category": "semantic_paraphrase",
+      "text": "Отмотай пару минут",
+      "outcome": "command",
+      "intent": "media.seek_backward",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-77",
+      "category": "semantic_paraphrase",
+      "text": "Перескочи минуту вперёд",
+      "outcome": "command",
+      "intent": "media.seek_forward",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-78",
+      "category": "semantic_paraphrase",
+      "text": "Верни на пять минут",
+      "outcome": "command",
+      "intent": "media.seek_backward",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-79",
+      "category": "semantic_paraphrase",
+      "text": "Хочу посмотреть Кварис",
+      "outcome": "command",
+      "intent": "video.play",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-80",
+      "category": "semantic_paraphrase",
+      "text": "Покажи мне Норвен",
+      "outcome": "command",
+      "intent": "video.play",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-81",
+      "category": "semantic_paraphrase",
+      "text": "Давай глянем Элидар",
+      "outcome": "command",
+      "intent": "video.play",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-82",
+      "category": "semantic_paraphrase",
+      "text": "Кварис на экран",
+      "outcome": "command",
+      "intent": "video.play",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-83",
+      "category": "semantic_paraphrase",
+      "text": "Хочу кино про Норвена",
+      "outcome": "command",
+      "intent": "video.play",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-84",
+      "category": "semantic_paraphrase",
+      "text": "Послушаем Норвен",
+      "outcome": "command",
+      "intent": "audio.play",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-85",
+      "category": "semantic_paraphrase",
+      "text": "Хочу услышать Элидар",
+      "outcome": "command",
+      "intent": "audio.play",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-86",
+      "category": "semantic_paraphrase",
+      "text": "Пусти Кварис в наушники",
+      "outcome": "command",
+      "intent": "audio.play",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-87",
+      "category": "semantic_paraphrase",
+      "text": "Поставь послушать Элидар",
+      "outcome": "command",
+      "intent": "audio.play",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-88",
+      "category": "semantic_paraphrase",
+      "text": "Давай Кварис",
+      "outcome": "command",
+      "intent": "content.play",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-89",
+      "category": "semantic_paraphrase",
+      "text": "Хочу Норвен",
+      "outcome": "command",
+      "intent": "content.play",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-90",
+      "category": "semantic_paraphrase",
+      "text": "Можно Элидар?",
+      "outcome": "command",
+      "intent": "content.play",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-91",
+      "category": "semantic_paraphrase",
+      "text": "Дай Кварис",
+      "outcome": "command",
+      "intent": "content.play",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "B-92",
+      "category": "semantic_paraphrase",
+      "text": "Хочу включить Норвен",
+      "outcome": "command",
+      "intent": "content.play",
+      "reason": "existing expected intent is a household command"
+    },
+    {
+      "id": "C-01",
+      "category": "ambiguous",
+      "text": "Сделай нормально",
+      "outcome": "needs_context",
+      "intent": null,
+      "reason": "imperative, the desired state is not in the phrase"
+    },
+    {
+      "id": "C-02",
+      "category": "ambiguous",
+      "text": "Не то",
+      "outcome": "needs_context",
+      "intent": null,
+      "reason": "correction, the replacement action is not in the phrase"
+    },
+    {
+      "id": "C-03",
+      "category": "ambiguous",
+      "text": "Исправь это",
+      "outcome": "needs_context",
+      "intent": null,
+      "reason": "deictic repair request"
+    },
+    {
+      "id": "C-04",
+      "category": "ambiguous",
+      "text": "Давай другое",
+      "outcome": "needs_context",
+      "intent": null,
+      "reason": "continuation, the object of «другое» is not in the phrase"
+    },
+    {
+      "id": "C-05",
+      "category": "ambiguous",
+      "text": "Сделай как вчера",
+      "outcome": "needs_context",
+      "intent": null,
+      "reason": "request to restore an unstated past state"
+    },
+    {
+      "id": "C-06",
+      "category": "ambiguous",
+      "text": "Как обычно",
+      "outcome": "needs_context",
+      "intent": null,
+      "reason": "habit reference, no action in the phrase"
+    },
+    {
+      "id": "C-07",
+      "category": "ambiguous",
+      "text": "Ещё",
+      "outcome": "needs_context",
+      "intent": null,
+      "reason": "continuation, more of an unstated previous action"
+    },
+    {
+      "id": "C-08",
+      "category": "ambiguous",
+      "text": "Поправь",
+      "outcome": "needs_context",
+      "intent": null,
+      "reason": "repair request without an object"
+    },
+    {
+      "id": "C-09",
+      "category": "ambiguous",
+      "text": "Не так",
+      "outcome": "needs_context",
+      "intent": null,
+      "reason": "correction without a replacement"
+    },
+    {
+      "id": "C-10",
+      "category": "ambiguous",
+      "text": "Верни как было",
+      "outcome": "needs_context",
+      "intent": null,
+      "reason": "restore request, previous state is not in the phrase"
+    },
+    {
+      "id": "C-11",
+      "category": "ambiguous",
+      "text": "Сделай красиво",
+      "outcome": "needs_context",
+      "intent": null,
+      "reason": "imperative like «сделай нормально», the action is not determined"
+    },
+    {
+      "id": "C-12",
+      "category": "ambiguous",
+      "text": "Настрой всё",
+      "outcome": "needs_context",
+      "intent": null,
+      "reason": "setup request without a parameter"
+    },
+    {
+      "id": "C-13",
+      "category": "ambiguous",
+      "text": "Сделай теплее",
+      "outcome": "needs_context",
+      "intent": null,
+      "reason": "direction is present, domain (color or climate) is not"
+    },
+    {
+      "id": "C-14",
+      "category": "ambiguous",
+      "text": "Холодно тут",
+      "outcome": "not_command",
+      "intent": null,
+      "reason": "complaint, the phrase does not ask for an action"
+    },
+    {
+      "id": "C-15",
+      "category": "ambiguous",
+      "text": "Жарко",
+      "outcome": "not_command",
+      "intent": null,
+      "reason": "complaint, the phrase does not ask for an action"
+    },
+    {
+      "id": "C-16",
+      "category": "ambiguous",
+      "text": "Сделай на двадцать",
+      "outcome": "needs_context",
+      "intent": null,
+      "reason": "imperative with a number and no parameter"
+    },
+    {
+      "id": "C-17",
+      "category": "ambiguous",
+      "text": "Поставь пять",
+      "outcome": "needs_context",
+      "intent": null,
+      "reason": "imperative with a number and no object"
+    },
+    {
+      "id": "C-18",
+      "category": "ambiguous",
+      "text": "Хватит",
+      "outcome": "needs_context",
+      "intent": null,
+      "reason": "stop-shaped request, the action is not determined"
+    },
+    {
+      "id": "C-19",
+      "category": "ambiguous",
+      "text": "Продолжай",
+      "outcome": "needs_context",
+      "intent": null,
+      "reason": "continuation, resume of what is not in the phrase"
+    },
+    {
+      "id": "C-20",
+      "category": "ambiguous",
+      "text": "Дальше",
+      "outcome": "needs_context",
+      "intent": null,
+      "reason": "continuation, next of what is not in the phrase"
+    },
+    {
+      "id": "C-21",
+      "category": "ambiguous",
+      "text": "Громко",
+      "outcome": "not_command",
+      "intent": null,
+      "reason": "observation, not a request"
+    },
+    {
+      "id": "C-22",
+      "category": "ambiguous",
+      "text": "Темно",
+      "outcome": "not_command",
+      "intent": null,
+      "reason": "observation, not a request"
+    },
+    {
+      "id": "C-23",
+      "category": "ambiguous",
+      "text": "Светло",
+      "outcome": "not_command",
+      "intent": null,
+      "reason": "observation, not a request"
+    },
+    {
+      "id": "C-24",
+      "category": "ambiguous",
+      "text": "Включи что-нибудь",
+      "outcome": "needs_context",
+      "intent": null,
+      "reason": "power request, the object is explicitly unspecified"
+    },
+    {
+      "id": "C-25",
+      "category": "ambiguous",
+      "text": "Поставь что-нибудь",
+      "outcome": "needs_context",
+      "intent": null,
+      "reason": "play-shaped request, the object is explicitly unspecified"
+    },
+    {
+      "id": "C-26",
+      "category": "ambiguous",
+      "text": "Можно?",
+      "outcome": "needs_context",
+      "intent": null,
+      "reason": "permission fragment, the action is not in the phrase"
+    },
+    {
+      "id": "C-27",
+      "category": "ambiguous",
+      "text": "Не сейчас",
+      "outcome": "needs_context",
+      "intent": null,
+      "reason": "deferral of an unstated action"
+    },
+    {
+      "id": "C-28",
+      "category": "ambiguous",
+      "text": "Отмена",
+      "outcome": "needs_context",
+      "intent": null,
+      "reason": "cancel request, the target action is not in the phrase"
+    },
+    {
+      "id": "C-29",
+      "category": "ambiguous",
+      "text": "Забудь",
+      "outcome": "needs_context",
+      "intent": null,
+      "reason": "imperative about prior state, no household action in the phrase"
+    },
+    {
+      "id": "C-30",
+      "category": "ambiguous",
+      "text": "Как у Маши",
+      "outcome": "needs_context",
+      "intent": null,
+      "reason": "copy an unstated state"
+    },
+    {
+      "id": "C-31",
+      "category": "ambiguous",
+      "text": "Сделай так же",
+      "outcome": "needs_context",
+      "intent": null,
+      "reason": "copy an unstated state"
+    },
+    {
+      "id": "C-32",
+      "category": "ambiguous",
+      "text": "Этот цвет не тот",
+      "outcome": "needs_context",
+      "intent": null,
+      "reason": "color correction, the replacement color is not in the phrase"
+    },
+    {
+      "id": "C-33",
+      "category": "ambiguous",
+      "text": "Не синий",
+      "outcome": "needs_context",
+      "intent": null,
+      "reason": "negated color, the replacement is not in the phrase"
+    },
+    {
+      "id": "C-34",
+      "category": "ambiguous",
+      "text": "Кварис, пожалуйста",
+      "outcome": "needs_context",
+      "intent": null,
+      "reason": "polite mention of a name, the action is not in the phrase"
+    },
+    {
+      "id": "C-35",
+      "category": "ambiguous",
+      "text": "Повтори",
+      "outcome": "needs_context",
+      "intent": null,
+      "reason": "repeat request, the object is not in the phrase"
+    },
+    {
+      "id": "C-36",
+      "category": "ambiguous",
+      "text": "Ну и?",
+      "outcome": "not_command",
+      "intent": null,
+      "reason": "conversational prompt, not a household request"
+    },
+    {
+      "id": "C-37",
+      "category": "ambiguous",
+      "text": "Алло",
+      "outcome": "not_command",
+      "intent": null,
+      "reason": "attention check, not a household request"
+    },
+    {
+      "id": "C-38",
+      "category": "ambiguous",
+      "text": "Позже",
+      "outcome": "needs_context",
+      "intent": null,
+      "reason": "deferral of an unstated action"
+    },
+    {
+      "id": "C-39",
+      "category": "ambiguous",
+      "text": "Верни предыдущее состояние",
+      "outcome": "needs_context",
+      "intent": null,
+      "reason": "state restore, not a media skip; the state is not in the phrase"
+    },
+    {
+      "id": "C-40",
+      "category": "ambiguous",
+      "text": "Опять оно",
+      "outcome": "not_command",
+      "intent": null,
+      "reason": "deictic complaint, not a request"
+    },
+    {
+      "id": "D-01",
+      "category": "adversarial",
+      "text": "Свет в конце тоннеля меня не включает",
+      "outcome": "not_command",
+      "intent": null,
+      "reason": "metaphor, not a power request"
+    },
+    {
+      "id": "D-02",
+      "category": "adversarial",
+      "text": "Громкость этого спора зашкаливает",
+      "outcome": "not_command",
+      "intent": null,
+      "reason": "statement about an argument"
+    },
+    {
+      "id": "D-03",
+      "category": "adversarial",
+      "text": "Телевизор в новостях опять показывает политику",
+      "outcome": "not_command",
+      "intent": null,
+      "reason": "statement about the news, not a play request"
+    },
+    {
+      "id": "D-04",
+      "category": "adversarial",
+      "text": "Пауза в разговоре затянулась",
+      "outcome": "not_command",
+      "intent": null,
+      "reason": "conversational gap, not media.pause"
+    },
+    {
+      "id": "D-05",
+      "category": "adversarial",
+      "text": "Ярче солнца только твоя улыбка",
+      "outcome": "not_command",
+      "intent": null,
+      "reason": "compliment, not a brightness command"
+    },
+    {
+      "id": "D-06",
+      "category": "adversarial",
+      "text": "Включи голову, пожалуйста",
+      "outcome": "not_command",
+      "intent": null,
+      "reason": "idiom, not a device or a title"
+    },
+    {
+      "id": "D-07",
+      "category": "adversarial",
+      "text": "Поставь точку в этом разговоре",
+      "outcome": "not_command",
+      "intent": null,
+      "reason": "idiom, not a play request"
+    },
+    {
+      "id": "D-08",
+      "category": "adversarial",
+      "text": "Выключи эту тему, она мне надоела",
+      "outcome": "not_command",
+      "intent": null,
+      "reason": "the object is a topic, not a device"
+    },
+    {
+      "id": "D-09",
+      "category": "adversarial",
+      "text": "На кухне светская беседа, а не вечеринка",
+      "outcome": "not_command",
+      "intent": null,
+      "reason": "statement, светская is not the light"
+    },
+    {
+      "id": "D-10",
+      "category": "adversarial",
+      "text": "Сериал, который ты советовал, я уже видел, не надо его ставить",
+      "outcome": "not_command",
+      "intent": null,
+      "reason": "refusal to play, not a play request"
+    },
+    {
+      "id": "D-11",
+      "category": "adversarial",
+      "text": "Не включай телевизор",
+      "outcome": "not_command",
+      "intent": null,
+      "reason": "prohibition, not an executable positive command and not an underspecified continuation"
+    },
+    {
+      "id": "D-12",
+      "category": "adversarial",
+      "text": "Если бы ты включил свет, было бы лучше, но не надо",
+      "outcome": "not_command",
+      "intent": null,
+      "reason": "hypothetical plus refusal"
+    },
+    {
+      "id": "D-13",
+      "category": "adversarial",
+      "text": "Громче кричать не стоит",
+      "outcome": "not_command",
+      "intent": null,
+      "reason": "advice about shouting, not volume"
+    },
+    {
+      "id": "D-14",
+      "category": "adversarial",
+      "text": "Перемотай разговор к началу, это не про фильм",
+      "outcome": "not_command",
+      "intent": null,
+      "reason": "metaphor, the speaker says it is not about a film"
+    },
+    {
+      "id": "D-15",
+      "category": "adversarial",
+      "text": "Альбом моей жизни не включай",
+      "outcome": "not_command",
+      "intent": null,
+      "reason": "metaphor plus prohibition"
+    },
+    {
+      "id": "D-16",
+      "category": "adversarial",
+      "text": "Остановись и подумай, это не плеер",
+      "outcome": "not_command",
+      "intent": null,
+      "reason": "addressed to the listener, not the player"
+    },
+    {
+      "id": "D-17",
+      "category": "adversarial",
+      "text": "Следующая остановка — кухня, я про маршрут",
+      "outcome": "not_command",
+      "intent": null,
+      "reason": "transit stop, not media.next"
+    },
+    {
+      "id": "D-18",
+      "category": "adversarial",
+      "text": "Предыдущая мысль была лучше",
+      "outcome": "not_command",
+      "intent": null,
+      "reason": "about an idea, not media.previous"
+    },
+    {
+      "id": "D-19",
+      "category": "adversarial",
+      "text": "Яркость твоих идей потрясает",
+      "outcome": "not_command",
+      "intent": null,
+      "reason": "compliment, not brightness"
+    },
+    {
+      "id": "D-20",
+      "category": "adversarial",
+      "text": "Потемнее шутки больше не шути",
+      "outcome": "not_command",
+      "intent": null,
+      "reason": "about jokes, not brightness"
+    },
+    {
+      "id": "D-21",
+      "category": "adversarial",
+      "text": "Музыка сфер — это не колонка",
+      "outcome": "not_command",
+      "intent": null,
+      "reason": "statement, not the soundbar"
+    },
+    {
+      "id": "D-22",
+      "category": "adversarial",
+      "text": "Включился сам, я ничего не просил",
+      "outcome": "not_command",
+      "intent": null,
+      "reason": "narrative, the speaker says they did not ask"
+    },
+    {
+      "id": "D-23",
+      "category": "adversarial",
+      "text": "Запусти двигатель обсуждения",
+      "outcome": "not_command",
+      "intent": null,
+      "reason": "idiom, not a play request"
+    },
+    {
+      "id": "D-24",
+      "category": "adversarial",
+      "text": "Колонка цифр в отчёте не сходится",
+      "outcome": "not_command",
+      "intent": null,
+      "reason": "spreadsheet column, not a speaker"
+    },
+    {
+      "id": "D-25",
+      "category": "adversarial",
+      "text": "Сделай вид, что свет не горит",
+      "outcome": "not_command",
+      "intent": null,
+      "reason": "pretend, not a light command"
+    },
+    {
+      "id": "D-26",
+      "category": "adversarial",
+      "text": "Фильм ужасов на улице, не включай ничего",
+      "outcome": "not_command",
+      "intent": null,
+      "reason": "metaphor plus prohibition"
+    },
+    {
+      "id": "D-27",
+      "category": "adversarial",
+      "text": "Красный как помидор, это про лицо, не про лампу",
+      "outcome": "not_command",
+      "intent": null,
+      "reason": "description of a face, not a lamp color"
+    },
+    {
+      "id": "D-28",
+      "category": "adversarial",
+      "text": "Пять минут назад ты обещал не трогать телевизор",
+      "outcome": "not_command",
+      "intent": null,
+      "reason": "complaint about a promise, not a seek"
+    }
+  ]
+}

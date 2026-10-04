@@ -10,7 +10,7 @@ from ollama_runner.nlu.backend import LLMNLUBackend
 from ollama_runner.nlu.normalize import semantic_command_from_dict
 from ollama_runner.nlu.slots import apply_explicit
 from ollama_runner.resolve.capability import CapabilityResolver
-from ollama_runner.semantic import DeviceRuntime, RequestContext, SemanticCommand, Target
+from ollama_runner.semantic import CommandOutcome, DeviceRuntime, RequestContext, SemanticCommand, Target
 from ollama_runner.semantic_pipeline import SemanticPipeline
 from ollama_runner.skills.book import Executor
 from ollama_runner.types import Result
@@ -470,6 +470,7 @@ def test_llm_backend_maps_schema_without_picking_an_entity(tmp_path) -> None:
     prompt = tmp_path / "semantic.md"
     prompt.write_text("semantic", encoding="utf-8")
     payload = {
+        "outcome": "command",
         "intent": "device.turn_on",
         "device_type": "monitor",
         "mention": "монитор",
@@ -494,8 +495,10 @@ def test_llm_backend_maps_schema_without_picking_an_entity(tmp_path) -> None:
         base_url="http://ollama.test",
         client=httpx.Client(transport=httpx.MockTransport(handler), base_url="http://ollama.test"),
     )
-    command = backend.parse("Включи монитор", RequestContext())
+    outcome = backend.parse("Включи монитор", RequestContext())
 
+    assert isinstance(outcome, CommandOutcome)
+    command = outcome.command
     assert command.intent == "device.turn_on"
     assert command.target.device_type == "monitor"
     assert command.target.owner is None

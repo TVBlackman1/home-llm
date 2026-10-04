@@ -1,0 +1,551 @@
+{
+  "corpus": {
+    "total": 42,
+    "partial_positives": 22,
+    "full_controls": 12,
+    "adversarial_controls": 8
+  },
+  "parser": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "true_partial": 22,
+    "false_partial": 0,
+    "missed_partial": 0,
+    "true_negative": 20,
+    "false_partial_cases": [],
+    "adversarial_false_partial": 0,
+    "missed_cases": []
+  },
+  "binder": {
+    "correct_bind": 34,
+    "correct_unresolved": 63,
+    "wrong_bind": 0,
+    "wrong_cases": []
+  },
+  "focus": [
+    {
+      "id": "S-03",
+      "text": "Верни то, что было до этого",
+      "partial": {
+        "operation": "restore_previous",
+        "referent": "previous_executed_action"
+      },
+      "context": {
+        "previous_executed_semantic_action": "media.next",
+        "active_domain": "none"
+      },
+      "result": {
+        "status": "bound",
+        "command": {
+          "intent": "media.previous"
+        },
+        "reason": "undo_navigation"
+      },
+      "expected_status": "bound"
+    },
+    {
+      "id": "S-03",
+      "text": "Верни то, что было до этого",
+      "partial": {
+        "operation": "restore_previous",
+        "referent": "previous_executed_action"
+      },
+      "context": {
+        "previous_executed_semantic_action": "media.previous",
+        "active_domain": "none"
+      },
+      "result": {
+        "status": "bound",
+        "command": {
+          "intent": "media.next"
+        },
+        "reason": "undo_navigation"
+      },
+      "expected_status": "bound"
+    },
+    {
+      "id": "S-03",
+      "text": "Верни то, что было до этого",
+      "partial": {
+        "operation": "restore_previous",
+        "referent": "previous_executed_action"
+      },
+      "context": {
+        "previous_executed_semantic_action": "brightness.set",
+        "active_domain": "none"
+      },
+      "result": {
+        "status": "unresolved",
+        "command": null,
+        "reason": "incompatible_history"
+      },
+      "expected_status": "unresolved"
+    },
+    {
+      "id": "S-03",
+      "text": "Верни то, что было до этого",
+      "partial": {
+        "operation": "restore_previous",
+        "referent": "previous_executed_action"
+      },
+      "context": {
+        "previous_executed_semantic_action": "device.turn_off",
+        "active_domain": "none"
+      },
+      "result": {
+        "status": "unresolved",
+        "command": null,
+        "reason": "incompatible_history"
+      },
+      "expected_status": "unresolved"
+    },
+    {
+      "id": "S-03",
+      "text": "Верни то, что было до этого",
+      "partial": {
+        "operation": "restore_previous",
+        "referent": "previous_executed_action"
+      },
+      "context": {
+        "previous_executed_semantic_action": "none",
+        "active_domain": "none"
+      },
+      "result": {
+        "status": "unresolved",
+        "command": null,
+        "reason": "incompatible_history"
+      },
+      "expected_status": "unresolved"
+    },
+    {
+      "id": "S-22",
+      "text": "Вернись на одну назад",
+      "partial": {
+        "operation": "relative_step",
+        "direction": "previous",
+        "count": 1,
+        "domain": "unresolved"
+      },
+      "context": {
+        "previous_executed_semantic_action": "none",
+        "active_domain": "media.playlist"
+      },
+      "result": {
+        "status": "bound",
+        "command": {
+          "intent": "media.previous"
+        },
+        "reason": "ordered_domain"
+      },
+      "expected_status": "bound"
+    },
+    {
+      "id": "S-22",
+      "text": "Вернись на одну назад",
+      "partial": {
+        "operation": "relative_step",
+        "direction": "previous",
+        "count": 1,
+        "domain": "unresolved"
+      },
+      "context": {
+        "previous_executed_semantic_action": "none",
+        "active_domain": "media.episode"
+      },
+      "result": {
+        "status": "bound",
+        "command": {
+          "intent": "media.previous"
+        },
+        "reason": "ordered_domain"
+      },
+      "expected_status": "bound"
+    },
+    {
+      "id": "S-22",
+      "text": "Вернись на одну назад",
+      "partial": {
+        "operation": "relative_step",
+        "direction": "previous",
+        "count": 1,
+        "domain": "unresolved"
+      },
+      "context": {
+        "previous_executed_semantic_action": "none",
+        "active_domain": "media.photos"
+      },
+      "result": {
+        "status": "unresolved",
+        "command": null,
+        "reason": "incompatible_domain"
+      },
+      "expected_status": "unresolved"
+    },
+    {
+      "id": "S-22",
+      "text": "Вернись на одну назад",
+      "partial": {
+        "operation": "relative_step",
+        "direction": "previous",
+        "count": 1,
+        "domain": "unresolved"
+      },
+      "context": {
+        "previous_executed_semantic_action": "none",
+        "active_domain": "none"
+      },
+      "result": {
+        "status": "unresolved",
+        "command": null,
+        "reason": "incompatible_domain"
+      },
+      "expected_status": "unresolved"
+    }
+  ],
+  "parsed": [
+    {
+      "id": "S-01",
+      "text": "Верни предыдущее",
+      "found": {
+        "operation": "restore_previous",
+        "referent": "previous_executed_action"
+      },
+      "ok": true
+    },
+    {
+      "id": "S-02",
+      "text": "Верни то, что было раньше",
+      "found": {
+        "operation": "restore_previous",
+        "referent": "previous_executed_action"
+      },
+      "ok": true
+    },
+    {
+      "id": "S-03",
+      "text": "Верни то, что было до этого",
+      "found": {
+        "operation": "restore_previous",
+        "referent": "previous_executed_action"
+      },
+      "ok": true
+    },
+    {
+      "id": "S-04",
+      "text": "Верни как было до этого",
+      "found": {
+        "operation": "restore_previous",
+        "referent": "previous_executed_action"
+      },
+      "ok": true
+    },
+    {
+      "id": "S-05",
+      "text": "Верни как было",
+      "found": {
+        "operation": "restore_previous",
+        "referent": "previous_executed_action"
+      },
+      "ok": true
+    },
+    {
+      "id": "S-06",
+      "text": "Отмени последнее изменение",
+      "found": {
+        "operation": "restore_previous",
+        "referent": "previous_executed_action"
+      },
+      "ok": true
+    },
+    {
+      "id": "S-07",
+      "text": "Верни то, что было перед этим",
+      "found": {
+        "operation": "restore_previous",
+        "referent": "previous_executed_action"
+      },
+      "ok": true
+    },
+    {
+      "id": "S-08",
+      "text": "Отмени последнее действие",
+      "found": {
+        "operation": "restore_previous",
+        "referent": "previous_executed_action"
+      },
+      "ok": true
+    },
+    {
+      "id": "S-09",
+      "text": "Верни то, что играло до этого",
+      "found": {
+        "operation": "restore_previous",
+        "referent": "previous_executed_action"
+      },
+      "ok": true
+    },
+    {
+      "id": "S-10",
+      "text": "На одну назад",
+      "found": {
+        "operation": "relative_step",
+        "direction": "previous",
+        "count": 1,
+        "domain": "unresolved"
+      },
+      "ok": true
+    },
+    {
+      "id": "S-11",
+      "text": "Вернись на один шаг",
+      "found": {
+        "operation": "relative_step",
+        "direction": "previous",
+        "count": 1,
+        "domain": "unresolved"
+      },
+      "ok": true
+    },
+    {
+      "id": "S-12",
+      "text": "Перейди на одну назад",
+      "found": {
+        "operation": "relative_step",
+        "direction": "previous",
+        "count": 1,
+        "domain": "unresolved"
+      },
+      "ok": true
+    },
+    {
+      "id": "S-13",
+      "text": "Один назад",
+      "found": {
+        "operation": "relative_step",
+        "direction": "previous",
+        "count": 1,
+        "domain": "unresolved"
+      },
+      "ok": true
+    },
+    {
+      "id": "S-14",
+      "text": "На одну вперёд",
+      "found": {
+        "operation": "relative_step",
+        "direction": "forward",
+        "count": 1,
+        "domain": "unresolved"
+      },
+      "ok": true
+    },
+    {
+      "id": "S-15",
+      "text": "Перейди на два дальше",
+      "found": {
+        "operation": "relative_step",
+        "direction": "forward",
+        "count": 2,
+        "domain": "unresolved"
+      },
+      "ok": true
+    },
+    {
+      "id": "S-16",
+      "text": "На две назад",
+      "found": {
+        "operation": "relative_step",
+        "direction": "previous",
+        "count": 2,
+        "domain": "unresolved"
+      },
+      "ok": true
+    },
+    {
+      "id": "S-17",
+      "text": "На три вперёд",
+      "found": {
+        "operation": "relative_step",
+        "direction": "forward",
+        "count": 3,
+        "domain": "unresolved"
+      },
+      "ok": true
+    },
+    {
+      "id": "S-18",
+      "text": "Вернись на два шага назад",
+      "found": {
+        "operation": "relative_step",
+        "direction": "previous",
+        "count": 2,
+        "domain": "unresolved"
+      },
+      "ok": true
+    },
+    {
+      "id": "S-19",
+      "text": "Шагни на одну вперёд",
+      "found": {
+        "operation": "relative_step",
+        "direction": "forward",
+        "count": 1,
+        "domain": "unresolved"
+      },
+      "ok": true
+    },
+    {
+      "id": "S-20",
+      "text": "На шаг назад",
+      "found": {
+        "operation": "relative_step",
+        "direction": "previous",
+        "count": 1,
+        "domain": "unresolved"
+      },
+      "ok": true
+    },
+    {
+      "id": "S-21",
+      "text": "Перейди на три назад",
+      "found": {
+        "operation": "relative_step",
+        "direction": "previous",
+        "count": 3,
+        "domain": "unresolved"
+      },
+      "ok": true
+    },
+    {
+      "id": "S-22",
+      "text": "Вернись на одну назад",
+      "found": {
+        "operation": "relative_step",
+        "direction": "previous",
+        "count": 1,
+        "domain": "unresolved"
+      },
+      "ok": true
+    },
+    {
+      "id": "S-23",
+      "text": "Следующий трек",
+      "found": null,
+      "ok": true
+    },
+    {
+      "id": "S-24",
+      "text": "Предыдущая серия",
+      "found": null,
+      "ok": true
+    },
+    {
+      "id": "S-25",
+      "text": "Верни предыдущую песню",
+      "found": null,
+      "ok": true
+    },
+    {
+      "id": "S-26",
+      "text": "Перейди к следующему эпизоду",
+      "found": null,
+      "ok": true
+    },
+    {
+      "id": "S-27",
+      "text": "Предыдущий трек",
+      "found": null,
+      "ok": true
+    },
+    {
+      "id": "S-28",
+      "text": "Следующая серия",
+      "found": null,
+      "ok": true
+    },
+    {
+      "id": "S-29",
+      "text": "Верни предыдущее видео",
+      "found": null,
+      "ok": true
+    },
+    {
+      "id": "S-30",
+      "text": "Верни яркость на 20 процентов",
+      "found": null,
+      "ok": true
+    },
+    {
+      "id": "S-31",
+      "text": "Сделай свет как раньше",
+      "found": null,
+      "ok": true
+    },
+    {
+      "id": "S-32",
+      "text": "Верни телевизор",
+      "found": null,
+      "ok": true
+    },
+    {
+      "id": "S-33",
+      "text": "Включи телевизор",
+      "found": null,
+      "ok": true
+    },
+    {
+      "id": "S-34",
+      "text": "Выключи свет",
+      "found": null,
+      "ok": true
+    },
+    {
+      "id": "S-35",
+      "text": "Верни мне книгу",
+      "found": null,
+      "ok": true
+    },
+    {
+      "id": "S-36",
+      "text": "Верни деньги",
+      "found": null,
+      "ok": true
+    },
+    {
+      "id": "S-37",
+      "text": "На шаг назад от двери",
+      "found": null,
+      "ok": true
+    },
+    {
+      "id": "S-38",
+      "text": "Он вернулся назад",
+      "found": null,
+      "ok": true
+    },
+    {
+      "id": "S-39",
+      "text": "Предыдущий вариант был лучше",
+      "found": null,
+      "ok": true
+    },
+    {
+      "id": "S-40",
+      "text": "То, что было до этого, мне нравилось",
+      "found": null,
+      "ok": true
+    },
+    {
+      "id": "S-41",
+      "text": "Назад дороги нет",
+      "found": null,
+      "ok": true
+    },
+    {
+      "id": "S-42",
+      "text": "Верни книгу на полку",
+      "found": null,
+      "ok": true
+    }
+  ]
+}

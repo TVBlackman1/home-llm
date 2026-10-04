@@ -55,6 +55,36 @@ class SemanticCommand:
 
 
 @dataclass(frozen=True)
+class CommandOutcome:
+    """Fallback decided the utterance is a self-contained household command."""
+
+    command: SemanticCommand
+    kind: str = "command"
+
+
+@dataclass(frozen=True)
+class NotCommandOutcome:
+    """Fallback decided the utterance is not a smart-home command.
+
+    A discarded intent is instrumentation only. It is not a command.
+    """
+
+    kind: str = "not_command"
+    discarded_intent: str | None = None
+
+
+@dataclass(frozen=True)
+class NeedsContextOutcome:
+    """Fallback decided the utterance may be a continuation, but the action is not in the text."""
+
+    kind: str = "needs_context"
+    discarded_intent: str | None = None
+
+
+SemanticNLUOutcome = CommandOutcome | NotCommandOutcome | NeedsContextOutcome
+
+
+@dataclass(frozen=True)
 class SemanticPlan:
     """One utterance expanded into atomic commands before the resolver.
 

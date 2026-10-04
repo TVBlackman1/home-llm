@@ -3,11 +3,18 @@ from __future__ import annotations
 import pytest
 
 from ollama_runner.inventory.registry import DeviceRegistry
-from ollama_runner.nlu.normalize import semantic_command_from_dict
+from ollama_runner.nlu.normalize import semantic_command_from_dict, semantic_outcome_from_dict
 from ollama_runner.nlu.parse import parse_deterministic
 from ollama_runner.nlu.slots import apply_explicit
 from ollama_runner.resolve.capability import CapabilityResolver
-from ollama_runner.semantic import RequestContext
+from ollama_runner.semantic import (
+    CommandOutcome,
+    NeedsContextOutcome,
+    NotCommandOutcome,
+    RequestContext,
+    SemanticCommand,
+    Target,
+)
 from ollama_runner.semantic_pipeline import SemanticPipeline
 from ollama_runner.skills.book import Executor
 from ollama_runner.types import Result
@@ -203,3 +210,127 @@ def test_handled_brightness_has_no_invented_room(registry: DeviceRegistry) -> No
     command = parsed.command()
     assert command.target.device_type is None
     assert command.target.explicit is False
+
+
+@pytest.mark.unit
+def test_decline_outcomes_drop_a_household_intent() -> None:
+    declined = semantic_outcome_from_dict({"outcome": "not_command", "intent": "media.pause"})
+    assert isinstance(declined, NotCommandOutcome)
+    assert declined.discarded_intent == "media.pause"
+    missing = semantic_outcome_from_dict({"outcome": "needs_context"})
+    assert isinstance(missing, NeedsContextOutcome)
+    assert missing.discarded_intent is None
+
+
+@pytest.mark.unit
+def test_not_command_stops_before_the_resolver(registry: DeviceRegistry) -> None:
+    class _Decline:
+        def parse(self, text: str, context: RequestContext):
+            del text, context
+            return NotCommandOutcome()
+
+    pipeline = SemanticPipeline(_Decline(), CapabilityResolver(registry), Executor(registry), registry)
+    sink = CaptureSink()
+    result = pipeline.run("Пауза в разговоре затянулась", sink)
+
+    assert pipeline.traces[0].handled is False
+    assert pipeline.traces[0].llm_intent is None
+    assert result.payload["outcome"] == "not_command"
+    assert sink.commands == []
+    assert pipeline.observations[-1]["final"] is None
+
+
+def _fallback(registry: DeviceRegistry, text: str, command: SemanticCommand):
+    class _Fixed:
+        def parse(self, utterance: str, context: RequestContext):
+            del utterance, context
+            return CommandOutcome(command)
+
+    pipeline = SemanticPipeline(_Fixed(), CapabilityResolver(registry), Executor(registry), registry)
+    pipeline.run(text, CaptureSink())
+    return pipeline.observations[-1]
+
+
+@pytest.mark.unit
+def test_fallback_command_keeps_llm_intent_and_takes_slots_from_text(registry: DeviceRegistry) -> None:
+    text = "У Маши включи вторую колонку на кухне"
+    assert not parse_deterministic(text, registry).handled
+    observed = _fallback(registry, text, SemanticCommand(
+        intent="volume.decrease",
+        target=Target(device_type="tv", mention="телевизор", owner="Антон", area="спальня", ordinal=4),
+    ))
+
+    assert observed["merge_changed_intent"] is False
+    assert observed["llm"]["intent"] == "volume.decrease"
+    assert observed["final"]["intent"] == "volume.decrease"
+    assert observed["final"]["owner"] == "Маша"
+    assert observed["final"]["area"] == "кухня"
+    assert observed["final"]["ordinal"] == 2
+    assert observed["final"]["device_type"] == "speaker"
+    assert observed["final"]["mention"] == "вторую колонку"
+
+
+@pytest.mark.unit
+def test_fallback_command_drops_a_hallucinated_target_and_keeps_intent(registry: DeviceRegistry) -> None:
+    text = "сделай тут приятнее"
+    assert not parse_deterministic(text, registry).handled
+    observed = _fallback(registry, text, SemanticCommand(
+        intent="brightness.decrease",
+        target=Target(
+            device_type="light",
+            mention="лампа",
+            owner="Антон",
+            area="спальня",
+            ordinal=2,
+            explicit=True,
+        ),
+    ))
+
+    assert observed["merge_changed_intent"] is False
+    assert observed["final"]["intent"] == "brightness.decrease"
+    assert observed["final"]["device_type"] is None
+    assert observed["final"]["mention"] is None
+    assert observed["final"]["owner"] is None
+    assert observed["final"]["area"] is None
+    assert observed["final"]["ordinal"] is None
+
+
+@pytest.mark.unit
+def test_authoritative_intent_still_canonicalizes_color_and_does_not_reclassify(registry: DeviceRegistry) -> None:
+    colored, _, _ = apply_explicit(
+        "Сделай свет в спальне красным",
+        SemanticCommand(intent="color.set"),
+        registry,
+        authoritative_intent=True,
+    )
+    assert colored.intent == "color.set"
+    assert colored.arguments["value"] == "красный"
+    assert colored.target.area == "спальня"
+    assert colored.target.device_type == "light"
+
+    text = "Засвети коридор"
+    assert not parse_deterministic(text, registry).handled
+    rewritten, _, _ = apply_explicit(text, SemanticCommand(intent="device.turn_on"), registry)
+    assert rewritten.intent == "content.play"
+    observed = _fallback(registry, text, SemanticCommand(intent="device.turn_on"))
+    assert observed["merge_changed_intent"] is False
+    assert observed["final"]["intent"] == "device.turn_on"
+    assert observed["final"]["area"] == "коридор"
+
+
+@pytest.mark.unit
+def test_deterministic_command_keeps_its_own_intent(registry: DeviceRegistry) -> None:
+    class _Boom:
+        def parse(self, text: str, context: RequestContext):
+            del context
+            raise AssertionError(text)
+
+    pipeline = SemanticPipeline(_Boom(), CapabilityResolver(registry), Executor(registry), registry)
+    pipeline.run("Сделай потемнее", CaptureSink())
+    observed = pipeline.observations[-1]
+
+    assert observed["handled"] is True
+    assert observed["outcome"] is None
+    assert observed["llm"] is None
+    assert observed["final"]["intent"] == "brightness.decrease"
+    assert observed["merge_changed_intent"] is False

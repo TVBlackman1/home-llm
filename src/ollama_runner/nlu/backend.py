@@ -6,8 +6,8 @@ from typing import Protocol
 
 import httpx
 
-from ollama_runner.nlu.normalize import semantic_command_from_dict
-from ollama_runner.semantic import RequestContext, SemanticCommand
+from ollama_runner.nlu.normalize import semantic_outcome_from_dict
+from ollama_runner.semantic import RequestContext, SemanticNLUOutcome
 
 
 INTENTS = (
@@ -38,41 +38,53 @@ INTENTS = (
     "pc.turn_off",
 )
 
+_COMMAND_FIELDS = {
+    "intent": {"type": "string", "enum": list(INTENTS)},
+    "device_type": {"type": "string"},
+    "mention": {"type": "string"},
+    "owner": {"type": "string"},
+    "area": {"type": "string"},
+    "ordinal": {"type": "integer"},
+    "explicit": {"type": "boolean"},
+    "content": {"type": "string"},
+    "value": {"type": "string"},
+}
+
 SEMANTIC_SCHEMA = {
-    "type": "object",
-    "properties": {
-        "intent": {"type": "string", "enum": list(INTENTS)},
-        "device_type": {"type": "string"},
-        "mention": {"type": "string"},
-        "owner": {"type": "string"},
-        "area": {"type": "string"},
-        "ordinal": {"type": "integer"},
-        "explicit": {"type": "boolean"},
-        "content": {"type": "string"},
-        "value": {"type": "string"},
-    },
-    "required": [
-        "intent",
-        "device_type",
-        "mention",
-        "owner",
-        "area",
-        "ordinal",
-        "explicit",
-        "content",
-        "value",
+    "anyOf": [
+        {
+            "type": "object",
+            "properties": {
+                "outcome": {"type": "string", "enum": ["command"]},
+                **_COMMAND_FIELDS,
+            },
+            "required": ["outcome", *_COMMAND_FIELDS],
+            "additionalProperties": False,
+        },
+        {
+            "type": "object",
+            "properties": {"outcome": {"type": "string", "enum": ["not_command"]}},
+            "required": ["outcome"],
+            "additionalProperties": False,
+        },
+        {
+            "type": "object",
+            "properties": {"outcome": {"type": "string", "enum": ["needs_context"]}},
+            "required": ["outcome"],
+            "additionalProperties": False,
+        },
     ],
-    "additionalProperties": False,
 }
 
 
 class NLUBackend(Protocol):
     """Sync on purpose: the current pipeline, cache and sinks are synchronous.
 
-    A later Hassil or encoder backend returns the same SemanticCommand.
+    A later Hassil or encoder backend returns the same semantic outcome.
+    The household intent enum stays inside CommandOutcome.
     """
 
-    def parse(self, text: str, context: RequestContext) -> SemanticCommand: ...
+    def parse(self, text: str, context: RequestContext) -> SemanticNLUOutcome: ...
 
 
 class LLMNLUBackend:
@@ -99,7 +111,7 @@ class LLMNLUBackend:
         self._owns_client = client is None
         self.calls = 0
 
-    def parse(self, text: str, context: RequestContext | None = None) -> SemanticCommand:
+    def parse(self, text: str, context: RequestContext | None = None) -> SemanticNLUOutcome:
         self.calls += 1
         del context  # reserved for a later prompt section; resolver owns context
         response = self.client.post(
@@ -119,7 +131,7 @@ class LLMNLUBackend:
         )
         response.raise_for_status()
         content = response.json()["message"]["content"]
-        return semantic_command_from_dict(json.loads(content))
+        return semantic_outcome_from_dict(json.loads(content))
 
     def close(self) -> None:
         if self._owns_client:

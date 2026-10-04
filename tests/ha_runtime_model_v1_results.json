@@ -1,0 +1,672 @@
+{
+  "version": "ha-runtime-model-v1",
+  "navigation_checks": 34,
+  "navigation_ok": 34,
+  "restore_checks": 10,
+  "restore_ok": 10,
+  "wrong": 0,
+  "navigation": [
+    {
+      "id": "M-01",
+      "check": 1,
+      "direction": "previous",
+      "count": 1,
+      "expected": {
+        "kind": "BOUND",
+        "intent": "media.previous"
+      },
+      "actual": {
+        "kind": "BOUND",
+        "intent": "media.previous"
+      },
+      "ok": true
+    },
+    {
+      "id": "M-01",
+      "check": 2,
+      "direction": "forward",
+      "count": 1,
+      "expected": {
+        "kind": "BOUND",
+        "intent": "media.next"
+      },
+      "actual": {
+        "kind": "BOUND",
+        "intent": "media.next"
+      },
+      "ok": true
+    },
+    {
+      "id": "M-02",
+      "check": 1,
+      "direction": "previous",
+      "count": 1,
+      "expected": {
+        "kind": "BOUND",
+        "intent": "media.previous"
+      },
+      "actual": {
+        "kind": "BOUND",
+        "intent": "media.previous"
+      },
+      "ok": true
+    },
+    {
+      "id": "M-02",
+      "check": 2,
+      "direction": "forward",
+      "count": 1,
+      "expected": {
+        "kind": "BOUND",
+        "intent": "media.next"
+      },
+      "actual": {
+        "kind": "BOUND",
+        "intent": "media.next"
+      },
+      "ok": true
+    },
+    {
+      "id": "M-03",
+      "check": 1,
+      "direction": "previous",
+      "count": 1,
+      "expected": {
+        "kind": "BOUND",
+        "intent": "media.previous"
+      },
+      "actual": {
+        "kind": "BOUND",
+        "intent": "media.previous"
+      },
+      "ok": true
+    },
+    {
+      "id": "M-03",
+      "check": 2,
+      "direction": "forward",
+      "count": 1,
+      "expected": {
+        "kind": "BOUND",
+        "intent": "media.next"
+      },
+      "actual": {
+        "kind": "BOUND",
+        "intent": "media.next"
+      },
+      "ok": true
+    },
+    {
+      "id": "M-04",
+      "check": 1,
+      "direction": "previous",
+      "count": 1,
+      "expected": {
+        "kind": "BOUND",
+        "intent": "media.previous"
+      },
+      "actual": {
+        "kind": "BOUND",
+        "intent": "media.previous"
+      },
+      "ok": true
+    },
+    {
+      "id": "M-04",
+      "check": 2,
+      "direction": "forward",
+      "count": 1,
+      "expected": {
+        "kind": "BOUND",
+        "intent": "media.next"
+      },
+      "actual": {
+        "kind": "BOUND",
+        "intent": "media.next"
+      },
+      "ok": true
+    },
+    {
+      "id": "M-05",
+      "check": 1,
+      "direction": "previous",
+      "count": 1,
+      "expected": {
+        "kind": "UNRESOLVED",
+        "reason": "navigation_semantics_unknown"
+      },
+      "actual": {
+        "kind": "UNRESOLVED",
+        "reason": "navigation_semantics_unknown"
+      },
+      "ok": true
+    },
+    {
+      "id": "M-05",
+      "check": 2,
+      "direction": "forward",
+      "count": 1,
+      "expected": {
+        "kind": "UNRESOLVED",
+        "reason": "navigation_semantics_unknown"
+      },
+      "actual": {
+        "kind": "UNRESOLVED",
+        "reason": "navigation_semantics_unknown"
+      },
+      "ok": true
+    },
+    {
+      "id": "M-06",
+      "check": 1,
+      "direction": "previous",
+      "count": 1,
+      "expected": {
+        "kind": "UNRESOLVED",
+        "reason": "navigation_semantics_unknown"
+      },
+      "actual": {
+        "kind": "UNRESOLVED",
+        "reason": "navigation_semantics_unknown"
+      },
+      "ok": true
+    },
+    {
+      "id": "M-06",
+      "check": 2,
+      "direction": "forward",
+      "count": 1,
+      "expected": {
+        "kind": "UNRESOLVED",
+        "reason": "navigation_semantics_unknown"
+      },
+      "actual": {
+        "kind": "UNRESOLVED",
+        "reason": "navigation_semantics_unknown"
+      },
+      "ok": true
+    },
+    {
+      "id": "M-07",
+      "check": 1,
+      "direction": "previous",
+      "count": 1,
+      "expected": {
+        "kind": "UNRESOLVED",
+        "reason": "navigation_semantics_unknown"
+      },
+      "actual": {
+        "kind": "UNRESOLVED",
+        "reason": "navigation_semantics_unknown"
+      },
+      "ok": true
+    },
+    {
+      "id": "M-07",
+      "check": 2,
+      "direction": "forward",
+      "count": 1,
+      "expected": {
+        "kind": "UNRESOLVED",
+        "reason": "navigation_semantics_unknown"
+      },
+      "actual": {
+        "kind": "UNRESOLVED",
+        "reason": "navigation_semantics_unknown"
+      },
+      "ok": true
+    },
+    {
+      "id": "M-08",
+      "check": 1,
+      "direction": "previous",
+      "count": 1,
+      "expected": {
+        "kind": "UNRESOLVED",
+        "reason": "capability_missing"
+      },
+      "actual": {
+        "kind": "UNRESOLVED",
+        "reason": "capability_missing"
+      },
+      "ok": true
+    },
+    {
+      "id": "M-08",
+      "check": 2,
+      "direction": "forward",
+      "count": 1,
+      "expected": {
+        "kind": "UNRESOLVED",
+        "reason": "capability_missing"
+      },
+      "actual": {
+        "kind": "UNRESOLVED",
+        "reason": "capability_missing"
+      },
+      "ok": true
+    },
+    {
+      "id": "M-09",
+      "check": 1,
+      "direction": "previous",
+      "count": 1,
+      "expected": {
+        "kind": "UNRESOLVED",
+        "reason": "state_incompatible"
+      },
+      "actual": {
+        "kind": "UNRESOLVED",
+        "reason": "state_incompatible"
+      },
+      "ok": true
+    },
+    {
+      "id": "M-09",
+      "check": 2,
+      "direction": "forward",
+      "count": 1,
+      "expected": {
+        "kind": "UNRESOLVED",
+        "reason": "state_incompatible"
+      },
+      "actual": {
+        "kind": "UNRESOLVED",
+        "reason": "state_incompatible"
+      },
+      "ok": true
+    },
+    {
+      "id": "M-10",
+      "check": 1,
+      "direction": "previous",
+      "count": 1,
+      "expected": {
+        "kind": "UNRESOLVED",
+        "reason": "state_incompatible"
+      },
+      "actual": {
+        "kind": "UNRESOLVED",
+        "reason": "state_incompatible"
+      },
+      "ok": true
+    },
+    {
+      "id": "M-10",
+      "check": 2,
+      "direction": "forward",
+      "count": 1,
+      "expected": {
+        "kind": "UNRESOLVED",
+        "reason": "state_incompatible"
+      },
+      "actual": {
+        "kind": "UNRESOLVED",
+        "reason": "state_incompatible"
+      },
+      "ok": true
+    },
+    {
+      "id": "M-11",
+      "check": 1,
+      "direction": "previous",
+      "count": 1,
+      "expected": {
+        "kind": "UNRESOLVED",
+        "reason": "state_incompatible"
+      },
+      "actual": {
+        "kind": "UNRESOLVED",
+        "reason": "state_incompatible"
+      },
+      "ok": true
+    },
+    {
+      "id": "M-11",
+      "check": 2,
+      "direction": "forward",
+      "count": 1,
+      "expected": {
+        "kind": "UNRESOLVED",
+        "reason": "state_incompatible"
+      },
+      "actual": {
+        "kind": "UNRESOLVED",
+        "reason": "state_incompatible"
+      },
+      "ok": true
+    },
+    {
+      "id": "M-12",
+      "check": 1,
+      "direction": "previous",
+      "count": 1,
+      "expected": {
+        "kind": "UNRESOLVED",
+        "reason": "multiple_active_sessions"
+      },
+      "actual": {
+        "kind": "UNRESOLVED",
+        "reason": "multiple_active_sessions"
+      },
+      "ok": true
+    },
+    {
+      "id": "M-12",
+      "check": 2,
+      "direction": "forward",
+      "count": 1,
+      "expected": {
+        "kind": "UNRESOLVED",
+        "reason": "multiple_active_sessions"
+      },
+      "actual": {
+        "kind": "UNRESOLVED",
+        "reason": "multiple_active_sessions"
+      },
+      "ok": true
+    },
+    {
+      "id": "M-13",
+      "check": 1,
+      "direction": "previous",
+      "count": 1,
+      "expected": {
+        "kind": "UNRESOLVED",
+        "reason": "no_active_session"
+      },
+      "actual": {
+        "kind": "UNRESOLVED",
+        "reason": "no_active_session"
+      },
+      "ok": true
+    },
+    {
+      "id": "M-13",
+      "check": 2,
+      "direction": "forward",
+      "count": 1,
+      "expected": {
+        "kind": "UNRESOLVED",
+        "reason": "no_active_session"
+      },
+      "actual": {
+        "kind": "UNRESOLVED",
+        "reason": "no_active_session"
+      },
+      "ok": true
+    },
+    {
+      "id": "M-14",
+      "check": 1,
+      "direction": "previous",
+      "count": 2,
+      "expected": {
+        "kind": "REPRESENTATION_LIMIT"
+      },
+      "actual": {
+        "kind": "REPRESENTATION_LIMIT"
+      },
+      "ok": true
+    },
+    {
+      "id": "M-14",
+      "check": 2,
+      "direction": "forward",
+      "count": 2,
+      "expected": {
+        "kind": "REPRESENTATION_LIMIT"
+      },
+      "actual": {
+        "kind": "REPRESENTATION_LIMIT"
+      },
+      "ok": true
+    },
+    {
+      "id": "M-15",
+      "check": 1,
+      "direction": "previous",
+      "count": 1,
+      "expected": {
+        "kind": "UNRESOLVED",
+        "reason": "capability_unknown"
+      },
+      "actual": {
+        "kind": "UNRESOLVED",
+        "reason": "capability_unknown"
+      },
+      "ok": true
+    },
+    {
+      "id": "M-15",
+      "check": 2,
+      "direction": "forward",
+      "count": 1,
+      "expected": {
+        "kind": "UNRESOLVED",
+        "reason": "capability_unknown"
+      },
+      "actual": {
+        "kind": "UNRESOLVED",
+        "reason": "capability_unknown"
+      },
+      "ok": true
+    },
+    {
+      "id": "M-16",
+      "check": 1,
+      "direction": "previous",
+      "count": 1,
+      "expected": {
+        "kind": "UNRESOLVED",
+        "reason": "state_unknown"
+      },
+      "actual": {
+        "kind": "UNRESOLVED",
+        "reason": "state_unknown"
+      },
+      "ok": true
+    },
+    {
+      "id": "M-16",
+      "check": 2,
+      "direction": "forward",
+      "count": 1,
+      "expected": {
+        "kind": "UNRESOLVED",
+        "reason": "state_unknown"
+      },
+      "actual": {
+        "kind": "UNRESOLVED",
+        "reason": "state_unknown"
+      },
+      "ok": true
+    },
+    {
+      "id": "M-17",
+      "check": 1,
+      "direction": "previous",
+      "count": 1,
+      "expected": {
+        "kind": "BOUND",
+        "intent": "media.previous"
+      },
+      "actual": {
+        "kind": "BOUND",
+        "intent": "media.previous"
+      },
+      "ok": true
+    },
+    {
+      "id": "M-17",
+      "check": 2,
+      "direction": "forward",
+      "count": 1,
+      "expected": {
+        "kind": "BOUND",
+        "intent": "media.next"
+      },
+      "actual": {
+        "kind": "BOUND",
+        "intent": "media.next"
+      },
+      "ok": true
+    }
+  ],
+  "restore": [
+    {
+      "id": "U-01",
+      "expected": {
+        "kind": "RESTORE",
+        "property": "brightness",
+        "value": 40,
+        "via": "recorded_before"
+      },
+      "actual": {
+        "kind": "RESTORE",
+        "property": "brightness",
+        "value": 40,
+        "via": "recorded_before"
+      },
+      "ok": true
+    },
+    {
+      "id": "U-02",
+      "expected": {
+        "kind": "RESTORE",
+        "property": "brightness",
+        "value": 40,
+        "via": "recorded_before"
+      },
+      "actual": {
+        "kind": "RESTORE",
+        "property": "brightness",
+        "value": 40,
+        "via": "recorded_before"
+      },
+      "ok": true
+    },
+    {
+      "id": "U-03",
+      "expected": {
+        "kind": "UNRESOLVED",
+        "reason": "conflict"
+      },
+      "actual": {
+        "kind": "UNRESOLVED",
+        "reason": "conflict"
+      },
+      "ok": true
+    },
+    {
+      "id": "U-04",
+      "expected": {
+        "kind": "UNRESOLVED",
+        "reason": "no_record"
+      },
+      "actual": {
+        "kind": "UNRESOLVED",
+        "reason": "no_record"
+      },
+      "ok": true
+    },
+    {
+      "id": "U-05",
+      "expected": {
+        "kind": "UNRESOLVED",
+        "reason": "not_reversible"
+      },
+      "actual": {
+        "kind": "UNRESOLVED",
+        "reason": "not_reversible"
+      },
+      "ok": true
+    },
+    {
+      "id": "U-06",
+      "expected": {
+        "kind": "UNRESOLVED",
+        "reason": "not_reversible"
+      },
+      "actual": {
+        "kind": "UNRESOLVED",
+        "reason": "not_reversible"
+      },
+      "ok": true
+    },
+    {
+      "id": "U-07",
+      "expected": {
+        "kind": "RESTORE",
+        "property": "volume",
+        "value": 0.2,
+        "via": "recorded_before"
+      },
+      "actual": {
+        "kind": "RESTORE",
+        "property": "volume",
+        "value": 0.2,
+        "via": "recorded_before"
+      },
+      "ok": true
+    },
+    {
+      "id": "U-08",
+      "expected": {
+        "kind": "RESTORE",
+        "property": "power",
+        "value": "off",
+        "via": "recorded_before"
+      },
+      "actual": {
+        "kind": "RESTORE",
+        "property": "power",
+        "value": "off",
+        "via": "recorded_before"
+      },
+      "ok": true
+    },
+    {
+      "id": "U-09",
+      "expected": {
+        "kind": "RESTORE",
+        "property": "color",
+        "value": {
+          "color_mode": "rgb",
+          "rgb_color": [
+            255,
+            0,
+            0
+          ]
+        },
+        "via": "recorded_before"
+      },
+      "actual": {
+        "kind": "RESTORE",
+        "property": "color",
+        "value": {
+          "color_mode": "rgb",
+          "rgb_color": [
+            255,
+            0,
+            0
+          ]
+        },
+        "via": "recorded_before"
+      },
+      "ok": true
+    },
+    {
+      "id": "U-10",
+      "expected": {
+        "kind": "UNRESOLVED",
+        "reason": "state_unknown"
+      },
+      "actual": {
+        "kind": "UNRESOLVED",
+        "reason": "state_unknown"
+      },
+      "ok": true
+    }
+  ]
+}

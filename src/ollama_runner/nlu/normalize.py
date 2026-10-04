@@ -5,7 +5,14 @@ from ollama_runner.inventory.registry import (
     ordinal_from_mention,
     type_from_mention,
 )
-from ollama_runner.semantic import SemanticCommand, Target
+from ollama_runner.semantic import (
+    CommandOutcome,
+    NeedsContextOutcome,
+    NotCommandOutcome,
+    SemanticCommand,
+    SemanticNLUOutcome,
+    Target,
+)
 
 
 _CONTEXT_INTENTS = frozenset({
@@ -22,6 +29,27 @@ def _blank(value: object) -> str | None:
         return None
     text = str(value).strip()
     return text or None
+
+
+def _discarded_intent(data: dict) -> str | None:
+    raw = data.get("intent")
+    if raw is None:
+        return None
+    text = str(raw).strip()
+    return text or None
+
+
+def semantic_outcome_from_dict(data: dict) -> SemanticNLUOutcome:
+    """COMMAND carries a household intent. The other two outcomes cannot."""
+
+    outcome = str(data.get("outcome", "")).strip()
+    if outcome == "not_command":
+        return NotCommandOutcome(discarded_intent=_discarded_intent(data))
+    if outcome == "needs_context":
+        return NeedsContextOutcome(discarded_intent=_discarded_intent(data))
+    if outcome == "command":
+        return CommandOutcome(semantic_command_from_dict(data))
+    return NeedsContextOutcome(discarded_intent=_discarded_intent(data))
 
 
 def semantic_command_from_dict(data: dict) -> SemanticCommand:

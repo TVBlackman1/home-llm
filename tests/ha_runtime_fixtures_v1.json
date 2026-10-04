@@ -1,0 +1,464 @@
+{
+  "version": "ha-runtime-model-v1",
+  "ordered_content_types": ["music", "playlist", "episode", "tvshow", "podcast"],
+  "note": "Expected outcomes were fixed before the binder. Snapshots use only generic HA media_player fields. ignored_static_capabilities must not affect the result.",
+  "cases": [
+    {
+      "id": "M-01",
+      "title": "playing + music + NEXT/PREVIOUS",
+      "sessions": [
+        {
+          "state": "playing",
+          "supported_features": ["NEXT_TRACK", "PREVIOUS_TRACK", "SEEK", "VOLUME_SET"],
+          "media_content_type": "music",
+          "media_content_id": "item-1",
+          "media_position": 12.0,
+          "media_duration": 180.0,
+          "volume_level": 0.4,
+          "ignored_static_capabilities": ["media.next", "media.previous"]
+        }
+      ],
+      "checks": [
+        {"direction": "previous", "count": 1, "expected": {"kind": "BOUND", "intent": "media.previous"}},
+        {"direction": "forward", "count": 1, "expected": {"kind": "BOUND", "intent": "media.next"}}
+      ]
+    },
+    {
+      "id": "M-02",
+      "title": "playing + playlist + NEXT/PREVIOUS",
+      "sessions": [
+        {
+          "state": "playing",
+          "supported_features": ["NEXT_TRACK", "PREVIOUS_TRACK", "SEEK", "VOLUME_SET"],
+          "media_content_type": "playlist",
+          "media_content_id": "item-2",
+          "media_position": 3.0,
+          "media_duration": 240.0,
+          "volume_level": 0.5
+        }
+      ],
+      "checks": [
+        {"direction": "previous", "count": 1, "expected": {"kind": "BOUND", "intent": "media.previous"}},
+        {"direction": "forward", "count": 1, "expected": {"kind": "BOUND", "intent": "media.next"}}
+      ]
+    },
+    {
+      "id": "M-03",
+      "title": "playing + episode + NEXT/PREVIOUS",
+      "sessions": [
+        {
+          "state": "playing",
+          "supported_features": ["NEXT_TRACK", "PREVIOUS_TRACK", "SEEK", "VOLUME_SET"],
+          "media_content_type": "episode",
+          "media_content_id": "item-3",
+          "media_position": 40.0,
+          "media_duration": 1500.0,
+          "volume_level": 0.3
+        }
+      ],
+      "checks": [
+        {"direction": "previous", "count": 1, "expected": {"kind": "BOUND", "intent": "media.previous"}},
+        {"direction": "forward", "count": 1, "expected": {"kind": "BOUND", "intent": "media.next"}}
+      ]
+    },
+    {
+      "id": "M-04",
+      "title": "playing + podcast + NEXT/PREVIOUS",
+      "sessions": [
+        {
+          "state": "playing",
+          "supported_features": ["NEXT_TRACK", "PREVIOUS_TRACK", "VOLUME_SET"],
+          "media_content_type": "podcast",
+          "media_content_id": "item-4",
+          "media_position": 8.0,
+          "media_duration": 900.0,
+          "volume_level": 0.6
+        }
+      ],
+      "checks": [
+        {"direction": "previous", "count": 1, "expected": {"kind": "BOUND", "intent": "media.previous"}},
+        {"direction": "forward", "count": 1, "expected": {"kind": "BOUND", "intent": "media.next"}}
+      ]
+    },
+    {
+      "id": "M-05",
+      "title": "playing + video + NEXT/PREVIOUS",
+      "sessions": [
+        {
+          "state": "playing",
+          "supported_features": ["NEXT_TRACK", "PREVIOUS_TRACK", "SEEK"],
+          "media_content_type": "video",
+          "media_content_id": "item-5",
+          "media_position": 20.0,
+          "media_duration": 6000.0,
+          "volume_level": 0.4
+        }
+      ],
+      "checks": [
+        {"direction": "previous", "count": 1, "expected": {"kind": "UNRESOLVED", "reason": "navigation_semantics_unknown"}},
+        {"direction": "forward", "count": 1, "expected": {"kind": "UNRESOLVED", "reason": "navigation_semantics_unknown"}}
+      ]
+    },
+    {
+      "id": "M-06",
+      "title": "playing + channel + NEXT/PREVIOUS",
+      "sessions": [
+        {
+          "state": "playing",
+          "supported_features": ["NEXT_TRACK", "PREVIOUS_TRACK"],
+          "media_content_type": "channel",
+          "media_content_id": "item-6",
+          "media_position": null,
+          "media_duration": null,
+          "volume_level": 0.4
+        }
+      ],
+      "checks": [
+        {"direction": "previous", "count": 1, "expected": {"kind": "UNRESOLVED", "reason": "navigation_semantics_unknown"}},
+        {"direction": "forward", "count": 1, "expected": {"kind": "UNRESOLVED", "reason": "navigation_semantics_unknown"}}
+      ]
+    },
+    {
+      "id": "M-07",
+      "title": "playing + missing content type + NEXT/PREVIOUS",
+      "sessions": [
+        {
+          "state": "playing",
+          "supported_features": ["NEXT_TRACK", "PREVIOUS_TRACK", "SEEK", "VOLUME_SET"],
+          "media_content_type": null,
+          "media_content_id": null,
+          "media_position": 1.0,
+          "media_duration": 100.0,
+          "volume_level": 0.2
+        }
+      ],
+      "checks": [
+        {"direction": "previous", "count": 1, "expected": {"kind": "UNRESOLVED", "reason": "navigation_semantics_unknown"}},
+        {"direction": "forward", "count": 1, "expected": {"kind": "UNRESOLVED", "reason": "navigation_semantics_unknown"}}
+      ]
+    },
+    {
+      "id": "M-08",
+      "title": "playing + music + no required feature",
+      "sessions": [
+        {
+          "state": "playing",
+          "supported_features": ["SEEK", "VOLUME_SET", "PAUSE"],
+          "media_content_type": "music",
+          "media_content_id": "item-8",
+          "media_position": 5.0,
+          "media_duration": 200.0,
+          "volume_level": 0.4,
+          "ignored_static_capabilities": ["media.next", "media.previous"]
+        }
+      ],
+      "checks": [
+        {"direction": "previous", "count": 1, "expected": {"kind": "UNRESOLVED", "reason": "capability_missing"}},
+        {"direction": "forward", "count": 1, "expected": {"kind": "UNRESOLVED", "reason": "capability_missing"}}
+      ]
+    },
+    {
+      "id": "M-09",
+      "title": "paused + music + feature",
+      "sessions": [
+        {
+          "state": "paused",
+          "supported_features": ["NEXT_TRACK", "PREVIOUS_TRACK", "SEEK", "VOLUME_SET"],
+          "media_content_type": "music",
+          "media_content_id": "item-9",
+          "media_position": 15.0,
+          "media_duration": 180.0,
+          "volume_level": 0.4
+        }
+      ],
+      "checks": [
+        {"direction": "previous", "count": 1, "expected": {"kind": "UNRESOLVED", "reason": "state_incompatible"}},
+        {"direction": "forward", "count": 1, "expected": {"kind": "UNRESOLVED", "reason": "state_incompatible"}}
+      ]
+    },
+    {
+      "id": "M-10",
+      "title": "idle + music + feature",
+      "sessions": [
+        {
+          "state": "idle",
+          "supported_features": ["NEXT_TRACK", "PREVIOUS_TRACK", "VOLUME_SET"],
+          "media_content_type": "music",
+          "media_content_id": "item-10",
+          "media_position": null,
+          "media_duration": null,
+          "volume_level": 0.4
+        }
+      ],
+      "checks": [
+        {"direction": "previous", "count": 1, "expected": {"kind": "UNRESOLVED", "reason": "state_incompatible"}},
+        {"direction": "forward", "count": 1, "expected": {"kind": "UNRESOLVED", "reason": "state_incompatible"}}
+      ]
+    },
+    {
+      "id": "M-11",
+      "title": "unavailable",
+      "sessions": [
+        {
+          "state": "unavailable",
+          "supported_features": ["NEXT_TRACK", "PREVIOUS_TRACK"],
+          "media_content_type": null,
+          "media_content_id": null,
+          "media_position": null,
+          "media_duration": null,
+          "volume_level": null
+        }
+      ],
+      "checks": [
+        {"direction": "previous", "count": 1, "expected": {"kind": "UNRESOLVED", "reason": "state_incompatible"}},
+        {"direction": "forward", "count": 1, "expected": {"kind": "UNRESOLVED", "reason": "state_incompatible"}}
+      ]
+    },
+    {
+      "id": "M-12",
+      "title": "two compatible playing sessions",
+      "sessions": [
+        {
+          "label": "a",
+          "state": "playing",
+          "supported_features": ["NEXT_TRACK", "PREVIOUS_TRACK", "VOLUME_SET"],
+          "media_content_type": "music",
+          "media_content_id": "item-a",
+          "media_position": 1.0,
+          "media_duration": 100.0,
+          "volume_level": 0.2
+        },
+        {
+          "label": "b",
+          "state": "playing",
+          "supported_features": ["NEXT_TRACK", "PREVIOUS_TRACK", "VOLUME_SET"],
+          "media_content_type": "playlist",
+          "media_content_id": "item-b",
+          "media_position": 2.0,
+          "media_duration": 100.0,
+          "volume_level": 0.3
+        }
+      ],
+      "checks": [
+        {"direction": "previous", "count": 1, "expected": {"kind": "UNRESOLVED", "reason": "multiple_active_sessions"}},
+        {"direction": "forward", "count": 1, "expected": {"kind": "UNRESOLVED", "reason": "multiple_active_sessions"}}
+      ]
+    },
+    {
+      "id": "M-13",
+      "title": "zero sessions",
+      "sessions": [],
+      "checks": [
+        {"direction": "previous", "count": 1, "expected": {"kind": "UNRESOLVED", "reason": "no_active_session"}},
+        {"direction": "forward", "count": 1, "expected": {"kind": "UNRESOLVED", "reason": "no_active_session"}}
+      ]
+    },
+    {
+      "id": "M-14",
+      "title": "count=2 on an otherwise compatible session",
+      "sessions": [
+        {
+          "state": "playing",
+          "supported_features": ["NEXT_TRACK", "PREVIOUS_TRACK", "SEEK", "VOLUME_SET"],
+          "media_content_type": "music",
+          "media_content_id": "item-14",
+          "media_position": 9.0,
+          "media_duration": 180.0,
+          "volume_level": 0.4
+        }
+      ],
+      "checks": [
+        {"direction": "previous", "count": 2, "expected": {"kind": "REPRESENTATION_LIMIT"}},
+        {"direction": "forward", "count": 2, "expected": {"kind": "REPRESENTATION_LIMIT"}}
+      ]
+    },
+    {
+      "id": "M-15",
+      "title": "supported_features unknown",
+      "sessions": [
+        {
+          "state": "playing",
+          "supported_features": null,
+          "media_content_type": "music",
+          "media_content_id": "item-15",
+          "media_position": 1.0,
+          "media_duration": 100.0,
+          "volume_level": 0.4,
+          "ignored_static_capabilities": ["media.next", "media.previous"]
+        }
+      ],
+      "checks": [
+        {"direction": "previous", "count": 1, "expected": {"kind": "UNRESOLVED", "reason": "capability_unknown"}},
+        {"direction": "forward", "count": 1, "expected": {"kind": "UNRESOLVED", "reason": "capability_unknown"}}
+      ]
+    },
+    {
+      "id": "M-16",
+      "title": "state unknown",
+      "sessions": [
+        {
+          "state": null,
+          "supported_features": ["NEXT_TRACK", "PREVIOUS_TRACK"],
+          "media_content_type": "music",
+          "media_content_id": "item-16",
+          "media_position": null,
+          "media_duration": null,
+          "volume_level": null
+        }
+      ],
+      "checks": [
+        {"direction": "previous", "count": 1, "expected": {"kind": "UNRESOLVED", "reason": "state_unknown"}},
+        {"direction": "forward", "count": 1, "expected": {"kind": "UNRESOLVED", "reason": "state_unknown"}}
+      ]
+    },
+    {
+      "id": "M-17",
+      "title": "playing + tvshow + NEXT/PREVIOUS",
+      "sessions": [
+        {
+          "state": "playing",
+          "supported_features": ["NEXT_TRACK", "PREVIOUS_TRACK"],
+          "media_content_type": "tvshow",
+          "media_content_id": "item-17",
+          "media_position": 30.0,
+          "media_duration": 2400.0,
+          "volume_level": 0.35
+        }
+      ],
+      "checks": [
+        {"direction": "previous", "count": 1, "expected": {"kind": "BOUND", "intent": "media.previous"}},
+        {"direction": "forward", "count": 1, "expected": {"kind": "BOUND", "intent": "media.next"}}
+      ]
+    }
+  ],
+  "restore_cases": [
+    {
+      "id": "U-01",
+      "record": {
+        "semantic_action": "brightness.set",
+        "target": "light.kitchen",
+        "property": "brightness",
+        "before": 40,
+        "after": 80,
+        "executed_at": "2026-10-04T00:00:00Z"
+      },
+      "current": {"brightness": 80},
+      "expected": {"kind": "RESTORE", "property": "brightness", "value": 40, "via": "recorded_before"}
+    },
+    {
+      "id": "U-02",
+      "record": {
+        "semantic_action": "brightness.increase",
+        "target": "light.kitchen",
+        "property": "brightness",
+        "before": 40,
+        "after": 80,
+        "executed_at": "2026-10-04T00:00:01Z"
+      },
+      "current": {"brightness": 80},
+      "expected": {"kind": "RESTORE", "property": "brightness", "value": 40, "via": "recorded_before"}
+    },
+    {
+      "id": "U-03",
+      "record": {
+        "semantic_action": "brightness.set",
+        "target": "light.kitchen",
+        "property": "brightness",
+        "before": 40,
+        "after": 80,
+        "executed_at": "2026-10-04T00:00:02Z"
+      },
+      "current": {"brightness": 50},
+      "expected": {"kind": "UNRESOLVED", "reason": "conflict"}
+    },
+    {
+      "id": "U-04",
+      "record": null,
+      "current": {"brightness": 80},
+      "expected": {"kind": "UNRESOLVED", "reason": "no_record"}
+    },
+    {
+      "id": "U-05",
+      "record": {
+        "semantic_action": "media.next",
+        "target": "media_player.room",
+        "property": "media_navigation",
+        "before": null,
+        "after": null,
+        "executed_at": "2026-10-04T00:00:03Z"
+      },
+      "current": {"state": "playing"},
+      "expected": {"kind": "UNRESOLVED", "reason": "not_reversible"}
+    },
+    {
+      "id": "U-06",
+      "record": {
+        "semantic_action": "media.previous",
+        "target": "media_player.room",
+        "property": "media_navigation",
+        "before": null,
+        "after": null,
+        "executed_at": "2026-10-04T00:00:04Z"
+      },
+      "current": {"state": "playing"},
+      "expected": {"kind": "UNRESOLVED", "reason": "not_reversible"}
+    },
+    {
+      "id": "U-07",
+      "record": {
+        "semantic_action": "volume.set",
+        "target": "media_player.room",
+        "property": "volume",
+        "before": 0.2,
+        "after": 0.5,
+        "executed_at": "2026-10-04T00:00:05Z"
+      },
+      "current": {"volume_level": 0.5},
+      "expected": {"kind": "RESTORE", "property": "volume", "value": 0.2, "via": "recorded_before"}
+    },
+    {
+      "id": "U-08",
+      "record": {
+        "semantic_action": "device.turn_on",
+        "target": "light.kitchen",
+        "property": "power",
+        "before": "off",
+        "after": "on",
+        "executed_at": "2026-10-04T00:00:06Z"
+      },
+      "current": {"state": "on"},
+      "expected": {"kind": "RESTORE", "property": "power", "value": "off", "via": "recorded_before"}
+    },
+    {
+      "id": "U-09",
+      "record": {
+        "semantic_action": "color.set",
+        "target": "light.kitchen",
+        "property": "color",
+        "before": {"color_mode": "rgb", "rgb_color": [255, 0, 0]},
+        "after": {"color_mode": "rgb", "rgb_color": [0, 0, 255]},
+        "executed_at": "2026-10-04T00:00:07Z"
+      },
+      "current": {"color_mode": "rgb", "rgb_color": [0, 0, 255]},
+      "expected": {
+        "kind": "RESTORE",
+        "property": "color",
+        "value": {"color_mode": "rgb", "rgb_color": [255, 0, 0]},
+        "via": "recorded_before"
+      }
+    },
+    {
+      "id": "U-10",
+      "record": {
+        "semantic_action": "brightness.set",
+        "target": "light.kitchen",
+        "property": "brightness",
+        "before": 40,
+        "after": 80,
+        "executed_at": "2026-10-04T00:00:08Z"
+      },
+      "current": {},
+      "expected": {"kind": "UNRESOLVED", "reason": "state_unknown"}
+    }
+  ]
+}

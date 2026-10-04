@@ -1,0 +1,52 @@
+{
+  "version": "partial-semantics-v1",
+  "note": "Frozen before parser rules. Expected labels are not benchmark household intents.",
+  "cases": [
+    {"id": "S-01", "group": "previous_action", "role": "partial_positive", "text": "Верни предыдущее", "expected_kind": "partial", "expected_partial": {"operation": "restore_previous", "referent": "previous_executed_action"}},
+    {"id": "S-02", "group": "previous_action", "role": "partial_positive", "text": "Верни то, что было раньше", "expected_kind": "partial", "expected_partial": {"operation": "restore_previous", "referent": "previous_executed_action"}},
+    {"id": "S-03", "group": "previous_action", "role": "partial_positive", "text": "Верни то, что было до этого", "expected_kind": "partial", "expected_partial": {"operation": "restore_previous", "referent": "previous_executed_action"}},
+    {"id": "S-04", "group": "previous_action", "role": "partial_positive", "text": "Верни как было до этого", "expected_kind": "partial", "expected_partial": {"operation": "restore_previous", "referent": "previous_executed_action"}},
+    {"id": "S-05", "group": "previous_action", "role": "partial_positive", "text": "Верни как было", "expected_kind": "partial", "expected_partial": {"operation": "restore_previous", "referent": "previous_executed_action"}},
+    {"id": "S-06", "group": "previous_action", "role": "partial_positive", "text": "Отмени последнее изменение", "expected_kind": "partial", "expected_partial": {"operation": "restore_previous", "referent": "previous_executed_action"}},
+    {"id": "S-07", "group": "previous_action", "role": "partial_positive", "text": "Верни то, что было перед этим", "expected_kind": "partial", "expected_partial": {"operation": "restore_previous", "referent": "previous_executed_action"}},
+    {"id": "S-08", "group": "previous_action", "role": "partial_positive", "text": "Отмени последнее действие", "expected_kind": "partial", "expected_partial": {"operation": "restore_previous", "referent": "previous_executed_action"}},
+    {"id": "S-09", "group": "previous_action", "role": "partial_positive", "text": "Верни то, что играло до этого", "expected_kind": "partial", "expected_partial": {"operation": "restore_previous", "referent": "previous_executed_action"}},
+
+    {"id": "S-10", "group": "relative_step", "role": "partial_positive", "text": "На одну назад", "expected_kind": "partial", "expected_partial": {"operation": "relative_step", "direction": "previous", "count": 1, "domain": "unresolved"}},
+    {"id": "S-11", "group": "relative_step", "role": "partial_positive", "text": "Вернись на один шаг", "expected_kind": "partial", "expected_partial": {"operation": "relative_step", "direction": "previous", "count": 1, "domain": "unresolved"}},
+    {"id": "S-12", "group": "relative_step", "role": "partial_positive", "text": "Перейди на одну назад", "expected_kind": "partial", "expected_partial": {"operation": "relative_step", "direction": "previous", "count": 1, "domain": "unresolved"}},
+    {"id": "S-13", "group": "relative_step", "role": "partial_positive", "text": "Один назад", "expected_kind": "partial", "expected_partial": {"operation": "relative_step", "direction": "previous", "count": 1, "domain": "unresolved"}},
+    {"id": "S-14", "group": "relative_step", "role": "partial_positive", "text": "На одну вперёд", "expected_kind": "partial", "expected_partial": {"operation": "relative_step", "direction": "forward", "count": 1, "domain": "unresolved"}},
+    {"id": "S-15", "group": "relative_step", "role": "partial_positive", "text": "Перейди на два дальше", "expected_kind": "partial", "expected_partial": {"operation": "relative_step", "direction": "forward", "count": 2, "domain": "unresolved"}},
+    {"id": "S-16", "group": "relative_step", "role": "partial_positive", "text": "На две назад", "expected_kind": "partial", "expected_partial": {"operation": "relative_step", "direction": "previous", "count": 2, "domain": "unresolved"}},
+    {"id": "S-17", "group": "relative_step", "role": "partial_positive", "text": "На три вперёд", "expected_kind": "partial", "expected_partial": {"operation": "relative_step", "direction": "forward", "count": 3, "domain": "unresolved"}},
+    {"id": "S-18", "group": "relative_step", "role": "partial_positive", "text": "Вернись на два шага назад", "expected_kind": "partial", "expected_partial": {"operation": "relative_step", "direction": "previous", "count": 2, "domain": "unresolved"}},
+    {"id": "S-19", "group": "relative_step", "role": "partial_positive", "text": "Шагни на одну вперёд", "expected_kind": "partial", "expected_partial": {"operation": "relative_step", "direction": "forward", "count": 1, "domain": "unresolved"}},
+    {"id": "S-20", "group": "relative_step", "role": "partial_positive", "text": "На шаг назад", "expected_kind": "partial", "expected_partial": {"operation": "relative_step", "direction": "previous", "count": 1, "domain": "unresolved"}},
+    {"id": "S-21", "group": "relative_step", "role": "partial_positive", "text": "Перейди на три назад", "expected_kind": "partial", "expected_partial": {"operation": "relative_step", "direction": "previous", "count": 3, "domain": "unresolved"}},
+    {"id": "S-22", "group": "relative_step", "role": "partial_positive", "text": "Вернись на одну назад", "expected_kind": "partial", "expected_partial": {"operation": "relative_step", "direction": "previous", "count": 1, "domain": "unresolved"}},
+
+    {"id": "S-23", "group": "explicit_media", "role": "full_control", "text": "Следующий трек", "expected_kind": "not_partial"},
+    {"id": "S-24", "group": "explicit_media", "role": "full_control", "text": "Предыдущая серия", "expected_kind": "not_partial"},
+    {"id": "S-25", "group": "explicit_media", "role": "full_control", "text": "Верни предыдущую песню", "expected_kind": "not_partial"},
+    {"id": "S-26", "group": "explicit_media", "role": "full_control", "text": "Перейди к следующему эпизоду", "expected_kind": "not_partial"},
+    {"id": "S-27", "group": "explicit_media", "role": "full_control", "text": "Предыдущий трек", "expected_kind": "not_partial"},
+    {"id": "S-28", "group": "explicit_media", "role": "full_control", "text": "Следующая серия", "expected_kind": "not_partial"},
+    {"id": "S-29", "group": "explicit_media", "role": "full_control", "text": "Верни предыдущее видео", "expected_kind": "not_partial"},
+
+    {"id": "S-30", "group": "explicit_device", "role": "full_control", "text": "Верни яркость на 20 процентов", "expected_kind": "not_partial"},
+    {"id": "S-31", "group": "explicit_device", "role": "full_control", "text": "Сделай свет как раньше", "expected_kind": "not_partial"},
+    {"id": "S-32", "group": "explicit_device", "role": "full_control", "text": "Верни телевизор", "expected_kind": "not_partial"},
+    {"id": "S-33", "group": "explicit_device", "role": "full_control", "text": "Включи телевизор", "expected_kind": "not_partial"},
+    {"id": "S-34", "group": "explicit_device", "role": "full_control", "text": "Выключи свет", "expected_kind": "not_partial"},
+
+    {"id": "S-35", "group": "adversarial", "role": "adversarial_control", "text": "Верни мне книгу", "expected_kind": "not_partial"},
+    {"id": "S-36", "group": "adversarial", "role": "adversarial_control", "text": "Верни деньги", "expected_kind": "not_partial"},
+    {"id": "S-37", "group": "adversarial", "role": "adversarial_control", "text": "На шаг назад от двери", "expected_kind": "not_partial"},
+    {"id": "S-38", "group": "adversarial", "role": "adversarial_control", "text": "Он вернулся назад", "expected_kind": "not_partial"},
+    {"id": "S-39", "group": "adversarial", "role": "adversarial_control", "text": "Предыдущий вариант был лучше", "expected_kind": "not_partial"},
+    {"id": "S-40", "group": "adversarial", "role": "adversarial_control", "text": "То, что было до этого, мне нравилось", "expected_kind": "not_partial"},
+    {"id": "S-41", "group": "adversarial", "role": "adversarial_control", "text": "Назад дороги нет", "expected_kind": "not_partial"},
+    {"id": "S-42", "group": "adversarial", "role": "adversarial_control", "text": "Верни книгу на полку", "expected_kind": "not_partial"}
+  ]
+}

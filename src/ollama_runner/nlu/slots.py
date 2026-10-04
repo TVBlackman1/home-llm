@@ -95,6 +95,8 @@ def apply_explicit(
     text: str,
     command: SemanticCommand,
     registry: DeviceRegistry,
+    *,
+    authoritative_intent: bool = False,
 ) -> tuple[SemanticCommand, ExplicitSlots, tuple[str, ...]]:
     slots = read_slots(text, registry)
     ordinal = slots.ordinal
@@ -103,7 +105,9 @@ def apply_explicit(
     arguments = dict(command.arguments)
     notes: list[str] = []
 
-    if _is_episode(text):
+    if authoritative_intent:
+        notes.append("intent kept from fallback")
+    elif _is_episode(text):
         if intent != "video.play":
             notes.append(f"intent {intent} → video.play")
         intent = "video.play"
