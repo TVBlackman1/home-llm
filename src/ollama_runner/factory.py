@@ -27,17 +27,28 @@ def get_resolver() -> FastTextResolver:
     return _get_resolver()
 
 
-def semantic_pipeline(*, model: str | None = None) -> SemanticPipeline:
-    """Same Ollama model, semantic IR, capability resolver, existing sink."""
+def semantic_pipeline(
+    *,
+    model: str | None = None,
+    registry: DeviceRegistry | None = None,
+    executor: object | None = None,
+) -> SemanticPipeline:
+    """Same Ollama model and capability resolver.
+
+    The default registry is the static benchmark inventory. A Home Assistant
+    registry is passed in by the production entrypoint and does not replace
+    `DeviceRegistry.from_static()` for tests.
+    """
 
     settings = get_settings()
     chosen = model or settings.ollama_model
-    registry = _get_registry()
+    chosen_registry = _get_registry() if registry is None else registry
+    chosen_executor = Executor(chosen_registry) if executor is None else executor
     return SemanticPipeline(
         _get_semantic_parser(chosen),
-        CapabilityResolver(registry),
-        Executor(registry),
-        registry,
+        CapabilityResolver(chosen_registry),
+        chosen_executor,
+        chosen_registry,
     )
 
 

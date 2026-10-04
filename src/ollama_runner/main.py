@@ -4,9 +4,11 @@ import argparse
 import sys
 from pathlib import Path
 
-from ollama_runner.factory import close_resources, default_pipeline
+from ollama_runner.factory import close_resources, default_pipeline, semantic_pipeline
+from ollama_runner.ha.client import HaClient
+from ollama_runner.ha.execute import HaExecutor
+from ollama_runner.ha.normalize import load_inventory
 from ollama_runner.settings import get_settings
-from ollama_runner.sinks.ha import HomeAssistant
 from ollama_runner.sinks.jsonprint import PrintSink
 
 
@@ -23,7 +25,7 @@ def main() -> None:
         "--sink",
         choices=("json", "ha"),
         default="json",
-        help="json prints Command, ha sends to the Home Assistant stub",
+        help="json keeps the benchmark pipeline; ha runs the semantic pipeline against Home Assistant",
     )
     parser.add_argument(
         "--model",
@@ -31,16 +33,14 @@ def main() -> None:
     )
 
     args = parser.parse_args()
-    pipeline = default_pipeline(model=args.model)
-
     if args.sink == "ha":
-        sink = HomeAssistant(
-            host=settings.ha_host,
-            port=settings.ha_port,
-            token=settings.ha_token,
-        )
-    else:
-        sink = PrintSink()
+        if args.audio is not None:
+            raise SystemExit("Home Assistant mode takes text")
+        _run_home(args, settings)
+        return
+
+    pipeline = default_pipeline(model=args.model)
+    sink = PrintSink()
 
     try:
         if args.text is not None:
@@ -69,6 +69,40 @@ def main() -> None:
             if not result.ok:
                 print(result.error, file=sys.stderr)
     finally:
+        close_resources()
+
+
+def _run_home(args, settings) -> None:
+    client = HaClient(settings)
+    try:
+        inventory = load_inventory(client)
+        pipeline = semantic_pipeline(
+            model=args.model,
+            registry=inventory.registry,
+            executor=HaExecutor(inventory.registry, inventory.bindings, client),
+        )
+        sink = PrintSink()
+
+        def once(text: str) -> bool:
+            result = pipeline.run(text, sink, state=inventory.state)
+            if not result.ok:
+                print(result.error or result.payload, file=sys.stderr)
+            return result.ok
+
+        if args.text is not None:
+            raise SystemExit(0 if once(args.text) else 1)
+        if args.file is not None:
+            raise SystemExit(0 if once(args.file.read_text(encoding="utf-8")) else 1)
+        while True:
+            try:
+                text = input("> ").strip()
+            except (EOFError, KeyboardInterrupt):
+                print()
+                break
+            if text:
+                once(text)
+    finally:
+        client.close()
         close_resources()
 
 
