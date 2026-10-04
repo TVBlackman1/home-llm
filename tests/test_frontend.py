@@ -173,8 +173,8 @@ def test_listen_infinitive_is_audio_and_bare_titles_stay_content(registry: Devic
     assert not lets.handled
 
     filler = parse_deterministic("слушай, включи свет", registry)
-    assert filler.intent != "audio.play"
-    assert not filler.handled
+    assert filler.intent == "device.turn_on"
+    assert filler.slots.device_type == "light"
 
     song = parse_deterministic("поставь песню Sonne", registry)
     assert song.intent == "audio.play"
@@ -194,9 +194,14 @@ def test_listen_infinitive_is_audio_and_bare_titles_stay_content(registry: Devic
 @pytest.mark.unit
 def test_deterministic_slots_beat_the_model(registry: DeviceRegistry) -> None:
     text = "У Маши включи вторую колонку на кухне"
-    # Verb is not at the start, so the grammar declines and the model is asked.
-    declined = parse_deterministic(text, registry)
-    assert not declined.handled
+    parsed = parse_deterministic(text, registry)
+    assert parsed.handled
+    assert parsed.intent == "device.turn_on"
+    assert parsed.slots.owner == "Маша"
+    assert parsed.slots.area == "кухня"
+    assert parsed.slots.ordinal == 2
+    assert parsed.slots.device_type == "speaker"
+    assert parsed.mention == "вторую колонку"
     merged, slots, _ = apply_explicit(text, _llm(
         intent="brightness.decrease",
         device_type="light",
@@ -322,7 +327,7 @@ def _fallback(registry: DeviceRegistry, text: str, command: SemanticCommand):
 
 @pytest.mark.unit
 def test_fallback_command_keeps_llm_intent_and_takes_slots_from_text(registry: DeviceRegistry) -> None:
-    text = "У Маши включи вторую колонку на кухне"
+    text = "У Маши вторую колонку на кухне"
     assert not parse_deterministic(text, registry).handled
     observed = _fallback(registry, text, SemanticCommand(
         intent="volume.decrease",
@@ -403,3 +408,196 @@ def test_deterministic_command_keeps_its_own_intent(registry: DeviceRegistry) ->
     assert observed["llm"] is None
     assert observed["final"]["intent"] == "brightness.decrease"
     assert observed["merge_changed_intent"] is False
+
+
+@pytest.mark.unit
+def test_power_imperative_is_position_independent(registry: DeviceRegistry) -> None:
+    off = [
+        "Выключи телевизор у Маши",
+        "У Маши выключи телевизор",
+        "У Маши телевизор выключи",
+        "Телевизор у Маши выключи",
+        "У Маши, кстати, телевизор выключи",
+        "Кстати, у Маши телевизор выключи",
+    ]
+    for text in off:
+        parsed = parse_deterministic(text, registry)
+        command = parsed.command()
+        assert parsed.handled, text
+        assert parsed.intent == "device.turn_off", text
+        assert command.target.device_type == "tv", text
+        assert command.target.owner == "Маша", text
+        assert command.target.mention.casefold() == "телевизор", text
+        assert command.target.explicit is True, text
+
+    on = [
+        ("Включи свет в спальне", "спальня"),
+        ("В спальне включи свет", "спальня"),
+        ("В спальне свет включи", "спальня"),
+        ("Свет в спальне включи", "спальня"),
+    ]
+    for text, area in on:
+        parsed = parse_deterministic(text, registry)
+        command = parsed.command()
+        assert parsed.handled, text
+        assert parsed.intent == "device.turn_on", text
+        assert command.target.device_type == "light", text
+        assert command.target.area == area, text
+        assert command.target.mention.casefold() == "свет", text
+        assert command.target.explicit is True, text
+
+    for text in (
+        "Не включай телевизор",
+        "Телевизор не включай",
+        "Не выключай свет",
+        "Свет не выключай",
+        "Свет горит",
+        "Свет не горит",
+        "Телевизор включён",
+        "Телевизор выключен",
+        "Свет в конце тоннеля меня не включает",
+        "Сделай вид, выключи свет",
+        "Представь, включи телевизор",
+        "Допустим, выключи свет",
+        "выключи",
+        "Я думаю выключить телевизор",
+        "У Маши телевизор запусти",
+        "У Маши телевизор поставь",
+    ):
+        assert not parse_deterministic(text, registry).handled, text
+
+
+@pytest.mark.unit
+def test_extinguish_is_a_modal_turn_off_for_light_and_tv(registry: DeviceRegistry) -> None:
+    for text in (
+        "Телевизор можно уже гасить",
+        "Телевизор уже можно гасить",
+        "Можно уже гасить телевизор",
+        "Можно гасить телевизор",
+        "Свет можно уже гасить",
+        "Можно гасить свет в спальне",
+    ):
+        parsed = parse_deterministic(text, registry)
+        command = parsed.command()
+        assert parsed.handled, text
+        assert parsed.intent == "device.turn_off", text
+        assert command.target.device_type in {"tv", "light"}, text
+        assert command.target.explicit is True, text
+
+    for text in (
+        "гасить",
+        "можно уже гасить",
+        "пора гасить",
+        "Я люблю гасить свет",
+        "Он решил гасить свет",
+        "Она умеет гасить свет",
+        "Гасить свет полезно",
+        "Нужно ли гасить свет?",
+        "Почему нужно гасить свет?",
+        "Не гасить телевизор",
+        "Телевизор не гасить",
+        "Нельзя гасить телевизор",
+        "Сделай вид, что телевизор можно гасить",
+        "Представь, что телевизор можно гасить",
+        "Колонку можно уже гасить",
+        "Монитор можно гасить",
+        "Гаси телевизор у Маши",
+        "Погаси свет",
+        "Можно ли гасить телевизор?",
+    ):
+        assert not parse_deterministic(text, registry).handled, text
+
+
+@pytest.mark.unit
+def test_sleep_speaker_is_turn_off(registry: DeviceRegistry) -> None:
+    for text in (
+        "Усыпи колонку на балконе",
+        "Колонку на балконе усыпи",
+        "На балконе усыпи колонку",
+        "На балконе колонку усыпи",
+    ):
+        parsed = parse_deterministic(text, registry)
+        command = parsed.command()
+        assert parsed.handled, text
+        assert parsed.intent == "device.turn_off", text
+        assert command.target.device_type == "speaker", text
+        assert command.target.area == "балкон", text
+        assert command.target.mention.casefold() == "колонку", text
+        assert command.target.explicit is True, text
+
+    for text in (
+        "Усыпи",
+        "Усыпи это",
+        "Пора усыпить",
+        "Не усыпи колонку",
+        "Колонку не усыпи",
+        "Нельзя усыпить колонку",
+        "Усыпи ребёнка",
+        "Усыпи собаку",
+        "Усыпи кота",
+        "Усыпи меня",
+        "Усыпи Машу",
+        "Эта музыка меня усыпит",
+        "Музыка меня усыпляет",
+        "Он решил усыпить собаку",
+        "Я хочу усыпить колонку",
+        "Сделай вид, усыпи колонку",
+        "Представь, усыпи колонку",
+        "Допустим, усыпи колонку",
+        "Притворись, усыпи колонку",
+        "Усыпи телевизор",
+        "Усыпи монитор",
+        "Усыпи пылесос",
+        "Усыпи свет",
+        "Усыпите колонку",
+        "Усыпить колонку",
+    ):
+        assert not parse_deterministic(text, registry).handled, text
+
+
+@pytest.mark.unit
+def test_rewind_with_duration_is_seek_backward(registry: DeviceRegistry) -> None:
+    for text, amount in (
+        ("Отмотай пару минут", "пару минут"),
+        ("Отмотай две минуты", "две минуты"),
+        ("Отмотай 2 минуты", "2 минуты"),
+        ("Пару минут отмотай", "Пару минут"),
+        ("Две минуты отмотай", "Две минуты"),
+    ):
+        parsed = parse_deterministic(text, registry)
+        command = parsed.command()
+        assert parsed.handled, text
+        assert parsed.intent == "media.seek_backward", text
+        assert parsed.value == amount, text
+        assert command.arguments["value"] == amount, text
+        assert command.target.device_type is None, text
+        assert command.target.explicit is False, text
+
+    kept = parse_deterministic("Перемотай на пять минут назад", registry)
+    assert kept.intent == "media.seek_backward"
+    assert kept.value == "на пять минут"
+    forward = parse_deterministic("Перемотай сериал на 10 минут вперед", registry)
+    assert forward.intent == "media.seek_forward"
+    assert forward.value == "на 10 минут"
+
+    for text in (
+        "Отмотай к прошлому треку",
+        "Отмотай",
+        "Отмотай немного",
+        "Отмотай чуть-чуть",
+        "Отмотай назад",
+        "Отмотай минуту",
+        "Отмотай пару метров",
+        "Отмотай два метра",
+        "Отмотай кусок провода",
+        "Отмотай немного кабеля",
+        "Отмотай пару минут разговора",
+        "Не отмотай пару минут",
+        "Не надо отматывать пару минут",
+        "Нельзя отматывать пару минут",
+        "Сделай вид, отмотай пару минут",
+        "Представь, отмотай пару минут",
+        "Допустим, отмотай пару минут",
+        "Давай отмотаем пару минут назад",
+    ):
+        assert not parse_deterministic(text, registry).handled, text

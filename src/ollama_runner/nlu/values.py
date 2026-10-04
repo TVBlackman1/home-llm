@@ -23,7 +23,7 @@ _PERCENT = re.compile(
     re.IGNORECASE,
 )
 _DURATION = re.compile(
-    rf"((?:на\s+)?(?:{_NUMBER})\s+минут\w*)",
+    rf"((?:на\s+)?(?<![0-9a-zа-яе])(?:{_NUMBER}|пару)(?![0-9a-zа-яе])\s+минут\w*)",
     re.IGNORECASE,
 )
 _MAGNITUDE = re.compile(r"(?<![0-9a-zа-яе])(немного|сильно)(?![0-9a-zа-яе])", re.IGNORECASE)

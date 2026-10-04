@@ -21,9 +21,31 @@ from ollama_runner.semantic import ExplicitSlots, SemanticCommand, Target
 
 _POWER_ON = re.compile(r"^(?:пожалуйста\s+)?(?:включи|запусти|вруби|поставь)\b", re.IGNORECASE)
 _POWER_OFF = re.compile(r"^(?:пожалуйста\s+)?(?:выключи|выруби)\b", re.IGNORECASE)
+_POWER_ON_WORD = re.compile(
+    r"(?<![0-9a-zа-яе])(?:включи|вруби)(?![0-9a-zа-яе])",
+    re.IGNORECASE,
+)
+_POWER_OFF_WORD = re.compile(
+    r"(?<![0-9a-zа-яе])(?:выключи|выруби)(?![0-9a-zа-яе])",
+    re.IGNORECASE,
+)
+_PRETEND_FRAME = re.compile(
+    r"(?<![0-9a-zа-яе])(?:сделай\s+вид|представь|допустим|притворись)(?![0-9a-zа-яе])",
+    re.IGNORECASE,
+)
+_EXTINGUISH = re.compile(
+    r"(?<![0-9a-zа-яе])можно(?:\s+уже)?\s+гасить(?![0-9a-zа-яе])",
+    re.IGNORECASE,
+)
+_EXTINGUISH_TYPES = frozenset({"light", "tv"})
+_SLEEP_SPEAKER = re.compile(
+    r"(?<![0-9a-zа-яе])усыпи(?![0-9a-zа-яе])",
+    re.IGNORECASE,
+)
 _PAUSE = re.compile(r"(?<![0-9a-zа-яе])(?:пауз\w*|приостанови\w*)", re.IGNORECASE)
 _STOP = re.compile(r"(?<![0-9a-zа-яе])останови(?!сь)", re.IGNORECASE)
 _SEEK = re.compile(r"(?<![0-9a-zа-яе])перемотай", re.IGNORECASE)
+_REWIND = re.compile(r"(?<![0-9a-zа-яе])отмотай(?![0-9a-zа-яе])", re.IGNORECASE)
 _FORWARD = re.compile(r"(?<![0-9a-zа-яе])вперед", re.IGNORECASE)
 _BACKWARD = re.compile(r"(?<![0-9a-zа-яе])назад", re.IGNORECASE)
 _SKIP = re.compile(r"(?<![0-9a-zа-яе])перескочи", re.IGNORECASE)
@@ -214,7 +236,18 @@ def _decide(
 ) -> tuple[str, str | None, str | None, tuple[str, ...]] | None:
     amount = value[0] if value and value[1] != "color" else None
     color = value[0] if value and value[1] == "color" else None
-    if _NEGATION.search(folded) or not _command_frame(text, registry):
+    if _NEGATION.search(folded):
+        return None
+    extinguish = _extinguish_off(text, folded, registry)
+    if extinguish is not None:
+        return extinguish
+    sleep_speaker = _sleep_speaker_off(text, folded, registry)
+    if sleep_speaker is not None:
+        return sleep_speaker
+    rewind = _rewind_duration(folded, value)
+    if rewind is not None:
+        return rewind
+    if not _command_frame(text, registry):
         return None
 
     if _is_episode(text):
@@ -270,6 +303,11 @@ def _decide(
         return "device.turn_on", None, None, ("power_on",)
     if _POWER_ON.search(text) and _unknown_leftover(text, registry) and _plausible_title(residual or _unknown_leftover(text, registry) or ""):
         return "content.play", residual or _unknown_leftover(text, registry), None, ("bare_content",)
+    if not _PRETEND_FRAME.search(folded):
+        if _POWER_OFF_WORD.search(folded) and _explicit_device(text, registry):
+            return "device.turn_off", None, None, ("power_off",)
+        if _POWER_ON_WORD.search(folded) and _explicit_device(text, registry):
+            return "device.turn_on", None, None, ("power_on",)
     return None
 
 
@@ -322,6 +360,58 @@ def _functionish(token: str) -> bool:
 def _known_device(text: str, registry: DeviceRegistry) -> bool:
     if _unknown_leftover(text, registry):
         return False
-    if device_type_from_text(text) is not None:
-        return True
-    return registry.unique_alias_type(text) is not None
+    return _explicit_device(text, registry)
+
+
+def _extinguish_off(
+    text: str,
+    folded: str,
+    registry: DeviceRegistry,
+) -> tuple[str, str | None, str | None, tuple[str, ...]] | None:
+    """«можно (уже) гасить» plus an explicit light or tv. Not a general power verb."""
+
+    if _PRETEND_FRAME.search(folded) or not _EXTINGUISH.search(folded):
+        return None
+    found = device_type_from_text(text)
+    device_type = found[0] if found is not None else registry.unique_alias_type(text)
+    if device_type not in _EXTINGUISH_TYPES:
+        return None
+    return "device.turn_off", None, None, ("extinguish",)
+
+
+def _rewind_duration(
+    folded: str,
+    value: tuple[str, str] | None,
+) -> tuple[str, str | None, str | None, tuple[str, ...]] | None:
+    """Whole-word «отмотай» plus a parsed duration. The verb supplies backward."""
+
+    if _PRETEND_FRAME.search(folded) or not _REWIND.search(folded):
+        return None
+    if value is None or value[1] != "duration":
+        return None
+    if any(re.search(rf"(?<![0-9a-zа-яе]){re.escape(stem)}", folded) for stem in _NON_TITLE):
+        return None
+    return "media.seek_backward", None, value[0], ("rewind_duration",)
+
+
+def _sleep_speaker_off(
+    text: str,
+    folded: str,
+    registry: DeviceRegistry,
+) -> tuple[str, str | None, str | None, tuple[str, ...]] | None:
+    """Whole-word «усыпи» plus an explicit speaker. Not a general power verb."""
+
+    if _PRETEND_FRAME.search(folded) or not _SLEEP_SPEAKER.search(folded):
+        return None
+    found = device_type_from_text(text)
+    device_type = found[0] if found is not None else registry.unique_alias_type(text)
+    if device_type != "speaker":
+        return None
+    return "device.turn_off", None, None, ("sleep_speaker",)
+
+
+def _explicit_device(text: str, registry: DeviceRegistry) -> bool:
+    return (
+        device_type_from_text(text) is not None
+        or registry.unique_alias_type(text) is not None
+    )
