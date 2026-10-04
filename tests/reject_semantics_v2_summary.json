@@ -1,0 +1,2138 @@
+{
+  "production": {
+    "regression": {
+      "correct": 279,
+      "n": 279,
+      "false_rejects": 0,
+      "wrong": 0,
+      "unstable": 0,
+      "llm_cases": 0
+    },
+    "challenge": {
+      "correct": 179,
+      "n": 220,
+      "fallback": 189,
+      "fallback_correct": 149,
+      "false_command": 14,
+      "false_command_c": [
+        "C-11",
+        "C-13",
+        "C-16",
+        "C-17",
+        "C-25",
+        "C-32"
+      ],
+      "false_command_d": [
+        "D-01",
+        "D-03",
+        "D-11",
+        "D-14",
+        "D-15",
+        "D-16",
+        "D-21",
+        "D-25"
+      ],
+      "executable_false": 4,
+      "executable_ids": [
+        "D-01",
+        "D-03",
+        "D-11",
+        "D-25"
+      ],
+      "non_executable_false": 10,
+      "false_rejects": 7,
+      "wrong_intents": 19,
+      "unstable": 1,
+      "unstable_ids": [
+        "C-20"
+      ],
+      "deterministic_false": [
+        "D-23"
+      ],
+      "hallucinations_produced_runs": 38,
+      "hallucinations_survived_runs": 0,
+      "hallucinations_reached_resolver_runs": 0
+    },
+    "remaining": [
+      {
+        "id": "C-11",
+        "category": "ambiguous",
+        "text": "Сделай красиво",
+        "votes": [
+          "command:color.set",
+          "command:color.set",
+          "command:color.set"
+        ],
+        "executable": false,
+        "resolver": [
+          "ambiguous",
+          "ambiguous",
+          "ambiguous"
+        ]
+      },
+      {
+        "id": "C-13",
+        "category": "ambiguous",
+        "text": "Сделай теплее",
+        "votes": [
+          "command:brightness.increase",
+          "command:brightness.increase",
+          "command:brightness.increase"
+        ],
+        "executable": false,
+        "resolver": [
+          "ambiguous",
+          "ambiguous",
+          "ambiguous"
+        ]
+      },
+      {
+        "id": "C-16",
+        "category": "ambiguous",
+        "text": "Сделай на двадцать",
+        "votes": [
+          "command:brightness.increase",
+          "command:brightness.increase",
+          "command:brightness.increase"
+        ],
+        "executable": false,
+        "resolver": [
+          "ambiguous",
+          "ambiguous",
+          "ambiguous"
+        ]
+      },
+      {
+        "id": "C-17",
+        "category": "ambiguous",
+        "text": "Поставь пять",
+        "votes": [
+          "command:media.next",
+          "command:media.next",
+          "command:media.next"
+        ],
+        "executable": false,
+        "resolver": [
+          "clarify",
+          "clarify",
+          "clarify"
+        ]
+      },
+      {
+        "id": "C-25",
+        "category": "ambiguous",
+        "text": "Поставь что-нибудь",
+        "votes": [
+          "command:media.play",
+          "command:media.play",
+          "command:media.play"
+        ],
+        "executable": false,
+        "resolver": [
+          "ambiguous",
+          "ambiguous",
+          "ambiguous"
+        ]
+      },
+      {
+        "id": "C-32",
+        "category": "ambiguous",
+        "text": "Этот цвет не тот",
+        "votes": [
+          "command:color.set",
+          "command:color.set",
+          "command:color.set"
+        ],
+        "executable": false,
+        "resolver": [
+          "ambiguous",
+          "ambiguous",
+          "ambiguous"
+        ]
+      },
+      {
+        "id": "D-01",
+        "category": "adversarial",
+        "text": "Свет в конце тоннеля меня не включает",
+        "votes": [
+          "command:device.turn_on",
+          "command:device.turn_on",
+          "command:device.turn_on"
+        ],
+        "executable": true,
+        "resolver": [
+          "resolved",
+          "resolved",
+          "resolved"
+        ]
+      },
+      {
+        "id": "D-03",
+        "category": "adversarial",
+        "text": "Телевизор в новостях опять показывает политику",
+        "votes": [
+          "command:video.play",
+          "command:video.play",
+          "command:video.play"
+        ],
+        "executable": true,
+        "resolver": [
+          "resolved",
+          "resolved",
+          "resolved"
+        ]
+      },
+      {
+        "id": "D-11",
+        "category": "adversarial",
+        "text": "Не включай телевизор",
+        "votes": [
+          "command:device.turn_off",
+          "command:device.turn_off",
+          "command:device.turn_off"
+        ],
+        "executable": true,
+        "resolver": [
+          "resolved",
+          "resolved",
+          "resolved"
+        ]
+      },
+      {
+        "id": "D-14",
+        "category": "adversarial",
+        "text": "Перемотай разговор к началу, это не про фильм",
+        "votes": [
+          "command:media.seek_backward",
+          "command:media.seek_backward",
+          "command:media.seek_backward"
+        ],
+        "executable": false,
+        "resolver": [
+          "clarify",
+          "clarify",
+          "clarify"
+        ]
+      },
+      {
+        "id": "D-15",
+        "category": "adversarial",
+        "text": "Альбом моей жизни не включай",
+        "votes": [
+          "command:audio.play",
+          "command:audio.play",
+          "command:audio.play"
+        ],
+        "executable": false,
+        "resolver": [
+          "ambiguous",
+          "ambiguous",
+          "ambiguous"
+        ]
+      },
+      {
+        "id": "D-16",
+        "category": "adversarial",
+        "text": "Остановись и подумай, это не плеер",
+        "votes": [
+          "command:media.stop",
+          "command:media.stop",
+          "command:media.stop"
+        ],
+        "executable": false,
+        "resolver": [
+          "clarify",
+          "clarify",
+          "clarify"
+        ]
+      },
+      {
+        "id": "D-21",
+        "category": "adversarial",
+        "text": "Музыка сфер — это не колонка",
+        "votes": [
+          "command:audio.play",
+          "command:audio.play",
+          "command:audio.play"
+        ],
+        "executable": false,
+        "resolver": [
+          "ambiguous",
+          "ambiguous",
+          "ambiguous"
+        ]
+      },
+      {
+        "id": "D-25",
+        "category": "adversarial",
+        "text": "Сделай вид, что свет не горит",
+        "votes": [
+          "command:device.turn_off",
+          "command:device.turn_off",
+          "command:device.turn_off"
+        ],
+        "executable": true,
+        "resolver": [
+          "resolved",
+          "resolved",
+          "resolved"
+        ]
+      }
+    ],
+    "false_rejects": [
+      {
+        "id": "B-16",
+        "text": "Усыпи колонку на балконе",
+        "expected": "device.turn_off",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-31",
+        "text": "Сделай яркость средней на кухне",
+        "expected": "brightness.set",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-70",
+        "text": "Пропусти этот кусок",
+        "expected": "media.next",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-71",
+        "text": "Верни то, что было до этого",
+        "expected": "media.previous",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-73",
+        "text": "Вернись на одну назад",
+        "expected": "media.previous",
+        "votes": [
+          "needs_context",
+          "needs_context",
+          "needs_context"
+        ]
+      },
+      {
+        "id": "B-76",
+        "text": "Отмотай пару минут",
+        "expected": "media.seek_backward",
+        "votes": [
+          "needs_context",
+          "needs_context",
+          "needs_context"
+        ]
+      },
+      {
+        "id": "B-90",
+        "text": "Можно Элидар?",
+        "expected": "content.play",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      }
+    ],
+    "wrong_intents": [
+      {
+        "id": "B-03",
+        "text": "Пусть в гостиной горит свет",
+        "expected": "device.turn_on",
+        "votes": [
+          "command:device.turn_off",
+          "command:device.turn_off",
+          "command:device.turn_off"
+        ]
+      },
+      {
+        "id": "B-12",
+        "text": "Хватит светить на кухне",
+        "expected": "device.turn_off",
+        "votes": [
+          "command:brightness.decrease",
+          "command:brightness.decrease",
+          "command:brightness.decrease"
+        ]
+      },
+      {
+        "id": "B-14",
+        "text": "Телевизор можно уже гасить",
+        "expected": "device.turn_off",
+        "votes": [
+          "command:media.pause",
+          "command:media.pause",
+          "command:media.pause"
+        ]
+      },
+      {
+        "id": "B-18",
+        "text": "Добавь света на кухне",
+        "expected": "brightness.increase",
+        "votes": [
+          "command:device.turn_on",
+          "command:device.turn_on",
+          "command:device.turn_on"
+        ]
+      },
+      {
+        "id": "B-20",
+        "text": "Маловато света в гостиной",
+        "expected": "brightness.increase",
+        "votes": [
+          "command:brightness.decrease",
+          "command:brightness.decrease",
+          "command:brightness.decrease"
+        ]
+      },
+      {
+        "id": "B-38",
+        "text": "Добавь звука на телевизоре",
+        "expected": "volume.increase",
+        "votes": [
+          "command:device.turn_on",
+          "command:device.turn_on",
+          "command:device.turn_on"
+        ]
+      },
+      {
+        "id": "B-45",
+        "text": "Что-то музыка орёт",
+        "expected": "volume.decrease",
+        "votes": [
+          "command:volume.increase",
+          "command:volume.increase",
+          "command:volume.increase"
+        ]
+      },
+      {
+        "id": "B-48",
+        "text": "Прикрути звук на кухне",
+        "expected": "volume.decrease",
+        "votes": [
+          "command:volume.increase",
+          "command:volume.increase",
+          "command:volume.increase"
+        ]
+      },
+      {
+        "id": "B-49",
+        "text": "Колонка орёт на балконе",
+        "expected": "volume.decrease",
+        "votes": [
+          "command:volume.increase",
+          "command:volume.increase",
+          "command:volume.increase"
+        ]
+      },
+      {
+        "id": "B-55",
+        "text": "Замри на этом кадре",
+        "expected": "media.pause",
+        "votes": [
+          "command:media.seek_backward",
+          "command:media.seek_backward",
+          "command:media.seek_backward"
+        ]
+      },
+      {
+        "id": "B-61",
+        "text": "Верни воспроизведение",
+        "expected": "media.resume",
+        "votes": [
+          "command:media.play",
+          "command:media.play",
+          "command:media.play"
+        ]
+      },
+      {
+        "id": "B-62",
+        "text": "Хватит кино",
+        "expected": "media.stop",
+        "votes": [
+          "command:media.pause",
+          "command:media.pause",
+          "command:media.pause"
+        ]
+      },
+      {
+        "id": "B-68",
+        "text": "Давай другой трек",
+        "expected": "media.next",
+        "votes": [
+          "command:media.previous",
+          "command:media.previous",
+          "command:media.previous"
+        ]
+      },
+      {
+        "id": "B-79",
+        "text": "Хочу посмотреть Кварис",
+        "expected": "video.play",
+        "votes": [
+          "command:content.play",
+          "command:content.play",
+          "command:content.play"
+        ]
+      },
+      {
+        "id": "B-80",
+        "text": "Покажи мне Норвен",
+        "expected": "video.play",
+        "votes": [
+          "command:content.play",
+          "command:content.play",
+          "command:content.play"
+        ]
+      },
+      {
+        "id": "B-81",
+        "text": "Давай глянем Элидар",
+        "expected": "video.play",
+        "votes": [
+          "command:media.play",
+          "command:media.play",
+          "command:media.play"
+        ]
+      },
+      {
+        "id": "B-82",
+        "text": "Кварис на экран",
+        "expected": "video.play",
+        "votes": [
+          "command:content.play",
+          "command:content.play",
+          "command:content.play"
+        ]
+      },
+      {
+        "id": "B-91",
+        "text": "Дай Кварис",
+        "expected": "content.play",
+        "votes": [
+          "command:device.turn_on",
+          "command:device.turn_on",
+          "command:device.turn_on"
+        ]
+      },
+      {
+        "id": "B-92",
+        "text": "Хочу включить Норвен",
+        "expected": "content.play",
+        "votes": [
+          "command:device.turn_on",
+          "command:device.turn_on",
+          "command:device.turn_on"
+        ]
+      }
+    ],
+    "indirect": {
+      "B-03": {
+        "text": "Пусть в гостиной горит свет",
+        "expected": "device.turn_on",
+        "votes": [
+          "command:device.turn_off",
+          "command:device.turn_off",
+          "command:device.turn_off"
+        ],
+        "label": "wrong"
+      },
+      "B-05": {
+        "text": "Хочу чтобы в спальне загорелся свет",
+        "expected": "device.turn_on",
+        "votes": [
+          "command:device.turn_on",
+          "command:device.turn_on",
+          "command:device.turn_on"
+        ],
+        "label": "correct"
+      },
+      "B-12": {
+        "text": "Хватит светить на кухне",
+        "expected": "device.turn_off",
+        "votes": [
+          "command:brightness.decrease",
+          "command:brightness.decrease",
+          "command:brightness.decrease"
+        ],
+        "label": "wrong"
+      },
+      "B-13": {
+        "text": "Свет в ванной больше не нужен",
+        "expected": "device.turn_off",
+        "votes": [
+          "command:device.turn_off",
+          "command:device.turn_off",
+          "command:device.turn_off"
+        ],
+        "label": "correct"
+      },
+      "B-19": {
+        "text": "Пусть в спальне будет светлее",
+        "expected": "brightness.increase",
+        "votes": [
+          "command:brightness.increase",
+          "command:brightness.increase",
+          "command:brightness.increase"
+        ],
+        "label": "correct"
+      },
+      "B-20": {
+        "text": "Маловато света в гостиной",
+        "expected": "brightness.increase",
+        "votes": [
+          "command:brightness.decrease",
+          "command:brightness.decrease",
+          "command:brightness.decrease"
+        ],
+        "label": "wrong"
+      },
+      "B-22": {
+        "text": "Света не хватает в ванной",
+        "expected": "brightness.increase",
+        "votes": [
+          "command:brightness.increase",
+          "command:brightness.increase",
+          "command:brightness.increase"
+        ],
+        "label": "correct"
+      },
+      "B-23": {
+        "text": "Здесь слишком ярко",
+        "expected": "brightness.decrease",
+        "votes": [
+          "command:brightness.decrease",
+          "command:brightness.decrease",
+          "command:brightness.decrease"
+        ],
+        "label": "correct"
+      },
+      "B-25": {
+        "text": "Свет режет глаза на кухне",
+        "expected": "brightness.decrease",
+        "votes": [
+          "command:brightness.decrease",
+          "command:brightness.decrease",
+          "command:brightness.decrease"
+        ],
+        "label": "correct"
+      },
+      "B-27": {
+        "text": "Слишком светло в детской",
+        "expected": "brightness.decrease",
+        "votes": [
+          "command:brightness.decrease",
+          "command:brightness.decrease",
+          "command:brightness.decrease"
+        ],
+        "label": "correct"
+      },
+      "B-32": {
+        "text": "Хочу свет на 15 процентов в детской",
+        "expected": "brightness.set",
+        "votes": [
+          "command:brightness.set",
+          "command:brightness.set",
+          "command:brightness.set"
+        ],
+        "label": "correct"
+      },
+      "B-33": {
+        "text": "Хочу тёплый свет в спальне",
+        "expected": "color.set",
+        "votes": [
+          "command:color.set",
+          "command:color.set",
+          "command:color.set"
+        ],
+        "label": "correct"
+      },
+      "B-35": {
+        "text": "Пусть торшер будет зелёным",
+        "expected": "color.set",
+        "votes": [
+          "command:color.set",
+          "command:color.set",
+          "command:color.set"
+        ],
+        "label": "correct"
+      },
+      "B-39": {
+        "text": "Плохо слышно колонку в гостиной",
+        "expected": "volume.increase",
+        "votes": [
+          "command:volume.increase",
+          "command:volume.increase",
+          "command:volume.increase"
+        ],
+        "label": "correct"
+      },
+      "B-41": {
+        "text": "Телевизор слишком тихий",
+        "expected": "volume.increase",
+        "votes": [
+          "command:volume.increase",
+          "command:volume.increase",
+          "command:volume.increase"
+        ],
+        "label": "correct"
+      },
+      "B-45": {
+        "text": "Что-то музыка орёт",
+        "expected": "volume.decrease",
+        "votes": [
+          "command:volume.increase",
+          "command:volume.increase",
+          "command:volume.increase"
+        ],
+        "label": "wrong"
+      },
+      "B-46": {
+        "text": "Слишком громко здесь",
+        "expected": "volume.decrease",
+        "votes": [
+          "command:volume.decrease",
+          "command:volume.decrease",
+          "command:volume.decrease"
+        ],
+        "label": "correct"
+      },
+      "B-49": {
+        "text": "Колонка орёт на балконе",
+        "expected": "volume.decrease",
+        "votes": [
+          "command:volume.increase",
+          "command:volume.increase",
+          "command:volume.increase"
+        ],
+        "label": "wrong"
+      }
+    },
+    "focused": {
+      "D-01": {
+        "command:device.turn_on": 3
+      },
+      "D-03": {
+        "command:video.play": 3
+      },
+      "D-11": {
+        "command:device.turn_off": 3
+      },
+      "D-25": {
+        "command:device.turn_off": 3
+      },
+      "obs-on": {
+        "command:device.turn_off": 3
+      },
+      "obs-off": {
+        "command:device.turn_on": 3
+      },
+      "obs-tv": {
+        "command:content.play": 3
+      },
+      "cmd-on-light": {
+        "command:device.turn_on": 3
+      },
+      "cmd-off-light": {
+        "command:device.turn_off": 3
+      },
+      "cmd-on-tv": {
+        "command:device.turn_on": 3
+      },
+      "cmd-off-tv": {
+        "command:device.turn_off": 3
+      },
+      "cmd-film": {
+        "command:video.play": 3
+      },
+      "cmd-dim": {
+        "command:brightness.decrease": 3
+      },
+      "B-13": {
+        "command:device.turn_off": 3
+      },
+      "B-22": {
+        "command:brightness.increase": 3
+      }
+    }
+  },
+  "v2a": {
+    "regression": {
+      "correct": 279,
+      "n": 279,
+      "false_rejects": 0,
+      "wrong": 0,
+      "unstable": 0,
+      "llm_cases": 0
+    },
+    "challenge": {
+      "correct": 185,
+      "n": 220,
+      "fallback": 189,
+      "fallback_correct": 155,
+      "false_command": 8,
+      "false_command_c": [
+        "C-04",
+        "C-13",
+        "C-14",
+        "C-16",
+        "C-17",
+        "C-20",
+        "C-25"
+      ],
+      "false_command_d": [
+        "D-14"
+      ],
+      "executable_false": 0,
+      "executable_ids": [],
+      "non_executable_false": 8,
+      "false_rejects": 15,
+      "wrong_intents": 11,
+      "unstable": 1,
+      "unstable_ids": [
+        "D-16"
+      ],
+      "deterministic_false": [
+        "D-23"
+      ],
+      "hallucinations_produced_runs": 41,
+      "hallucinations_survived_runs": 0,
+      "hallucinations_reached_resolver_runs": 0
+    },
+    "remaining": [
+      {
+        "id": "C-04",
+        "category": "ambiguous",
+        "text": "Давай другое",
+        "votes": [
+          "command:device.turn_on",
+          "command:device.turn_on",
+          "command:device.turn_on"
+        ],
+        "executable": false,
+        "resolver": [
+          "ambiguous",
+          "ambiguous",
+          "ambiguous"
+        ]
+      },
+      {
+        "id": "C-13",
+        "category": "ambiguous",
+        "text": "Сделай теплее",
+        "votes": [
+          "command:brightness.increase",
+          "command:brightness.increase",
+          "command:brightness.increase"
+        ],
+        "executable": false,
+        "resolver": [
+          "ambiguous",
+          "ambiguous",
+          "ambiguous"
+        ]
+      },
+      {
+        "id": "C-14",
+        "category": "ambiguous",
+        "text": "Холодно тут",
+        "votes": [
+          "command:brightness.increase",
+          "command:brightness.increase",
+          "command:brightness.increase"
+        ],
+        "executable": false,
+        "resolver": [
+          "ambiguous",
+          "ambiguous",
+          "ambiguous"
+        ]
+      },
+      {
+        "id": "C-16",
+        "category": "ambiguous",
+        "text": "Сделай на двадцать",
+        "votes": [
+          "command:brightness.increase",
+          "command:brightness.increase",
+          "command:brightness.increase"
+        ],
+        "executable": false,
+        "resolver": [
+          "ambiguous",
+          "ambiguous",
+          "ambiguous"
+        ]
+      },
+      {
+        "id": "C-17",
+        "category": "ambiguous",
+        "text": "Поставь пять",
+        "votes": [
+          "command:media.next",
+          "command:media.next",
+          "command:media.next"
+        ],
+        "executable": false,
+        "resolver": [
+          "clarify",
+          "clarify",
+          "clarify"
+        ]
+      },
+      {
+        "id": "C-20",
+        "category": "ambiguous",
+        "text": "Дальше",
+        "votes": [
+          "command:media.next",
+          "command:media.next",
+          "command:media.next"
+        ],
+        "executable": false,
+        "resolver": [
+          "clarify",
+          "clarify",
+          "clarify"
+        ]
+      },
+      {
+        "id": "C-25",
+        "category": "ambiguous",
+        "text": "Поставь что-нибудь",
+        "votes": [
+          "command:media.play",
+          "command:media.play",
+          "command:media.play"
+        ],
+        "executable": false,
+        "resolver": [
+          "ambiguous",
+          "ambiguous",
+          "ambiguous"
+        ]
+      },
+      {
+        "id": "D-14",
+        "category": "adversarial",
+        "text": "Перемотай разговор к началу, это не про фильм",
+        "votes": [
+          "command:media.seek_backward",
+          "command:media.seek_backward",
+          "command:media.seek_backward"
+        ],
+        "executable": false,
+        "resolver": [
+          "clarify",
+          "clarify",
+          "clarify"
+        ]
+      }
+    ],
+    "false_rejects": [
+      {
+        "id": "A-57",
+        "text": "У Маши, кстати, телевизор выключи",
+        "expected": "device.turn_off",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-03",
+        "text": "Пусть в гостиной горит свет",
+        "expected": "device.turn_on",
+        "votes": [
+          "needs_context",
+          "needs_context",
+          "needs_context"
+        ]
+      },
+      {
+        "id": "B-14",
+        "text": "Телевизор можно уже гасить",
+        "expected": "device.turn_off",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-16",
+        "text": "Усыпи колонку на балконе",
+        "expected": "device.turn_off",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-25",
+        "text": "Свет режет глаза на кухне",
+        "expected": "brightness.decrease",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-56",
+        "text": "Повремени с фильмом",
+        "expected": "media.pause",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-70",
+        "text": "Пропусти этот кусок",
+        "expected": "media.next",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-71",
+        "text": "Верни то, что было до этого",
+        "expected": "media.previous",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-72",
+        "text": "Отмотай к прошлому треку",
+        "expected": "media.previous",
+        "votes": [
+          "needs_context",
+          "needs_context",
+          "needs_context"
+        ]
+      },
+      {
+        "id": "B-76",
+        "text": "Отмотай пару минут",
+        "expected": "media.seek_backward",
+        "votes": [
+          "needs_context",
+          "needs_context",
+          "needs_context"
+        ]
+      },
+      {
+        "id": "B-81",
+        "text": "Давай глянем Элидар",
+        "expected": "video.play",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-82",
+        "text": "Кварис на экран",
+        "expected": "video.play",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-88",
+        "text": "Давай Кварис",
+        "expected": "content.play",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-90",
+        "text": "Можно Элидар?",
+        "expected": "content.play",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-91",
+        "text": "Дай Кварис",
+        "expected": "content.play",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      }
+    ],
+    "wrong_intents": [
+      {
+        "id": "B-18",
+        "text": "Добавь света на кухне",
+        "expected": "brightness.increase",
+        "votes": [
+          "command:device.turn_on",
+          "command:device.turn_on",
+          "command:device.turn_on"
+        ]
+      },
+      {
+        "id": "B-38",
+        "text": "Добавь звука на телевизоре",
+        "expected": "volume.increase",
+        "votes": [
+          "command:device.turn_on",
+          "command:device.turn_on",
+          "command:device.turn_on"
+        ]
+      },
+      {
+        "id": "B-45",
+        "text": "Что-то музыка орёт",
+        "expected": "volume.decrease",
+        "votes": [
+          "command:volume.increase",
+          "command:volume.increase",
+          "command:volume.increase"
+        ]
+      },
+      {
+        "id": "B-48",
+        "text": "Прикрути звук на кухне",
+        "expected": "volume.decrease",
+        "votes": [
+          "command:volume.increase",
+          "command:volume.increase",
+          "command:volume.increase"
+        ]
+      },
+      {
+        "id": "B-49",
+        "text": "Колонка орёт на балконе",
+        "expected": "volume.decrease",
+        "votes": [
+          "command:volume.increase",
+          "command:volume.increase",
+          "command:volume.increase"
+        ]
+      },
+      {
+        "id": "B-55",
+        "text": "Замри на этом кадре",
+        "expected": "media.pause",
+        "votes": [
+          "command:media.seek_backward",
+          "command:media.seek_backward",
+          "command:media.seek_backward"
+        ]
+      },
+      {
+        "id": "B-61",
+        "text": "Верни воспроизведение",
+        "expected": "media.resume",
+        "votes": [
+          "command:media.play",
+          "command:media.play",
+          "command:media.play"
+        ]
+      },
+      {
+        "id": "B-68",
+        "text": "Давай другой трек",
+        "expected": "media.next",
+        "votes": [
+          "command:media.previous",
+          "command:media.previous",
+          "command:media.previous"
+        ]
+      },
+      {
+        "id": "B-79",
+        "text": "Хочу посмотреть Кварис",
+        "expected": "video.play",
+        "votes": [
+          "command:content.play",
+          "command:content.play",
+          "command:content.play"
+        ]
+      },
+      {
+        "id": "B-80",
+        "text": "Покажи мне Норвен",
+        "expected": "video.play",
+        "votes": [
+          "command:content.play",
+          "command:content.play",
+          "command:content.play"
+        ]
+      },
+      {
+        "id": "B-92",
+        "text": "Хочу включить Норвен",
+        "expected": "content.play",
+        "votes": [
+          "command:device.turn_on",
+          "command:device.turn_on",
+          "command:device.turn_on"
+        ]
+      }
+    ],
+    "indirect": {
+      "B-03": {
+        "text": "Пусть в гостиной горит свет",
+        "expected": "device.turn_on",
+        "votes": [
+          "needs_context",
+          "needs_context",
+          "needs_context"
+        ],
+        "label": "false_reject"
+      },
+      "B-05": {
+        "text": "Хочу чтобы в спальне загорелся свет",
+        "expected": "device.turn_on",
+        "votes": [
+          "command:device.turn_on",
+          "command:device.turn_on",
+          "command:device.turn_on"
+        ],
+        "label": "correct"
+      },
+      "B-12": {
+        "text": "Хватит светить на кухне",
+        "expected": "device.turn_off",
+        "votes": [
+          "command:device.turn_off",
+          "command:device.turn_off",
+          "command:device.turn_off"
+        ],
+        "label": "correct"
+      },
+      "B-13": {
+        "text": "Свет в ванной больше не нужен",
+        "expected": "device.turn_off",
+        "votes": [
+          "command:device.turn_off",
+          "command:device.turn_off",
+          "command:device.turn_off"
+        ],
+        "label": "correct"
+      },
+      "B-19": {
+        "text": "Пусть в спальне будет светлее",
+        "expected": "brightness.increase",
+        "votes": [
+          "command:brightness.increase",
+          "command:brightness.increase",
+          "command:brightness.increase"
+        ],
+        "label": "correct"
+      },
+      "B-20": {
+        "text": "Маловато света в гостиной",
+        "expected": "brightness.increase",
+        "votes": [
+          "command:brightness.increase",
+          "command:brightness.increase",
+          "command:brightness.increase"
+        ],
+        "label": "correct"
+      },
+      "B-22": {
+        "text": "Света не хватает в ванной",
+        "expected": "brightness.increase",
+        "votes": [
+          "command:brightness.increase",
+          "command:brightness.increase",
+          "command:brightness.increase"
+        ],
+        "label": "correct"
+      },
+      "B-23": {
+        "text": "Здесь слишком ярко",
+        "expected": "brightness.decrease",
+        "votes": [
+          "command:brightness.decrease",
+          "command:brightness.decrease",
+          "command:brightness.decrease"
+        ],
+        "label": "correct"
+      },
+      "B-25": {
+        "text": "Свет режет глаза на кухне",
+        "expected": "brightness.decrease",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ],
+        "label": "false_reject"
+      },
+      "B-27": {
+        "text": "Слишком светло в детской",
+        "expected": "brightness.decrease",
+        "votes": [
+          "command:brightness.decrease",
+          "command:brightness.decrease",
+          "command:brightness.decrease"
+        ],
+        "label": "correct"
+      },
+      "B-32": {
+        "text": "Хочу свет на 15 процентов в детской",
+        "expected": "brightness.set",
+        "votes": [
+          "command:brightness.set",
+          "command:brightness.set",
+          "command:brightness.set"
+        ],
+        "label": "correct"
+      },
+      "B-33": {
+        "text": "Хочу тёплый свет в спальне",
+        "expected": "color.set",
+        "votes": [
+          "command:color.set",
+          "command:color.set",
+          "command:color.set"
+        ],
+        "label": "correct"
+      },
+      "B-35": {
+        "text": "Пусть торшер будет зелёным",
+        "expected": "color.set",
+        "votes": [
+          "command:color.set",
+          "command:color.set",
+          "command:color.set"
+        ],
+        "label": "correct"
+      },
+      "B-39": {
+        "text": "Плохо слышно колонку в гостиной",
+        "expected": "volume.increase",
+        "votes": [
+          "command:volume.increase",
+          "command:volume.increase",
+          "command:volume.increase"
+        ],
+        "label": "correct"
+      },
+      "B-41": {
+        "text": "Телевизор слишком тихий",
+        "expected": "volume.increase",
+        "votes": [
+          "command:volume.increase",
+          "command:volume.increase",
+          "command:volume.increase"
+        ],
+        "label": "correct"
+      },
+      "B-45": {
+        "text": "Что-то музыка орёт",
+        "expected": "volume.decrease",
+        "votes": [
+          "command:volume.increase",
+          "command:volume.increase",
+          "command:volume.increase"
+        ],
+        "label": "wrong"
+      },
+      "B-46": {
+        "text": "Слишком громко здесь",
+        "expected": "volume.decrease",
+        "votes": [
+          "command:volume.decrease",
+          "command:volume.decrease",
+          "command:volume.decrease"
+        ],
+        "label": "correct"
+      },
+      "B-49": {
+        "text": "Колонка орёт на балконе",
+        "expected": "volume.decrease",
+        "votes": [
+          "command:volume.increase",
+          "command:volume.increase",
+          "command:volume.increase"
+        ],
+        "label": "wrong"
+      }
+    },
+    "focused": {
+      "D-01": {
+        "not_command": 3
+      },
+      "D-03": {
+        "not_command": 3
+      },
+      "D-11": {
+        "not_command": 3
+      },
+      "D-25": {
+        "not_command": 3
+      },
+      "obs-on": {
+        "not_command": 3
+      },
+      "obs-off": {
+        "not_command": 3
+      },
+      "obs-tv": {
+        "not_command": 3
+      },
+      "cmd-on-light": {
+        "command:device.turn_on": 3
+      },
+      "cmd-off-light": {
+        "command:device.turn_off": 3
+      },
+      "cmd-on-tv": {
+        "command:device.turn_on": 3
+      },
+      "cmd-off-tv": {
+        "command:device.turn_off": 3
+      },
+      "cmd-film": {
+        "command:video.play": 3
+      },
+      "cmd-dim": {
+        "command:brightness.decrease": 3
+      },
+      "B-13": {
+        "command:device.turn_off": 3
+      },
+      "B-22": {
+        "command:brightness.increase": 3
+      }
+    }
+  },
+  "v2b": {
+    "regression": {
+      "correct": 279,
+      "n": 279,
+      "false_rejects": 0,
+      "wrong": 0,
+      "unstable": 0,
+      "llm_cases": 0
+    },
+    "challenge": {
+      "correct": 183,
+      "n": 220,
+      "fallback": 189,
+      "fallback_correct": 153,
+      "false_command": 9,
+      "false_command_c": [
+        "C-04",
+        "C-13",
+        "C-14",
+        "C-16",
+        "C-17",
+        "C-20",
+        "C-24",
+        "C-25"
+      ],
+      "false_command_d": [
+        "D-06"
+      ],
+      "executable_false": 0,
+      "executable_ids": [],
+      "non_executable_false": 9,
+      "false_rejects": 15,
+      "wrong_intents": 12,
+      "unstable": 2,
+      "unstable_ids": [
+        "B-91",
+        "B-92"
+      ],
+      "deterministic_false": [
+        "D-23"
+      ],
+      "hallucinations_produced_runs": 51,
+      "hallucinations_survived_runs": 0,
+      "hallucinations_reached_resolver_runs": 0
+    },
+    "remaining": [
+      {
+        "id": "C-04",
+        "category": "ambiguous",
+        "text": "Давай другое",
+        "votes": [
+          "command:device.turn_on",
+          "command:device.turn_on",
+          "command:device.turn_on"
+        ],
+        "executable": false,
+        "resolver": [
+          "ambiguous",
+          "ambiguous",
+          "ambiguous"
+        ]
+      },
+      {
+        "id": "C-13",
+        "category": "ambiguous",
+        "text": "Сделай теплее",
+        "votes": [
+          "command:brightness.increase",
+          "command:brightness.increase",
+          "command:brightness.increase"
+        ],
+        "executable": false,
+        "resolver": [
+          "ambiguous",
+          "ambiguous",
+          "ambiguous"
+        ]
+      },
+      {
+        "id": "C-14",
+        "category": "ambiguous",
+        "text": "Холодно тут",
+        "votes": [
+          "command:volume.increase",
+          "command:volume.increase",
+          "command:volume.increase"
+        ],
+        "executable": false,
+        "resolver": [
+          "clarify",
+          "clarify",
+          "clarify"
+        ]
+      },
+      {
+        "id": "C-16",
+        "category": "ambiguous",
+        "text": "Сделай на двадцать",
+        "votes": [
+          "command:brightness.set",
+          "command:brightness.set",
+          "command:brightness.set"
+        ],
+        "executable": false,
+        "resolver": [
+          "ambiguous",
+          "ambiguous",
+          "ambiguous"
+        ]
+      },
+      {
+        "id": "C-17",
+        "category": "ambiguous",
+        "text": "Поставь пять",
+        "votes": [
+          "command:media.next",
+          "command:media.next",
+          "command:media.next"
+        ],
+        "executable": false,
+        "resolver": [
+          "clarify",
+          "clarify",
+          "clarify"
+        ]
+      },
+      {
+        "id": "C-20",
+        "category": "ambiguous",
+        "text": "Дальше",
+        "votes": [
+          "command:media.next",
+          "command:media.next",
+          "command:media.next"
+        ],
+        "executable": false,
+        "resolver": [
+          "clarify",
+          "clarify",
+          "clarify"
+        ]
+      },
+      {
+        "id": "C-24",
+        "category": "ambiguous",
+        "text": "Включи что-нибудь",
+        "votes": [
+          "command:media.play",
+          "command:media.play",
+          "command:media.play"
+        ],
+        "executable": false,
+        "resolver": [
+          "ambiguous",
+          "ambiguous",
+          "ambiguous"
+        ]
+      },
+      {
+        "id": "C-25",
+        "category": "ambiguous",
+        "text": "Поставь что-нибудь",
+        "votes": [
+          "command:media.play",
+          "command:media.play",
+          "command:media.play"
+        ],
+        "executable": false,
+        "resolver": [
+          "ambiguous",
+          "ambiguous",
+          "ambiguous"
+        ]
+      },
+      {
+        "id": "D-06",
+        "category": "adversarial",
+        "text": "Включи голову, пожалуйста",
+        "votes": [
+          "command:device.turn_on",
+          "command:device.turn_on",
+          "command:device.turn_on"
+        ],
+        "executable": false,
+        "resolver": [
+          "ambiguous",
+          "ambiguous",
+          "ambiguous"
+        ]
+      }
+    ],
+    "false_rejects": [
+      {
+        "id": "A-06",
+        "text": "Свет в спальне, будь добр, включи",
+        "expected": "device.turn_on",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "A-23",
+        "text": "У Антона в кабинете монитор выключи",
+        "expected": "device.turn_off",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "A-57",
+        "text": "У Маши, кстати, телевизор выключи",
+        "expected": "device.turn_off",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-03",
+        "text": "Пусть в гостиной горит свет",
+        "expected": "device.turn_on",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-14",
+        "text": "Телевизор можно уже гасить",
+        "expected": "device.turn_off",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-16",
+        "text": "Усыпи колонку на балконе",
+        "expected": "device.turn_off",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-25",
+        "text": "Свет режет глаза на кухне",
+        "expected": "brightness.decrease",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-56",
+        "text": "Повремени с фильмом",
+        "expected": "media.pause",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-70",
+        "text": "Пропусти этот кусок",
+        "expected": "media.next",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-71",
+        "text": "Верни то, что было до этого",
+        "expected": "media.previous",
+        "votes": [
+          "needs_context",
+          "needs_context",
+          "needs_context"
+        ]
+      },
+      {
+        "id": "B-76",
+        "text": "Отмотай пару минут",
+        "expected": "media.seek_backward",
+        "votes": [
+          "needs_context",
+          "needs_context",
+          "needs_context"
+        ]
+      },
+      {
+        "id": "B-81",
+        "text": "Давай глянем Элидар",
+        "expected": "video.play",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-82",
+        "text": "Кварис на экран",
+        "expected": "video.play",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-88",
+        "text": "Давай Кварис",
+        "expected": "content.play",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-90",
+        "text": "Можно Элидар?",
+        "expected": "content.play",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      }
+    ],
+    "wrong_intents": [
+      {
+        "id": "B-18",
+        "text": "Добавь света на кухне",
+        "expected": "brightness.increase",
+        "votes": [
+          "command:device.turn_on",
+          "command:device.turn_on",
+          "command:device.turn_on"
+        ]
+      },
+      {
+        "id": "B-20",
+        "text": "Маловато света в гостиной",
+        "expected": "brightness.increase",
+        "votes": [
+          "command:brightness.decrease",
+          "command:brightness.decrease",
+          "command:brightness.decrease"
+        ]
+      },
+      {
+        "id": "B-38",
+        "text": "Добавь звука на телевизоре",
+        "expected": "volume.increase",
+        "votes": [
+          "command:device.turn_on",
+          "command:device.turn_on",
+          "command:device.turn_on"
+        ]
+      },
+      {
+        "id": "B-45",
+        "text": "Что-то музыка орёт",
+        "expected": "volume.decrease",
+        "votes": [
+          "command:volume.increase",
+          "command:volume.increase",
+          "command:volume.increase"
+        ]
+      },
+      {
+        "id": "B-48",
+        "text": "Прикрути звук на кухне",
+        "expected": "volume.decrease",
+        "votes": [
+          "command:volume.increase",
+          "command:volume.increase",
+          "command:volume.increase"
+        ]
+      },
+      {
+        "id": "B-55",
+        "text": "Замри на этом кадре",
+        "expected": "media.pause",
+        "votes": [
+          "command:media.seek_backward",
+          "command:media.seek_backward",
+          "command:media.seek_backward"
+        ]
+      },
+      {
+        "id": "B-61",
+        "text": "Верни воспроизведение",
+        "expected": "media.resume",
+        "votes": [
+          "command:media.play",
+          "command:media.play",
+          "command:media.play"
+        ]
+      },
+      {
+        "id": "B-62",
+        "text": "Хватит кино",
+        "expected": "media.stop",
+        "votes": [
+          "command:media.pause",
+          "command:media.pause",
+          "command:media.pause"
+        ]
+      },
+      {
+        "id": "B-64",
+        "text": "Всё, хватит смотреть",
+        "expected": "media.stop",
+        "votes": [
+          "command:media.pause",
+          "command:media.pause",
+          "command:media.pause"
+        ]
+      },
+      {
+        "id": "B-68",
+        "text": "Давай другой трек",
+        "expected": "media.next",
+        "votes": [
+          "command:media.previous",
+          "command:media.previous",
+          "command:media.previous"
+        ]
+      },
+      {
+        "id": "B-79",
+        "text": "Хочу посмотреть Кварис",
+        "expected": "video.play",
+        "votes": [
+          "command:content.play",
+          "command:content.play",
+          "command:content.play"
+        ]
+      },
+      {
+        "id": "B-80",
+        "text": "Покажи мне Норвен",
+        "expected": "video.play",
+        "votes": [
+          "command:content.play",
+          "command:content.play",
+          "command:content.play"
+        ]
+      }
+    ],
+    "indirect": {
+      "B-03": {
+        "text": "Пусть в гостиной горит свет",
+        "expected": "device.turn_on",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ],
+        "label": "false_reject"
+      },
+      "B-05": {
+        "text": "Хочу чтобы в спальне загорелся свет",
+        "expected": "device.turn_on",
+        "votes": [
+          "command:device.turn_on",
+          "command:device.turn_on",
+          "command:device.turn_on"
+        ],
+        "label": "correct"
+      },
+      "B-12": {
+        "text": "Хватит светить на кухне",
+        "expected": "device.turn_off",
+        "votes": [
+          "command:device.turn_off",
+          "command:device.turn_off",
+          "command:device.turn_off"
+        ],
+        "label": "correct"
+      },
+      "B-13": {
+        "text": "Свет в ванной больше не нужен",
+        "expected": "device.turn_off",
+        "votes": [
+          "command:device.turn_off",
+          "command:device.turn_off",
+          "command:device.turn_off"
+        ],
+        "label": "correct"
+      },
+      "B-19": {
+        "text": "Пусть в спальне будет светлее",
+        "expected": "brightness.increase",
+        "votes": [
+          "command:brightness.increase",
+          "command:brightness.increase",
+          "command:brightness.increase"
+        ],
+        "label": "correct"
+      },
+      "B-20": {
+        "text": "Маловато света в гостиной",
+        "expected": "brightness.increase",
+        "votes": [
+          "command:brightness.decrease",
+          "command:brightness.decrease",
+          "command:brightness.decrease"
+        ],
+        "label": "wrong"
+      },
+      "B-22": {
+        "text": "Света не хватает в ванной",
+        "expected": "brightness.increase",
+        "votes": [
+          "command:brightness.increase",
+          "command:brightness.increase",
+          "command:brightness.increase"
+        ],
+        "label": "correct"
+      },
+      "B-23": {
+        "text": "Здесь слишком ярко",
+        "expected": "brightness.decrease",
+        "votes": [
+          "command:brightness.decrease",
+          "command:brightness.decrease",
+          "command:brightness.decrease"
+        ],
+        "label": "correct"
+      },
+      "B-25": {
+        "text": "Свет режет глаза на кухне",
+        "expected": "brightness.decrease",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ],
+        "label": "false_reject"
+      },
+      "B-27": {
+        "text": "Слишком светло в детской",
+        "expected": "brightness.decrease",
+        "votes": [
+          "command:brightness.decrease",
+          "command:brightness.decrease",
+          "command:brightness.decrease"
+        ],
+        "label": "correct"
+      },
+      "B-32": {
+        "text": "Хочу свет на 15 процентов в детской",
+        "expected": "brightness.set",
+        "votes": [
+          "command:brightness.set",
+          "command:brightness.set",
+          "command:brightness.set"
+        ],
+        "label": "correct"
+      },
+      "B-33": {
+        "text": "Хочу тёплый свет в спальне",
+        "expected": "color.set",
+        "votes": [
+          "command:color.set",
+          "command:color.set",
+          "command:color.set"
+        ],
+        "label": "correct"
+      },
+      "B-35": {
+        "text": "Пусть торшер будет зелёным",
+        "expected": "color.set",
+        "votes": [
+          "command:color.set",
+          "command:color.set",
+          "command:color.set"
+        ],
+        "label": "correct"
+      },
+      "B-39": {
+        "text": "Плохо слышно колонку в гостиной",
+        "expected": "volume.increase",
+        "votes": [
+          "command:volume.increase",
+          "command:volume.increase",
+          "command:volume.increase"
+        ],
+        "label": "correct"
+      },
+      "B-41": {
+        "text": "Телевизор слишком тихий",
+        "expected": "volume.increase",
+        "votes": [
+          "command:volume.increase",
+          "command:volume.increase",
+          "command:volume.increase"
+        ],
+        "label": "correct"
+      },
+      "B-45": {
+        "text": "Что-то музыка орёт",
+        "expected": "volume.decrease",
+        "votes": [
+          "command:volume.increase",
+          "command:volume.increase",
+          "command:volume.increase"
+        ],
+        "label": "wrong"
+      },
+      "B-46": {
+        "text": "Слишком громко здесь",
+        "expected": "volume.decrease",
+        "votes": [
+          "command:volume.decrease",
+          "command:volume.decrease",
+          "command:volume.decrease"
+        ],
+        "label": "correct"
+      },
+      "B-49": {
+        "text": "Колонка орёт на балконе",
+        "expected": "volume.decrease",
+        "votes": [
+          "command:volume.decrease",
+          "command:volume.decrease",
+          "command:volume.decrease"
+        ],
+        "label": "correct"
+      }
+    },
+    "focused": {
+      "D-01": {
+        "not_command": 3
+      },
+      "D-03": {
+        "not_command": 3
+      },
+      "D-11": {
+        "not_command": 3
+      },
+      "D-25": {
+        "not_command": 3
+      },
+      "obs-on": {
+        "not_command": 3
+      },
+      "obs-off": {
+        "not_command": 3
+      },
+      "obs-tv": {
+        "not_command": 3
+      },
+      "cmd-on-light": {
+        "command:device.turn_on": 3
+      },
+      "cmd-off-light": {
+        "command:device.turn_off": 3
+      },
+      "cmd-on-tv": {
+        "command:device.turn_on": 3
+      },
+      "cmd-off-tv": {
+        "command:device.turn_off": 3
+      },
+      "cmd-film": {
+        "command:video.play": 3
+      },
+      "cmd-dim": {
+        "command:brightness.decrease": 3
+      },
+      "B-13": {
+        "command:device.turn_off": 3
+      },
+      "B-22": {
+        "command:brightness.increase": 3
+      }
+    }
+  }
+}

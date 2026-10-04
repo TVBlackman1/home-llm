@@ -1,0 +1,186 @@
+{
+  "D-01": {
+    "Свет в конце тоннеля меня не включает": {
+      "votes": [
+        "command:device.turn_on",
+        "command:device.turn_on",
+        "command:device.turn_on"
+      ],
+      "stability": "stable",
+      "unique": [
+        "command:device.turn_on"
+      ]
+    },
+    "Включи свет": {
+      "votes": [
+        "command:device.turn_on",
+        "command:device.turn_on",
+        "command:device.turn_on"
+      ],
+      "stability": "stable",
+      "unique": [
+        "command:device.turn_on"
+      ]
+    },
+    "Свет в ванной больше не нужен": {
+      "votes": [
+        "command:device.turn_off",
+        "command:device.turn_off",
+        "command:device.turn_off"
+      ],
+      "stability": "stable",
+      "unique": [
+        "command:device.turn_off"
+      ]
+    },
+    "Свет горит": {
+      "votes": [
+        "command:device.turn_off",
+        "command:device.turn_off",
+        "command:device.turn_off"
+      ],
+      "stability": "stable",
+      "unique": [
+        "command:device.turn_off"
+      ]
+    }
+  },
+  "D-03": {
+    "Телевизор в новостях опять показывает политику": {
+      "votes": [
+        "command:video.play",
+        "command:video.play",
+        "command:video.play"
+      ],
+      "stability": "stable",
+      "unique": [
+        "command:video.play"
+      ]
+    },
+    "Включи телевизор": {
+      "votes": [
+        "command:device.turn_on",
+        "command:device.turn_on",
+        "command:device.turn_on"
+      ],
+      "stability": "stable",
+      "unique": [
+        "command:device.turn_on"
+      ]
+    },
+    "Поставь фильм Интерстеллар": {
+      "votes": [
+        "command:video.play",
+        "command:video.play",
+        "command:video.play"
+      ],
+      "stability": "stable",
+      "unique": [
+        "command:video.play"
+      ]
+    },
+    "Телевизор показывает политику": {
+      "votes": [
+        "command:content.play",
+        "command:content.play",
+        "command:content.play"
+      ],
+      "stability": "stable",
+      "unique": [
+        "command:content.play"
+      ]
+    }
+  },
+  "D-11": {
+    "Не включай телевизор": {
+      "votes": [
+        "command:device.turn_off",
+        "command:device.turn_off",
+        "command:device.turn_off"
+      ],
+      "stability": "stable",
+      "unique": [
+        "command:device.turn_off"
+      ]
+    },
+    "Выключи телевизор": {
+      "votes": [
+        "command:device.turn_off",
+        "command:device.turn_off",
+        "command:device.turn_off"
+      ],
+      "stability": "stable",
+      "unique": [
+        "command:device.turn_off"
+      ]
+    },
+    "Включи телевизор": {
+      "votes": [
+        "command:device.turn_on",
+        "command:device.turn_on",
+        "command:device.turn_on"
+      ],
+      "stability": "stable",
+      "unique": [
+        "command:device.turn_on"
+      ]
+    },
+    "Телевизор не включай": {
+      "votes": [
+        "command:device.turn_off",
+        "command:device.turn_off",
+        "command:device.turn_off"
+      ],
+      "stability": "stable",
+      "unique": [
+        "command:device.turn_off"
+      ]
+    }
+  },
+  "D-25": {
+    "Сделай вид, что свет не горит": {
+      "votes": [
+        "command:device.turn_off",
+        "command:device.turn_off",
+        "command:device.turn_off"
+      ],
+      "stability": "stable",
+      "unique": [
+        "command:device.turn_off"
+      ]
+    },
+    "Выключи свет": {
+      "votes": [
+        "command:device.turn_off",
+        "command:device.turn_off",
+        "command:device.turn_off"
+      ],
+      "stability": "stable",
+      "unique": [
+        "command:device.turn_off"
+      ]
+    },
+    "Сделай свет потемнее": {
+      "votes": [
+        "command:brightness.decrease",
+        "command:brightness.decrease",
+        "command:brightness.decrease"
+      ],
+      "stability": "stable",
+      "unique": [
+        "command:brightness.decrease"
+      ]
+    },
+    "Свет не горит": {
+      "votes": [
+        "command:device.turn_on",
+        "command:device.turn_on",
+        "command:device.turn_on"
+      ],
+      "stability": "stable",
+      "unique": [
+        "command:device.turn_on"
+      ]
+    }
+  }
+}

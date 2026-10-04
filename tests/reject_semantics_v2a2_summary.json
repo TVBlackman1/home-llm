@@ -1,0 +1,2151 @@
+{
+  "production": {
+    "correct": 179,
+    "n": 220,
+    "fallback": 189,
+    "fallback_correct": 149,
+    "false_command": 14,
+    "false_command_c": [
+      "C-11",
+      "C-13",
+      "C-16",
+      "C-17",
+      "C-25",
+      "C-32"
+    ],
+    "false_command_d": [
+      "D-01",
+      "D-03",
+      "D-11",
+      "D-14",
+      "D-15",
+      "D-16",
+      "D-21",
+      "D-25"
+    ],
+    "executable_false": 4,
+    "any_executable_run": [
+      "D-01",
+      "D-03",
+      "D-11",
+      "D-25"
+    ],
+    "false_rejects": 7,
+    "wrong_intents": 19,
+    "unstable": 1,
+    "remaining": [
+      {
+        "id": "C-11",
+        "category": "ambiguous",
+        "text": "Сделай красиво",
+        "votes": [
+          "command:color.set",
+          "command:color.set",
+          "command:color.set"
+        ],
+        "executable": false,
+        "resolver": [
+          "ambiguous",
+          "ambiguous",
+          "ambiguous"
+        ]
+      },
+      {
+        "id": "C-13",
+        "category": "ambiguous",
+        "text": "Сделай теплее",
+        "votes": [
+          "command:brightness.increase",
+          "command:brightness.increase",
+          "command:brightness.increase"
+        ],
+        "executable": false,
+        "resolver": [
+          "ambiguous",
+          "ambiguous",
+          "ambiguous"
+        ]
+      },
+      {
+        "id": "C-16",
+        "category": "ambiguous",
+        "text": "Сделай на двадцать",
+        "votes": [
+          "command:brightness.increase",
+          "command:brightness.increase",
+          "command:brightness.increase"
+        ],
+        "executable": false,
+        "resolver": [
+          "ambiguous",
+          "ambiguous",
+          "ambiguous"
+        ]
+      },
+      {
+        "id": "C-17",
+        "category": "ambiguous",
+        "text": "Поставь пять",
+        "votes": [
+          "command:media.next",
+          "command:media.next",
+          "command:media.next"
+        ],
+        "executable": false,
+        "resolver": [
+          "clarify",
+          "clarify",
+          "clarify"
+        ]
+      },
+      {
+        "id": "C-25",
+        "category": "ambiguous",
+        "text": "Поставь что-нибудь",
+        "votes": [
+          "command:media.play",
+          "command:media.play",
+          "command:media.play"
+        ],
+        "executable": false,
+        "resolver": [
+          "ambiguous",
+          "ambiguous",
+          "ambiguous"
+        ]
+      },
+      {
+        "id": "C-32",
+        "category": "ambiguous",
+        "text": "Этот цвет не тот",
+        "votes": [
+          "command:color.set",
+          "command:color.set",
+          "command:color.set"
+        ],
+        "executable": false,
+        "resolver": [
+          "ambiguous",
+          "ambiguous",
+          "ambiguous"
+        ]
+      },
+      {
+        "id": "D-01",
+        "category": "adversarial",
+        "text": "Свет в конце тоннеля меня не включает",
+        "votes": [
+          "command:device.turn_on",
+          "command:device.turn_on",
+          "command:device.turn_on"
+        ],
+        "executable": true,
+        "resolver": [
+          "resolved",
+          "resolved",
+          "resolved"
+        ]
+      },
+      {
+        "id": "D-03",
+        "category": "adversarial",
+        "text": "Телевизор в новостях опять показывает политику",
+        "votes": [
+          "command:video.play",
+          "command:video.play",
+          "command:video.play"
+        ],
+        "executable": true,
+        "resolver": [
+          "resolved",
+          "resolved",
+          "resolved"
+        ]
+      },
+      {
+        "id": "D-11",
+        "category": "adversarial",
+        "text": "Не включай телевизор",
+        "votes": [
+          "command:device.turn_off",
+          "command:device.turn_off",
+          "command:device.turn_off"
+        ],
+        "executable": true,
+        "resolver": [
+          "resolved",
+          "resolved",
+          "resolved"
+        ]
+      },
+      {
+        "id": "D-14",
+        "category": "adversarial",
+        "text": "Перемотай разговор к началу, это не про фильм",
+        "votes": [
+          "command:media.seek_backward",
+          "command:media.seek_backward",
+          "command:media.seek_backward"
+        ],
+        "executable": false,
+        "resolver": [
+          "clarify",
+          "clarify",
+          "clarify"
+        ]
+      },
+      {
+        "id": "D-15",
+        "category": "adversarial",
+        "text": "Альбом моей жизни не включай",
+        "votes": [
+          "command:audio.play",
+          "command:audio.play",
+          "command:audio.play"
+        ],
+        "executable": false,
+        "resolver": [
+          "ambiguous",
+          "ambiguous",
+          "ambiguous"
+        ]
+      },
+      {
+        "id": "D-16",
+        "category": "adversarial",
+        "text": "Остановись и подумай, это не плеер",
+        "votes": [
+          "command:media.stop",
+          "command:media.stop",
+          "command:media.stop"
+        ],
+        "executable": false,
+        "resolver": [
+          "clarify",
+          "clarify",
+          "clarify"
+        ]
+      },
+      {
+        "id": "D-21",
+        "category": "adversarial",
+        "text": "Музыка сфер — это не колонка",
+        "votes": [
+          "command:audio.play",
+          "command:audio.play",
+          "command:audio.play"
+        ],
+        "executable": false,
+        "resolver": [
+          "ambiguous",
+          "ambiguous",
+          "ambiguous"
+        ]
+      },
+      {
+        "id": "D-25",
+        "category": "adversarial",
+        "text": "Сделай вид, что свет не горит",
+        "votes": [
+          "command:device.turn_off",
+          "command:device.turn_off",
+          "command:device.turn_off"
+        ],
+        "executable": true,
+        "resolver": [
+          "resolved",
+          "resolved",
+          "resolved"
+        ]
+      }
+    ],
+    "reject_rows": [
+      {
+        "id": "B-16",
+        "text": "Усыпи колонку на балконе",
+        "expected": "device.turn_off",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-31",
+        "text": "Сделай яркость средней на кухне",
+        "expected": "brightness.set",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-70",
+        "text": "Пропусти этот кусок",
+        "expected": "media.next",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-71",
+        "text": "Верни то, что было до этого",
+        "expected": "media.previous",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-73",
+        "text": "Вернись на одну назад",
+        "expected": "media.previous",
+        "votes": [
+          "needs_context",
+          "needs_context",
+          "needs_context"
+        ]
+      },
+      {
+        "id": "B-76",
+        "text": "Отмотай пару минут",
+        "expected": "media.seek_backward",
+        "votes": [
+          "needs_context",
+          "needs_context",
+          "needs_context"
+        ]
+      },
+      {
+        "id": "B-90",
+        "text": "Можно Элидар?",
+        "expected": "content.play",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      }
+    ],
+    "wrong_rows": [
+      {
+        "id": "B-03",
+        "text": "Пусть в гостиной горит свет",
+        "expected": "device.turn_on",
+        "votes": [
+          "command:device.turn_off",
+          "command:device.turn_off",
+          "command:device.turn_off"
+        ]
+      },
+      {
+        "id": "B-12",
+        "text": "Хватит светить на кухне",
+        "expected": "device.turn_off",
+        "votes": [
+          "command:brightness.decrease",
+          "command:brightness.decrease",
+          "command:brightness.decrease"
+        ]
+      },
+      {
+        "id": "B-14",
+        "text": "Телевизор можно уже гасить",
+        "expected": "device.turn_off",
+        "votes": [
+          "command:media.pause",
+          "command:media.pause",
+          "command:media.pause"
+        ]
+      },
+      {
+        "id": "B-18",
+        "text": "Добавь света на кухне",
+        "expected": "brightness.increase",
+        "votes": [
+          "command:device.turn_on",
+          "command:device.turn_on",
+          "command:device.turn_on"
+        ]
+      },
+      {
+        "id": "B-20",
+        "text": "Маловато света в гостиной",
+        "expected": "brightness.increase",
+        "votes": [
+          "command:brightness.decrease",
+          "command:brightness.decrease",
+          "command:brightness.decrease"
+        ]
+      },
+      {
+        "id": "B-38",
+        "text": "Добавь звука на телевизоре",
+        "expected": "volume.increase",
+        "votes": [
+          "command:device.turn_on",
+          "command:device.turn_on",
+          "command:device.turn_on"
+        ]
+      },
+      {
+        "id": "B-45",
+        "text": "Что-то музыка орёт",
+        "expected": "volume.decrease",
+        "votes": [
+          "command:volume.increase",
+          "command:volume.increase",
+          "command:volume.increase"
+        ]
+      },
+      {
+        "id": "B-48",
+        "text": "Прикрути звук на кухне",
+        "expected": "volume.decrease",
+        "votes": [
+          "command:volume.increase",
+          "command:volume.increase",
+          "command:volume.increase"
+        ]
+      },
+      {
+        "id": "B-49",
+        "text": "Колонка орёт на балконе",
+        "expected": "volume.decrease",
+        "votes": [
+          "command:volume.increase",
+          "command:volume.increase",
+          "command:volume.increase"
+        ]
+      },
+      {
+        "id": "B-55",
+        "text": "Замри на этом кадре",
+        "expected": "media.pause",
+        "votes": [
+          "command:media.seek_backward",
+          "command:media.seek_backward",
+          "command:media.seek_backward"
+        ]
+      },
+      {
+        "id": "B-61",
+        "text": "Верни воспроизведение",
+        "expected": "media.resume",
+        "votes": [
+          "command:media.play",
+          "command:media.play",
+          "command:media.play"
+        ]
+      },
+      {
+        "id": "B-62",
+        "text": "Хватит кино",
+        "expected": "media.stop",
+        "votes": [
+          "command:media.pause",
+          "command:media.pause",
+          "command:media.pause"
+        ]
+      },
+      {
+        "id": "B-68",
+        "text": "Давай другой трек",
+        "expected": "media.next",
+        "votes": [
+          "command:media.previous",
+          "command:media.previous",
+          "command:media.previous"
+        ]
+      },
+      {
+        "id": "B-79",
+        "text": "Хочу посмотреть Кварис",
+        "expected": "video.play",
+        "votes": [
+          "command:content.play",
+          "command:content.play",
+          "command:content.play"
+        ]
+      },
+      {
+        "id": "B-80",
+        "text": "Покажи мне Норвен",
+        "expected": "video.play",
+        "votes": [
+          "command:content.play",
+          "command:content.play",
+          "command:content.play"
+        ]
+      },
+      {
+        "id": "B-81",
+        "text": "Давай глянем Элидар",
+        "expected": "video.play",
+        "votes": [
+          "command:media.play",
+          "command:media.play",
+          "command:media.play"
+        ]
+      },
+      {
+        "id": "B-82",
+        "text": "Кварис на экран",
+        "expected": "video.play",
+        "votes": [
+          "command:content.play",
+          "command:content.play",
+          "command:content.play"
+        ]
+      },
+      {
+        "id": "B-91",
+        "text": "Дай Кварис",
+        "expected": "content.play",
+        "votes": [
+          "command:device.turn_on",
+          "command:device.turn_on",
+          "command:device.turn_on"
+        ]
+      },
+      {
+        "id": "B-92",
+        "text": "Хочу включить Норвен",
+        "expected": "content.play",
+        "votes": [
+          "command:device.turn_on",
+          "command:device.turn_on",
+          "command:device.turn_on"
+        ]
+      }
+    ],
+    "unstable_rows": [
+      {
+        "id": "C-20",
+        "votes": [
+          "needs_context",
+          "needs_context",
+          "command:media.next"
+        ],
+        "text": "Дальше"
+      }
+    ]
+  },
+  "v2a": {
+    "correct": 185,
+    "n": 220,
+    "fallback": 189,
+    "fallback_correct": 155,
+    "false_command": 8,
+    "false_command_c": [
+      "C-04",
+      "C-13",
+      "C-14",
+      "C-16",
+      "C-17",
+      "C-20",
+      "C-25"
+    ],
+    "false_command_d": [
+      "D-14"
+    ],
+    "executable_false": 0,
+    "any_executable_run": [],
+    "false_rejects": 15,
+    "wrong_intents": 11,
+    "unstable": 1,
+    "remaining": [
+      {
+        "id": "C-04",
+        "category": "ambiguous",
+        "text": "Давай другое",
+        "votes": [
+          "command:device.turn_on",
+          "command:device.turn_on",
+          "command:device.turn_on"
+        ],
+        "executable": false,
+        "resolver": [
+          "ambiguous",
+          "ambiguous",
+          "ambiguous"
+        ]
+      },
+      {
+        "id": "C-13",
+        "category": "ambiguous",
+        "text": "Сделай теплее",
+        "votes": [
+          "command:brightness.increase",
+          "command:brightness.increase",
+          "command:brightness.increase"
+        ],
+        "executable": false,
+        "resolver": [
+          "ambiguous",
+          "ambiguous",
+          "ambiguous"
+        ]
+      },
+      {
+        "id": "C-14",
+        "category": "ambiguous",
+        "text": "Холодно тут",
+        "votes": [
+          "command:brightness.increase",
+          "command:brightness.increase",
+          "command:brightness.increase"
+        ],
+        "executable": false,
+        "resolver": [
+          "ambiguous",
+          "ambiguous",
+          "ambiguous"
+        ]
+      },
+      {
+        "id": "C-16",
+        "category": "ambiguous",
+        "text": "Сделай на двадцать",
+        "votes": [
+          "command:brightness.increase",
+          "command:brightness.increase",
+          "command:brightness.increase"
+        ],
+        "executable": false,
+        "resolver": [
+          "ambiguous",
+          "ambiguous",
+          "ambiguous"
+        ]
+      },
+      {
+        "id": "C-17",
+        "category": "ambiguous",
+        "text": "Поставь пять",
+        "votes": [
+          "command:media.next",
+          "command:media.next",
+          "command:media.next"
+        ],
+        "executable": false,
+        "resolver": [
+          "clarify",
+          "clarify",
+          "clarify"
+        ]
+      },
+      {
+        "id": "C-20",
+        "category": "ambiguous",
+        "text": "Дальше",
+        "votes": [
+          "command:media.next",
+          "command:media.next",
+          "command:media.next"
+        ],
+        "executable": false,
+        "resolver": [
+          "clarify",
+          "clarify",
+          "clarify"
+        ]
+      },
+      {
+        "id": "C-25",
+        "category": "ambiguous",
+        "text": "Поставь что-нибудь",
+        "votes": [
+          "command:media.play",
+          "command:media.play",
+          "command:media.play"
+        ],
+        "executable": false,
+        "resolver": [
+          "ambiguous",
+          "ambiguous",
+          "ambiguous"
+        ]
+      },
+      {
+        "id": "D-14",
+        "category": "adversarial",
+        "text": "Перемотай разговор к началу, это не про фильм",
+        "votes": [
+          "command:media.seek_backward",
+          "command:media.seek_backward",
+          "command:media.seek_backward"
+        ],
+        "executable": false,
+        "resolver": [
+          "clarify",
+          "clarify",
+          "clarify"
+        ]
+      }
+    ],
+    "reject_rows": [
+      {
+        "id": "A-57",
+        "text": "У Маши, кстати, телевизор выключи",
+        "expected": "device.turn_off",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-03",
+        "text": "Пусть в гостиной горит свет",
+        "expected": "device.turn_on",
+        "votes": [
+          "needs_context",
+          "needs_context",
+          "needs_context"
+        ]
+      },
+      {
+        "id": "B-14",
+        "text": "Телевизор можно уже гасить",
+        "expected": "device.turn_off",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-16",
+        "text": "Усыпи колонку на балконе",
+        "expected": "device.turn_off",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-25",
+        "text": "Свет режет глаза на кухне",
+        "expected": "brightness.decrease",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-56",
+        "text": "Повремени с фильмом",
+        "expected": "media.pause",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-70",
+        "text": "Пропусти этот кусок",
+        "expected": "media.next",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-71",
+        "text": "Верни то, что было до этого",
+        "expected": "media.previous",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-72",
+        "text": "Отмотай к прошлому треку",
+        "expected": "media.previous",
+        "votes": [
+          "needs_context",
+          "needs_context",
+          "needs_context"
+        ]
+      },
+      {
+        "id": "B-76",
+        "text": "Отмотай пару минут",
+        "expected": "media.seek_backward",
+        "votes": [
+          "needs_context",
+          "needs_context",
+          "needs_context"
+        ]
+      },
+      {
+        "id": "B-81",
+        "text": "Давай глянем Элидар",
+        "expected": "video.play",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-82",
+        "text": "Кварис на экран",
+        "expected": "video.play",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-88",
+        "text": "Давай Кварис",
+        "expected": "content.play",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-90",
+        "text": "Можно Элидар?",
+        "expected": "content.play",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-91",
+        "text": "Дай Кварис",
+        "expected": "content.play",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      }
+    ],
+    "wrong_rows": [
+      {
+        "id": "B-18",
+        "text": "Добавь света на кухне",
+        "expected": "brightness.increase",
+        "votes": [
+          "command:device.turn_on",
+          "command:device.turn_on",
+          "command:device.turn_on"
+        ]
+      },
+      {
+        "id": "B-38",
+        "text": "Добавь звука на телевизоре",
+        "expected": "volume.increase",
+        "votes": [
+          "command:device.turn_on",
+          "command:device.turn_on",
+          "command:device.turn_on"
+        ]
+      },
+      {
+        "id": "B-45",
+        "text": "Что-то музыка орёт",
+        "expected": "volume.decrease",
+        "votes": [
+          "command:volume.increase",
+          "command:volume.increase",
+          "command:volume.increase"
+        ]
+      },
+      {
+        "id": "B-48",
+        "text": "Прикрути звук на кухне",
+        "expected": "volume.decrease",
+        "votes": [
+          "command:volume.increase",
+          "command:volume.increase",
+          "command:volume.increase"
+        ]
+      },
+      {
+        "id": "B-49",
+        "text": "Колонка орёт на балконе",
+        "expected": "volume.decrease",
+        "votes": [
+          "command:volume.increase",
+          "command:volume.increase",
+          "command:volume.increase"
+        ]
+      },
+      {
+        "id": "B-55",
+        "text": "Замри на этом кадре",
+        "expected": "media.pause",
+        "votes": [
+          "command:media.seek_backward",
+          "command:media.seek_backward",
+          "command:media.seek_backward"
+        ]
+      },
+      {
+        "id": "B-61",
+        "text": "Верни воспроизведение",
+        "expected": "media.resume",
+        "votes": [
+          "command:media.play",
+          "command:media.play",
+          "command:media.play"
+        ]
+      },
+      {
+        "id": "B-68",
+        "text": "Давай другой трек",
+        "expected": "media.next",
+        "votes": [
+          "command:media.previous",
+          "command:media.previous",
+          "command:media.previous"
+        ]
+      },
+      {
+        "id": "B-79",
+        "text": "Хочу посмотреть Кварис",
+        "expected": "video.play",
+        "votes": [
+          "command:content.play",
+          "command:content.play",
+          "command:content.play"
+        ]
+      },
+      {
+        "id": "B-80",
+        "text": "Покажи мне Норвен",
+        "expected": "video.play",
+        "votes": [
+          "command:content.play",
+          "command:content.play",
+          "command:content.play"
+        ]
+      },
+      {
+        "id": "B-92",
+        "text": "Хочу включить Норвен",
+        "expected": "content.play",
+        "votes": [
+          "command:device.turn_on",
+          "command:device.turn_on",
+          "command:device.turn_on"
+        ]
+      }
+    ],
+    "unstable_rows": [
+      {
+        "id": "D-16",
+        "votes": [
+          "not_command",
+          "command:media.stop",
+          "not_command"
+        ],
+        "text": "Остановись и подумай, это не плеер"
+      }
+    ]
+  },
+  "v2a2": {
+    "correct": 182,
+    "n": 220,
+    "fallback": 189,
+    "fallback_correct": 152,
+    "false_command": 9,
+    "false_command_c": [
+      "C-04",
+      "C-13",
+      "C-16",
+      "C-17",
+      "C-20",
+      "C-24",
+      "C-25"
+    ],
+    "false_command_d": [
+      "D-14",
+      "D-16"
+    ],
+    "executable_false": 0,
+    "any_executable_run": [],
+    "false_rejects": 16,
+    "wrong_intents": 12,
+    "unstable": 3,
+    "remaining": [
+      {
+        "id": "C-04",
+        "category": "ambiguous",
+        "text": "Давай другое",
+        "votes": [
+          "command:device.turn_on",
+          "command:device.turn_on",
+          "command:device.turn_on"
+        ],
+        "executable": false,
+        "resolver": [
+          "ambiguous",
+          "ambiguous",
+          "ambiguous"
+        ]
+      },
+      {
+        "id": "C-13",
+        "category": "ambiguous",
+        "text": "Сделай теплее",
+        "votes": [
+          "command:brightness.increase",
+          "command:brightness.increase",
+          "command:brightness.increase"
+        ],
+        "executable": false,
+        "resolver": [
+          "ambiguous",
+          "ambiguous",
+          "ambiguous"
+        ]
+      },
+      {
+        "id": "C-16",
+        "category": "ambiguous",
+        "text": "Сделай на двадцать",
+        "votes": [
+          "command:brightness.increase",
+          "command:brightness.increase",
+          "command:brightness.increase"
+        ],
+        "executable": false,
+        "resolver": [
+          "ambiguous",
+          "ambiguous",
+          "ambiguous"
+        ]
+      },
+      {
+        "id": "C-17",
+        "category": "ambiguous",
+        "text": "Поставь пять",
+        "votes": [
+          "command:media.next",
+          "command:media.next",
+          "command:media.next"
+        ],
+        "executable": false,
+        "resolver": [
+          "clarify",
+          "clarify",
+          "clarify"
+        ]
+      },
+      {
+        "id": "C-20",
+        "category": "ambiguous",
+        "text": "Дальше",
+        "votes": [
+          "command:media.next",
+          "command:media.next",
+          "command:media.next"
+        ],
+        "executable": false,
+        "resolver": [
+          "clarify",
+          "clarify",
+          "clarify"
+        ]
+      },
+      {
+        "id": "C-24",
+        "category": "ambiguous",
+        "text": "Включи что-нибудь",
+        "votes": [
+          "command:media.play",
+          "command:media.play",
+          "command:media.play"
+        ],
+        "executable": false,
+        "resolver": [
+          "ambiguous",
+          "ambiguous",
+          "ambiguous"
+        ]
+      },
+      {
+        "id": "C-25",
+        "category": "ambiguous",
+        "text": "Поставь что-нибудь",
+        "votes": [
+          "command:media.play",
+          "command:media.play",
+          "command:media.play"
+        ],
+        "executable": false,
+        "resolver": [
+          "ambiguous",
+          "ambiguous",
+          "ambiguous"
+        ]
+      },
+      {
+        "id": "D-14",
+        "category": "adversarial",
+        "text": "Перемотай разговор к началу, это не про фильм",
+        "votes": [
+          "command:media.seek_backward",
+          "command:media.seek_backward",
+          "command:media.seek_backward"
+        ],
+        "executable": false,
+        "resolver": [
+          "clarify",
+          "clarify",
+          "clarify"
+        ]
+      },
+      {
+        "id": "D-16",
+        "category": "adversarial",
+        "text": "Остановись и подумай, это не плеер",
+        "votes": [
+          "command:media.stop",
+          "command:media.pause",
+          "command:media.stop"
+        ],
+        "executable": false,
+        "resolver": [
+          "clarify",
+          "clarify",
+          "clarify"
+        ]
+      }
+    ],
+    "reject_rows": [
+      {
+        "id": "A-15",
+        "text": "На балконе, слушай, включи свет",
+        "expected": "device.turn_on",
+        "votes": [
+          "needs_context",
+          "needs_context",
+          "needs_context"
+        ]
+      },
+      {
+        "id": "A-57",
+        "text": "У Маши, кстати, телевизор выключи",
+        "expected": "device.turn_off",
+        "votes": [
+          "needs_context",
+          "command:device.turn_off",
+          "needs_context"
+        ]
+      },
+      {
+        "id": "B-03",
+        "text": "Пусть в гостиной горит свет",
+        "expected": "device.turn_on",
+        "votes": [
+          "needs_context",
+          "needs_context",
+          "needs_context"
+        ]
+      },
+      {
+        "id": "B-16",
+        "text": "Усыпи колонку на балконе",
+        "expected": "device.turn_off",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-25",
+        "text": "Свет режет глаза на кухне",
+        "expected": "brightness.decrease",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-49",
+        "text": "Колонка орёт на балконе",
+        "expected": "volume.decrease",
+        "votes": [
+          "command:volume.decrease",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-56",
+        "text": "Повремени с фильмом",
+        "expected": "media.pause",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-70",
+        "text": "Пропусти этот кусок",
+        "expected": "media.next",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-71",
+        "text": "Верни то, что было до этого",
+        "expected": "media.previous",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-72",
+        "text": "Отмотай к прошлому треку",
+        "expected": "media.previous",
+        "votes": [
+          "needs_context",
+          "needs_context",
+          "needs_context"
+        ]
+      },
+      {
+        "id": "B-76",
+        "text": "Отмотай пару минут",
+        "expected": "media.seek_backward",
+        "votes": [
+          "needs_context",
+          "needs_context",
+          "needs_context"
+        ]
+      },
+      {
+        "id": "B-81",
+        "text": "Давай глянем Элидар",
+        "expected": "video.play",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-82",
+        "text": "Кварис на экран",
+        "expected": "video.play",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-88",
+        "text": "Давай Кварис",
+        "expected": "content.play",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-90",
+        "text": "Можно Элидар?",
+        "expected": "content.play",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      },
+      {
+        "id": "B-91",
+        "text": "Дай Кварис",
+        "expected": "content.play",
+        "votes": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ]
+      }
+    ],
+    "wrong_rows": [
+      {
+        "id": "B-18",
+        "text": "Добавь света на кухне",
+        "expected": "brightness.increase",
+        "votes": [
+          "command:device.turn_on",
+          "command:device.turn_on",
+          "command:device.turn_on"
+        ]
+      },
+      {
+        "id": "B-38",
+        "text": "Добавь звука на телевизоре",
+        "expected": "volume.increase",
+        "votes": [
+          "command:device.turn_on",
+          "command:device.turn_on",
+          "command:device.turn_on"
+        ]
+      },
+      {
+        "id": "B-45",
+        "text": "Что-то музыка орёт",
+        "expected": "volume.decrease",
+        "votes": [
+          "command:volume.increase",
+          "command:volume.increase",
+          "command:volume.increase"
+        ]
+      },
+      {
+        "id": "B-48",
+        "text": "Прикрути звук на кухне",
+        "expected": "volume.decrease",
+        "votes": [
+          "command:volume.increase",
+          "command:volume.increase",
+          "command:volume.increase"
+        ]
+      },
+      {
+        "id": "B-52",
+        "text": "Колонку процентов на двадцать",
+        "expected": "volume.set",
+        "votes": [
+          "command:brightness.set",
+          "command:brightness.set",
+          "command:brightness.set"
+        ]
+      },
+      {
+        "id": "B-55",
+        "text": "Замри на этом кадре",
+        "expected": "media.pause",
+        "votes": [
+          "command:media.seek_backward",
+          "command:media.seek_backward",
+          "command:media.seek_backward"
+        ]
+      },
+      {
+        "id": "B-61",
+        "text": "Верни воспроизведение",
+        "expected": "media.resume",
+        "votes": [
+          "command:media.play",
+          "command:media.play",
+          "command:media.play"
+        ]
+      },
+      {
+        "id": "B-62",
+        "text": "Хватит кино",
+        "expected": "media.stop",
+        "votes": [
+          "command:media.pause",
+          "command:media.pause",
+          "command:media.pause"
+        ]
+      },
+      {
+        "id": "B-68",
+        "text": "Давай другой трек",
+        "expected": "media.next",
+        "votes": [
+          "command:content.play",
+          "command:content.play",
+          "command:content.play"
+        ]
+      },
+      {
+        "id": "B-79",
+        "text": "Хочу посмотреть Кварис",
+        "expected": "video.play",
+        "votes": [
+          "command:content.play",
+          "command:content.play",
+          "command:content.play"
+        ]
+      },
+      {
+        "id": "B-80",
+        "text": "Покажи мне Норвен",
+        "expected": "video.play",
+        "votes": [
+          "command:content.play",
+          "command:content.play",
+          "command:content.play"
+        ]
+      },
+      {
+        "id": "B-92",
+        "text": "Хочу включить Норвен",
+        "expected": "content.play",
+        "votes": [
+          "command:device.turn_on",
+          "command:device.turn_on",
+          "command:device.turn_on"
+        ]
+      }
+    ],
+    "unstable_rows": [
+      {
+        "id": "A-57",
+        "votes": [
+          "needs_context",
+          "command:device.turn_off",
+          "needs_context"
+        ],
+        "text": "У Маши, кстати, телевизор выключи"
+      },
+      {
+        "id": "B-49",
+        "votes": [
+          "command:volume.decrease",
+          "not_command",
+          "not_command"
+        ],
+        "text": "Колонка орёт на балконе"
+      },
+      {
+        "id": "D-16",
+        "votes": [
+          "command:media.stop",
+          "command:media.pause",
+          "command:media.stop"
+        ],
+        "text": "Остановись и подумай, это не плеер"
+      }
+    ]
+  },
+  "delta_v2a_to_v2a2": {
+    "recovered": [
+      {
+        "id": "B-14",
+        "text": "Телевизор можно уже гасить",
+        "expected": "device.turn_off",
+        "votes": [
+          "command:device.turn_off",
+          "command:device.turn_off",
+          "command:device.turn_off"
+        ]
+      }
+    ],
+    "lost_vs_base_correct": [
+      {
+        "id": "A-15",
+        "text": "На балконе, слушай, включи свет",
+        "was": [
+          "command:device.turn_on",
+          "command:device.turn_on",
+          "command:device.turn_on"
+        ],
+        "now": [
+          "needs_context",
+          "needs_context",
+          "needs_context"
+        ],
+        "vote": "false_reject"
+      },
+      {
+        "id": "B-52",
+        "text": "Колонку процентов на двадцать",
+        "was": [
+          "command:volume.set",
+          "command:volume.set",
+          "command:volume.set"
+        ],
+        "now": [
+          "command:brightness.set",
+          "command:brightness.set",
+          "command:brightness.set"
+        ],
+        "vote": "wrong"
+      },
+      {
+        "id": "B-62",
+        "text": "Хватит кино",
+        "was": [
+          "command:media.stop",
+          "command:media.stop",
+          "command:media.stop"
+        ],
+        "now": [
+          "command:media.pause",
+          "command:media.pause",
+          "command:media.pause"
+        ],
+        "vote": "wrong"
+      }
+    ],
+    "new_false_command": [
+      {
+        "id": "C-24",
+        "text": "Включи что-нибудь",
+        "votes": [
+          "command:media.play",
+          "command:media.play",
+          "command:media.play"
+        ],
+        "resolver": [
+          "ambiguous",
+          "ambiguous",
+          "ambiguous"
+        ]
+      },
+      {
+        "id": "D-16",
+        "text": "Остановись и подумай, это не плеер",
+        "votes": [
+          "command:media.stop",
+          "command:media.pause",
+          "command:media.stop"
+        ],
+        "resolver": [
+          "clarify",
+          "clarify",
+          "clarify"
+        ]
+      }
+    ]
+  },
+  "delta_production_to_v2a2": {
+    "recovered": [
+      {
+        "id": "B-31",
+        "text": "Сделай яркость средней на кухне",
+        "expected": "brightness.set",
+        "votes": [
+          "command:brightness.set",
+          "command:brightness.set",
+          "command:brightness.set"
+        ]
+      },
+      {
+        "id": "B-73",
+        "text": "Вернись на одну назад",
+        "expected": "media.previous",
+        "votes": [
+          "command:media.previous",
+          "command:media.previous",
+          "command:media.previous"
+        ]
+      }
+    ],
+    "lost_vs_base_correct": [
+      {
+        "id": "A-15",
+        "text": "На балконе, слушай, включи свет",
+        "was": [
+          "command:device.turn_on",
+          "command:device.turn_on",
+          "command:device.turn_on"
+        ],
+        "now": [
+          "needs_context",
+          "needs_context",
+          "needs_context"
+        ],
+        "vote": "false_reject"
+      },
+      {
+        "id": "A-57",
+        "text": "У Маши, кстати, телевизор выключи",
+        "was": [
+          "command:device.turn_off",
+          "command:device.turn_off",
+          "command:device.turn_off"
+        ],
+        "now": [
+          "needs_context",
+          "command:device.turn_off",
+          "needs_context"
+        ],
+        "vote": "false_reject"
+      },
+      {
+        "id": "B-25",
+        "text": "Свет режет глаза на кухне",
+        "was": [
+          "command:brightness.decrease",
+          "command:brightness.decrease",
+          "command:brightness.decrease"
+        ],
+        "now": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ],
+        "vote": "false_reject"
+      },
+      {
+        "id": "B-52",
+        "text": "Колонку процентов на двадцать",
+        "was": [
+          "command:volume.set",
+          "command:volume.set",
+          "command:volume.set"
+        ],
+        "now": [
+          "command:brightness.set",
+          "command:brightness.set",
+          "command:brightness.set"
+        ],
+        "vote": "wrong"
+      },
+      {
+        "id": "B-56",
+        "text": "Повремени с фильмом",
+        "was": [
+          "command:media.pause",
+          "command:media.pause",
+          "command:media.pause"
+        ],
+        "now": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ],
+        "vote": "false_reject"
+      },
+      {
+        "id": "B-72",
+        "text": "Отмотай к прошлому треку",
+        "was": [
+          "command:media.previous",
+          "command:media.previous",
+          "command:media.previous"
+        ],
+        "now": [
+          "needs_context",
+          "needs_context",
+          "needs_context"
+        ],
+        "vote": "false_reject"
+      },
+      {
+        "id": "B-88",
+        "text": "Давай Кварис",
+        "was": [
+          "command:content.play",
+          "command:content.play",
+          "command:content.play"
+        ],
+        "now": [
+          "not_command",
+          "not_command",
+          "not_command"
+        ],
+        "vote": "false_reject"
+      }
+    ],
+    "new_false_command": [
+      {
+        "id": "C-04",
+        "text": "Давай другое",
+        "votes": [
+          "command:device.turn_on",
+          "command:device.turn_on",
+          "command:device.turn_on"
+        ],
+        "resolver": [
+          "ambiguous",
+          "ambiguous",
+          "ambiguous"
+        ]
+      },
+      {
+        "id": "C-20",
+        "text": "Дальше",
+        "votes": [
+          "command:media.next",
+          "command:media.next",
+          "command:media.next"
+        ],
+        "resolver": [
+          "clarify",
+          "clarify",
+          "clarify"
+        ]
+      },
+      {
+        "id": "C-24",
+        "text": "Включи что-нибудь",
+        "votes": [
+          "command:media.play",
+          "command:media.play",
+          "command:media.play"
+        ],
+        "resolver": [
+          "ambiguous",
+          "ambiguous",
+          "ambiguous"
+        ]
+      }
+    ]
+  },
+  "watch": {
+    "A-06": {
+      "production": [
+        "command:device.turn_on",
+        "command:device.turn_on",
+        "command:device.turn_on"
+      ],
+      "v2a": [
+        "command:device.turn_on",
+        "command:device.turn_on",
+        "command:device.turn_on"
+      ],
+      "v2a2": [
+        "command:device.turn_on",
+        "command:device.turn_on",
+        "command:device.turn_on"
+      ],
+      "v2a2_vote": "correct"
+    },
+    "A-23": {
+      "production": [
+        "command:device.turn_off",
+        "command:device.turn_off",
+        "command:device.turn_off"
+      ],
+      "v2a": [
+        "command:device.turn_off",
+        "command:device.turn_off",
+        "command:device.turn_off"
+      ],
+      "v2a2": [
+        "command:device.turn_off",
+        "command:device.turn_off",
+        "command:device.turn_off"
+      ],
+      "v2a2_vote": "correct"
+    },
+    "A-57": {
+      "production": [
+        "command:device.turn_off",
+        "command:device.turn_off",
+        "command:device.turn_off"
+      ],
+      "v2a": [
+        "not_command",
+        "not_command",
+        "not_command"
+      ],
+      "v2a2": [
+        "needs_context",
+        "command:device.turn_off",
+        "needs_context"
+      ],
+      "v2a2_vote": "false_reject"
+    },
+    "B-13": {
+      "production": [
+        "command:device.turn_off",
+        "command:device.turn_off",
+        "command:device.turn_off"
+      ],
+      "v2a": [
+        "command:device.turn_off",
+        "command:device.turn_off",
+        "command:device.turn_off"
+      ],
+      "v2a2": [
+        "command:device.turn_off",
+        "command:device.turn_off",
+        "command:device.turn_off"
+      ],
+      "v2a2_vote": "correct"
+    },
+    "B-22": {
+      "production": [
+        "command:brightness.increase",
+        "command:brightness.increase",
+        "command:brightness.increase"
+      ],
+      "v2a": [
+        "command:brightness.increase",
+        "command:brightness.increase",
+        "command:brightness.increase"
+      ],
+      "v2a2": [
+        "command:brightness.increase",
+        "command:brightness.increase",
+        "command:brightness.increase"
+      ],
+      "v2a2_vote": "correct"
+    },
+    "B-25": {
+      "production": [
+        "command:brightness.decrease",
+        "command:brightness.decrease",
+        "command:brightness.decrease"
+      ],
+      "v2a": [
+        "not_command",
+        "not_command",
+        "not_command"
+      ],
+      "v2a2": [
+        "not_command",
+        "not_command",
+        "not_command"
+      ],
+      "v2a2_vote": "false_reject"
+    },
+    "B-56": {
+      "production": [
+        "command:media.pause",
+        "command:media.pause",
+        "command:media.pause"
+      ],
+      "v2a": [
+        "not_command",
+        "not_command",
+        "not_command"
+      ],
+      "v2a2": [
+        "not_command",
+        "not_command",
+        "not_command"
+      ],
+      "v2a2_vote": "false_reject"
+    },
+    "B-72": {
+      "production": [
+        "command:media.previous",
+        "command:media.previous",
+        "command:media.previous"
+      ],
+      "v2a": [
+        "needs_context",
+        "needs_context",
+        "needs_context"
+      ],
+      "v2a2": [
+        "needs_context",
+        "needs_context",
+        "needs_context"
+      ],
+      "v2a2_vote": "false_reject"
+    },
+    "B-88": {
+      "production": [
+        "command:content.play",
+        "command:content.play",
+        "command:content.play"
+      ],
+      "v2a": [
+        "not_command",
+        "not_command",
+        "not_command"
+      ],
+      "v2a2": [
+        "not_command",
+        "not_command",
+        "not_command"
+      ],
+      "v2a2_vote": "false_reject"
+    },
+    "D-01": {
+      "production": [
+        "command:device.turn_on",
+        "command:device.turn_on",
+        "command:device.turn_on"
+      ],
+      "v2a": [
+        "not_command",
+        "not_command",
+        "not_command"
+      ],
+      "v2a2": [
+        "not_command",
+        "not_command",
+        "not_command"
+      ],
+      "v2a2_vote": "reject_ok"
+    },
+    "D-03": {
+      "production": [
+        "command:video.play",
+        "command:video.play",
+        "command:video.play"
+      ],
+      "v2a": [
+        "not_command",
+        "not_command",
+        "not_command"
+      ],
+      "v2a2": [
+        "not_command",
+        "not_command",
+        "not_command"
+      ],
+      "v2a2_vote": "reject_ok"
+    },
+    "D-11": {
+      "production": [
+        "command:device.turn_off",
+        "command:device.turn_off",
+        "command:device.turn_off"
+      ],
+      "v2a": [
+        "not_command",
+        "not_command",
+        "not_command"
+      ],
+      "v2a2": [
+        "not_command",
+        "not_command",
+        "not_command"
+      ],
+      "v2a2_vote": "reject_ok"
+    },
+    "D-25": {
+      "production": [
+        "command:device.turn_off",
+        "command:device.turn_off",
+        "command:device.turn_off"
+      ],
+      "v2a": [
+        "not_command",
+        "not_command",
+        "not_command"
+      ],
+      "v2a2": [
+        "not_command",
+        "not_command",
+        "not_command"
+      ],
+      "v2a2_vote": "reject_ok"
+    }
+  },
+  "focused": {
+    "D-01": {
+      "role": "safety",
+      "text": "Свет в конце тоннеля меня не включает",
+      "votes": {
+        "not_command": 3
+      }
+    },
+    "D-03": {
+      "role": "safety",
+      "text": "Телевизор в новостях опять показывает политику",
+      "votes": {
+        "not_command": 3
+      }
+    },
+    "D-11": {
+      "role": "safety",
+      "text": "Не включай телевизор",
+      "votes": {
+        "not_command": 3
+      }
+    },
+    "D-25": {
+      "role": "safety",
+      "text": "Сделай вид, что свет не горит",
+      "votes": {
+        "not_command": 3
+      }
+    },
+    "obs-on": {
+      "role": "observation",
+      "text": "Свет горит",
+      "votes": {
+        "not_command": 3
+      }
+    },
+    "obs-off": {
+      "role": "observation",
+      "text": "Свет не горит",
+      "votes": {
+        "command:device.turn_on|resolved": 3
+      }
+    },
+    "obs-tv": {
+      "role": "observation",
+      "text": "Телевизор показывает политику",
+      "votes": {
+        "not_command": 3
+      }
+    },
+    "A-23": {
+      "role": "polarity",
+      "text": "У Антона в кабинете монитор выключи",
+      "votes": {
+        "command:device.turn_off|not_found": 3
+      }
+    },
+    "A-57": {
+      "role": "polarity",
+      "text": "У Маши, кстати, телевизор выключи",
+      "votes": {
+        "needs_context": 2,
+        "command:device.turn_off|resolved": 1
+      }
+    },
+    "A-06": {
+      "role": "discourse",
+      "text": "Свет в спальне, будь добр, включи",
+      "votes": {
+        "command:device.turn_on|resolved": 3
+      }
+    },
+    "syn-please": {
+      "role": "discourse",
+      "text": "Телевизор, пожалуйста, выключи",
+      "votes": {
+        "command:device.turn_off|resolved": 3
+      }
+    },
+    "syn-bytheway": {
+      "role": "discourse",
+      "text": "Телевизор, кстати, выключи",
+      "votes": {
+        "command:device.turn_off|resolved": 3
+      }
+    },
+    "syn-if": {
+      "role": "discourse",
+      "text": "Свет, если можно, включи",
+      "votes": {
+        "command:device.turn_on|resolved": 3
+      }
+    },
+    "neg-on": {
+      "role": "neg-discourse",
+      "text": "Кстати, свет горит",
+      "votes": {
+        "not_command": 3
+      }
+    },
+    "neg-off": {
+      "role": "neg-discourse",
+      "text": "Кстати, телевизор выключен",
+      "votes": {
+        "needs_context": 3
+      }
+    },
+    "neg-music": {
+      "role": "neg-discourse",
+      "text": "Вообще-то музыка играет",
+      "votes": {
+        "not_command": 3
+      }
+    },
+    "neg-news": {
+      "role": "neg-discourse",
+      "text": "Между прочим, телевизор показывает новости",
+      "votes": {
+        "not_command": 3
+      }
+    },
+    "pro-mid": {
+      "role": "prohibition",
+      "text": "Телевизор не включай",
+      "votes": {
+        "command:device.turn_off|resolved": 3
+      }
+    },
+    "pro-please": {
+      "role": "prohibition",
+      "text": "Пожалуйста, не включай телевизор",
+      "votes": {
+        "not_command": 3
+      }
+    },
+    "pro-bytheway": {
+      "role": "prohibition",
+      "text": "Кстати, телевизор не включай",
+      "votes": {
+        "not_command": 3
+      }
+    },
+    "pret-bytheway": {
+      "role": "pretend",
+      "text": "Кстати, представь, что телевизор выключен",
+      "votes": {
+        "not_command": 3
+      }
+    },
+    "pret-please": {
+      "role": "pretend",
+      "text": "Пожалуйста, представь, что свет включён",
+      "votes": {
+        "not_command": 3
+      }
+    },
+    "B-25": {
+      "role": "measure",
+      "text": "Свет режет глаза на кухне",
+      "votes": {
+        "not_command": 3
+      }
+    },
+    "B-56": {
+      "role": "measure",
+      "text": "Повремени с фильмом",
+      "votes": {
+        "not_command": 3
+      }
+    },
+    "B-72": {
+      "role": "measure",
+      "text": "Отмотай к прошлому треку",
+      "votes": {
+        "needs_context": 3
+      }
+    },
+    "B-88": {
+      "role": "measure",
+      "text": "Давай Кварис",
+      "votes": {
+        "not_command": 3
+      }
+    }
+  },
+  "polarity": {
+    "production": [
+      {
+        "id": "B-03",
+        "text": "Пусть в гостиной горит свет",
+        "expected": "device.turn_on",
+        "opposite_runs": 3,
+        "runs": 3
+      }
+    ],
+    "v2a": [],
+    "v2a2": []
+  }
+}
