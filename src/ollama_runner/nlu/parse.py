@@ -27,6 +27,14 @@ _SEEK = re.compile(r"(?<![0-9a-zа-яе])перемотай", re.IGNORECASE)
 _FORWARD = re.compile(r"(?<![0-9a-zа-яе])вперед", re.IGNORECASE)
 _BACKWARD = re.compile(r"(?<![0-9a-zа-яе])назад", re.IGNORECASE)
 _SKIP = re.compile(r"(?<![0-9a-zа-яе])перескочи", re.IGNORECASE)
+_TIME_UNIT = re.compile(
+    r"(?<![0-9a-zа-яе])(?:секунд\w*|минут\w*|час(?:а|ов|у|е|ом|ы|ах|ами)?)(?![0-9a-zа-яе])",
+    re.IGNORECASE,
+)
+_LISTEN = re.compile(
+    r"(?<![0-9a-zа-яе])(?:послушать|слушать)(?![0-9a-zа-яе])",
+    re.IGNORECASE,
+)
 _DARKER = re.compile(r"(?<![0-9a-zа-яе])потемнее", re.IGNORECASE)
 _BRIGHTER = re.compile(r"(?<![0-9a-zа-яе])ярче", re.IGNORECASE)
 _BRIGHTNESS = re.compile(r"(?<![0-9a-zа-яе])яркост", re.IGNORECASE)
@@ -217,6 +225,11 @@ def _decide(
         return "media.seek_forward", None, amount, ("seek_forward",)
     if _SEEK.search(folded) and _BACKWARD.search(folded):
         return "media.seek_backward", None, amount, ("seek_backward",)
+    if _SKIP.search(folded) and _TIME_UNIT.search(folded):
+        if _FORWARD.search(folded):
+            return "media.seek_forward", None, amount, ("seek_forward",)
+        if _BACKWARD.search(folded):
+            return "media.seek_backward", None, amount, ("seek_backward",)
     if _SKIP.search(folded) or _is_relative(text):
         if _is_relative(text):
             intent = "media.previous" if re.search(r"предыдущ", folded) else "media.next"
@@ -249,6 +262,8 @@ def _decide(
         return "audio.play", residual or None, None, ("audio_marker",)
     if kind == "video.play" and _PLAY.search(folded):
         return "video.play", residual or None, None, ("video_marker",)
+    if _LISTEN.search(folded) and _POWER_ON.search(text):
+        return "audio.play", _without_listen(residual) or None, None, ("listen_infinitive",)
     if _POWER_OFF.search(text) and _known_device(text, registry):
         return "device.turn_off", None, None, ("power_off",)
     if _POWER_ON.search(text) and _known_device(text, registry):
@@ -256,6 +271,11 @@ def _decide(
     if _POWER_ON.search(text) and _unknown_leftover(text, registry) and _plausible_title(residual or _unknown_leftover(text, registry) or ""):
         return "content.play", residual or _unknown_leftover(text, registry), None, ("bare_content",)
     return None
+
+
+def _without_listen(text: str) -> str:
+    cleaned = _LISTEN.sub(" ", text)
+    return re.sub(r"\s+", " ", cleaned).strip(" ,.")
 
 
 def _command_frame(text: str, registry: DeviceRegistry) -> bool:

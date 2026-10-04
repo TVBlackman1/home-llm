@@ -123,6 +123,75 @@ def test_value_keeps_the_spoken_amount_and_canonicalizes_color(registry: DeviceR
 
 
 @pytest.mark.unit
+def test_temporal_skip_is_seek_and_item_skip_stays_next(registry: DeviceRegistry) -> None:
+    forward = parse_deterministic("Перескочи минуту вперёд", registry)
+    assert forward.intent == "media.seek_forward"
+    assert forward.value is None
+
+    backward = parse_deterministic("Перескочи минуту назад", registry)
+    assert backward.intent == "media.seek_backward"
+    assert backward.value is None
+
+    numbered = parse_deterministic("Перескочи две минуты назад", registry)
+    assert numbered.intent == "media.seek_backward"
+    assert numbered.value == "две минуты"
+
+    seconds = parse_deterministic("Перескочи 30 секунд вперёд", registry)
+    assert seconds.intent == "media.seek_forward"
+    assert seconds.value is None
+
+    song = parse_deterministic("Перескочи эту песню", registry)
+    assert song.intent == "media.next"
+    assert song.content is None
+
+    bare = parse_deterministic("Перескочи назад", registry)
+    assert bare.intent == "media.next"
+
+    track = parse_deterministic("Следующий трек", registry)
+    assert track.intent == "media.next"
+    episode = parse_deterministic("Следующая серия", registry)
+    assert episode.intent == "media.next"
+
+
+@pytest.mark.unit
+def test_listen_infinitive_is_audio_and_bare_titles_stay_content(registry: DeviceRegistry) -> None:
+    elidar = parse_deterministic("Поставь послушать Элидар", registry)
+    assert elidar.intent == "audio.play"
+    assert elidar.content == "Элидар"
+
+    norven = parse_deterministic("Включи послушать Норвен", registry)
+    assert norven.intent == "audio.play"
+    assert norven.content == "Норвен"
+
+    kvaris = parse_deterministic("Поставь слушать Кварис", registry)
+    assert kvaris.intent == "audio.play"
+    assert kvaris.content == "Кварис"
+
+    want = parse_deterministic("Хочу послушать Элидар", registry)
+    assert not want.handled
+    lets = parse_deterministic("Давай послушаем Элидар", registry)
+    assert not lets.handled
+
+    filler = parse_deterministic("слушай, включи свет", registry)
+    assert filler.intent != "audio.play"
+    assert not filler.handled
+
+    song = parse_deterministic("поставь песню Sonne", registry)
+    assert song.intent == "audio.play"
+    assert song.content == "песню Sonne"
+
+    bare = parse_deterministic("Поставь Элидар", registry)
+    assert bare.intent == "content.play"
+    assert bare.content == "Элидар"
+    launched = parse_deterministic("Запусти Элидар", registry)
+    assert launched.intent == "content.play"
+    assert launched.content == "Элидар"
+    idiom = parse_deterministic("Запусти двигатель обсуждения", registry)
+    assert idiom.intent == "content.play"
+    assert idiom.content == "двигатель обсуждения"
+
+
+@pytest.mark.unit
 def test_deterministic_slots_beat_the_model(registry: DeviceRegistry) -> None:
     text = "У Маши включи вторую колонку на кухне"
     # Verb is not at the start, so the grammar declines and the model is asked.
