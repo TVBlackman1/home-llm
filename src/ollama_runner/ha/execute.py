@@ -4,6 +4,7 @@ from dataclasses import dataclass
 
 import httpx
 
+from ollama_runner.execution import execution_capability
 from ollama_runner.ha.normalize import Binding, whole_kelvin
 from ollama_runner.inventory.registry import DeviceRegistry
 from ollama_runner.nlu.values import kelvin_points, named_color_rgb, percent_points
@@ -47,15 +48,6 @@ _VOLUME = frozenset({
     "volume.mute",
     "volume.unmute",
 })
-# Advertised capabilities can still resolve. Only this set may become success.
-_IMPLEMENTED = (
-    frozenset(_POWER)
-    | _BRIGHTNESS
-    | _COLOR_TEMPERATURE
-    | _VOLUME
-    | frozenset(_PLAYBACK)
-    | frozenset({"color.set", "source.select"})
-)
 
 
 @dataclass(frozen=True)
@@ -158,10 +150,12 @@ class HaExecutor:
         result = self._inner.execute(resolved, sink)
         if not result.ok or resolved.status != "resolved":
             return result
-        if resolved.intent not in _IMPLEMENTED:
+        if execution_capability(resolved.intent) is None:
             return _unsupported(result, "execution_not_implemented")
         binding = self._bindings.get(resolved.execution_target_id or "")
-        target = binding.for_capability(resolved.intent) if binding is not None else None
+        if binding is None:
+            return _unsupported(result, "binding_unavailable")
+        target = binding.for_capability(resolved.intent)
         relative: dict = {}
         if (
             resolved.intent in _POWER

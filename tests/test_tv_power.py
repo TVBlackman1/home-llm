@@ -64,6 +64,38 @@ def _run(intent: str, states: list | None, *, power: str | None = "remote.frame"
     return client, result
 
 
+def test_each_power_decision_reads_the_media_player_again():
+    class _Sequence:
+        def __init__(self) -> None:
+            self._pending = ["off", "on"]
+            self.calls: list[tuple] = []
+
+        def get_states(self) -> list:
+            return [{"entity_id": "media_player.frame", "state": self._pending.pop(0), "attributes": {}}]
+
+        def call_service(self, domain: str, service: str, data: dict) -> int:
+            self.calls.append((domain, service, data))
+            return 200
+
+    inventory = _snapshot()
+    client = _Sequence()
+    executor = HaExecutor(inventory.registry, inventory.bindings, client)
+    command = ResolvedCommand(
+        status="resolved",
+        intent="device.turn_on",
+        semantic_target_id="media_player.frame",
+        execution_target_id="media_player.frame",
+        arguments={},
+        candidates=("media_player.frame",),
+    )
+    first = executor.execute(command, _Quiet())
+    second = executor.execute(command, _Quiet())
+    assert client.calls == [("homeassistant", "toggle", {"entity_id": "remote.frame"})]
+    assert first.payload["execution"]["current_state"] == "off"
+    assert second.payload["execution"]["action"] == "noop"
+    assert second.payload["execution"]["current_state"] == "on"
+
+
 def test_turn_on_from_off_toggles_the_remote():
     client, result = _run("device.turn_on", _state("off"))
     assert client.calls == [("homeassistant", "toggle", {"entity_id": "remote.frame"})]

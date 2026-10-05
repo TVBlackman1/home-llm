@@ -6,7 +6,7 @@ from pathlib import Path
 
 from ollama_runner.factory import close_resources, default_pipeline, semantic_pipeline
 from ollama_runner.ha.client import HaClient
-from ollama_runner.ha.execute import HaExecutor
+from ollama_runner.ha.route import ExecutionRouter
 from ollama_runner.ha.normalize import load_inventory
 from ollama_runner.request import configure_request_logging
 from ollama_runner.settings import get_settings
@@ -77,12 +77,14 @@ def main() -> None:
 def _run_home(args, settings) -> None:
     client = HaClient(settings)
     try:
+        # One discovery snapshot for this process. Feature bits, aliases, and
+        # areas stay as loaded. Commands that depend on live state re-read it.
         inventory = load_inventory(client)
         configure_request_logging()
         pipeline = semantic_pipeline(
             model=args.model,
             registry=inventory.registry,
-            executor=HaExecutor(inventory.registry, inventory.bindings, client),
+            executor=ExecutionRouter(inventory.registry, inventory.bindings, client),
         )
         sink = _QuietSink()
 

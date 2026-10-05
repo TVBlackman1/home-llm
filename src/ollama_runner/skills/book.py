@@ -41,6 +41,8 @@ LEGACY_ACTION = {
     "pc.turn_off": "off",
 }
 
+# Legacy command labels for the benchmark sink. These strings are not the
+# Home Assistant calls. Physical implementation is execution_capability.
 HA_ACTION = {
     "device.turn_on": "homeassistant.turn_on",
     "device.turn_off": "homeassistant.turn_off",
@@ -173,7 +175,12 @@ class SkillBook:
 
 
 class Executor:
-    """Validates a resolved command and adapts it to the existing sink."""
+    """Adapt a resolved command to the benchmark sink.
+
+    Membership in ``HA_ACTION`` means the legacy catalog has a label. It does
+    not mean Home Assistant will be called. The production path decides that
+    with ``execution_capability``.
+    """
 
     def __init__(self, registry: DeviceRegistry) -> None:
         self._registry = registry
