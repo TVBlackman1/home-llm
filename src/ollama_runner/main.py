@@ -6,9 +6,12 @@ from pathlib import Path
 
 from ollama_runner.factory import close_resources, default_pipeline, semantic_pipeline
 from ollama_runner.ha.client import HaClient
+from ollama_runner.ha.execute import failure_reason
 from ollama_runner.ha.route import ExecutionRouter
 from ollama_runner.ha.normalize import load_inventory
 from ollama_runner.request import configure_request_logging
+from ollama_runner.resolve.capability import CapabilityResolver
+from ollama_runner.semantic_pipeline import SemanticPipeline
 from ollama_runner.settings import get_settings
 from ollama_runner.sinks.jsonprint import PrintSink
 from ollama_runner.types import Command, Result
@@ -74,23 +77,46 @@ def main() -> None:
         close_resources()
 
 
+def run_home_request(client, text: str, *, model: str | None = None, nlu=None) -> Result:
+    """One utterance against one fresh Home Assistant inventory.
+
+    The client and the language model stay process-scoped. A failed refresh
+    does not reuse an older device map.
+    """
+
+    try:
+        inventory = load_inventory(client)
+    except Exception as exc:
+        return Result(
+            ok=False,
+            command=Command(device_id="", action=""),
+            error="unavailable",
+            payload={"status": "unavailable", "reason": failure_reason(exc)},
+        )
+    executor = ExecutionRouter(inventory.registry, inventory.bindings, client)
+    if nlu is None:
+        pipeline = semantic_pipeline(
+            model=model,
+            registry=inventory.registry,
+            executor=executor,
+        )
+    else:
+        pipeline = SemanticPipeline(
+            nlu,
+            CapabilityResolver(inventory.registry),
+            executor,
+            inventory.registry,
+        )
+    return pipeline.run(text, _QuietSink(), state=inventory.state)
+
+
 def _run_home(args, settings) -> None:
     client = HaClient(settings)
     try:
-        # One discovery snapshot for this process. Feature bits, aliases, and
-        # areas stay as loaded. Commands that depend on live state re-read it.
-        inventory = load_inventory(client)
         configure_request_logging()
-        pipeline = semantic_pipeline(
-            model=args.model,
-            registry=inventory.registry,
-            executor=ExecutionRouter(inventory.registry, inventory.bindings, client),
-        )
-        sink = _QuietSink()
 
         def once(text: str) -> bool:
-            result = pipeline.run(text, sink, state=inventory.state)
-            return result.ok
+            return run_home_request(client, text, model=args.model).ok
 
         if args.text is not None:
             raise SystemExit(0 if once(args.text) else 1)
