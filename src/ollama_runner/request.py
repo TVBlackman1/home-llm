@@ -46,6 +46,9 @@ class CommandResult:
     candidates: tuple[str, ...] = ()
     http_status: int | None = None
     executed: bool = False
+    value: str | None = None
+    brightness_pct: int | None = None
+    brightness_step_pct: int | None = None
 
 
 @dataclass(frozen=True)
@@ -122,6 +125,13 @@ def command_from_result(
         candidates=candidates,
         http_status=http_status if isinstance(http_status, int) else None,
         executed=bool(execution.get("attempted")),
+        value=(semantic.arguments.get("value") or None) if semantic is not None else None,
+        brightness_pct=execution.get("brightness_pct") if isinstance(execution.get("brightness_pct"), int) else None,
+        brightness_step_pct=(
+            execution.get("brightness_step_pct")
+            if isinstance(execution.get("brightness_step_pct"), int)
+            else None
+        ),
     )
 
 
@@ -206,6 +216,7 @@ def _semantic_line(command: CommandResult, prefix: dict) -> str:
     fields["area"] = command.area
     if command.ordinal is not None:
         fields["ordinal"] = command.ordinal
+    fields["value"] = command.value
     return _fields(**fields)
 
 
@@ -226,6 +237,8 @@ def _execute_line(command: CommandResult, prefix: dict) -> str:
         intent=command.intent,
         service=command.service,
         entity=command.entity_id,
+        brightness_pct=command.brightness_pct,
+        brightness_step_pct=command.brightness_step_pct,
     )
 
 

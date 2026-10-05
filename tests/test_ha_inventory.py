@@ -203,7 +203,10 @@ def test_power_mapping_uses_the_binding_domain():
     off = planned_call("device.turn_off", Binding("media_player.frame", "media_player"))
     assert off is not None
     assert off.service == "turn_off"
-    assert planned_call("brightness.increase", Binding("light.lampa", "light")) is None
+    brighter = planned_call("brightness.increase", Binding("light.lampa", "light"))
+    assert brighter is not None
+    assert brighter.brightness_step_pct == 10
+    assert planned_call("brightness.set", Binding("media_player.frame", "media_player"), "50") is None
     assert planned_call("device.turn_on", None) is None
 
 
@@ -267,13 +270,13 @@ def test_resolved_turn_off_calls_light_turn_off():
     assert client.calls == [("light", "turn_off", {"entity_id": "light.lampa"})]
 
 
-def test_resolved_brightness_does_not_call_service():
+def test_color_set_does_not_call_service():
     inventory = _snapshot()
     client = _FakeHa()
     executor = HaExecutor(inventory.registry, inventory.bindings, client)
     resolved = ResolvedCommand(
         status="resolved",
-        intent="brightness.increase",
+        intent="color.set",
         semantic_target_id="light.bulb_e27_lemon_3",
         execution_target_id="light.bulb_e27_lemon_3",
         arguments={"value": "10"},

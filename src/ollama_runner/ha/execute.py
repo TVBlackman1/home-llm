@@ -6,6 +6,7 @@ import httpx
 
 from ollama_runner.ha.normalize import Binding
 from ollama_runner.inventory.registry import DeviceRegistry
+from ollama_runner.nlu.values import percent_points
 from ollama_runner.request import EXECUTION_FAILED
 from ollama_runner.semantic import ResolvedCommand
 from ollama_runner.skills.book import Executor
@@ -16,6 +17,14 @@ _POWER = {
     "device.turn_on": "turn_on",
     "device.turn_off": "turn_off",
 }
+_BRIGHTNESS = frozenset({
+    "brightness.set",
+    "brightness.increase",
+    "brightness.decrease",
+})
+# No step exists in the semantic layer. Ten points on the 0–100 service scale
+# is the one explicit default for a relative command that names no amount.
+DEFAULT_BRIGHTNESS_STEP = 10
 
 
 @dataclass(frozen=True)
@@ -23,6 +32,16 @@ class PlannedCall:
     domain: str
     service: str
     entity_id: str
+    brightness_pct: int | None = None
+    brightness_step_pct: int | None = None
+
+    def service_data(self) -> dict:
+        data = {"entity_id": self.entity_id}
+        if self.brightness_pct is not None:
+            data["brightness_pct"] = self.brightness_pct
+        if self.brightness_step_pct is not None:
+            data["brightness_step_pct"] = self.brightness_step_pct
+        return data
 
 
 def failure_reason(exc: BaseException) -> str:
@@ -38,13 +57,37 @@ def failure_reason(exc: BaseException) -> str:
     return f"execution_exception:{type(exc).__name__}"
 
 
-def planned_call(intent: str, binding: Binding | None) -> PlannedCall | None:
-    """Map a resolved power intent onto the entity domain. Other intents stay unexecuted."""
+def planned_call(
+    intent: str,
+    binding: Binding | None,
+    value: str = "",
+) -> PlannedCall | None:
+    """Map a resolved power or light-brightness intent. Other intents stay unexecuted."""
 
-    service = _POWER.get(intent)
-    if service is None or binding is None:
+    if binding is None:
         return None
-    return PlannedCall(binding.domain, service, binding.entity_id)
+    service = _POWER.get(intent)
+    if service is not None:
+        return PlannedCall(binding.domain, service, binding.entity_id)
+    if intent not in _BRIGHTNESS or binding.domain != "light":
+        return None
+    points = percent_points(value)
+    if intent == "brightness.set":
+        if points is None or not 0 <= points <= 100:
+            return None
+        return PlannedCall(binding.domain, "turn_on", binding.entity_id, brightness_pct=points)
+    if value.strip() and points is None:
+        return None
+    step = DEFAULT_BRIGHTNESS_STEP if points is None else points
+    if not 1 <= step <= 100:
+        return None
+    signed = step if intent == "brightness.increase" else -step
+    return PlannedCall(
+        binding.domain,
+        "turn_on",
+        binding.entity_id,
+        brightness_step_pct=signed,
+    )
 
 
 class HaExecutor:
@@ -71,6 +114,7 @@ class HaExecutor:
         call = planned_call(
             resolved.intent,
             self._bindings.get(resolved.execution_target_id or ""),
+            str(resolved.arguments.get("value") or ""),
         )
         if call is None:
             return result
@@ -81,13 +125,17 @@ class HaExecutor:
             "service": service,
             "entity_id": call.entity_id,
         }
+        if call.brightness_pct is not None:
+            execution["brightness_pct"] = call.brightness_pct
+        if call.brightness_step_pct is not None:
+            execution["brightness_step_pct"] = call.brightness_step_pct
         if not self._perform:
             return _with_execution(result, execution)
         try:
             status_code = self._client.call_service(
                 call.domain,
                 call.service,
-                {"entity_id": call.entity_id},
+                call.service_data(),
             )
         except Exception as exc:
             execution["attempted"] = True

@@ -27,6 +27,35 @@ _DURATION = re.compile(
     re.IGNORECASE,
 )
 _MAGNITUDE = re.compile(r"(?<![0-9a-zа-яе])(немного|сильно)(?![0-9a-zа-яе])", re.IGNORECASE)
+_PERCENT_WORDS = {
+    "один": 1,
+    "одна": 1,
+    "одну": 1,
+    "два": 2,
+    "две": 2,
+    "три": 3,
+    "четыре": 4,
+    "пять": 5,
+    "шесть": 6,
+    "семь": 7,
+    "восемь": 8,
+    "девять": 9,
+    "десять": 10,
+    "одиннадцать": 11,
+    "двенадцать": 12,
+    "тринадцать": 13,
+    "четырнадцать": 14,
+    "пятнадцать": 15,
+    "шестнадцать": 16,
+    "семнадцать": 17,
+    "восемнадцать": 18,
+    "девятнадцать": 19,
+    "двадцать": 20,
+    "тридцать": 30,
+    "сорок": 40,
+    "пятьдесят": 50,
+    "шестьдесят": 60,
+}
 _COLOR_PHRASE = re.compile(r"^(?:теплый|тёплый)\s+бел\w+$", re.IGNORECASE)
 _COLOR_WORD = (
     (re.compile(r"^красн\w*$", re.IGNORECASE), "красный"),
@@ -73,4 +102,23 @@ def canonical_color(span: str) -> str | None:
     for pattern, canonical in _COLOR_WORD:
         if pattern.match(text):
             return canonical
+    return None
+
+
+def percent_points(value: str | None) -> int | None:
+    """Integer read from an already extracted percentage span.
+
+    Digits win. Otherwise one closed word from the same list that recognizes
+    the span. «немного» and «сильно» are magnitudes, not percentages.
+    """
+
+    if not value:
+        return None
+    folded = fold(value)
+    digit = re.search(r"\d+", folded)
+    if digit is not None:
+        return int(digit.group())
+    for word, number in _PERCENT_WORDS.items():
+        if re.search(rf"(?<![0-9a-zа-яе]){word}(?![0-9a-zа-яе])", folded):
+            return number
     return None
