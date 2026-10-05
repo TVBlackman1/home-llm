@@ -47,6 +47,15 @@ _VOLUME = frozenset({
     "volume.mute",
     "volume.unmute",
 })
+# Advertised capabilities can still resolve. Only this set may become success.
+_IMPLEMENTED = (
+    frozenset(_POWER)
+    | _BRIGHTNESS
+    | _COLOR_TEMPERATURE
+    | _VOLUME
+    | frozenset(_PLAYBACK)
+    | frozenset({"color.set", "source.select"})
+)
 
 
 @dataclass(frozen=True)
@@ -148,6 +157,8 @@ class HaExecutor:
         result = self._inner.execute(resolved, sink)
         if not result.ok or resolved.status != "resolved":
             return result
+        if resolved.intent not in _IMPLEMENTED:
+            return _unsupported(result, "execution_not_implemented")
         binding = self._bindings.get(resolved.execution_target_id or "")
         relative: dict = {}
         if (

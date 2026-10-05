@@ -1,8 +1,10 @@
 """Structured result and compact trace for one production request.
 
-Statuses reuse the resolver and NLU vocabulary. `success` means a resolved
-command was accepted by Home Assistant. `execution_failed` means resolution
-succeeded and the service call did not.
+Statuses reuse the resolver and NLU vocabulary. `success` means Home Assistant
+accepted a service call, or a verified noop such as TV power already matching.
+An advertised capability with no executor is `unsupported` with reason
+`execution_not_implemented`. `execution_failed` means a service call was
+attempted and did not succeed.
 """
 
 from __future__ import annotations
@@ -288,6 +290,7 @@ def _execute_line(command: CommandResult, prefix: dict) -> str:
     return _fields(
         **prefix,
         intent=command.intent,
+        service_called="true" if command.executed else "false",
         current_state=command.current_state,
         action=command.action,
         service=command.service,
@@ -304,7 +307,12 @@ def _execute_line(command: CommandResult, prefix: dict) -> str:
 
 def _result_line(command: CommandResult, prefix: dict) -> str:
     reason = command.reason if command.status in {EXECUTION_FAILED, "unsupported"} else ""
-    return _fields(**prefix, status=command.status, reason=reason)
+    return _fields(
+        **prefix,
+        status=command.status,
+        reason=reason,
+        service_called="true" if command.executed else "false",
+    )
 
 
 def _as_float(value: object) -> float | None:

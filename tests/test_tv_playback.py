@@ -4,7 +4,9 @@ from ollama_runner.ha.execute import HaExecutor
 from ollama_runner.inventory.registry import DeviceRegistry
 from ollama_runner.nlu.parse import parse_deterministic
 from ollama_runner.request import RequestResult, command_from_result, emit_request
-from ollama_runner.semantic import ResolvedCommand, SemanticCommand, Target
+from ollama_runner.resolve.capability import CapabilityResolver
+from ollama_runner.semantic import NotCommandOutcome, ResolvedCommand, SemanticCommand, Target
+from ollama_runner.semantic_pipeline import SemanticPipeline
 from ollama_runner.types import Command, Result
 from tests.test_ha_inventory import _snapshot
 
@@ -158,8 +160,89 @@ def test_playback_failure_is_execution_failed():
     assert "super-secret-token" not in result.payload["reason"]
 
 
-def test_stop_is_not_executed():
+def _recorded(result, intent: str):
+    return command_from_result(
+        source="deterministic",
+        decision="command",
+        result=result,
+        semantic=SemanticCommand(intent=intent, target=Target(device_type="tv", mention="телевизор")),
+        resolution_status="resolved",
+        device_id="media_player.frame",
+        resolved_type="tv",
+    )
+
+
+def test_stop_is_advertised_and_not_executed():
+    inventory = _snapshot()
+    assert "media.stop" in inventory.registry.get("media_player.frame").capabilities
     client, result = _run("media.stop")
+    command = _recorded(result, "media.stop")
     assert client.calls == []
-    execution = (result.payload or {}).get("execution") or {}
-    assert execution.get("service") != "media_player.media_stop"
+    assert result.ok is False
+    assert result.payload["status"] == "unsupported"
+    assert result.payload["reason"] == "execution_not_implemented"
+    assert "service" not in (result.payload.get("execution") or {})
+    assert command.status == "unsupported"
+    assert command.executed is False
+    assert command.service is None
+    assert command.action is None
+
+
+def test_next_is_advertised_and_not_executed():
+    inventory = _snapshot()
+    assert "media.next" in inventory.registry.get("media_player.frame").capabilities
+    client, result = _run("media.next")
+    command = _recorded(result, "media.next")
+    assert client.calls == []
+    assert result.payload["status"] == "unsupported"
+    assert result.payload["reason"] == "execution_not_implemented"
+    assert command.status == "unsupported"
+    assert command.status != "success"
+
+
+def test_stop_request_is_not_success(caplog):
+    caplog.set_level(logging.INFO, logger="ollama_runner.request")
+    inventory = _snapshot()
+    client = _FakeHa()
+
+    class _Idle:
+        calls = 0
+
+        def parse(self, text, context):
+            self.calls += 1
+            return NotCommandOutcome()
+
+    nlu = _Idle()
+    pipeline = SemanticPipeline(
+        nlu,
+        CapabilityResolver(inventory.registry),
+        HaExecutor(inventory.registry, inventory.bindings, client),
+        inventory.registry,
+    )
+    result = pipeline.run("Останови телевизор", _Quiet(), state=inventory.state)
+    request = pipeline.last_request
+    assert request is not None
+    assert nlu.calls == 0
+    assert client.calls == []
+    assert result.ok is False
+    assert request.commands[0].resolution_status == "resolved"
+    assert request.commands[0].intent == "media.stop"
+    assert request.status == "unsupported"
+    assert request.commands[0].reason == "execution_not_implemented"
+    assert request.commands[0].executed is False
+    assert "media_player.media_stop" not in caplog.text
+    assert "service_called=false" in caplog.text
+    assert "status=unsupported" in caplog.text
+    assert "reason=execution_not_implemented" in caplog.text
+
+
+def test_matching_power_noop_stays_success():
+    client, result = _run("device.turn_on")
+    command = _recorded(result, "device.turn_on")
+    assert client.calls == []
+    assert result.payload["execution"]["action"] == "noop"
+    assert "service" not in result.payload["execution"]
+    assert command.status == "success"
+    assert command.executed is False
+    assert command.action == "noop"
+    assert command.reason != "execution_not_implemented"
