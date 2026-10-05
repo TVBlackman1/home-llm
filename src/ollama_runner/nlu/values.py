@@ -7,6 +7,7 @@ specification stores the nominative («красным» → «красный»).
 
 from __future__ import annotations
 
+import colorsys
 import re
 from dataclasses import dataclass
 
@@ -64,6 +65,16 @@ _COLOR_WORD = (
     (re.compile(r"^зелен\w*$", re.IGNORECASE), "зеленый"),
     (re.compile(r"^оранж\w*$", re.IGNORECASE), "оранжевый"),
 )
+# Hue 0–360 and saturation 0–100. One table for every color.set name.
+# «теплый белый» stays a named color: a warm tint, not a Kelvin command.
+_COLOR_HS = {
+    "красный": (0, 100),
+    "оранжевый": (30, 100),
+    "зеленый": (120, 100),
+    "синий": (240, 100),
+    "фиолетовый": (270, 100),
+    "теплый белый": (30, 20),
+}
 
 
 @dataclass(frozen=True)
@@ -103,6 +114,16 @@ def canonical_color(span: str) -> str | None:
         if pattern.match(text):
             return canonical
     return None
+
+
+def named_color_rgb(name: str) -> tuple[int, int, int] | None:
+    """RGB for a canonical color.set name. Unknown names, including «белый», are absent."""
+
+    hs = _COLOR_HS.get(fold(name))
+    if hs is None:
+        return None
+    red, green, blue = colorsys.hsv_to_rgb(hs[0] / 360, hs[1] / 100, 1)
+    return (round(red * 255), round(green * 255), round(blue * 255))
 
 
 _KELVIN = re.compile(

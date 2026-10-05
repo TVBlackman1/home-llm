@@ -54,6 +54,7 @@ class CommandResult:
     direction: str | None = None
     step_kelvin: int | None = None
     target_kelvin: int | None = None
+    rgb_color: tuple[int, int, int] | None = None
 
 
 @dataclass(frozen=True)
@@ -142,6 +143,7 @@ def command_from_result(
         direction=execution.get("direction") if isinstance(execution.get("direction"), str) else None,
         step_kelvin=_as_int(execution.get("step_kelvin")),
         target_kelvin=_as_int(execution.get("target_kelvin")),
+        rgb_color=_as_rgb(execution.get("rgb_color")),
     )
 
 
@@ -262,12 +264,27 @@ def _execute_line(command: CommandResult, prefix: dict) -> str:
         brightness_pct=command.brightness_pct,
         brightness_step_pct=command.brightness_step_pct,
         color_temp_kelvin=command.color_temp_kelvin,
+        rgb_color=_rgb_text(command.rgb_color),
     )
 
 
 def _result_line(command: CommandResult, prefix: dict) -> str:
     reason = command.reason if command.status in {EXECUTION_FAILED, "unsupported"} else ""
     return _fields(**prefix, status=command.status, reason=reason)
+
+
+def _as_rgb(value: object) -> tuple[int, int, int] | None:
+    if not isinstance(value, (list, tuple)) or len(value) != 3:
+        return None
+    if not all(isinstance(part, int) for part in value):
+        return None
+    return (value[0], value[1], value[2])
+
+
+def _rgb_text(value: tuple[int, int, int] | None) -> str | None:
+    if value is None:
+        return None
+    return f"[{value[0]}, {value[1]}, {value[2]}]"
 
 
 def _as_int(value: object) -> int | None:

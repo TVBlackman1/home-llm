@@ -180,6 +180,7 @@ def test_lights_tv_group_and_remote():
         "light",
         min_color_temp_kelvin=2700,
         max_color_temp_kelvin=6500,
+        color_modes=frozenset({"color_temp", "hs"}),
     )
     assert "color_temperature.set" in lamp.capabilities
     assert inventory.state["light.bulb_e27_lemon_3"].power == "on"
@@ -284,7 +285,7 @@ def test_resolved_turn_off_calls_light_turn_off():
     assert client.calls == [("light", "turn_off", {"entity_id": "light.lampa"})]
 
 
-def test_color_set_does_not_call_service():
+def test_unknown_color_set_does_not_call_service():
     inventory = _snapshot()
     client = _FakeHa()
     executor = HaExecutor(inventory.registry, inventory.bindings, client)
@@ -297,7 +298,9 @@ def test_color_set_does_not_call_service():
         candidates=("light.bulb_e27_lemon_3",),
     )
     result = executor.execute(resolved, PrintSink())
-    assert result.ok is True
+    assert result.ok is False
+    assert result.payload["status"] == "unsupported"
+    assert result.payload["reason"] == "color_unsupported"
     assert client.calls == []
 
 

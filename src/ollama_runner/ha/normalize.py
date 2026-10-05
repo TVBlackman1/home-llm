@@ -48,6 +48,7 @@ class Binding:
     members: tuple[str, ...] = ()
     min_color_temp_kelvin: int | None = None
     max_color_temp_kelvin: int | None = None
+    color_modes: frozenset[str] = frozenset()
 
 
 @dataclass(frozen=True)
@@ -112,6 +113,7 @@ def build_inventory(
         attrs = state.get("attributes") or {}
         members = _members(attrs)
         low, high = _color_temp_limits(attrs, detail)
+        modes = _color_modes(attrs, detail)
         label_ids = list(entity.get("labels") or [])
         if device is not None:
             label_ids.extend(device.get("labels") or [])
@@ -133,6 +135,7 @@ def build_inventory(
             members=members,
             min_color_temp_kelvin=low,
             max_color_temp_kelvin=high,
+            color_modes=modes,
         )
         runtime[entity_id] = _runtime(domain, state.get("state") or "")
 
@@ -254,6 +257,18 @@ def whole_kelvin(raw: object) -> int | None:
         return int(round(float(raw)))
     except (TypeError, ValueError, OverflowError):
         return None
+
+
+def _color_modes(attrs: dict, detail: dict) -> frozenset[str]:
+    extra = (detail.get("capabilities") or {}) if detail else {}
+    modes = []
+    for source in (attrs.get("supported_color_modes"), extra.get("supported_color_modes")):
+        if not isinstance(source, list):
+            continue
+        for mode in source:
+            if isinstance(mode, str) and mode not in modes:
+                modes.append(mode)
+    return frozenset(modes)
 
 
 def _color_temp_limits(attrs: dict, detail: dict) -> tuple[int | None, int | None]:

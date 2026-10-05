@@ -6,7 +6,7 @@ import httpx
 
 from ollama_runner.ha.normalize import Binding, whole_kelvin
 from ollama_runner.inventory.registry import DeviceRegistry
-from ollama_runner.nlu.values import kelvin_points, percent_points
+from ollama_runner.nlu.values import kelvin_points, named_color_rgb, percent_points
 from ollama_runner.request import EXECUTION_FAILED
 from ollama_runner.semantic import ResolvedCommand
 from ollama_runner.skills.book import Executor
@@ -33,6 +33,8 @@ _COLOR_TEMPERATURE = frozenset({
 # The installed bulbs span 2700–6500 K. 400 K is one step inside the
 # 300–500 K band: visible on that 3800 K range, and not a large jump.
 DEFAULT_COLOR_TEMP_STEP_K = 400
+# light.turn_on has no hs_color field. rgb_color is the field filtered for hs.
+_CHROMATIC_MODES = frozenset({"hs", "xy", "rgb", "rgbw", "rgbww"})
 
 
 @dataclass(frozen=True)
@@ -43,6 +45,7 @@ class PlannedCall:
     brightness_pct: int | None = None
     brightness_step_pct: int | None = None
     color_temp_kelvin: int | None = None
+    rgb_color: tuple[int, int, int] | None = None
 
     def service_data(self) -> dict:
         data = {"entity_id": self.entity_id}
@@ -52,6 +55,8 @@ class PlannedCall:
             data["brightness_step_pct"] = self.brightness_step_pct
         if self.color_temp_kelvin is not None:
             data["color_temp_kelvin"] = self.color_temp_kelvin
+        if self.rgb_color is not None:
+            data["rgb_color"] = list(self.rgb_color)
         return data
 
 
@@ -139,6 +144,13 @@ class HaExecutor:
             )
             if call is None:
                 return _unsupported(result, reason)
+        elif resolved.intent == "color.set":
+            call, reason = _named_color_call(
+                binding,
+                str(resolved.arguments.get("value") or ""),
+            )
+            if call is None:
+                return _unsupported(result, reason)
         else:
             call = planned_call(
                 resolved.intent,
@@ -160,6 +172,8 @@ class HaExecutor:
             execution["brightness_step_pct"] = call.brightness_step_pct
         if call.color_temp_kelvin is not None:
             execution["color_temp_kelvin"] = call.color_temp_kelvin
+        if call.rgb_color is not None:
+            execution["rgb_color"] = list(call.rgb_color)
         execution.update(relative)
         if not self._perform:
             return _with_execution(result, execution)
@@ -238,6 +252,23 @@ def _color_temperature_call(
             "target_kelvin": target,
         },
     )
+
+
+def _named_color_call(binding: Binding | None, value: str) -> tuple[PlannedCall | None, str]:
+    """Named color.set becomes rgb_color. It does not send Kelvin or brightness.
+
+    ``light.turn_on`` with a color turns an off light on, same as brightness
+    and color temperature. A chromatic name is not rewritten as Kelvin.
+    """
+
+    if binding is None or binding.domain != "light":
+        return None, "color_unavailable"
+    rgb = named_color_rgb(value)
+    if rgb is None:
+        return None, "color_unsupported"
+    if not binding.color_modes & _CHROMATIC_MODES:
+        return None, "color_unavailable"
+    return PlannedCall(binding.domain, "turn_on", binding.entity_id, rgb_color=rgb), ""
 
 
 def _unsupported(result: Result, reason: str) -> Result:
