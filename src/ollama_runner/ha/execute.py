@@ -35,6 +35,7 @@ _COLOR_TEMPERATURE = frozenset({
 DEFAULT_COLOR_TEMP_STEP_K = 400
 # light.turn_on has no hs_color field. rgb_color is the field filtered for hs.
 _CHROMATIC_MODES = frozenset({"hs", "xy", "rgb", "rgbw", "rgbww"})
+_VOLUME = frozenset({"volume.set", "volume.increase", "volume.decrease"})
 
 
 @dataclass(frozen=True)
@@ -46,6 +47,7 @@ class PlannedCall:
     brightness_step_pct: int | None = None
     color_temp_kelvin: int | None = None
     rgb_color: tuple[int, int, int] | None = None
+    volume_level: float | None = None
 
     def service_data(self) -> dict:
         data = {"entity_id": self.entity_id}
@@ -57,6 +59,8 @@ class PlannedCall:
             data["color_temp_kelvin"] = self.color_temp_kelvin
         if self.rgb_color is not None:
             data["rgb_color"] = list(self.rgb_color)
+        if self.volume_level is not None:
+            data["volume_level"] = self.volume_level
         return data
 
 
@@ -135,6 +139,10 @@ class HaExecutor:
             and binding.domain == "media_player"
         ):
             return self._toggle_power(resolved, result, binding)
+        if resolved.intent in _VOLUME:
+            if binding is None or binding.domain != "media_player":
+                return _unsupported(result, "volume_unavailable")
+            return self._change_volume(resolved, result, binding)
         if resolved.intent in _COLOR_TEMPERATURE:
             current = None
             if (
@@ -180,6 +188,8 @@ class HaExecutor:
             execution["color_temp_kelvin"] = call.color_temp_kelvin
         if call.rgb_color is not None:
             execution["rgb_color"] = list(call.rgb_color)
+        if call.volume_level is not None:
+            execution["volume_level"] = call.volume_level
         execution.update(relative)
         if not self._perform:
             return _with_execution(result, execution)
@@ -195,6 +205,85 @@ class HaExecutor:
         if isinstance(status_code, int):
             execution["http_status"] = status_code
         return _with_execution(result, execution)
+
+    def _change_volume(self, resolved: ResolvedCommand, result: Result, binding: Binding) -> Result:
+        """Volume stays on the media player. An explicit percent is not clamped; a relative step is."""
+
+        value = str(resolved.arguments.get("value") or "")
+        points = percent_points(value)
+        intent = resolved.intent
+        relative: dict = {}
+        if intent == "volume.set":
+            if points is None or not 0 <= points <= 100:
+                return _unsupported(result, "volume_out_of_range")
+            call = PlannedCall(
+                "media_player",
+                "volume_set",
+                binding.entity_id,
+                volume_level=_percent_level(points),
+            )
+        elif value.strip() and points is None:
+            return _unsupported(result, "volume_out_of_range")
+        elif points is None:
+            service = "volume_up" if intent == "volume.increase" else "volume_down"
+            call = PlannedCall("media_player", service, binding.entity_id)
+        else:
+            if not 1 <= points <= 100:
+                return _unsupported(result, "volume_out_of_range")
+            current = self._volume_level(binding.entity_id)
+            if current is None:
+                return _unsupported(result, "volume_unavailable")
+            signed = points if intent == "volume.increase" else -points
+            target = min(100, max(0, round(current * 100) + signed))
+            level = _percent_level(target)
+            relative = {
+                "current_volume": round(current, 2),
+                "delta_percent": signed,
+                "target_volume": level,
+            }
+            call = PlannedCall("media_player", "volume_set", binding.entity_id, volume_level=level)
+        self.planned.append(call)
+        execution = {
+            "attempted": self._perform,
+            "intent": intent,
+            "service": f"{call.domain}.{call.service}",
+            "entity_id": call.entity_id,
+        }
+        if call.volume_level is not None:
+            execution["volume_level"] = call.volume_level
+        execution.update(relative)
+        if not self._perform:
+            return _with_execution(result, execution)
+        try:
+            status_code = self._client.call_service(call.domain, call.service, call.service_data())
+        except Exception as exc:
+            execution["attempted"] = True
+            return _failed(result, failure_reason(exc), execution)
+        if isinstance(status_code, int):
+            execution["http_status"] = status_code
+        return _with_execution(result, execution)
+
+    def _volume_level(self, entity_id: str) -> float | None:
+        try:
+            states = self._client.get_states()
+        except Exception:
+            return None
+        if not isinstance(states, list):
+            return None
+        for row in states:
+            if not isinstance(row, dict) or row.get("entity_id") != entity_id:
+                continue
+            attributes = row.get("attributes") or {}
+            if not isinstance(attributes, dict):
+                return None
+            raw = attributes.get("volume_level")
+            if isinstance(raw, bool) or not isinstance(raw, (int, float)):
+                return None
+            level = float(raw)
+            if not 0 <= level <= 1:
+                return None
+            return level
+        return None
 
     def _toggle_power(self, resolved: ResolvedCommand, result: Result, binding: Binding) -> Result:
         """TV power follows the working card: toggle the companion remote, and only when needed."""
@@ -320,6 +409,10 @@ def _color_temperature_call(
             "target_kelvin": target,
         },
     )
+
+
+def _percent_level(points: int) -> float:
+    return round(points / 100, 2)
 
 
 def _named_color_call(binding: Binding | None, value: str) -> tuple[PlannedCall | None, str]:

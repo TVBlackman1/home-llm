@@ -57,6 +57,10 @@ class CommandResult:
     rgb_color: tuple[int, int, int] | None = None
     current_state: str | None = None
     action: str | None = None
+    volume_level: float | None = None
+    current_volume: float | None = None
+    delta_percent: int | None = None
+    target_volume: float | None = None
 
 
 @dataclass(frozen=True)
@@ -150,6 +154,10 @@ def command_from_result(
         rgb_color=_as_rgb(execution.get("rgb_color")),
         current_state=_power_state(execution.get("current_state")),
         action="noop" if execution.get("action") == "noop" else None,
+        volume_level=_as_float(execution.get("volume_level")),
+        current_volume=_as_float(execution.get("current_volume")),
+        delta_percent=_as_int(execution.get("delta_percent")),
+        target_volume=_as_float(execution.get("target_volume")),
     )
 
 
@@ -219,6 +227,17 @@ def emit_request(request: RequestResult) -> None:
                     req,
                     _fields(**prefix, http_status=command.http_status),
                 )
+        if command.delta_percent is not None:
+            _LOGGER.debug(
+                "[execute] req=%s %s",
+                req,
+                _fields(
+                    **prefix,
+                    current_volume=_level_text(command.current_volume),
+                    delta_percent=command.delta_percent,
+                    target_volume=_level_text(command.target_volume),
+                ),
+            )
         if command.direction:
             _LOGGER.debug(
                 "[execute] req=%s %s",
@@ -273,12 +292,25 @@ def _execute_line(command: CommandResult, prefix: dict) -> str:
         brightness_step_pct=command.brightness_step_pct,
         color_temp_kelvin=command.color_temp_kelvin,
         rgb_color=_rgb_text(command.rgb_color),
+        volume_level=_level_text(command.volume_level),
     )
 
 
 def _result_line(command: CommandResult, prefix: dict) -> str:
     reason = command.reason if command.status in {EXECUTION_FAILED, "unsupported"} else ""
     return _fields(**prefix, status=command.status, reason=reason)
+
+
+def _as_float(value: object) -> float | None:
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
+        return None
+    return float(value)
+
+
+def _level_text(value: float | None) -> str | None:
+    if value is None:
+        return None
+    return f"{value:.2f}"
 
 
 def _power_state(value: object) -> str | None:
