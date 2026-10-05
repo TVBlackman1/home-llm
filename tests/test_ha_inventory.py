@@ -209,6 +209,9 @@ def test_lights_tv_group_and_remote():
     assert "media.seek_forward" not in tv.capabilities
     assert "телевизор" in tv.aliases
     assert inventory.state["media_player.frame"].power == "off"
+    assert inventory.registry.get("remote.frame") is None
+    assert inventory.bindings["media_player.frame"].power_entity_id == "remote.frame"
+    assert inventory.bindings["media_player.frame"].entity_id == "media_player.frame"
 
 
 def test_power_mapping_uses_the_binding_domain():

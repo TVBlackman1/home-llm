@@ -129,6 +129,12 @@ class HaExecutor:
             return result
         binding = self._bindings.get(resolved.execution_target_id or "")
         relative: dict = {}
+        if (
+            resolved.intent in _POWER
+            and binding is not None
+            and binding.domain == "media_player"
+        ):
+            return self._toggle_power(resolved, result, binding)
         if resolved.intent in _COLOR_TEMPERATURE:
             current = None
             if (
@@ -189,6 +195,68 @@ class HaExecutor:
         if isinstance(status_code, int):
             execution["http_status"] = status_code
         return _with_execution(result, execution)
+
+    def _toggle_power(self, resolved: ResolvedCommand, result: Result, binding: Binding) -> Result:
+        """TV power follows the working card: toggle the companion remote, and only when needed."""
+
+        current = self._reported_power(binding.entity_id)
+        if current not in {"on", "off"}:
+            return _unsupported(result, "tv_power_state_unknown")
+        want_on = resolved.intent == "device.turn_on"
+        if (want_on and current == "on") or (not want_on and current == "off"):
+            return _with_execution(
+                result,
+                {
+                    "attempted": False,
+                    "noop": True,
+                    "intent": resolved.intent,
+                    "current_state": current,
+                    "action": "noop",
+                },
+            )
+        if not binding.power_entity_id:
+            return _unsupported(result, "tv_power_unavailable")
+        call = PlannedCall("homeassistant", "toggle", binding.power_entity_id)
+        self.planned.append(call)
+        execution = {
+            "attempted": self._perform,
+            "intent": resolved.intent,
+            "current_state": current,
+            "service": "homeassistant.toggle",
+            "entity_id": binding.power_entity_id,
+        }
+        if not self._perform:
+            return _with_execution(result, execution)
+        try:
+            status_code = self._client.call_service(
+                call.domain,
+                call.service,
+                call.service_data(),
+            )
+        except Exception as exc:
+            execution["attempted"] = True
+            return _failed(result, failure_reason(exc), execution)
+        if isinstance(status_code, int):
+            execution["http_status"] = status_code
+        return _with_execution(result, execution)
+
+    def _reported_power(self, entity_id: str) -> str | None:
+        """Media-player on/off only. Anything else is not a reason to toggle."""
+
+        try:
+            states = self._client.get_states()
+        except Exception:
+            return None
+        if not isinstance(states, list):
+            return None
+        for row in states:
+            if not isinstance(row, dict) or row.get("entity_id") != entity_id:
+                continue
+            state = row.get("state")
+            if state in {"on", "off"}:
+                return state
+            return None
+        return None
 
     def _current_kelvin(self, entity_id: str) -> int | None:
         """One state read for one relative command. Nothing is cached or retried."""

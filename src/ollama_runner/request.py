@@ -55,6 +55,8 @@ class CommandResult:
     step_kelvin: int | None = None
     target_kelvin: int | None = None
     rgb_color: tuple[int, int, int] | None = None
+    current_state: str | None = None
+    action: str | None = None
 
 
 @dataclass(frozen=True)
@@ -106,6 +108,8 @@ def command_from_result(
     payload_reason = str(payload.get("reason") or reason or "")
     if payload_status == EXECUTION_FAILED:
         status = EXECUTION_FAILED
+    elif execution.get("noop") and result.ok:
+        status = SUCCESS
     elif execution.get("attempted") and result.ok and payload_status == "resolved":
         status = SUCCESS
     else:
@@ -144,6 +148,8 @@ def command_from_result(
         step_kelvin=_as_int(execution.get("step_kelvin")),
         target_kelvin=_as_int(execution.get("target_kelvin")),
         rgb_color=_as_rgb(execution.get("rgb_color")),
+        current_state=_power_state(execution.get("current_state")),
+        action="noop" if execution.get("action") == "noop" else None,
     )
 
 
@@ -205,7 +211,7 @@ def emit_request(request: RequestResult) -> None:
                     reason=command.reason,
                 ),
             )
-        if command.executed:
+        if command.executed or command.action == "noop":
             _LOGGER.info("[execute] req=%s %s", req, _execute_line(command, prefix))
             if command.http_status is not None:
                 _LOGGER.debug(
@@ -259,6 +265,8 @@ def _execute_line(command: CommandResult, prefix: dict) -> str:
     return _fields(
         **prefix,
         intent=command.intent,
+        current_state=command.current_state,
+        action=command.action,
         service=command.service,
         entity=command.entity_id,
         brightness_pct=command.brightness_pct,
@@ -271,6 +279,12 @@ def _execute_line(command: CommandResult, prefix: dict) -> str:
 def _result_line(command: CommandResult, prefix: dict) -> str:
     reason = command.reason if command.status in {EXECUTION_FAILED, "unsupported"} else ""
     return _fields(**prefix, status=command.status, reason=reason)
+
+
+def _power_state(value: object) -> str | None:
+    if value in {"on", "off"}:
+        return str(value)
+    return None
 
 
 def _as_rgb(value: object) -> tuple[int, int, int] | None:

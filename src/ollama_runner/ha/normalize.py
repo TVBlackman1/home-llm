@@ -49,6 +49,7 @@ class Binding:
     min_color_temp_kelvin: int | None = None
     max_color_temp_kelvin: int | None = None
     color_modes: frozenset[str] = frozenset()
+    power_entity_id: str | None = None
 
 
 @dataclass(frozen=True)
@@ -95,6 +96,7 @@ def build_inventory(
     labels_by_id = {_label_id(label): label for label in labels}
     states_by_id = {row["entity_id"]: row for row in states}
     light_services = _service_names(services, "light")
+    remotes = _companion_remotes(entities)
     records: list[RegistryDevice] = []
     bindings: dict[str, Binding] = {}
     runtime: dict[str, DeviceRuntime] = {}
@@ -129,6 +131,9 @@ def build_inventory(
                 ordinal=_ordinal(device, state, detail or entity),
             )
         )
+        power_entity_id = None
+        if domain == "media_player":
+            power_entity_id = remotes.get(entity.get("device_id") or "")
         bindings[entity_id] = Binding(
             entity_id=entity_id,
             domain=domain,
@@ -136,6 +141,7 @@ def build_inventory(
             min_color_temp_kelvin=low,
             max_color_temp_kelvin=high,
             color_modes=modes,
+            power_entity_id=power_entity_id,
         )
         runtime[entity_id] = _runtime(domain, state.get("state") or "")
 
@@ -144,6 +150,29 @@ def build_inventory(
         bindings=bindings,
         state=runtime,
     )
+
+
+def _companion_remotes(entities: list[dict]) -> dict[str, str]:
+    """One remote per HA device. Several remotes on one device are not guessed."""
+
+    found: dict[str, list[str]] = {}
+    for entity in entities:
+        if entity.get("disabled_by") or entity.get("hidden_by"):
+            continue
+        if entity.get("entity_category") in {"config", "diagnostic"}:
+            continue
+        entity_id = entity.get("entity_id") or ""
+        if not entity_id.startswith("remote."):
+            continue
+        device_id = entity.get("device_id")
+        if not isinstance(device_id, str) or not device_id:
+            continue
+        found.setdefault(device_id, []).append(entity_id)
+    return {
+        device_id: ids[0]
+        for device_id, ids in found.items()
+        if len(ids) == 1
+    }
 
 
 def _candidate(entity: dict) -> bool:
