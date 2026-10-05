@@ -62,6 +62,7 @@ class CommandResult:
     delta_percent: int | None = None
     target_volume: float | None = None
     is_volume_muted: bool | None = None
+    selected_source: str | None = None
 
 
 @dataclass(frozen=True)
@@ -160,6 +161,7 @@ def command_from_result(
         delta_percent=_as_int(execution.get("delta_percent")),
         target_volume=_as_float(execution.get("target_volume")),
         is_volume_muted=_as_bool(execution.get("is_volume_muted")),
+        selected_source=execution.get("source") if isinstance(execution.get("source"), str) else None,
     )
 
 
@@ -296,6 +298,7 @@ def _execute_line(command: CommandResult, prefix: dict) -> str:
         rgb_color=_rgb_text(command.rgb_color),
         volume_level=_level_text(command.volume_level),
         is_volume_muted=_bool_text(command.is_volume_muted),
+        source=command.selected_source,
     )
 
 

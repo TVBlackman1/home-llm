@@ -81,7 +81,7 @@ _PLAY = re.compile(
 )
 _FRAME_VERB = re.compile(
     r"(?<![0-9a-zа-яе])(?:включи|выключи|запусти|поставь|вруби|выруби|сделай|перемотай|"
-    r"убавь|уменьши|увеличь|прибавь|покажи|останови|приостанови|перескочи|хочу|убери|отключи|верни)\w*",
+    r"убавь|уменьши|увеличь|прибавь|покажи|останови|приостанови|перескочи|хочу|убери|отключи|верни|переключи|выбери)\w*",
     re.IGNORECASE,
 )
 _DOMAIN_TOKEN = re.compile(
@@ -326,6 +326,9 @@ def _decide(
         return "volume.increase", None, amount, ("volume_increase",)
     if _VOLUME.search(folded) and (_SET.search(folded) or amount):
         return "volume.set", None, amount, ("volume_set",)
+    selected = _selected_source(text, folded)
+    if selected is not None:
+        return "source.select", None, selected, ("source",)
     if kind == "audio.play" and _PLAY.search(folded):
         return "audio.play", residual or None, None, ("audio_marker",)
     if kind == "video.play" and _PLAY.search(folded):
@@ -344,6 +347,34 @@ def _decide(
         if _POWER_ON_WORD.search(folded) and _explicit_device(text, registry):
             return "device.turn_on", None, None, ("power_on",)
     return None
+
+
+def _selected_source(text: str, folded: str) -> str | None:
+    """«переключи/выбери» plus the words that name the source. HA owns the real list."""
+
+    del folded
+    found = device_type_from_text(text)
+    if found is None or found[0] != "tv":
+        return None
+    onto = re.search(
+        r"(?<![0-9a-zа-яе])переключи\w*.*?(?<![0-9a-zа-яе])на\s+(.+?)\s*$",
+        text,
+        re.IGNORECASE,
+    )
+    choose = re.search(
+        r"(?<![0-9a-zа-яе])выбери\w*\s+(.+?)\s+на(?:\s|$)",
+        text,
+        re.IGNORECASE,
+    )
+    match = onto or choose
+    if match is None:
+        return None
+    label = match.group(1).strip(" .,!")
+    if not label:
+        return None
+    if label.casefold() in {"hdmi", "tv"}:
+        return label.upper()
+    return label
 
 
 def _heard_audio(folded: str) -> tuple[str, None, None, tuple[str, ...]] | None:

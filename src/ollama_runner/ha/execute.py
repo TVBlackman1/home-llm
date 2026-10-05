@@ -55,6 +55,7 @@ class PlannedCall:
     rgb_color: tuple[int, int, int] | None = None
     volume_level: float | None = None
     is_volume_muted: bool | None = None
+    source: str | None = None
 
     def service_data(self) -> dict:
         data = {"entity_id": self.entity_id}
@@ -70,6 +71,8 @@ class PlannedCall:
             data["volume_level"] = self.volume_level
         if self.is_volume_muted is not None:
             data["is_volume_muted"] = self.is_volume_muted
+        if self.source is not None:
+            data["source"] = self.source
         return data
 
 
@@ -152,6 +155,10 @@ class HaExecutor:
             if binding is None or binding.domain != "media_player":
                 return _unsupported(result, "volume_unavailable")
             return self._change_volume(resolved, result, binding)
+        if resolved.intent == "source.select":
+            if binding is None or binding.domain != "media_player":
+                return _unsupported(result, "source_unavailable")
+            return self._select_source(resolved, result, binding)
         if resolved.intent in _COLOR_TEMPERATURE:
             current = None
             if (
@@ -280,6 +287,53 @@ class HaExecutor:
         if isinstance(status_code, int):
             execution["http_status"] = status_code
         return _with_execution(result, execution)
+
+    def _select_source(self, resolved: ResolvedCommand, result: Result, binding: Binding) -> Result:
+        """Select a source the media player advertises. No power and no nearest-name guess."""
+
+        requested = str(resolved.arguments.get("value") or "").strip()
+        chosen = _listed_source(requested, self._source_list(binding.entity_id))
+        if chosen is None:
+            return _unsupported(result, "source_unavailable")
+        call = PlannedCall("media_player", "select_source", binding.entity_id, source=chosen)
+        self.planned.append(call)
+        execution = {
+            "attempted": self._perform,
+            "intent": resolved.intent,
+            "service": "media_player.select_source",
+            "entity_id": call.entity_id,
+            "source": chosen,
+        }
+        if not self._perform:
+            return _with_execution(result, execution)
+        try:
+            status_code = self._client.call_service(call.domain, call.service, call.service_data())
+        except Exception as exc:
+            execution["attempted"] = True
+            return _failed(result, failure_reason(exc), execution)
+        if isinstance(status_code, int):
+            execution["http_status"] = status_code
+        return _with_execution(result, execution)
+
+    def _source_list(self, entity_id: str) -> list[str] | None:
+        try:
+            states = self._client.get_states()
+        except Exception:
+            return None
+        if not isinstance(states, list):
+            return None
+        for row in states:
+            if not isinstance(row, dict) or row.get("entity_id") != entity_id:
+                continue
+            attributes = row.get("attributes") or {}
+            if not isinstance(attributes, dict):
+                return None
+            raw = attributes.get("source_list")
+            if not isinstance(raw, list):
+                return None
+            names = [item for item in raw if isinstance(item, str) and item.strip()]
+            return names or None
+        return None
 
     def _volume_level(self, entity_id: str) -> float | None:
         try:
@@ -427,6 +481,18 @@ def _color_temperature_call(
             "target_kelvin": target,
         },
     )
+
+
+def _listed_source(requested: str, available: list[str] | None) -> str | None:
+    """Case-only match against the device's own source_list."""
+
+    if not requested or not available:
+        return None
+    folded = requested.casefold()
+    for name in available:
+        if name.casefold() == folded:
+            return name
+    return None
 
 
 def _percent_level(points: int) -> float:

@@ -29,6 +29,7 @@ _TV_BITS = (
     (1024, "volume.decrease"),
     (8, "volume.mute"),
     (8, "volume.unmute"),
+    (2048, "source.select"),
     (32, "media.next"),
     (16, "media.previous"),
 )
