@@ -22,6 +22,7 @@ _TV_BITS = (
     (128, "device.turn_on"),
     (256, "device.turn_off"),
     (16384, "media.play"),
+    (16384, "media.resume"),
     (1, "media.pause"),
     (4096, "media.stop"),
     (4, "volume.set"),

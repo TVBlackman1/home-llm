@@ -43,6 +43,7 @@ _SLEEP_SPEAKER = re.compile(
     re.IGNORECASE,
 )
 _PAUSE = re.compile(r"(?<![0-9a-zа-яе])(?:пауз\w*|приостанови\w*)", re.IGNORECASE)
+_RESUME = re.compile(r"(?<![0-9a-zа-яе])продолжи(?![0-9a-zа-яе])", re.IGNORECASE)
 _STOP = re.compile(r"(?<![0-9a-zа-яе])останови(?!сь)", re.IGNORECASE)
 _SEEK = re.compile(r"(?<![0-9a-zа-яе])перемотай", re.IGNORECASE)
 _REWIND = re.compile(r"(?<![0-9a-zа-яе])отмотай(?![0-9a-zа-яе])", re.IGNORECASE)
@@ -81,7 +82,7 @@ _PLAY = re.compile(
 )
 _FRAME_VERB = re.compile(
     r"(?<![0-9a-zа-яе])(?:включи|выключи|запусти|поставь|вруби|выруби|сделай|перемотай|"
-    r"убавь|уменьши|увеличь|прибавь|покажи|останови|приостанови|перескочи|хочу|убери|отключи|верни|переключи|выбери)\w*",
+    r"убавь|уменьши|увеличь|прибавь|покажи|останови|приостанови|перескочи|хочу|убери|отключи|верни|переключи|выбери|продолжи)\w*",
     re.IGNORECASE,
 )
 _DOMAIN_TOKEN = re.compile(
@@ -281,6 +282,8 @@ def _decide(
         return "video.play", residual or None, None, ("episode",)
     if _PAUSE.search(folded):
         return "media.pause", None, None, ("pause",)
+    if _RESUME.search(folded):
+        return "media.resume", None, None, ("resume",)
     if _SEEK.search(folded) and _FORWARD.search(folded):
         return "media.seek_forward", None, amount, ("seek_forward",)
     if _SEEK.search(folded) and _BACKWARD.search(folded):

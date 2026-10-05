@@ -35,6 +35,11 @@ _COLOR_TEMPERATURE = frozenset({
 DEFAULT_COLOR_TEMP_STEP_K = 400
 # light.turn_on has no hs_color field. rgb_color is the field filtered for hs.
 _CHROMATIC_MODES = frozenset({"hs", "xy", "rgb", "rgbw", "rgbww"})
+_PLAYBACK = {
+    "media.pause": "media_pause",
+    "media.play": "media_play",
+    "media.resume": "media_play",
+}
 _VOLUME = frozenset({
     "volume.set",
     "volume.increase",
@@ -159,6 +164,10 @@ class HaExecutor:
             if binding is None or binding.domain != "media_player":
                 return _unsupported(result, "source_unavailable")
             return self._select_source(resolved, result, binding)
+        if resolved.intent in _PLAYBACK:
+            if binding is None or binding.domain != "media_player":
+                return _unsupported(result, "playback_unavailable")
+            return self._control_playback(resolved, result, binding)
         if resolved.intent in _COLOR_TEMPERATURE:
             current = None
             if (
@@ -277,6 +286,28 @@ class HaExecutor:
         if call.is_volume_muted is not None:
             execution["is_volume_muted"] = call.is_volume_muted
         execution.update(relative)
+        if not self._perform:
+            return _with_execution(result, execution)
+        try:
+            status_code = self._client.call_service(call.domain, call.service, call.service_data())
+        except Exception as exc:
+            execution["attempted"] = True
+            return _failed(result, failure_reason(exc), execution)
+        if isinstance(status_code, int):
+            execution["http_status"] = status_code
+        return _with_execution(result, execution)
+
+    def _control_playback(self, resolved: ResolvedCommand, result: Result, binding: Binding) -> Result:
+        """Play and pause use the media player. Stop stays unwired until it is verified."""
+
+        call = PlannedCall("media_player", _PLAYBACK[resolved.intent], binding.entity_id)
+        self.planned.append(call)
+        execution = {
+            "attempted": self._perform,
+            "intent": resolved.intent,
+            "service": f"media_player.{call.service}",
+            "entity_id": call.entity_id,
+        }
         if not self._perform:
             return _with_execution(result, execution)
         try:
