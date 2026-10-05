@@ -223,7 +223,7 @@ def test_power_mapping_uses_the_binding_domain():
     assert off.service == "turn_off"
     brighter = planned_call("brightness.increase", Binding(HaExecutionBinding("light.lampa", "light")))
     assert brighter is not None
-    assert brighter.brightness_step_pct == 10
+    assert brighter.brightness_step_pct == 20
     assert planned_call(
         "brightness.set",
         Binding(HaExecutionBinding("media_player.frame", "media_player")),

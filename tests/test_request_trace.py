@@ -44,9 +44,14 @@ def _pipeline(client, *, nlu=None):
     inventory = _snapshot()
     executor = HaExecutor(inventory.registry, inventory.bindings, client)
     backend = nlu or _FakeNLU(NotCommandOutcome())
+    members = {
+        entity_id: binding.members
+        for entity_id, binding in inventory.bindings.items()
+        if binding.members
+    }
     pipeline = SemanticPipeline(
         backend,
-        CapabilityResolver(inventory.registry),
+        CapabilityResolver(inventory.registry, members=members),
         executor,
         inventory.registry,
     )
@@ -81,11 +86,11 @@ def test_not_found_does_not_call():
 
 def test_ambiguous_does_not_call():
     _inventory, client, pipeline = _pipeline(_FakeHa())
-    result = pipeline.run("Включи свет в гостиной", _Quiet(), state=_snapshot().state)
+    result = pipeline.run("звук", _Quiet(), state=_snapshot().state)
     request = pipeline.last_request
     assert request is not None
-    assert result.payload["status"] == "ambiguous"
-    assert request.status == "ambiguous"
+    assert result.payload["status"] == "clarify"
+    assert result.payload["reason"] == "no_active_device"
     assert request.commands[0].executed is False
     assert client.calls == []
 

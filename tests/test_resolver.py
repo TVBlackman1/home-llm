@@ -304,14 +304,18 @@ def test_monitor_does_not_invent_owner(resolver: CapabilityResolver) -> None:
 
 
 @pytest.mark.unit
-def test_explicit_room_beats_satellite_room(resolver: CapabilityResolver) -> None:
+def test_explicit_room_selects_every_maximal_light(resolver: CapabilityResolver) -> None:
     resolved = resolver.resolve(
         _command("device.turn_off", device_type="light", area="спальня", explicit=True),
         context=RequestContext(source_area="кухня"),
         text="Выключи свет в спальне",
     )
 
-    assert resolved.execution_target_id == "light_common_bedroom"
+    assert resolved.status == "resolved"
+    assert resolved.reason == "maximal_targets"
+    assert "light_common_bedroom" in resolved.execution_target_ids
+    assert "lamp_marina_bedroom" in resolved.execution_target_ids
+    assert "light_common_kitchen" not in resolved.execution_target_ids
 
 
 @pytest.mark.unit

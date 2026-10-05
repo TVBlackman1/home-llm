@@ -94,16 +94,22 @@ def run_home_request(client, text: str, *, model: str | None = None, nlu=None) -
             payload={"status": "unavailable", "reason": failure_reason(exc)},
         )
     executor = ExecutionRouter(inventory.registry, inventory.bindings, client)
+    members = {
+        entity_id: binding.members
+        for entity_id, binding in inventory.bindings.items()
+        if binding.members
+    }
     if nlu is None:
         pipeline = semantic_pipeline(
             model=model,
             registry=inventory.registry,
             executor=executor,
+            members=members,
         )
     else:
         pipeline = SemanticPipeline(
             nlu,
-            CapabilityResolver(inventory.registry),
+            CapabilityResolver(inventory.registry, members=members),
             executor,
             inventory.registry,
         )

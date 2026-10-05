@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import time
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from typing import Mapping
 
 from ollama_runner.inventory.registry import DeviceRegistry
@@ -119,10 +119,7 @@ class SemanticPipeline:
                     normalization=notes,
                 )
                 self._resolve_log.append(f"{resolved.status}/{resolved.reason or ''}")
-                result = self._executor.execute(resolved, sink)
-                records.append(
-                    _recorded(self, "llm", "command", semantic, resolved, result)
-                )
+                result = _dispatch(self, "llm", semantic, resolved, sink, records)
                 final_intent = semantic.intent
                 final_command = semantic
             else:
@@ -268,11 +265,48 @@ def _execute_plan(
             normalization=plan.evidence,
         )
         pipeline._resolve_log.append(f"{resolved.status}/{resolved.reason or ''}")
-        result = pipeline._executor.execute(resolved, sink)
-        records.append(_recorded(pipeline, "deterministic", "command", command, resolved, result))
+        result = _dispatch(pipeline, "deterministic", command, resolved, sink, records)
     if result is None:
         raise RuntimeError("fully parsed plan has no command")
     return result, records
+
+
+def _fanout_pairs(resolved) -> tuple[tuple[str, str], ...] | None:
+    ids = resolved.execution_target_ids
+    intents = resolved.execution_intents
+    if len(ids) > 1 and len(intents) == len(ids):
+        return tuple(zip(ids, intents))
+    return None
+
+
+def _dispatch(pipeline, source: str, semantic, resolved, sink, records) -> Result:
+    """Run one resolved command, or each maximal target when the resolver fans out."""
+
+    pairs = _fanout_pairs(resolved)
+    if pairs is None:
+        shown = semantic
+        if semantic is not None and resolved.intent and resolved.intent != semantic.intent:
+            shown = replace(semantic, intent=resolved.intent)
+        result = pipeline._executor.execute(resolved, sink)
+        records.append(_recorded(pipeline, source, "command", shown, resolved, result))
+        return result
+
+    results: list[Result] = []
+    for device_id, intent in pairs:
+        one = replace(
+            resolved,
+            intent=intent,
+            semantic_target_id=device_id,
+            execution_target_id=device_id,
+            execution_target_ids=(),
+            execution_intents=(),
+        )
+        shown = replace(semantic, intent=intent)
+        result = pipeline._executor.execute(one, sink)
+        results.append(result)
+        records.append(_recorded(pipeline, source, "command", shown, one, result))
+    failed = next((item for item in results if not item.ok), None)
+    return failed if failed is not None else results[-1]
 
 
 def _recorded(pipeline: SemanticPipeline, source: str, decision: str, semantic, resolved, result):

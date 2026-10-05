@@ -56,10 +56,10 @@ def test_brightness_increase_and_decrease_send_signed_steps():
 
 def test_relative_without_a_value_uses_the_explicit_default():
     assert _run("brightness.increase", "light.lampa") == [
-        ("light", "turn_on", {"entity_id": "light.lampa", "brightness_step_pct": 10})
+        ("light", "turn_on", {"entity_id": "light.lampa", "brightness_step_pct": 20})
     ]
     assert _run("brightness.decrease", "light.lampa") == [
-        ("light", "turn_on", {"entity_id": "light.lampa", "brightness_step_pct": -10})
+        ("light", "turn_on", {"entity_id": "light.lampa", "brightness_step_pct": -20})
     ]
 
 
@@ -126,7 +126,7 @@ def test_numbered_lamps_keep_their_targets():
         "Поставь яркость лампы 1 на 30 процентов": ("light.bulb_e27_lemon_3", 30, None),
         "Поставь яркость лампы один на 30 процентов": ("light.bulb_e27_lemon_3", 30, None),
         "Поставь яркость лампы 2 на 30 процентов": ("light.bulb_e27_lemon_3_2", 30, None),
-        "Сделай лампу 2 потемнее": ("light.bulb_e27_lemon_3_2", None, -10),
+        "Сделай лампу 2 потемнее": ("light.bulb_e27_lemon_3_2", None, -20),
     }
     for text, (entity, pct, step) in expected.items():
         parsed = parse_deterministic(text, inventory.registry)
@@ -235,15 +235,24 @@ def test_relative_decrease_sends_a_negative_step_twice():
     assert all("brightness_pct" not in payload for _, _, payload in client.calls)
 
 
-def test_unnamed_decrease_stays_ambiguous():
+def test_unnamed_decrease_uses_the_covering_group():
     inventory = _snapshot()
     client = _FakeHa()
-    resolver = CapabilityResolver(inventory.registry)
+    members = {
+        entity_id: binding.members
+        for entity_id, binding in inventory.bindings.items()
+        if binding.members
+    }
+    resolver = CapabilityResolver(inventory.registry, members=members)
     router = ExecutionRouter(inventory.registry, inventory.bindings, client)
     text = "уменьши яркость на 10 процентов"
     parsed = parse_deterministic(text, inventory.registry)
     assert parsed.intent == "brightness.decrease"
     resolved = resolver.resolve(parsed.command(), text=text)
-    assert resolved.status == "ambiguous"
+    assert resolved.status == "resolved"
+    assert resolved.execution_target_id == "light.lampa"
+    assert resolved.execution_target_ids == ()
     router.execute(resolved, _Quiet())
-    assert client.calls == []
+    assert client.calls == [
+        ("light", "turn_on", {"entity_id": "light.lampa", "brightness_step_pct": -10}),
+    ]

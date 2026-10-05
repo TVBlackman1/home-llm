@@ -76,6 +76,10 @@ _DECREASE = re.compile(r"(?<![0-9a-zа-яе])(?:убавь|уменьши|сни
 _INCREASE = re.compile(r"(?<![0-9a-zа-яе])(?:увеличь|прибавь)\w*", re.IGNORECASE)
 _RAISE = re.compile(r"(?<![0-9a-zа-яе])повысь\w*", re.IGNORECASE)
 _ASSIGN = re.compile(r"(?<![0-9a-zа-яе])установи\w*", re.IGNORECASE)
+_TOO_DARK = re.compile(r"(?<![0-9a-zа-яе])слишком\s+темно(?![0-9a-zа-яе])", re.IGNORECASE)
+_TOO_BRIGHT = re.compile(r"(?<![0-9a-zа-яе])слишком\s+ярко(?![0-9a-zа-яе])", re.IGNORECASE)
+_BARE_LIGHT = re.compile(r"^(?:пожалуйста\s+)?свет[.!]?$", re.IGNORECASE)
+_BARE_SOUND = re.compile(r"^(?:пожалуйста\s+)?звук[.!]?$", re.IGNORECASE)
 _SET = re.compile(r"(?<![0-9a-zа-яе])поставь", re.IGNORECASE)
 _NEGATION = re.compile(r"(?<![0-9a-zа-яе])(?:не|нельзя)(?![0-9a-zа-яе])", re.IGNORECASE)
 _PLAY = re.compile(
@@ -279,6 +283,9 @@ def _decide(
         return rewind
     if not _command_frame(text, registry):
         return None
+    shorthand = _shorthand(folded)
+    if shorthand is not None:
+        return shorthand
 
     if _is_episode(text):
         return "video.play", residual or None, None, ("episode",)
@@ -383,6 +390,20 @@ def _selected_source(text: str, folded: str) -> str | None:
     return label
 
 
+def _shorthand(folded: str) -> tuple[str, None, None, tuple[str, ...]] | None:
+    """Bare «свет» and «звук», and «слишком темно/ярко», are commands by themselves."""
+
+    if _TOO_DARK.search(folded):
+        return "brightness.increase", None, None, ("too_dark",)
+    if _TOO_BRIGHT.search(folded):
+        return "brightness.decrease", None, None, ("too_bright",)
+    if _BARE_LIGHT.search(folded):
+        return "device.toggle", None, None, ("light_shorthand",)
+    if _BARE_SOUND.search(folded):
+        return "media.toggle", None, None, ("media_shorthand",)
+    return None
+
+
 def _heard_audio(folded: str) -> tuple[str, None, None, tuple[str, ...]] | None:
     """«звук» owns the verb. TV power stays the command that names the television."""
 
@@ -404,6 +425,10 @@ def _command_frame(text: str, registry: DeviceRegistry) -> bool:
     """A lone keyword is not a command. A verb, or only domain words, is."""
 
     folded = fold(text)
+    if _TOO_DARK.search(folded) or _TOO_BRIGHT.search(folded):
+        return True
+    if _BARE_LIGHT.search(folded) or _BARE_SOUND.search(folded):
+        return True
     if _FRAME_VERB.search(folded):
         return True
     # снизь / повысь / установи are brightness verbs, not general command frames.

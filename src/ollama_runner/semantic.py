@@ -166,6 +166,8 @@ class ResolvedCommand:
     execution_target_id: str | None
     arguments: Mapping[str, str]
     candidates: tuple[str, ...]
+    execution_target_ids: tuple[str, ...] = ()
+    execution_intents: tuple[str, ...] = ()
     owner: str = ""
     area: str = ""
     reason: str = ""

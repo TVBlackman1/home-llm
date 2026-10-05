@@ -11,7 +11,7 @@ from ollama_runner.nlu.values import kelvin_points, named_color_rgb, percent_poi
 from ollama_runner.request import EXECUTION_FAILED
 from ollama_runner.semantic import ResolvedCommand
 from ollama_runner.skills.book import Executor
-from ollama_runner.types import Result
+from ollama_runner.types import Command, Result
 
 
 _POWER = {
@@ -25,7 +25,7 @@ _BRIGHTNESS = frozenset({
 })
 # No step exists in the semantic layer. Ten points on the 0–100 service scale
 # is the one explicit default for a relative command that names no amount.
-DEFAULT_BRIGHTNESS_STEP = 10
+DEFAULT_BRIGHTNESS_STEP = 20
 _COLOR_TEMPERATURE = frozenset({
     "color_temperature.set",
     "color_temperature.warmer",
@@ -147,6 +147,13 @@ class HaExecutor:
         self.planned: list[PlannedCall] = []
 
     def execute(self, resolved: ResolvedCommand, sink) -> Result:
+        if resolved.status == "resolved" and resolved.intent == "device.toggle":
+            return Result(
+                ok=False,
+                command=Command(device_id=resolved.execution_target_id or "", action=resolved.intent),
+                error="unsupported",
+                payload={"status": "unsupported", "reason": "light_state_unknown"},
+            )
         result = self._inner.execute(resolved, sink)
         if not result.ok or resolved.status != "resolved":
             return result

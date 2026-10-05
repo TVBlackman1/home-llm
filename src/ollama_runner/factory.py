@@ -32,6 +32,7 @@ def semantic_pipeline(
     model: str | None = None,
     registry: DeviceRegistry | None = None,
     executor: object | None = None,
+    members: dict[str, tuple[str, ...]] | None = None,
 ) -> SemanticPipeline:
     """Same Ollama model and capability resolver.
 
@@ -46,7 +47,7 @@ def semantic_pipeline(
     chosen_executor = Executor(chosen_registry) if executor is None else executor
     return SemanticPipeline(
         _get_semantic_parser(chosen),
-        CapabilityResolver(chosen_registry),
+        CapabilityResolver(chosen_registry, members=members),
         chosen_executor,
         chosen_registry,
     )

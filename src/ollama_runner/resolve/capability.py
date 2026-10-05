@@ -8,6 +8,7 @@ from ollama_runner.inventory.registry import (
     RegistryDevice,
     canonicalize_area,
     canonicalize_device_type,
+    device_type_from_text,
     relation_supports,
     stem_token,
 )
@@ -34,6 +35,11 @@ _POWER_FALLBACK = {
     "device.turn_on": "media.play",
     "device.turn_off": "media.stop",
 }
+_FANOUT = frozenset({
+    "brightness.set",
+    "brightness.increase",
+    "brightness.decrease",
+})
 
 
 def _phrase_key(text: str) -> str:
@@ -46,9 +52,16 @@ class CapabilityResolver:
         self,
         registry: DeviceRegistry,
         weights: ScoreWeights | None = None,
+        *,
+        members: Mapping[str, tuple[str, ...]] | None = None,
     ) -> None:
         self._registry = registry
         self._weights = weights or ScoreWeights()
+        self._members = {
+            entity_id: tuple(contained)
+            for entity_id, contained in (members or {}).items()
+            if contained
+        }
         self._slots = ExplicitSlots()
         self._nlu_intent = ""
         self._normalization: tuple[str, ...] = ()
@@ -175,6 +188,27 @@ class CapabilityResolver:
                 missing=(command.intent,) if named else (),
             )
 
+        if command.intent == "device.toggle":
+            return self._light_toggle(
+                command,
+                supported,
+                state,
+                text=text,
+                constraints=constraints,
+                capability_lines=tuple(capability_lines),
+                state_lines=state_lines,
+            )
+        if command.intent == "media.toggle":
+            return self._media_toggle(
+                command,
+                supported,
+                state,
+                text=text,
+                constraints=constraints,
+                capability_lines=tuple(capability_lines),
+                state_lines=state_lines,
+            )
+
         session = self._session_decision(
             command,
             supported,
@@ -186,6 +220,18 @@ class CapabilityResolver:
         )
         if session is not None:
             return session
+
+        fanout = self._fanout(
+            command,
+            supported,
+            alias_ids,
+            text=text,
+            constraints=constraints,
+            capability_lines=tuple(capability_lines),
+            state_lines=state_lines,
+        )
+        if fanout is not None:
+            return fanout
 
         scored: list[tuple[int, RegistryDevice, RegistryDevice, str, tuple[str, ...]]] = []
         for device, execution, via, effective in supported:
@@ -300,6 +346,14 @@ class CapabilityResolver:
         device: RegistryDevice,
         intent: str,
     ) -> tuple[RegistryDevice | None, str, str]:
+        if intent == "device.toggle":
+            if "device.turn_on" in device.capabilities and "device.turn_off" in device.capabilities:
+                return device, "", intent
+            return None, "", intent
+        if intent == "media.toggle":
+            if "media.pause" in device.capabilities or "media.resume" in device.capabilities:
+                return device, "", intent
+            return None, "", intent
         if intent in device.capabilities:
             return device, "", intent
         fallback = _POWER_FALLBACK.get(intent)
@@ -481,6 +535,8 @@ class CapabilityResolver:
         intent: str | None = None,
         reason: str = "",
         missing: tuple[str, ...] = (),
+        execution_target_ids: tuple[str, ...] = (),
+        execution_intents: tuple[str, ...] = (),
     ) -> ResolvedCommand:
         slots = self._slots
         explicit_lines = (
@@ -526,6 +582,250 @@ class CapabilityResolver:
             area=area,
             missing=missing,
             trace=trace,
+            execution_target_ids=execution_target_ids,
+            execution_intents=execution_intents,
+        )
+
+    def _concrete(self, target: Target, alias_ids: set[str]) -> bool:
+        """An ordinal or a name that is not just the device type picks one device."""
+
+        if target.ordinal is not None:
+            return True
+        if not target.mention or not alias_ids:
+            return False
+        found = device_type_from_text(target.mention)
+        if found is not None and _phrase_key(found[1]) == _phrase_key(target.mention):
+            return False
+        return True
+
+    def _covered(self, selected: set[str]) -> set[str]:
+        """Candidates transitively contained by another selected candidate."""
+
+        covered: set[str] = set()
+        for group_id in selected:
+            stack = list(self._members.get(group_id, ()))
+            seen: set[str] = set()
+            while stack:
+                member = stack.pop()
+                if member in seen:
+                    continue
+                seen.add(member)
+                if member in selected:
+                    covered.add(member)
+                stack.extend(self._members.get(member, ()))
+        return covered
+
+    def _maximal(
+        self,
+        supported: list[tuple[RegistryDevice, RegistryDevice, str, str]],
+    ) -> list[tuple[RegistryDevice, RegistryDevice, str, str]]:
+        selected = {item[0].id for item in supported}
+        covered = self._covered(selected)
+        kept = [item for item in supported if item[0].id not in covered]
+        kept.sort(key=lambda item: item[0].id)
+        return kept
+
+    def _fanout(
+        self,
+        command: SemanticCommand,
+        supported: list[tuple[RegistryDevice, RegistryDevice, str, str]],
+        alias_ids: set[str],
+        *,
+        text: str,
+        constraints: tuple[str, ...],
+        capability_lines: tuple[str, ...],
+        state_lines: tuple[str, ...],
+    ) -> ResolvedCommand | None:
+        area_power = (
+            command.intent in {"device.turn_on", "device.turn_off"}
+            and command.target.device_type == "light"
+            and bool(command.target.area)
+        )
+        if command.intent not in _FANOUT and not area_power:
+            return None
+        if self._concrete(command.target, alias_ids):
+            return None
+        maximal = self._maximal(supported)
+        types = {item[0].type for item in maximal}
+        if len(types) > 1:
+            devices = tuple(item[0] for item in maximal)
+            return self._finish(
+                command,
+                text=text,
+                status=AMBIGUOUS,
+                constraints=constraints,
+                candidates=tuple(device.id for device in devices),
+                capability_lines=capability_lines,
+                state_lines=state_lines,
+                score_lines=("multiple device types",),
+                semantic_id=None,
+                execution_id=None,
+                tied=tuple(device.id for device in devices),
+                reason="device_type",
+                missing=("device_type",),
+            )
+        if len(maximal) == 1:
+            device, execution, _, effective = maximal[0]
+            return self._finish(
+                command,
+                text=text,
+                status=RESOLVED,
+                constraints=constraints,
+                candidates=(device.id,),
+                capability_lines=capability_lines,
+                state_lines=state_lines,
+                score_lines=(f"{device.id} maximal target",),
+                semantic_id=device.id,
+                execution_id=execution.id,
+                tied=(device.id,),
+                intent=effective,
+            )
+        ids = tuple(item[0].id for item in maximal)
+        return self._finish(
+            command,
+            text=text,
+            status=RESOLVED,
+            constraints=constraints,
+            candidates=ids,
+            capability_lines=capability_lines,
+            state_lines=state_lines,
+            score_lines=tuple(f"{device_id} maximal target" for device_id in ids),
+            semantic_id=ids[0],
+            execution_id=ids[0],
+            tied=ids,
+            reason="maximal_targets",
+            execution_target_ids=ids,
+            execution_intents=tuple(command.intent for _ in ids),
+        )
+
+    def _light_toggle(
+        self,
+        command: SemanticCommand,
+        supported: list[tuple[RegistryDevice, RegistryDevice, str, str]],
+        state: Mapping[str, DeviceRuntime],
+        *,
+        text: str,
+        constraints: tuple[str, ...],
+        capability_lines: tuple[str, ...],
+        state_lines: tuple[str, ...],
+    ) -> ResolvedCommand:
+        maximal = self._maximal(supported)
+        if not maximal:
+            return self._finish(
+                command,
+                text=text,
+                status=NOT_FOUND,
+                constraints=constraints,
+                candidates=(),
+                capability_lines=capability_lines,
+                state_lines=state_lines,
+                score_lines=(),
+                semantic_id=None,
+                execution_id=None,
+                tied=(),
+                reason="no_capable_device",
+            )
+        ids: list[str] = []
+        intents: list[str] = []
+        notes: list[str] = []
+        for device, _, _, _ in maximal:
+            runtime = state.get(device.id)
+            power = runtime.power if runtime is not None else None
+            if power == "on":
+                intent = "device.turn_off"
+            elif power == "off":
+                intent = "device.turn_on"
+            else:
+                intent = "device.toggle"
+            ids.append(device.id)
+            intents.append(intent)
+            notes.append(f"{device.id} power={power or 'unknown'} → {intent}")
+        return self._finish(
+            command,
+            text=text,
+            status=RESOLVED,
+            constraints=constraints,
+            candidates=tuple(ids),
+            capability_lines=capability_lines,
+            state_lines=state_lines,
+            score_lines=tuple(notes),
+            semantic_id=ids[0],
+            execution_id=ids[0],
+            tied=tuple(ids),
+            intent=intents[0] if len(ids) == 1 else command.intent,
+            reason="maximal_targets",
+            execution_target_ids=tuple(ids),
+            execution_intents=tuple(intents),
+        )
+
+    def _media_toggle(
+        self,
+        command: SemanticCommand,
+        supported: list[tuple[RegistryDevice, RegistryDevice, str, str]],
+        state: Mapping[str, DeviceRuntime],
+        *,
+        text: str,
+        constraints: tuple[str, ...],
+        capability_lines: tuple[str, ...],
+        state_lines: tuple[str, ...],
+    ) -> ResolvedCommand:
+        active: list[tuple[RegistryDevice, RegistryDevice, str]] = []
+        for device, execution, _, _ in supported:
+            runtime = state.get(device.id) or state.get(execution.id)
+            media = runtime.media if runtime is not None else None
+            if media == "playing" and "media.pause" in device.capabilities:
+                active.append((device, execution, "media.pause"))
+            elif media == "paused" and "media.resume" in device.capabilities:
+                active.append((device, execution, "media.resume"))
+        if not active:
+            return self._finish(
+                command,
+                text=text,
+                status=CLARIFY,
+                constraints=constraints,
+                candidates=(),
+                capability_lines=capability_lines,
+                state_lines=state_lines,
+                score_lines=("no_active_device",),
+                semantic_id=None,
+                execution_id=None,
+                tied=(),
+                reason="no_active_device",
+                missing=("active_device",),
+            )
+        if len(active) > 1:
+            devices = tuple(item[0] for item in active)
+            return self._finish(
+                command,
+                text=text,
+                status=AMBIGUOUS,
+                constraints=constraints,
+                candidates=tuple(device.id for device in devices),
+                capability_lines=capability_lines,
+                state_lines=state_lines,
+                score_lines=("multiple_active_devices",),
+                semantic_id=None,
+                execution_id=None,
+                tied=tuple(device.id for device in devices),
+                reason="multiple_active_devices",
+                missing=("device",),
+            )
+        device, execution, intent = active[0]
+        note = "currently playing" if intent == "media.pause" else "currently paused"
+        return self._finish(
+            command,
+            text=text,
+            status=RESOLVED,
+            constraints=constraints,
+            candidates=(device.id,),
+            capability_lines=capability_lines,
+            state_lines=state_lines,
+            score_lines=(f"{device.id} {note}",),
+            semantic_id=device.id,
+            execution_id=execution.id,
+            tied=(device.id,),
+            intent=intent,
+            reason="active_device",
         )
 
     def _missing(self, devices: tuple[RegistryDevice, ...], target: Target) -> tuple[str, ...]:
