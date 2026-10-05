@@ -8,8 +8,10 @@ from ollama_runner.factory import close_resources, default_pipeline, semantic_pi
 from ollama_runner.ha.client import HaClient
 from ollama_runner.ha.execute import HaExecutor
 from ollama_runner.ha.normalize import load_inventory
+from ollama_runner.request import configure_request_logging
 from ollama_runner.settings import get_settings
 from ollama_runner.sinks.jsonprint import PrintSink
+from ollama_runner.types import Command, Result
 
 
 def main() -> None:
@@ -76,17 +78,16 @@ def _run_home(args, settings) -> None:
     client = HaClient(settings)
     try:
         inventory = load_inventory(client)
+        configure_request_logging()
         pipeline = semantic_pipeline(
             model=args.model,
             registry=inventory.registry,
             executor=HaExecutor(inventory.registry, inventory.bindings, client),
         )
-        sink = PrintSink()
+        sink = _QuietSink()
 
         def once(text: str) -> bool:
             result = pipeline.run(text, sink, state=inventory.state)
-            if not result.ok:
-                print(result.error or result.payload, file=sys.stderr)
             return result.ok
 
         if args.text is not None:
@@ -104,6 +105,13 @@ def _run_home(args, settings) -> None:
     finally:
         client.close()
         close_resources()
+
+
+class _QuietSink:
+    """Accept a resolved command without printing the legacy payload."""
+
+    def send(self, command: Command) -> Result:
+        return Result(ok=True, command=command)
 
 
 if __name__ == "__main__":

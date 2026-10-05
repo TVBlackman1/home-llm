@@ -60,9 +60,10 @@ class HaClient:
     def get_labels(self) -> list[dict]:
         return self._registry("config/label_registry/list")
 
-    def call_service(self, domain: str, service: str, data: dict) -> None:
+    def call_service(self, domain: str, service: str, data: dict) -> int:
         response = self._http.post(f"/api/services/{domain}/{service}", json=data)
         response.raise_for_status()
+        return response.status_code
 
     def _get(self, path: str) -> list[dict]:
         response = self._http.get(path)

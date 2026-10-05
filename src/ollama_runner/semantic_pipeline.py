@@ -9,6 +9,12 @@ from ollama_runner.nlu.backend import NLUBackend
 from ollama_runner.nlu.parse import DeterministicParse, parse_deterministic
 from ollama_runner.nlu.slots import apply_explicit
 from ollama_runner.nlu.structure import parse_plan
+from ollama_runner.request import (
+    RequestResult,
+    command_from_result,
+    emit_request,
+    overall_status,
+)
 from ollama_runner.resolve.capability import CapabilityResolver
 from ollama_runner.semantic import (
     CommandOutcome,
@@ -52,6 +58,8 @@ class SemanticPipeline:
         self._registry = registry
         self.traces: list[NLUTrace] = []
         self.observations: list[dict] = []
+        self._request_ids = 0
+        self.last_request: RequestResult | None = None
 
     def run(
         self,
@@ -62,6 +70,8 @@ class SemanticPipeline:
         state: Mapping[str, DeviceRuntime] | None = None,
     ) -> Result:
         started = time.perf_counter()
+        self._request_ids += 1
+        request_id = self._request_ids
         context = context or RequestContext()
         parsed_at = time.perf_counter()
         plan = parse_plan(text, self._registry)
@@ -72,17 +82,19 @@ class SemanticPipeline:
         llm_raw = None
         final_command = None
         merge_notes: tuple[str, ...] = ()
+        merge_ran = False
+        llm_outcome = None
+        discarded_intent = None
+        records = []
 
         if plan.fully_parsed and plan.commands:
-            result = _execute_plan(self, plan, sink, context, state, text)
+            result, records = _execute_plan(self, plan, sink, context, state, text)
             final_intent = plan.commands[-1].intent
             handled = True
             reason = plan.reason
             evidence = plan.evidence
             deterministic_intent = plan.commands[0].intent
             final_command = plan.commands[-1]
-            llm_outcome = None
-            discarded_intent = None
         else:
             # A partial plan is not executed. The unresolved span stays for a later policy.
             deterministic = parse_deterministic(text, self._registry)
@@ -95,6 +107,7 @@ class SemanticPipeline:
                 llm_raw = parsed
                 semantic, slots, notes = _merge(text, deterministic, parsed, self._registry)
                 merge_notes = notes
+                merge_ran = True
                 nlu_intent = parsed.intent
                 resolved = self._resolver.resolve(
                     semantic,
@@ -107,11 +120,17 @@ class SemanticPipeline:
                 )
                 self._resolve_log.append(f"{resolved.status}/{resolved.reason or ''}")
                 result = self._executor.execute(resolved, sink)
+                records.append(
+                    _recorded(self, "llm", "command", semantic, resolved, result)
+                )
                 final_intent = semantic.intent
                 final_command = semantic
             else:
                 llm_intent = None
                 result = _stopped(outcome.kind)
+                records.append(
+                    command_from_result(source="llm", decision=outcome.kind, result=result)
+                )
                 final_intent = ""
             handled = False
             reason = plan.reason
@@ -159,6 +178,26 @@ class SemanticPipeline:
                 "total_s": time.perf_counter() - started,
             }
         )
+        llm_debug = None
+        if llm_raw is not None or llm_outcome is not None:
+            llm_debug = {"decision": llm_outcome or "command"}
+            if llm_raw is not None:
+                llm_debug.update(_command_view(llm_raw))
+            if discarded_intent:
+                llm_debug["discarded_intent"] = discarded_intent
+        request = RequestResult(
+            request_id=request_id,
+            text=text,
+            status=overall_status(records),
+            commands=tuple(records),
+            parse_reason=reason,
+            fully_parsed=plan.fully_parsed,
+            unresolved=plan.unresolved_spans,
+            llm=llm_debug,
+            merge_notes=merge_notes if merge_ran else None,
+        )
+        emit_request(request)
+        self.last_request = request
         return result
 
     def warmup(self) -> None:
@@ -198,8 +237,16 @@ def _command_view(command: SemanticCommand) -> dict:
     }
 
 
-def _execute_plan(pipeline: SemanticPipeline, plan, sink, context, state, text: str) -> Result:
+def _execute_plan(
+    pipeline: SemanticPipeline,
+    plan,
+    sink,
+    context,
+    state,
+    text: str,
+) -> tuple[Result, list]:
     result: Result | None = None
+    records = []
     for command in plan.commands:
         target = command.target
         slots = ExplicitSlots(
@@ -222,9 +269,28 @@ def _execute_plan(pipeline: SemanticPipeline, plan, sink, context, state, text: 
         )
         pipeline._resolve_log.append(f"{resolved.status}/{resolved.reason or ''}")
         result = pipeline._executor.execute(resolved, sink)
+        records.append(_recorded(pipeline, "deterministic", "command", command, resolved, result))
     if result is None:
         raise RuntimeError("fully parsed plan has no command")
-    return result
+    return result, records
+
+
+def _recorded(pipeline: SemanticPipeline, source: str, decision: str, semantic, resolved, result):
+    device = None
+    if resolved.execution_target_id:
+        device = pipeline._registry.get(resolved.execution_target_id)
+    return command_from_result(
+        source=source,
+        decision=decision,
+        result=result,
+        semantic=semantic,
+        resolution_status=resolved.status,
+        device_id=resolved.execution_target_id,
+        resolved_type=device.type if device is not None else None,
+        resolved_area=device.area if device is not None else None,
+        candidates=tuple(resolved.candidates),
+        reason=resolved.reason,
+    )
 
 
 def _merge(
