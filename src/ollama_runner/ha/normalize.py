@@ -32,6 +32,13 @@ _TV_BITS = (
 )
 
 
+_COLOR_TEMPERATURE = frozenset({
+    "color_temperature.set",
+    "color_temperature.warmer",
+    "color_temperature.cooler",
+})
+
+
 @dataclass(frozen=True)
 class Binding:
     """How a registry id is executed in Home Assistant."""
@@ -39,6 +46,8 @@ class Binding:
     entity_id: str
     domain: str
     members: tuple[str, ...] = ()
+    min_color_temp_kelvin: int | None = None
+    max_color_temp_kelvin: int | None = None
 
 
 @dataclass(frozen=True)
@@ -102,6 +111,7 @@ def build_inventory(
         area_id = entity.get("area_id") or (device or {}).get("area_id")
         attrs = state.get("attributes") or {}
         members = _members(attrs)
+        low, high = _color_temp_limits(attrs, detail)
         label_ids = list(entity.get("labels") or [])
         if device is not None:
             label_ids.extend(device.get("labels") or [])
@@ -112,7 +122,8 @@ def build_inventory(
                 owner_id=_owner_id(label_ids, labels_by_id),
                 area=_area_name(areas_by_id.get(area_id)),
                 aliases=_aliases(device, state, detail or entity),
-                capabilities=_capabilities(domain, attrs, detail, light_services),
+                capabilities=_capabilities(domain, attrs, detail, light_services)
+                | (_COLOR_TEMPERATURE if low is not None else frozenset()),
                 ordinal=_ordinal(device, state, detail or entity),
             )
         )
@@ -120,6 +131,8 @@ def build_inventory(
             entity_id=entity_id,
             domain=domain,
             members=members,
+            min_color_temp_kelvin=low,
+            max_color_temp_kelvin=high,
         )
         runtime[entity_id] = _runtime(domain, state.get("state") or "")
 
@@ -230,6 +243,36 @@ def _aliases(device: dict | None, state: dict, entity: dict) -> tuple[str, ...]:
         seen.add(key)
         names.append(text)
     return tuple(names)
+
+
+def whole_kelvin(raw: object) -> int | None:
+    """Nearest whole Kelvin. A fractional report is the mired round-trip, not a second unit."""
+
+    if isinstance(raw, bool) or not isinstance(raw, (int, float)):
+        return None
+    try:
+        return int(round(float(raw)))
+    except (TypeError, ValueError, OverflowError):
+        return None
+
+
+def _color_temp_limits(attrs: dict, detail: dict) -> tuple[int | None, int | None]:
+    """Per-device Kelvin bounds. The service schema's global range is not used."""
+
+    extra = (detail.get("capabilities") or {}) if detail else {}
+    modes = set(attrs.get("supported_color_modes") or [])
+    modes.update(extra.get("supported_color_modes") or [])
+    if "color_temp" not in modes:
+        return None, None
+    low = whole_kelvin(attrs.get("min_color_temp_kelvin"))
+    high = whole_kelvin(attrs.get("max_color_temp_kelvin"))
+    if low is None:
+        low = whole_kelvin(extra.get("min_color_temp_kelvin"))
+    if high is None:
+        high = whole_kelvin(extra.get("max_color_temp_kelvin"))
+    if low is None or high is None or low > high:
+        return None, None
+    return low, high
 
 
 def _capabilities(

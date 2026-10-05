@@ -95,7 +95,12 @@ def _snapshot():
         {
             "entity_id": "light.bulb_e27_lemon_3",
             "state": "on",
-            "attributes": {"friendly_name": "Лампа 1", "supported_color_modes": ["color_temp", "hs"]},
+            "attributes": {
+                "friendly_name": "Лампа 1",
+                "supported_color_modes": ["color_temp", "hs"],
+                "min_color_temp_kelvin": 2700,
+                "max_color_temp_kelvin": 6500,
+            },
         },
         {
             "entity_id": "light.bulb_e27_lemon_3_2",
@@ -108,6 +113,8 @@ def _snapshot():
             "attributes": {
                 "friendly_name": "Лампа",
                 "supported_color_modes": ["color_temp", "hs"],
+                "min_color_temp_kelvin": 2700,
+                "max_color_temp_kelvin": 6500,
                 "entity_id": ["light.bulb_e27_lemon_3", "light.bulb_e27_lemon_3_2"],
             },
         },
@@ -168,7 +175,13 @@ def test_lights_tv_group_and_remote():
     assert "device.turn_on" in lamp.capabilities
     assert "brightness.increase" in lamp.capabilities
     assert "color.set" in lamp.capabilities
-    assert inventory.bindings["light.bulb_e27_lemon_3"] == Binding("light.bulb_e27_lemon_3", "light")
+    assert inventory.bindings["light.bulb_e27_lemon_3"] == Binding(
+        "light.bulb_e27_lemon_3",
+        "light",
+        min_color_temp_kelvin=2700,
+        max_color_temp_kelvin=6500,
+    )
+    assert "color_temperature.set" in lamp.capabilities
     assert inventory.state["light.bulb_e27_lemon_3"].power == "on"
 
     other = inventory.registry.get("light.bulb_e27_lemon_3_2")
@@ -176,6 +189,7 @@ def test_lights_tv_group_and_remote():
     assert other.owner_id == ""
     assert other.ordinal == 2
     assert other.area == "гостиная"
+    assert "color_temperature.set" not in other.capabilities
 
     group = inventory.registry.get("light.lampa")
     assert group is not None

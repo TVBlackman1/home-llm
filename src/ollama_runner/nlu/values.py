@@ -105,6 +105,26 @@ def canonical_color(span: str) -> str | None:
     return None
 
 
+_KELVIN = re.compile(
+    r"(?<![0-9a-zа-яе])(\d+)\s*кельвин",
+    re.IGNORECASE,
+)
+
+
+def kelvin_points(text: str) -> int | None:
+    """Kelvin from a bare integer or «4000 кельвинов». Spoken number words are not accepted."""
+
+    if not text:
+        return None
+    stripped = text.strip()
+    if re.fullmatch(r"\d+", stripped):
+        return int(stripped)
+    match = _KELVIN.search(fold(stripped))
+    if match is None:
+        return None
+    return int(match.group(1))
+
+
 def percent_points(value: str | None) -> int | None:
     """Integer read from an already extracted percentage span.
 

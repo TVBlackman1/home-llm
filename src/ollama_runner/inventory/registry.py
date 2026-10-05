@@ -14,6 +14,9 @@ LIGHT = POWER | frozenset({
     "brightness.decrease",
     "brightness.set",
     "color.set",
+    "color_temperature.set",
+    "color_temperature.warmer",
+    "color_temperature.cooler",
 })
 TRANSPORT = frozenset({
     "media.play",

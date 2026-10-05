@@ -49,6 +49,11 @@ class CommandResult:
     value: str | None = None
     brightness_pct: int | None = None
     brightness_step_pct: int | None = None
+    color_temp_kelvin: int | None = None
+    current_kelvin: int | None = None
+    direction: str | None = None
+    step_kelvin: int | None = None
+    target_kelvin: int | None = None
 
 
 @dataclass(frozen=True)
@@ -132,6 +137,11 @@ def command_from_result(
             if isinstance(execution.get("brightness_step_pct"), int)
             else None
         ),
+        color_temp_kelvin=_as_int(execution.get("color_temp_kelvin")),
+        current_kelvin=_as_int(execution.get("current_kelvin")),
+        direction=execution.get("direction") if isinstance(execution.get("direction"), str) else None,
+        step_kelvin=_as_int(execution.get("step_kelvin")),
+        target_kelvin=_as_int(execution.get("target_kelvin")),
     )
 
 
@@ -201,6 +211,18 @@ def emit_request(request: RequestResult) -> None:
                     req,
                     _fields(**prefix, http_status=command.http_status),
                 )
+        if command.direction:
+            _LOGGER.debug(
+                "[execute] req=%s %s",
+                req,
+                _fields(
+                    **prefix,
+                    current_kelvin=command.current_kelvin,
+                    direction=command.direction,
+                    step_kelvin=command.step_kelvin,
+                    target_kelvin=command.target_kelvin,
+                ),
+            )
         _LOGGER.info("[result] req=%s %s", req, _result_line(command, prefix))
 
 
@@ -239,12 +261,17 @@ def _execute_line(command: CommandResult, prefix: dict) -> str:
         entity=command.entity_id,
         brightness_pct=command.brightness_pct,
         brightness_step_pct=command.brightness_step_pct,
+        color_temp_kelvin=command.color_temp_kelvin,
     )
 
 
 def _result_line(command: CommandResult, prefix: dict) -> str:
-    reason = command.reason if command.status == EXECUTION_FAILED else ""
+    reason = command.reason if command.status in {EXECUTION_FAILED, "unsupported"} else ""
     return _fields(**prefix, status=command.status, reason=reason)
+
+
+def _as_int(value: object) -> int | None:
+    return value if isinstance(value, int) else None
 
 
 def _fields(**items) -> str:

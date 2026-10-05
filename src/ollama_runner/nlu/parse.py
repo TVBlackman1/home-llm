@@ -15,7 +15,7 @@ from ollama_runner.nlu.slots import (
     read_slots,
     spoken_mention,
 )
-from ollama_runner.nlu.values import canonical_color, parameter_value
+from ollama_runner.nlu.values import canonical_color, kelvin_points, parameter_value
 from ollama_runner.semantic import ExplicitSlots, SemanticCommand, Target
 
 
@@ -58,6 +58,9 @@ _LISTEN = re.compile(
     re.IGNORECASE,
 )
 _DARKER = re.compile(r"(?<![0-9a-zа-яе])потемнее", re.IGNORECASE)
+_WARMER = re.compile(r"(?<![0-9a-zа-яе])теплее(?![0-9a-zа-яе])", re.IGNORECASE)
+_COOLER = re.compile(r"(?<![0-9a-zа-яе])холоднее(?![0-9a-zа-яе])", re.IGNORECASE)
+_KELVIN_WORD = re.compile(r"(?<![0-9a-zа-яе])\d+\s*кельвин", re.IGNORECASE)
 _BRIGHTER = re.compile(r"(?<![0-9a-zа-яе])ярче", re.IGNORECASE)
 _BRIGHTNESS = re.compile(r"(?<![0-9a-zа-яе])яркост", re.IGNORECASE)
 _QUIETER = re.compile(r"(?<![0-9a-zа-яе])потише", re.IGNORECASE)
@@ -83,7 +86,8 @@ _DOMAIN_TOKEN = re.compile(
     r"сери\w*|фильм\w*|кино|альбом\w*|плейлист\w*|песн\w*|трек\w*|мультик\w*|"
     r"новост\w*|сезон\w*|исполнител\w*|процент\w*|минут\w*|"
     r"красн\w*|синим|синий|синяя|синее|синие|фиолетов\w*|зелен\w*|оранж\w*|"
-    r"теплый|тёплый|бел\w*|перв\w*|втор\w*|трет\w*|четвер\w*|\d+",
+    r"теплый|тёплый|бел\w*|теплее|холоднее|температур\w*|кельвин\w*|"
+    r"перв\w*|втор\w*|трет\w*|четвер\w*|\d+",
     re.IGNORECASE,
 )
 _FUNCTION_WORD = frozenset({
@@ -226,6 +230,23 @@ def _value_for(text: str, registry: DeviceRegistry) -> tuple[str, str] | None:
     return hit.canonical, hit.kind
 
 
+def _color_temperature(
+    text: str,
+    folded: str,
+) -> tuple[str, str | None, str | None, tuple[str, ...]] | None:
+    """Warmer is not a higher Kelvin number. The executor applies the direction."""
+
+    if _WARMER.search(folded):
+        return "color_temperature.warmer", None, None, ("warmer",)
+    if _COOLER.search(folded):
+        return "color_temperature.cooler", None, None, ("cooler",)
+    if _KELVIN_WORD.search(folded):
+        points = kelvin_points(text)
+        value = None if points is None else str(points)
+        return "color_temperature.set", None, value, ("color_temp_set",)
+    return None
+
+
 def _decide(
     text: str,
     folded: str,
@@ -273,6 +294,9 @@ def _decide(
         return "media.stop", None, None, ("stop",)
     if color:
         return "color.set", None, color, ("color",)
+    temperature = _color_temperature(text, folded)
+    if temperature is not None:
+        return temperature
     if _DARKER.search(folded):
         return "brightness.decrease", None, amount, ("darker",)
     if _BRIGHTER.search(folded):
