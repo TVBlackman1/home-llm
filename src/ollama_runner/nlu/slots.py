@@ -7,7 +7,7 @@ from ollama_runner.inventory.registry import (
     area_from_text,
     device_type_from_text,
     fold,
-    ordinal_from_mention,
+    ordinal_word,
     stem_token,
     token_stems,
 )
@@ -46,12 +46,6 @@ _VERB = re.compile(
 _SLOT_PREPOSITION = r"(?:на|в|у|для)\s+"
 _DEVICE_NOUN = re.compile(
     r"колонк|ламп|светильник|телевиз|телик|телек|монитор|плеер|проектор|саундбар|микрофон|люстр|торшер"
-)
-_ORDINALS = (
-    ("перв", 1),
-    ("втор", 2),
-    ("трет", 3),
-    ("четвер", 4),
 )
 
 
@@ -223,12 +217,12 @@ def _extend_ordinal(text: str, raw: str) -> str:
     if start < 0 or _device_ordinal(text) is None:
         return raw if start < 0 else text[start:start + len(needle)]
     end = start + len(needle)
-    previous = re.search(r"([0-9a-zа-яе]+)\s+$", folded[:start])
-    if previous and any(previous.group(1).startswith(stem) for stem, _number in _ORDINALS):
+    previous = re.search(r"((?:номер\s+)?[0-9a-zа-яе]+)\s+$", folded[:start])
+    if previous and ordinal_word(previous.group(1).split()[-1]):
         start = previous.start(1)
     else:
-        following = re.match(r"\s+([0-9a-zа-яе]+)", folded[end:])
-        if following and any(following.group(1).startswith(stem) for stem, _number in _ORDINALS):
+        following = re.match(r"\s+((?:номер\s+)?[0-9a-zа-яе]+)", folded[end:])
+        if following and ordinal_word(following.group(1).split()[-1]):
             end += following.end(1)
     return text[start:end]
 
@@ -309,18 +303,16 @@ def _content_names_device(content: str | None, registry: DeviceRegistry) -> bool
 
 def _device_ordinal(text: str) -> int | None:
     folded = fold(text)
-    for stem, number in _ORDINALS:
-        match = re.search(r"(?<![0-9a-zа-яе])" + stem + r"\w*", folded)
-        if match is None:
+    for match in re.finditer(r"[0-9a-zа-яе]+", folded):
+        if ordinal_word(match.group()) is None:
             continue
         window_start = max(0, match.start() - 24)
         window = folded[window_start:match.end() + 24]
         if "сери" in window:
             continue
         if _DEVICE_NOUN.search(window):
-            return number
-    mention = ordinal_from_mention(text)
-    return None if "сери" in folded else None
+            return ordinal_word(match.group())
+    return None
 
 
 def _episode_span(text: str) -> str:
@@ -365,12 +357,23 @@ def _cut_device_ordinal(span: str, text: str) -> str:
     if _device_ordinal(text) is None:
         return span
     folded = fold(span)
-    for stem, _number in _ORDINALS:
-        match = re.search(r"(?<![0-9a-zа-яе])" + stem + r"\w*", folded)
-        if match is None:
+    tokens = list(re.finditer(r"[0-9a-zа-яе]+", folded))
+    cuts: list[tuple[int, int]] = []
+    for index, match in enumerate(tokens):
+        if ordinal_word(match.group()) is None:
             continue
-        return span[:match.start()] + " " + span[match.end():]
-    return span
+        start = match.start()
+        if index > 0 and tokens[index - 1].group() == "номер":
+            gap = folded[tokens[index - 1].end():match.start()]
+            if gap.strip() == "":
+                start = tokens[index - 1].start()
+        cuts.append((start, match.end()))
+    if not cuts:
+        return span
+    chars = list(span)
+    for start, end in reversed(cuts):
+        chars[start:end] = " " * (end - start)
+    return "".join(chars)
 
 
 def _residual_content(text: str, registry: DeviceRegistry) -> str:

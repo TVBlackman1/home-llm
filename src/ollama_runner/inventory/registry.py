@@ -162,6 +162,23 @@ _ORDINAL_STEMS = (
     ("трет", 3),
     ("четвер", 4),
 )
+# Whole-word cardinals for the same 1–4 range. «четыре» is already covered by «четвер».
+_CARDINALS = {
+    "один": 1,
+    "одна": 1,
+    "одно": 1,
+    "одну": 1,
+    "одним": 1,
+    "одной": 1,
+    "одному": 1,
+    "два": 2,
+    "две": 2,
+    "двух": 2,
+    "двумя": 2,
+    "три": 3,
+    "трех": 3,
+    "тремя": 3,
+}
 
 _VOLUME_INTENTS = frozenset({
     "volume.increase",
@@ -374,14 +391,42 @@ def type_from_mention(mention: str | None) -> str | None:
     return None
 
 
+def ordinal_word(token: str) -> int | None:
+    """1–4 from one token: «первую», «один», «2». Not a substring of a longer number."""
+
+    folded = fold(token)
+    if folded in _CARDINALS:
+        return _CARDINALS[folded]
+    if len(folded) == 1 and folded in "1234":
+        return int(folded)
+    for stem, number in _ORDINAL_STEMS:
+        if folded.startswith(stem):
+            return number
+    return None
+
+
 def ordinal_from_mention(mention: str | None) -> int | None:
     if not mention:
         return None
-    folded = mention.casefold().replace("ё", "е")
-    for stem, number in _ORDINAL_STEMS:
-        if stem in folded:
+    for token in re.findall(r"[0-9a-zа-яе]+", fold(mention)):
+        number = ordinal_word(token)
+        if number is not None:
             return number
     return None
+
+
+def trailing_index(name: str) -> int | None:
+    """Final bare digit 1–4 on a display name.
+
+    Static ids use speaker_first/second/third. A Home Assistant name has no
+    separate ordinal field, so only this trailing index is read. Model numbers
+    and entity ids are not names.
+    """
+
+    tokens = re.findall(r"[0-9a-zа-яе]+", fold(name))
+    if not tokens or len(tokens[-1]) != 1 or tokens[-1] not in "1234":
+        return None
+    return int(tokens[-1])
 
 
 def relation_supports(relation_type: str, intent: str) -> bool:

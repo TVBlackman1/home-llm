@@ -7,6 +7,7 @@ from ollama_runner.inventory.registry import (
     RegistryDevice,
     canonicalize_area,
     fold,
+    trailing_index,
 )
 from ollama_runner.semantic import DeviceRuntime
 
@@ -112,7 +113,7 @@ def build_inventory(
                 area=_area_name(areas_by_id.get(area_id)),
                 aliases=_aliases(device, state, detail or entity),
                 capabilities=_capabilities(domain, attrs, detail, light_services),
-                ordinal=None,
+                ordinal=_ordinal(device, state, detail or entity),
             )
         )
         bindings[entity_id] = Binding(
@@ -175,6 +176,34 @@ def _owner_id(label_ids: list, labels_by_id: dict[str, dict]) -> str:
     if len(found) == 1:
         return found[0]
     return ""
+
+
+def _ordinal(device: dict | None, state: dict, entity: dict) -> int | None:
+    """One trailing 1–4 agreed by the same names that become aliases.
+
+    The integration's product name is not scanned. It often ends in a model
+    digit that is not the user's index. Entity ids are not scanned either.
+    """
+
+    attrs = state.get("attributes") or {}
+    values = [
+        (device or {}).get("name_by_user"),
+        attrs.get("friendly_name"),
+        entity.get("original_name"),
+        entity.get("name"),
+    ]
+    for alias in entity.get("aliases") or []:
+        values.append(alias)
+    found: list[int] = []
+    for value in values:
+        if not isinstance(value, str):
+            continue
+        number = trailing_index(value)
+        if number is not None and number not in found:
+            found.append(number)
+    if len(found) == 1:
+        return found[0]
+    return None
 
 
 def _aliases(device: dict | None, state: dict, entity: dict) -> tuple[str, ...]:

@@ -163,7 +163,7 @@ def test_lights_tv_group_and_remote():
     assert lamp.type == "light"
     assert lamp.area == "гостиная"
     assert lamp.owner_id == "me"
-    assert lamp.ordinal is None
+    assert lamp.ordinal == 1
     assert "Лампа 1" in lamp.aliases
     assert "device.turn_on" in lamp.capabilities
     assert "brightness.increase" in lamp.capabilities
@@ -174,11 +174,13 @@ def test_lights_tv_group_and_remote():
     other = inventory.registry.get("light.bulb_e27_lemon_3_2")
     assert other is not None
     assert other.owner_id == ""
+    assert other.ordinal == 2
     assert other.area == "гостиная"
 
     group = inventory.registry.get("light.lampa")
     assert group is not None
     assert group.type == "light"
+    assert group.ordinal is None
     binding = inventory.bindings["light.lampa"]
     assert binding.members == ("light.bulb_e27_lemon_3", "light.bulb_e27_lemon_3_2")
     assert binding.domain == "light"
@@ -186,6 +188,7 @@ def test_lights_tv_group_and_remote():
     tv = inventory.registry.get("media_player.frame")
     assert tv is not None
     assert tv.type == "tv"
+    assert tv.ordinal is None
     assert "device.turn_on" in tv.capabilities
     assert "media.pause" in tv.capabilities
     assert "media.seek_forward" not in tv.capabilities
