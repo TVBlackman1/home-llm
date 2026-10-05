@@ -20,7 +20,7 @@ from ollama_runner.factory import (
 from ollama_runner.pipeline import Pipeline
 from ollama_runner.semantic_pipeline import SemanticPipeline
 from ollama_runner.sinks.expect import Expect
-from ollama_runner.types import Intent, Result
+from ollama_runner.types import Command, Intent, Result
 
 
 ROOT = Path(__file__).parent.parent
@@ -179,6 +179,29 @@ def _outcome_label(result: Result) -> str:
     return status
 
 
+class _Capture:
+    def __init__(self) -> None:
+        self.commands: list[Command] = []
+
+    def send(self, command: Command) -> Result:
+        self.commands.append(command)
+        return Result(ok=True, command=command)
+
+
+def _targets_match(commands: list[Command], expected: dict[str, Any], targets: list[Any]) -> bool:
+    """A scope fans out to a set of devices. The singular device_id is not the contract."""
+
+    if {command.device_id for command in commands} != set(targets):
+        return False
+    if len(commands) != len(set(targets)):
+        return False
+    for command in commands:
+        for key in ("action", "value", "owner", "place"):
+            if key in expected and getattr(command, key) != expected[key]:
+                return False
+    return True
+
+
 def run_semantic_case(model: str, case: dict[str, Any]) -> None:
     key = f"{model} semantic"
     pipeline = get_semantic_pipeline(model)
@@ -188,6 +211,33 @@ def run_semantic_case(model: str, case: dict[str, Any]) -> None:
     for attempt in range(1, LLM_REPEATS + 1):
         started = time.perf_counter()
         expected = case.get("semantic_expected", case["expected"])
+        targets = case.get("targets")
+        if targets is not None:
+            capture = _Capture()
+            result = pipeline.run(case["text"], capture)
+            _LATENCIES[key].append(time.perf_counter() - started)
+            last_label = _outcome_label(result)
+            resolution = case.get("resolution")
+            matched = _targets_match(capture.commands, expected, targets)
+            if targets:
+                matched = matched and result.ok
+            if resolution and not _resolution_matches(result, resolution):
+                matched = False
+            if matched:
+                continue
+            failures.append(
+                {
+                    "attempt": attempt,
+                    "error": {
+                        "targets": [command.device_id for command in capture.commands],
+                        "expected_targets": targets,
+                        "status": (result.payload or {}).get("status"),
+                        "reason": (result.payload or {}).get("reason"),
+                    },
+                }
+            )
+            continue
+
         result = pipeline.run(case["text"], Expect(expected))
         _LATENCIES[key].append(time.perf_counter() - started)
         last_label = _outcome_label(result)

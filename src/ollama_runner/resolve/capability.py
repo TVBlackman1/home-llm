@@ -39,6 +39,8 @@ _FANOUT = frozenset({
     "brightness.set",
     "brightness.increase",
     "brightness.decrease",
+    "device.turn_on",
+    "device.turn_off",
 })
 
 
@@ -636,12 +638,9 @@ class CapabilityResolver:
         capability_lines: tuple[str, ...],
         state_lines: tuple[str, ...],
     ) -> ResolvedCommand | None:
-        area_power = (
-            command.intent in {"device.turn_on", "device.turn_off"}
-            and command.target.device_type == "light"
-            and bool(command.target.area)
-        )
-        if command.intent not in _FANOUT and not area_power:
+        if command.intent not in _FANOUT:
+            return None
+        if command.intent in {"device.turn_on", "device.turn_off"} and command.target.device_type != "light":
             return None
         if self._concrete(command.target, alias_ids):
             return None

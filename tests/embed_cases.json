@@ -51,7 +51,11 @@
       "owner": "Андрей",
       "place": "",
       "value": ""
-    }
+    },
+    "targets": [
+      "led_strip_andrey",
+      "led_strip_andrey_cabinet"
+    ]
   },
   {
     "id": "embed:canonical:Андрей|светодиодная лента|кабинет|led_strip_andrey_cabinet",
@@ -87,7 +91,11 @@
       "owner": "Антон",
       "place": "",
       "value": ""
-    }
+    },
+    "targets": [
+      "light_anton",
+      "light_anton_bedroom"
+    ]
   },
   {
     "id": "embed:canonical:Антон|лампа|спальня|light_anton_bedroom",
@@ -123,7 +131,11 @@
       "owner": "Антон",
       "place": "",
       "value": ""
-    }
+    },
+    "targets": [
+      "light_anton",
+      "light_anton_bedroom"
+    ]
   },
   {
     "id": "embed:canonical:Антон|свет|спальня|light_anton_bedroom",
@@ -159,7 +171,11 @@
       "owner": "Антон",
       "place": "",
       "value": ""
-    }
+    },
+    "targets": [
+      "floor_lamp_anton",
+      "floor_lamp_anton_living"
+    ]
   },
   {
     "id": "embed:canonical:Антон|торшер|гостиная|floor_lamp_anton_living",
@@ -231,7 +247,11 @@
       "owner": "Марина",
       "place": "",
       "value": ""
-    }
+    },
+    "targets": [
+      "lamp_marina",
+      "lamp_marina_bedroom"
+    ]
   },
   {
     "id": "embed:canonical:Марина|лампа|спальня|lamp_marina_bedroom",
@@ -267,7 +287,11 @@
       "owner": "Марина",
       "place": "",
       "value": ""
-    }
+    },
+    "targets": [
+      "lamp_marina",
+      "lamp_marina_bedroom"
+    ]
   },
   {
     "id": "embed:canonical:Марина|светильник|спальня|lamp_marina_bedroom",
@@ -303,7 +327,12 @@
       "owner": "Маша",
       "place": "",
       "value": ""
-    }
+    },
+    "targets": [
+      "light_masha",
+      "light_masha_bedroom",
+      "light_masha_kitchen"
+    ]
   },
   {
     "id": "embed:canonical:Маша|лампа|кухня|light_masha_kitchen",
@@ -357,7 +386,12 @@
       "owner": "Маша",
       "place": "",
       "value": ""
-    }
+    },
+    "targets": [
+      "light_masha",
+      "light_masha_bedroom",
+      "light_masha_kitchen"
+    ]
   },
   {
     "id": "embed:canonical:Маша|свет|кухня|light_masha_kitchen",
@@ -429,7 +463,12 @@
       "owner": "мама",
       "place": "",
       "value": ""
-    }
+    },
+    "targets": [
+      "light_mama",
+      "light_mama_bedroom",
+      "light_mama_kitchen"
+    ]
   },
   {
     "id": "embed:canonical:мама|лампа|кухня|light_mama_kitchen",
@@ -483,7 +522,12 @@
       "owner": "мама",
       "place": "",
       "value": ""
-    }
+    },
+    "targets": [
+      "light_mama",
+      "light_mama_bedroom",
+      "light_mama_kitchen"
+    ]
   },
   {
     "id": "embed:canonical:мама|свет|кухня|light_mama_kitchen",
@@ -759,7 +803,33 @@
       "owner": "",
       "place": "",
       "value": ""
-    }
+    },
+    "targets": [
+      "lamp_marina",
+      "lamp_marina_bedroom",
+      "light_andrey_balcony",
+      "light_anton",
+      "light_anton_bedroom",
+      "light_artem_nursery",
+      "light_common",
+      "light_common_bath",
+      "light_common_bedroom",
+      "light_common_hallway",
+      "light_common_kitchen",
+      "light_common_living",
+      "light_mama",
+      "light_mama_bedroom",
+      "light_mama_kitchen",
+      "light_masha",
+      "light_masha_bedroom",
+      "light_masha_kitchen",
+      "light_me",
+      "light_me_bedroom",
+      "light_me_cabinet",
+      "light_me_kitchen",
+      "light_papa",
+      "light_papa_cabinet"
+    ]
   },
   {
     "id": "embed:canonical:общий|лампа|ванная|light_common_bath",
@@ -831,7 +901,13 @@
       "owner": "",
       "place": "кухня",
       "value": ""
-    }
+    },
+    "targets": [
+      "light_common_kitchen",
+      "light_mama_kitchen",
+      "light_masha_kitchen",
+      "light_me_kitchen"
+    ]
   },
   {
     "id": "embed:canonical:общий|лампа|спальня|light_common_bedroom",
@@ -849,7 +925,15 @@
       "owner": "",
       "place": "спальня",
       "value": ""
-    }
+    },
+    "targets": [
+      "lamp_marina_bedroom",
+      "light_anton_bedroom",
+      "light_common_bedroom",
+      "light_mama_bedroom",
+      "light_masha_bedroom",
+      "light_me_bedroom"
+    ]
   },
   {
     "id": "embed:canonical:общий|люстра||chandelier_common",
@@ -867,7 +951,11 @@
       "owner": "",
       "place": "",
       "value": ""
-    }
+    },
+    "targets": [
+      "chandelier_common",
+      "chandelier_living"
+    ]
   },
   {
     "id": "embed:canonical:общий|люстра|гостиная|chandelier_living",
@@ -1227,7 +1315,31 @@
       "owner": "",
       "place": "",
       "value": ""
-    }
+    },
+    "targets": [
+      "light_andrey_balcony",
+      "light_anton",
+      "light_anton_bedroom",
+      "light_artem_nursery",
+      "light_common",
+      "light_common_bath",
+      "light_common_bedroom",
+      "light_common_hallway",
+      "light_common_kitchen",
+      "light_common_living",
+      "light_mama",
+      "light_mama_bedroom",
+      "light_mama_kitchen",
+      "light_masha",
+      "light_masha_bedroom",
+      "light_masha_kitchen",
+      "light_me",
+      "light_me_bedroom",
+      "light_me_cabinet",
+      "light_me_kitchen",
+      "light_papa",
+      "light_papa_cabinet"
+    ]
   },
   {
     "id": "embed:canonical:общий|свет|ванная|light_common_bath",
@@ -1299,7 +1411,13 @@
       "owner": "",
       "place": "кухня",
       "value": ""
-    }
+    },
+    "targets": [
+      "light_common_kitchen",
+      "light_mama_kitchen",
+      "light_masha_kitchen",
+      "light_me_kitchen"
+    ]
   },
   {
     "id": "embed:canonical:общий|свет|спальня|light_common_bedroom",
@@ -1317,7 +1435,14 @@
       "owner": "",
       "place": "спальня",
       "value": ""
-    }
+    },
+    "targets": [
+      "light_anton_bedroom",
+      "light_common_bedroom",
+      "light_mama_bedroom",
+      "light_masha_bedroom",
+      "light_me_bedroom"
+    ]
   },
   {
     "id": "embed:canonical:общий|телевизор||tv",
@@ -1485,7 +1610,11 @@
       "owner": "папа",
       "place": "",
       "value": ""
-    }
+    },
+    "targets": [
+      "light_papa",
+      "light_papa_cabinet"
+    ]
   },
   {
     "id": "embed:canonical:папа|лампа|кабинет|light_papa_cabinet",
@@ -1557,7 +1686,11 @@
       "owner": "папа",
       "place": "",
       "value": ""
-    }
+    },
+    "targets": [
+      "light_papa",
+      "light_papa_cabinet"
+    ]
   },
   {
     "id": "embed:canonical:папа|свет|кабинет|light_papa_cabinet",
@@ -1593,7 +1726,13 @@
       "owner": "я",
       "place": "",
       "value": ""
-    }
+    },
+    "targets": [
+      "light_me",
+      "light_me_bedroom",
+      "light_me_cabinet",
+      "light_me_kitchen"
+    ]
   },
   {
     "id": "embed:canonical:я|лампа|кабинет|light_me_cabinet",
@@ -1683,7 +1822,13 @@
       "owner": "я",
       "place": "",
       "value": ""
-    }
+    },
+    "targets": [
+      "light_me",
+      "light_me_bedroom",
+      "light_me_cabinet",
+      "light_me_kitchen"
+    ]
   },
   {
     "id": "embed:canonical:я|свет|кабинет|light_me_cabinet",
@@ -1791,7 +1936,31 @@
       "owner": "",
       "place": "",
       "value": ""
-    }
+    },
+    "targets": [
+      "light_andrey_balcony",
+      "light_anton",
+      "light_anton_bedroom",
+      "light_artem_nursery",
+      "light_common",
+      "light_common_bath",
+      "light_common_bedroom",
+      "light_common_hallway",
+      "light_common_kitchen",
+      "light_common_living",
+      "light_mama",
+      "light_mama_bedroom",
+      "light_mama_kitchen",
+      "light_masha",
+      "light_masha_bedroom",
+      "light_masha_kitchen",
+      "light_me",
+      "light_me_bedroom",
+      "light_me_cabinet",
+      "light_me_kitchen",
+      "light_papa",
+      "light_papa_cabinet"
+    ]
   },
   {
     "id": "embed:edge:|свет|кухня|light_common_kitchen",
@@ -1809,7 +1978,13 @@
       "owner": "",
       "place": "кухня",
       "value": ""
-    }
+    },
+    "targets": [
+      "light_common_kitchen",
+      "light_mama_kitchen",
+      "light_masha_kitchen",
+      "light_me_kitchen"
+    ]
   },
   {
     "id": "embed:edge:|свет|спальня|light_common_bedroom",
@@ -1827,7 +2002,14 @@
       "owner": "",
       "place": "спальня",
       "value": ""
-    }
+    },
+    "targets": [
+      "light_anton_bedroom",
+      "light_common_bedroom",
+      "light_mama_bedroom",
+      "light_masha_bedroom",
+      "light_me_bedroom"
+    ]
   },
   {
     "id": "embed:edge:|телевизор||tv",
@@ -2205,7 +2387,11 @@
       "owner": "Андрей",
       "place": "",
       "value": ""
-    }
+    },
+    "targets": [
+      "led_strip_andrey",
+      "led_strip_andrey_cabinet"
+    ]
   },
   {
     "id": "embed:synonym:Андрей|диодная лента|кабинет|led_strip_andrey_cabinet",
@@ -2241,7 +2427,11 @@
       "owner": "Андрей",
       "place": "",
       "value": ""
-    }
+    },
+    "targets": [
+      "led_strip_andrey",
+      "led_strip_andrey_cabinet"
+    ]
   },
   {
     "id": "embed:synonym:Андрей|лента|кабинет|led_strip_andrey_cabinet",
@@ -2295,7 +2485,11 @@
       "owner": "Андрей",
       "place": "",
       "value": ""
-    }
+    },
+    "targets": [
+      "led_strip_andrey",
+      "led_strip_andrey_cabinet"
+    ]
   },
   {
     "id": "embed:synonym:Андрей|световая лента|кабинет|led_strip_andrey_cabinet",
@@ -2367,7 +2561,11 @@
       "owner": "Антон",
       "place": "",
       "value": ""
-    }
+    },
+    "targets": [
+      "light_anton",
+      "light_anton_bedroom"
+    ]
   },
   {
     "id": "embed:synonym:Антон|освещение|спальня|light_anton_bedroom",
@@ -2421,7 +2619,12 @@
       "owner": "Маша",
       "place": "",
       "value": ""
-    }
+    },
+    "targets": [
+      "light_masha",
+      "light_masha_bedroom",
+      "light_masha_kitchen"
+    ]
   },
   {
     "id": "embed:synonym:Маша|освещение|кухня|light_masha_kitchen",
@@ -2631,7 +2834,12 @@
       "owner": "мама",
       "place": "",
       "value": ""
-    }
+    },
+    "targets": [
+      "light_mama",
+      "light_mama_bedroom",
+      "light_mama_kitchen"
+    ]
   },
   {
     "id": "embed:synonym:мама|освещение|кухня|light_mama_kitchen",
@@ -3099,7 +3307,31 @@
       "owner": "",
       "place": "",
       "value": ""
-    }
+    },
+    "targets": [
+      "light_andrey_balcony",
+      "light_anton",
+      "light_anton_bedroom",
+      "light_artem_nursery",
+      "light_common",
+      "light_common_bath",
+      "light_common_bedroom",
+      "light_common_hallway",
+      "light_common_kitchen",
+      "light_common_living",
+      "light_mama",
+      "light_mama_bedroom",
+      "light_mama_kitchen",
+      "light_masha",
+      "light_masha_bedroom",
+      "light_masha_kitchen",
+      "light_me",
+      "light_me_bedroom",
+      "light_me_cabinet",
+      "light_me_kitchen",
+      "light_papa",
+      "light_papa_cabinet"
+    ]
   },
   {
     "id": "embed:synonym:общий|освещение|ванная|light_common_bath",
@@ -3171,7 +3403,13 @@
       "owner": "",
       "place": "кухня",
       "value": ""
-    }
+    },
+    "targets": [
+      "light_common_kitchen",
+      "light_mama_kitchen",
+      "light_masha_kitchen",
+      "light_me_kitchen"
+    ]
   },
   {
     "id": "embed:synonym:общий|освещение|спальня|light_common_bedroom",
@@ -3189,7 +3427,14 @@
       "owner": "",
       "place": "спальня",
       "value": ""
-    }
+    },
+    "targets": [
+      "light_anton_bedroom",
+      "light_common_bedroom",
+      "light_mama_bedroom",
+      "light_masha_bedroom",
+      "light_me_bedroom"
+    ]
   },
   {
     "id": "embed:synonym:общий|первая колонка||speaker_first",
@@ -3243,7 +3488,11 @@
       "owner": "",
       "place": "",
       "value": ""
-    }
+    },
+    "targets": [
+      "chandelier_common",
+      "chandelier_living"
+    ]
   },
   {
     "id": "embed:synonym:общий|потолочная люстра|гостиная|chandelier_living",
@@ -3843,7 +4092,11 @@
       "owner": "папа",
       "place": "",
       "value": ""
-    }
+    },
+    "targets": [
+      "light_papa",
+      "light_papa_cabinet"
+    ]
   },
   {
     "id": "embed:synonym:папа|освещение|кабинет|light_papa_cabinet",
@@ -3897,7 +4150,13 @@
       "owner": "я",
       "place": "",
       "value": ""
-    }
+    },
+    "targets": [
+      "light_me",
+      "light_me_bedroom",
+      "light_me_cabinet",
+      "light_me_kitchen"
+    ]
   },
   {
     "id": "embed:synonym:я|освещение|кабинет|light_me_cabinet",

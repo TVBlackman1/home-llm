@@ -28,7 +28,16 @@ class _NoModel:
         raise AssertionError(text)
 
 
-def _light(entity_id: str, *, area: str, name: str, members: list[str] | None = None, state: str = "on") -> tuple[dict, dict]:
+def _light(
+    entity_id: str,
+    *,
+    area: str,
+    name: str,
+    members: list[str] | None = None,
+    state: str = "on",
+    labels: list[str] | None = None,
+    aliases: list[str] | None = None,
+) -> tuple[dict, dict]:
     entity = {
         "entity_id": entity_id,
         "device_id": None,
@@ -37,10 +46,10 @@ def _light(entity_id: str, *, area: str, name: str, members: list[str] | None = 
         "disabled_by": None,
         "hidden_by": None,
         "entity_category": None,
-        "labels": [],
+        "labels": labels or [],
         "name": None,
         "original_name": name,
-        "aliases": [],
+        "aliases": aliases or [],
     }
     attributes = {"friendly_name": name, "supported_color_modes": ["hs"]}
     if members:
@@ -77,7 +86,11 @@ def _media(entity_id: str, *, state: str) -> tuple[dict, dict]:
     }
 
 
-def _inventory(lights: list[tuple[dict, dict]], media: list[tuple[dict, dict]] | None = None):
+def _inventory(
+    lights: list[tuple[dict, dict]],
+    media: list[tuple[dict, dict]] | None = None,
+    labels: list[dict] | None = None,
+):
     areas = [_area("room", "Room", ["комната"]), _area("kitchen", "Kitchen", ["кухня"]), _area("bedroom", "Bedroom", ["спальня"])]
     entities = []
     states = []
@@ -88,13 +101,16 @@ def _inventory(lights: list[tuple[dict, dict]], media: list[tuple[dict, dict]] |
         areas=areas,
         devices=[],
         entities=entities,
-        labels=[],
+        labels=labels or [],
         states=states,
         services=[
             {"domain": "light", "services": {"turn_on": {}, "turn_off": {}}},
             {"domain": "media_player", "services": {"media_pause": {}, "media_play": {}}},
         ],
-        entity_details={entity["entity_id"]: {"aliases": []} for entity, _ in lights + (media or [])},
+        entity_details={
+            entity["entity_id"]: {"aliases": entity.get("aliases") or []}
+            for entity, _ in lights + (media or [])
+        },
     )
 
 
@@ -262,5 +278,190 @@ def test_named_power_and_brightness_phrases_keep_their_intents():
     assert up.intent == "brightness.increase"
     resolved = CapabilityResolver(registry).resolve(power.command(), text="включи свет")
     assert resolved.status == "resolved"
-    assert resolved.execution_target_id == "light_common"
-    assert resolved.execution_target_ids == ()
+    assert "light_common" in resolved.execution_target_ids
+    assert "light_common_kitchen" in resolved.execution_target_ids
+    assert len(resolved.execution_target_ids) > 1
+
+
+def _ids(calls) -> set[str]:
+    return {payload["entity_id"] for _, _, payload in calls}
+
+
+def test_area_boundary_excludes_the_other_room_and_its_members():
+    inventory = _inventory([
+        _light("light.kitchen_group", area="kitchen", name="Кухня", members=["light.kitchen_a", "light.kitchen_b"]),
+        _light("light.kitchen_a", area="kitchen", name="Кухня A"),
+        _light("light.kitchen_b", area="kitchen", name="Кухня B"),
+        _light("light.bedroom_group", area="bedroom", name="Спальня", members=["light.bedroom_a", "light.bedroom_b"]),
+        _light("light.bedroom_a", area="bedroom", name="Спальня A"),
+        _light("light.bedroom_b", area="bedroom", name="Спальня B"),
+    ])
+    kitchen, _, _ = _run(inventory, "сделай свет на кухне темнее")
+    bedroom, _, _ = _run(inventory, "выключи свет в спальне")
+    assert _ids(kitchen) == {"light.kitchen_group"}
+    assert "light.kitchen_a" not in _ids(kitchen)
+    assert "light.kitchen_b" not in _ids(kitchen)
+    assert "light.bedroom_group" not in _ids(kitchen)
+    assert "light.bedroom_a" not in _ids(kitchen)
+    assert "light.bedroom_b" not in _ids(kitchen)
+    assert _ids(bedroom) == {"light.bedroom_group"}
+    assert "light.kitchen_group" not in _ids(bedroom)
+    assert "light.kitchen_a" not in _ids(bedroom)
+    assert "light.bedroom_a" not in _ids(bedroom)
+
+
+def test_outside_group_does_not_absorb_an_in_area_member():
+    """An explicit area keeps only entities whose own area matches.
+
+    A group outside that area is not a candidate, so it cannot cover an
+    in-area member. Containment never crosses the area boundary.
+    """
+
+    inventory = _inventory([
+        _light("light.bedroom_group", area="bedroom", name="Спальня", members=["light.kitchen_lamp"]),
+        _light("light.kitchen_lamp", area="kitchen", name="Кухня"),
+        _light("light.bedroom_only", area="bedroom", name="Бра"),
+    ])
+    calls, _, _ = _run(inventory, "сделай свет на кухне темнее")
+    assert _ids(calls) == {"light.kitchen_lamp"}
+    assert "light.bedroom_group" not in _ids(calls)
+    assert "light.bedroom_only" not in _ids(calls)
+
+
+def test_in_area_group_is_called_without_its_outside_member():
+    inventory = _inventory([
+        _light("light.kitchen_group", area="kitchen", name="Кухня", members=["light.bedroom_lamp"]),
+        _light("light.bedroom_lamp", area="bedroom", name="Спальня"),
+    ])
+    calls, _, _ = _run(inventory, "включи свет на кухне")
+    assert calls == [("light", "turn_on", {"entity_id": "light.kitchen_group"})]
+
+
+def test_owner_boundary_excludes_other_owners():
+    labels = [
+        {"label_id": "label-mama", "name": "owner:mama"},
+        {"label_id": "label-masha", "name": "owner:masha"},
+    ]
+    inventory = _inventory([
+        _light("light.mama_group", area="room", name="Мама", members=["light.mama_bulb"], labels=["label-mama"]),
+        _light("light.mama_bulb", area="room", name="Мама лампа", labels=["label-mama"]),
+        _light("light.masha", area="room", name="Маша", labels=["label-masha"]),
+    ], labels=labels)
+    calls, _, _ = _run(inventory, "убавь у мамы яркость на 10 процентов")
+    assert _ids(calls) == {"light.mama_group"}
+    assert "light.mama_bulb" not in _ids(calls)
+    assert "light.masha" not in _ids(calls)
+
+
+def test_unique_alias_does_not_fan_out():
+    inventory = _inventory([
+        _light("light.room", area="room", name="Комната", members=["light.night", "light.bulb"]),
+        _light("light.night", area="room", name="Ночник"),
+        _light("light.bulb", area="room", name="Лампа"),
+    ])
+    calls, _, _ = _run(inventory, "сделай ночник темнее")
+    assert calls == [("light", "turn_on", {"entity_id": "light.night", "brightness_step_pct": -20})]
+
+
+def test_type_only_power_calls_every_maximal_light():
+    calls, result, request = _run(_room_and_desk(), "включи свет")
+    assert _ids(calls) == {"light.desk", "light.room"}
+    assert result.ok is True
+    assert request is not None and request.ok is True
+    off, off_result, off_request = _run(_room_and_desk(), "выключи свет")
+    assert _ids(off) == {"light.desk", "light.room"}
+    assert off_result.ok is True
+    assert off_request is not None and off_request.ok is True
+
+
+def test_payload_shape_separates_absolute_and_relative_brightness():
+    inventory = _inventory([_light("light.only", area="room", name="Свет")])
+    absolute, _, _ = _run(inventory, "поставь яркость света на 10 процентов")
+    up, _, _ = _run(inventory, "увеличь яркость света на 10 процентов")
+    down, _, _ = _run(inventory, "уменьши яркость света на 10 процентов")
+    default_up, _, _ = _run(inventory, "сделай свет ярче")
+    default_down, _, _ = _run(inventory, "сделай свет темнее")
+    assert absolute == [("light", "turn_on", {"entity_id": "light.only", "brightness_pct": 10})]
+    assert up == [("light", "turn_on", {"entity_id": "light.only", "brightness_step_pct": 10})]
+    assert down == [("light", "turn_on", {"entity_id": "light.only", "brightness_step_pct": -10})]
+    assert default_up == [("light", "turn_on", {"entity_id": "light.only", "brightness_step_pct": 20})]
+    assert default_down == [("light", "turn_on", {"entity_id": "light.only", "brightness_step_pct": -20})]
+    for calls in (absolute, up, down, default_up, default_down):
+        payload = calls[0][2]
+        assert ("brightness_pct" in payload) != ("brightness_step_pct" in payload)
+
+
+def test_repeated_default_decrease_stays_a_step():
+    inventory = _inventory([_light("light.only", area="room", name="Свет")])
+    first, _, _ = _run(inventory, "сделай свет темнее")
+    second, _, _ = _run(inventory, "сделай свет темнее")
+    assert first == second == [("light", "turn_on", {"entity_id": "light.only", "brightness_step_pct": -20})]
+
+
+def test_unknown_light_state_is_not_a_successful_toggle():
+    inventory = _inventory([
+        _light("light.known", area="room", name="Известный", state="off"),
+        _light("light.unknown", area="room", name="Неизвестный", state="unavailable"),
+    ])
+    calls, result, request = _run(inventory, "свет")
+    assert calls == [("light", "turn_on", {"entity_id": "light.known"})]
+    assert result.ok is False
+    assert request is not None
+    assert request.ok is False
+    statuses = {command.device_id: command.status for command in request.commands}
+    assert statuses["light.known"] == "success"
+    assert statuses["light.unknown"] != "success"
+
+
+class _SecondFails:
+    def __init__(self) -> None:
+        self.calls: list[tuple] = []
+
+    def call_service(self, domain: str, service: str, data: dict) -> int:
+        self.calls.append((domain, service, data))
+        if data["entity_id"] == "light.room":
+            raise RuntimeError("rejected")
+        return 200
+
+
+def test_fanout_records_a_rejected_target_without_claiming_success():
+    inventory = _room_and_desk()
+    client = _SecondFails()
+    members = {
+        entity_id: binding.members
+        for entity_id, binding in inventory.bindings.items()
+        if binding.members
+    }
+    pipeline = SemanticPipeline(
+        _NoModel(),
+        CapabilityResolver(inventory.registry, members=members),
+        HaExecutor(inventory.registry, inventory.bindings, client),
+        inventory.registry,
+    )
+    result = pipeline.run("сделай темнее", _Quiet(), state=inventory.state)
+    request = pipeline.last_request
+    assert result.ok is False
+    assert request is not None and request.ok is False
+    by_id = {command.device_id: command.status for command in request.commands}
+    assert by_id["light.desk"] == "success"
+    assert by_id["light.room"] == "execution_failed"
+    assert _ids(client.calls) == {"light.desk", "light.room"}
+
+
+def test_playing_and_paused_sessions_are_both_active():
+    inventory = _inventory([], [
+        _media("media_player.playing", state="playing"),
+        _media("media_player.paused", state="paused"),
+    ])
+    calls, result, _ = _run(inventory, "звук")
+    assert calls == []
+    assert result.payload["status"] == "ambiguous"
+    assert result.payload["reason"] == "multiple_active_devices"
+
+
+def test_no_brightness_target_is_not_success():
+    inventory = _inventory([], [_media("media_player.idle", state="off")])
+    calls, result, request = _run(inventory, "сделай темнее")
+    assert calls == []
+    assert result.ok is False
+    assert request is not None and request.ok is False

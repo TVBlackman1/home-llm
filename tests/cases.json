@@ -15,7 +15,31 @@
       "owner": "",
       "place": "",
       "value": ""
-    }
+    },
+    "targets": [
+      "light_andrey_balcony",
+      "light_anton",
+      "light_anton_bedroom",
+      "light_artem_nursery",
+      "light_common",
+      "light_common_bath",
+      "light_common_bedroom",
+      "light_common_hallway",
+      "light_common_kitchen",
+      "light_common_living",
+      "light_mama",
+      "light_mama_bedroom",
+      "light_mama_kitchen",
+      "light_masha",
+      "light_masha_bedroom",
+      "light_masha_kitchen",
+      "light_me",
+      "light_me_bedroom",
+      "light_me_cabinet",
+      "light_me_kitchen",
+      "light_papa",
+      "light_papa_cabinet"
+    ]
   },
   {
     "id": "pipeline:1:Перемотай сериал на 10 минут вперед",
@@ -181,9 +205,38 @@
       "place": "",
       "value": "на 20 процентов"
     },
-    "resolution": {
-      "status": "ambiguous"
-    }
+    "targets": [
+      "chandelier_common",
+      "chandelier_living",
+      "floor_lamp_anton",
+      "floor_lamp_anton_living",
+      "lamp_marina",
+      "lamp_marina_bedroom",
+      "led_strip_andrey",
+      "led_strip_andrey_cabinet",
+      "light_andrey_balcony",
+      "light_anton",
+      "light_anton_bedroom",
+      "light_artem_nursery",
+      "light_common",
+      "light_common_bath",
+      "light_common_bedroom",
+      "light_common_hallway",
+      "light_common_kitchen",
+      "light_common_living",
+      "light_mama",
+      "light_mama_bedroom",
+      "light_mama_kitchen",
+      "light_masha",
+      "light_masha_bedroom",
+      "light_masha_kitchen",
+      "light_me",
+      "light_me_bedroom",
+      "light_me_cabinet",
+      "light_me_kitchen",
+      "light_papa",
+      "light_papa_cabinet"
+    ]
   },
   {
     "id": "pipeline:9:Выключи свет на кухне",
@@ -201,7 +254,13 @@
       "owner": "",
       "place": "кухня",
       "value": ""
-    }
+    },
+    "targets": [
+      "light_common_kitchen",
+      "light_mama_kitchen",
+      "light_masha_kitchen",
+      "light_me_kitchen"
+    ]
   },
   {
     "id": "pipeline:10:Сделай потемнее",
@@ -220,9 +279,38 @@
       "place": "",
       "value": ""
     },
-    "resolution": {
-      "status": "ambiguous"
-    }
+    "targets": [
+      "chandelier_common",
+      "chandelier_living",
+      "floor_lamp_anton",
+      "floor_lamp_anton_living",
+      "lamp_marina",
+      "lamp_marina_bedroom",
+      "led_strip_andrey",
+      "led_strip_andrey_cabinet",
+      "light_andrey_balcony",
+      "light_anton",
+      "light_anton_bedroom",
+      "light_artem_nursery",
+      "light_common",
+      "light_common_bath",
+      "light_common_bedroom",
+      "light_common_hallway",
+      "light_common_kitchen",
+      "light_common_living",
+      "light_mama",
+      "light_mama_bedroom",
+      "light_mama_kitchen",
+      "light_masha",
+      "light_masha_bedroom",
+      "light_masha_kitchen",
+      "light_me",
+      "light_me_bedroom",
+      "light_me_cabinet",
+      "light_me_kitchen",
+      "light_papa",
+      "light_papa_cabinet"
+    ]
   },
   {
     "id": "pipeline:11:Сделай свет немного ярче",
@@ -240,7 +328,31 @@
       "owner": "",
       "place": "",
       "value": "немного"
-    }
+    },
+    "targets": [
+      "light_andrey_balcony",
+      "light_anton",
+      "light_anton_bedroom",
+      "light_artem_nursery",
+      "light_common",
+      "light_common_bath",
+      "light_common_bedroom",
+      "light_common_hallway",
+      "light_common_kitchen",
+      "light_common_living",
+      "light_mama",
+      "light_mama_bedroom",
+      "light_mama_kitchen",
+      "light_masha",
+      "light_masha_bedroom",
+      "light_masha_kitchen",
+      "light_me",
+      "light_me_bedroom",
+      "light_me_cabinet",
+      "light_me_kitchen",
+      "light_papa",
+      "light_papa_cabinet"
+    ]
   },
   {
     "id": "pipeline:12:Убавь яркость на 30 процентов",
@@ -259,9 +371,38 @@
       "place": "",
       "value": "на 30 процентов"
     },
-    "resolution": {
-      "status": "ambiguous"
-    }
+    "targets": [
+      "chandelier_common",
+      "chandelier_living",
+      "floor_lamp_anton",
+      "floor_lamp_anton_living",
+      "lamp_marina",
+      "lamp_marina_bedroom",
+      "led_strip_andrey",
+      "led_strip_andrey_cabinet",
+      "light_andrey_balcony",
+      "light_anton",
+      "light_anton_bedroom",
+      "light_artem_nursery",
+      "light_common",
+      "light_common_bath",
+      "light_common_bedroom",
+      "light_common_hallway",
+      "light_common_kitchen",
+      "light_common_living",
+      "light_mama",
+      "light_mama_bedroom",
+      "light_mama_kitchen",
+      "light_masha",
+      "light_masha_bedroom",
+      "light_masha_kitchen",
+      "light_me",
+      "light_me_bedroom",
+      "light_me_cabinet",
+      "light_me_kitchen",
+      "light_papa",
+      "light_papa_cabinet"
+    ]
   },
   {
     "id": "pipeline:13:Поставь яркость 50 процентов",
@@ -280,9 +421,38 @@
       "place": "",
       "value": "50 процентов"
     },
-    "resolution": {
-      "status": "ambiguous"
-    }
+    "targets": [
+      "chandelier_common",
+      "chandelier_living",
+      "floor_lamp_anton",
+      "floor_lamp_anton_living",
+      "lamp_marina",
+      "lamp_marina_bedroom",
+      "led_strip_andrey",
+      "led_strip_andrey_cabinet",
+      "light_andrey_balcony",
+      "light_anton",
+      "light_anton_bedroom",
+      "light_artem_nursery",
+      "light_common",
+      "light_common_bath",
+      "light_common_bedroom",
+      "light_common_hallway",
+      "light_common_kitchen",
+      "light_common_living",
+      "light_mama",
+      "light_mama_bedroom",
+      "light_mama_kitchen",
+      "light_masha",
+      "light_masha_bedroom",
+      "light_masha_kitchen",
+      "light_me",
+      "light_me_bedroom",
+      "light_me_cabinet",
+      "light_me_kitchen",
+      "light_papa",
+      "light_papa_cabinet"
+    ]
   },
   {
     "id": "pipeline:14:Сделай на кухне теплый белый",
@@ -1107,7 +1277,12 @@
       "owner": "Маша",
       "place": "",
       "value": "на 10 процентов"
-    }
+    },
+    "targets": [
+      "light_masha",
+      "light_masha_bedroom",
+      "light_masha_kitchen"
+    ]
   },
   {
     "id": "pipeline:53:У Антона в спальне сделай потемнее",
@@ -1182,7 +1357,12 @@
       "owner": "мама",
       "place": "",
       "value": "немного"
-    }
+    },
+    "targets": [
+      "light_mama",
+      "light_mama_bedroom",
+      "light_mama_kitchen"
+    ]
   },
   {
     "id": "pipeline:57:Следующая серия",
@@ -1512,6 +1692,768 @@
       "owner": "",
       "place": "",
       "value": "фиолетовый"
+    }
+  },
+  {
+    "id": "pipeline:scope:уменьши яркость света на 10 процентов",
+    "text": "уменьши яркость света на 10 процентов",
+    "intent": {
+      "device": "свет",
+      "action": "decrease",
+      "owner": "",
+      "place": "",
+      "value": "на 10 процентов"
+    },
+    "expected": {
+      "device_id": "light_andrey_balcony",
+      "action": "decrease",
+      "owner": "",
+      "place": "",
+      "value": "на 10 процентов"
+    },
+    "targets": [
+      "light_andrey_balcony",
+      "light_anton",
+      "light_anton_bedroom",
+      "light_artem_nursery",
+      "light_common",
+      "light_common_bath",
+      "light_common_bedroom",
+      "light_common_hallway",
+      "light_common_kitchen",
+      "light_common_living",
+      "light_mama",
+      "light_mama_bedroom",
+      "light_mama_kitchen",
+      "light_masha",
+      "light_masha_bedroom",
+      "light_masha_kitchen",
+      "light_me",
+      "light_me_bedroom",
+      "light_me_cabinet",
+      "light_me_kitchen",
+      "light_papa",
+      "light_papa_cabinet"
+    ]
+  },
+  {
+    "id": "pipeline:scope:убавь яркость света на 10 процентов",
+    "text": "убавь яркость света на 10 процентов",
+    "intent": {
+      "device": "свет",
+      "action": "decrease",
+      "owner": "",
+      "place": "",
+      "value": "на 10 процентов"
+    },
+    "expected": {
+      "device_id": "light_andrey_balcony",
+      "action": "decrease",
+      "owner": "",
+      "place": "",
+      "value": "на 10 процентов"
+    },
+    "targets": [
+      "light_andrey_balcony",
+      "light_anton",
+      "light_anton_bedroom",
+      "light_artem_nursery",
+      "light_common",
+      "light_common_bath",
+      "light_common_bedroom",
+      "light_common_hallway",
+      "light_common_kitchen",
+      "light_common_living",
+      "light_mama",
+      "light_mama_bedroom",
+      "light_mama_kitchen",
+      "light_masha",
+      "light_masha_bedroom",
+      "light_masha_kitchen",
+      "light_me",
+      "light_me_bedroom",
+      "light_me_cabinet",
+      "light_me_kitchen",
+      "light_papa",
+      "light_papa_cabinet"
+    ]
+  },
+  {
+    "id": "pipeline:scope:снизь яркость света на 10 процентов",
+    "text": "снизь яркость света на 10 процентов",
+    "intent": {
+      "device": "свет",
+      "action": "decrease",
+      "owner": "",
+      "place": "",
+      "value": "на 10 процентов"
+    },
+    "expected": {
+      "device_id": "light_andrey_balcony",
+      "action": "decrease",
+      "owner": "",
+      "place": "",
+      "value": "на 10 процентов"
+    },
+    "targets": [
+      "light_andrey_balcony",
+      "light_anton",
+      "light_anton_bedroom",
+      "light_artem_nursery",
+      "light_common",
+      "light_common_bath",
+      "light_common_bedroom",
+      "light_common_hallway",
+      "light_common_kitchen",
+      "light_common_living",
+      "light_mama",
+      "light_mama_bedroom",
+      "light_mama_kitchen",
+      "light_masha",
+      "light_masha_bedroom",
+      "light_masha_kitchen",
+      "light_me",
+      "light_me_bedroom",
+      "light_me_cabinet",
+      "light_me_kitchen",
+      "light_papa",
+      "light_papa_cabinet"
+    ]
+  },
+  {
+    "id": "pipeline:scope:сделай свет темнее на 10 процентов",
+    "text": "сделай свет темнее на 10 процентов",
+    "intent": {
+      "device": "свет",
+      "action": "decrease",
+      "owner": "",
+      "place": "",
+      "value": "на 10 процентов"
+    },
+    "expected": {
+      "device_id": "light_andrey_balcony",
+      "action": "decrease",
+      "owner": "",
+      "place": "",
+      "value": "на 10 процентов"
+    },
+    "targets": [
+      "light_andrey_balcony",
+      "light_anton",
+      "light_anton_bedroom",
+      "light_artem_nursery",
+      "light_common",
+      "light_common_bath",
+      "light_common_bedroom",
+      "light_common_hallway",
+      "light_common_kitchen",
+      "light_common_living",
+      "light_mama",
+      "light_mama_bedroom",
+      "light_mama_kitchen",
+      "light_masha",
+      "light_masha_bedroom",
+      "light_masha_kitchen",
+      "light_me",
+      "light_me_bedroom",
+      "light_me_cabinet",
+      "light_me_kitchen",
+      "light_papa",
+      "light_papa_cabinet"
+    ]
+  },
+  {
+    "id": "pipeline:scope:увеличь яркость света на 10 процентов",
+    "text": "увеличь яркость света на 10 процентов",
+    "intent": {
+      "device": "свет",
+      "action": "increase",
+      "owner": "",
+      "place": "",
+      "value": "на 10 процентов"
+    },
+    "expected": {
+      "device_id": "light_andrey_balcony",
+      "action": "increase",
+      "owner": "",
+      "place": "",
+      "value": "на 10 процентов"
+    },
+    "targets": [
+      "light_andrey_balcony",
+      "light_anton",
+      "light_anton_bedroom",
+      "light_artem_nursery",
+      "light_common",
+      "light_common_bath",
+      "light_common_bedroom",
+      "light_common_hallway",
+      "light_common_kitchen",
+      "light_common_living",
+      "light_mama",
+      "light_mama_bedroom",
+      "light_mama_kitchen",
+      "light_masha",
+      "light_masha_bedroom",
+      "light_masha_kitchen",
+      "light_me",
+      "light_me_bedroom",
+      "light_me_cabinet",
+      "light_me_kitchen",
+      "light_papa",
+      "light_papa_cabinet"
+    ]
+  },
+  {
+    "id": "pipeline:scope:повысь яркость света на 10 процентов",
+    "text": "повысь яркость света на 10 процентов",
+    "intent": {
+      "device": "свет",
+      "action": "increase",
+      "owner": "",
+      "place": "",
+      "value": "на 10 процентов"
+    },
+    "expected": {
+      "device_id": "light_andrey_balcony",
+      "action": "increase",
+      "owner": "",
+      "place": "",
+      "value": "на 10 процентов"
+    },
+    "targets": [
+      "light_andrey_balcony",
+      "light_anton",
+      "light_anton_bedroom",
+      "light_artem_nursery",
+      "light_common",
+      "light_common_bath",
+      "light_common_bedroom",
+      "light_common_hallway",
+      "light_common_kitchen",
+      "light_common_living",
+      "light_mama",
+      "light_mama_bedroom",
+      "light_mama_kitchen",
+      "light_masha",
+      "light_masha_bedroom",
+      "light_masha_kitchen",
+      "light_me",
+      "light_me_bedroom",
+      "light_me_cabinet",
+      "light_me_kitchen",
+      "light_papa",
+      "light_papa_cabinet"
+    ]
+  },
+  {
+    "id": "pipeline:scope:сделай свет ярче на 10 процентов",
+    "text": "сделай свет ярче на 10 процентов",
+    "intent": {
+      "device": "свет",
+      "action": "increase",
+      "owner": "",
+      "place": "",
+      "value": "на 10 процентов"
+    },
+    "expected": {
+      "device_id": "light_andrey_balcony",
+      "action": "increase",
+      "owner": "",
+      "place": "",
+      "value": "на 10 процентов"
+    },
+    "targets": [
+      "light_andrey_balcony",
+      "light_anton",
+      "light_anton_bedroom",
+      "light_artem_nursery",
+      "light_common",
+      "light_common_bath",
+      "light_common_bedroom",
+      "light_common_hallway",
+      "light_common_kitchen",
+      "light_common_living",
+      "light_mama",
+      "light_mama_bedroom",
+      "light_mama_kitchen",
+      "light_masha",
+      "light_masha_bedroom",
+      "light_masha_kitchen",
+      "light_me",
+      "light_me_bedroom",
+      "light_me_cabinet",
+      "light_me_kitchen",
+      "light_papa",
+      "light_papa_cabinet"
+    ]
+  },
+  {
+    "id": "pipeline:scope:поставь яркость света на 10 процентов",
+    "text": "поставь яркость света на 10 процентов",
+    "intent": {
+      "device": "свет",
+      "action": "set_state",
+      "owner": "",
+      "place": "",
+      "value": "на 10 процентов"
+    },
+    "expected": {
+      "device_id": "light_andrey_balcony",
+      "action": "set_state",
+      "owner": "",
+      "place": "",
+      "value": "на 10 процентов"
+    },
+    "targets": [
+      "light_andrey_balcony",
+      "light_anton",
+      "light_anton_bedroom",
+      "light_artem_nursery",
+      "light_common",
+      "light_common_bath",
+      "light_common_bedroom",
+      "light_common_hallway",
+      "light_common_kitchen",
+      "light_common_living",
+      "light_mama",
+      "light_mama_bedroom",
+      "light_mama_kitchen",
+      "light_masha",
+      "light_masha_bedroom",
+      "light_masha_kitchen",
+      "light_me",
+      "light_me_bedroom",
+      "light_me_cabinet",
+      "light_me_kitchen",
+      "light_papa",
+      "light_papa_cabinet"
+    ]
+  },
+  {
+    "id": "pipeline:scope:установи яркость света на 30 процентов",
+    "text": "установи яркость света на 30 процентов",
+    "intent": {
+      "device": "свет",
+      "action": "set_state",
+      "owner": "",
+      "place": "",
+      "value": "на 30 процентов"
+    },
+    "expected": {
+      "device_id": "light_andrey_balcony",
+      "action": "set_state",
+      "owner": "",
+      "place": "",
+      "value": "на 30 процентов"
+    },
+    "targets": [
+      "light_andrey_balcony",
+      "light_anton",
+      "light_anton_bedroom",
+      "light_artem_nursery",
+      "light_common",
+      "light_common_bath",
+      "light_common_bedroom",
+      "light_common_hallway",
+      "light_common_kitchen",
+      "light_common_living",
+      "light_mama",
+      "light_mama_bedroom",
+      "light_mama_kitchen",
+      "light_masha",
+      "light_masha_bedroom",
+      "light_masha_kitchen",
+      "light_me",
+      "light_me_bedroom",
+      "light_me_cabinet",
+      "light_me_kitchen",
+      "light_papa",
+      "light_papa_cabinet"
+    ]
+  },
+  {
+    "id": "pipeline:scope:сделай яркость света 50 процентов",
+    "text": "сделай яркость света 50 процентов",
+    "intent": {
+      "device": "свет",
+      "action": "set_state",
+      "owner": "",
+      "place": "",
+      "value": "50 процентов"
+    },
+    "expected": {
+      "device_id": "light_andrey_balcony",
+      "action": "set_state",
+      "owner": "",
+      "place": "",
+      "value": "50 процентов"
+    },
+    "targets": [
+      "light_andrey_balcony",
+      "light_anton",
+      "light_anton_bedroom",
+      "light_artem_nursery",
+      "light_common",
+      "light_common_bath",
+      "light_common_bedroom",
+      "light_common_hallway",
+      "light_common_kitchen",
+      "light_common_living",
+      "light_mama",
+      "light_mama_bedroom",
+      "light_mama_kitchen",
+      "light_masha",
+      "light_masha_bedroom",
+      "light_masha_kitchen",
+      "light_me",
+      "light_me_bedroom",
+      "light_me_cabinet",
+      "light_me_kitchen",
+      "light_papa",
+      "light_papa_cabinet"
+    ]
+  },
+  {
+    "id": "pipeline:scope:сделай свет темнее",
+    "text": "сделай свет темнее",
+    "intent": {
+      "device": "свет",
+      "action": "decrease",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_andrey_balcony",
+      "action": "decrease",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "targets": [
+      "light_andrey_balcony",
+      "light_anton",
+      "light_anton_bedroom",
+      "light_artem_nursery",
+      "light_common",
+      "light_common_bath",
+      "light_common_bedroom",
+      "light_common_hallway",
+      "light_common_kitchen",
+      "light_common_living",
+      "light_mama",
+      "light_mama_bedroom",
+      "light_mama_kitchen",
+      "light_masha",
+      "light_masha_bedroom",
+      "light_masha_kitchen",
+      "light_me",
+      "light_me_bedroom",
+      "light_me_cabinet",
+      "light_me_kitchen",
+      "light_papa",
+      "light_papa_cabinet"
+    ]
+  },
+  {
+    "id": "pipeline:scope:сделай свет ярче",
+    "text": "сделай свет ярче",
+    "intent": {
+      "device": "свет",
+      "action": "increase",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_andrey_balcony",
+      "action": "increase",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "targets": [
+      "light_andrey_balcony",
+      "light_anton",
+      "light_anton_bedroom",
+      "light_artem_nursery",
+      "light_common",
+      "light_common_bath",
+      "light_common_bedroom",
+      "light_common_hallway",
+      "light_common_kitchen",
+      "light_common_living",
+      "light_mama",
+      "light_mama_bedroom",
+      "light_mama_kitchen",
+      "light_masha",
+      "light_masha_bedroom",
+      "light_masha_kitchen",
+      "light_me",
+      "light_me_bedroom",
+      "light_me_cabinet",
+      "light_me_kitchen",
+      "light_papa",
+      "light_papa_cabinet"
+    ]
+  },
+  {
+    "id": "pipeline:scope:слишком ярко",
+    "text": "слишком ярко",
+    "intent": {
+      "device": "свет",
+      "action": "decrease",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "chandelier_common",
+      "action": "decrease",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "targets": [
+      "chandelier_common",
+      "chandelier_living",
+      "floor_lamp_anton",
+      "floor_lamp_anton_living",
+      "lamp_marina",
+      "lamp_marina_bedroom",
+      "led_strip_andrey",
+      "led_strip_andrey_cabinet",
+      "light_andrey_balcony",
+      "light_anton",
+      "light_anton_bedroom",
+      "light_artem_nursery",
+      "light_common",
+      "light_common_bath",
+      "light_common_bedroom",
+      "light_common_hallway",
+      "light_common_kitchen",
+      "light_common_living",
+      "light_mama",
+      "light_mama_bedroom",
+      "light_mama_kitchen",
+      "light_masha",
+      "light_masha_bedroom",
+      "light_masha_kitchen",
+      "light_me",
+      "light_me_bedroom",
+      "light_me_cabinet",
+      "light_me_kitchen",
+      "light_papa",
+      "light_papa_cabinet"
+    ]
+  },
+  {
+    "id": "pipeline:scope:слишком темно",
+    "text": "слишком темно",
+    "intent": {
+      "device": "свет",
+      "action": "increase",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "chandelier_common",
+      "action": "increase",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "targets": [
+      "chandelier_common",
+      "chandelier_living",
+      "floor_lamp_anton",
+      "floor_lamp_anton_living",
+      "lamp_marina",
+      "lamp_marina_bedroom",
+      "led_strip_andrey",
+      "led_strip_andrey_cabinet",
+      "light_andrey_balcony",
+      "light_anton",
+      "light_anton_bedroom",
+      "light_artem_nursery",
+      "light_common",
+      "light_common_bath",
+      "light_common_bedroom",
+      "light_common_hallway",
+      "light_common_kitchen",
+      "light_common_living",
+      "light_mama",
+      "light_mama_bedroom",
+      "light_mama_kitchen",
+      "light_masha",
+      "light_masha_bedroom",
+      "light_masha_kitchen",
+      "light_me",
+      "light_me_bedroom",
+      "light_me_cabinet",
+      "light_me_kitchen",
+      "light_papa",
+      "light_papa_cabinet"
+    ]
+  },
+  {
+    "id": "pipeline:scope:выключи свет",
+    "text": "выключи свет",
+    "intent": {
+      "device": "свет",
+      "action": "off",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_andrey_balcony",
+      "action": "off",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "targets": [
+      "light_andrey_balcony",
+      "light_anton",
+      "light_anton_bedroom",
+      "light_artem_nursery",
+      "light_common",
+      "light_common_bath",
+      "light_common_bedroom",
+      "light_common_hallway",
+      "light_common_kitchen",
+      "light_common_living",
+      "light_mama",
+      "light_mama_bedroom",
+      "light_mama_kitchen",
+      "light_masha",
+      "light_masha_bedroom",
+      "light_masha_kitchen",
+      "light_me",
+      "light_me_bedroom",
+      "light_me_cabinet",
+      "light_me_kitchen",
+      "light_papa",
+      "light_papa_cabinet"
+    ]
+  },
+  {
+    "id": "pipeline:scope:выключи свет в спальне",
+    "text": "выключи свет в спальне",
+    "intent": {
+      "device": "свет",
+      "action": "off",
+      "owner": "",
+      "place": "спальня",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "light_anton_bedroom",
+      "action": "off",
+      "owner": "",
+      "place": "спальня",
+      "value": ""
+    },
+    "targets": [
+      "light_anton_bedroom",
+      "light_common_bedroom",
+      "light_mama_bedroom",
+      "light_masha_bedroom",
+      "light_me_bedroom"
+    ]
+  },
+  {
+    "id": "pipeline:scope:убавь у мамы яркость на 10 процентов",
+    "text": "убавь у мамы яркость на 10 процентов",
+    "intent": {
+      "device": "свет",
+      "action": "decrease",
+      "owner": "мама",
+      "place": "",
+      "value": "на 10 процентов"
+    },
+    "expected": {
+      "device_id": "light_mama",
+      "action": "decrease",
+      "owner": "мама",
+      "place": "",
+      "value": "на 10 процентов"
+    },
+    "targets": [
+      "light_mama",
+      "light_mama_bedroom",
+      "light_mama_kitchen"
+    ]
+  },
+  {
+    "id": "pipeline:scope:свет",
+    "text": "свет",
+    "intent": {
+      "device": "свет",
+      "action": "device.toggle",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "",
+      "action": "device.toggle",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "targets": [],
+    "resolution": {
+      "status": "rejected"
+    }
+  },
+  {
+    "id": "pipeline:scope:звук",
+    "text": "звук",
+    "intent": {
+      "device": "звук",
+      "action": "media.toggle",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "",
+      "action": "media.toggle",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "targets": [],
+    "resolution": {
+      "status": "clarify",
+      "reason": "no_active_device"
+    }
+  },
+  {
+    "id": "pipeline:scope:сделай лампу 2 темнее",
+    "text": "сделай лампу 2 темнее",
+    "intent": {
+      "device": "лампа",
+      "action": "decrease",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "expected": {
+      "device_id": "",
+      "action": "decrease",
+      "owner": "",
+      "place": "",
+      "value": ""
+    },
+    "targets": [],
+    "resolution": {
+      "status": "not_found",
+      "reason": "no_match"
     }
   }
 ]

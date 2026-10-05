@@ -319,14 +319,16 @@ def test_explicit_room_selects_every_maximal_light(resolver: CapabilityResolver)
 
 
 @pytest.mark.unit
-def test_satellite_room_is_a_hint_when_room_is_absent(resolver: CapabilityResolver) -> None:
+def test_unscoped_light_power_does_not_use_the_request_area_as_a_boundary(resolver: CapabilityResolver) -> None:
     resolved = resolver.resolve(
         _command("device.turn_off", device_type="light", explicit=True),
         context=RequestContext(source_area="кухня"),
         text="Выключи свет",
     )
 
-    assert resolved.execution_target_id == "light_common_kitchen"
+    assert resolved.status == "resolved"
+    assert "light_common_kitchen" in resolved.execution_target_ids
+    assert "light_common_bedroom" in resolved.execution_target_ids
 
 
 @pytest.mark.unit

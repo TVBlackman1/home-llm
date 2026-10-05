@@ -20,6 +20,27 @@ from ollama_runner.sinks.expect import Expect
 from ollama_runner.types import Command, Result
 
 
+class _Capture:
+    def __init__(self) -> None:
+        self.commands: list[Command] = []
+
+    def send(self, command: Command) -> Result:
+        self.commands.append(command)
+        return Result(ok=True, command=command)
+
+
+def _targets_match(commands: list[Command], expected: dict, targets: list) -> bool:
+    if {command.device_id for command in commands} != set(targets):
+        return False
+    if len(commands) != len(set(targets)):
+        return False
+    for command in commands:
+        for key in ("action", "value", "owner", "place"):
+            if key in expected and getattr(command, key) != expected[key]:
+                return False
+    return True
+
+
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "tests" / "fallback_baseline.json"
 REJECT = "NEEDS_CONTEXT"
@@ -174,10 +195,21 @@ def main() -> None:
     for case in _load_regression():
         before = pipeline._nlu.calls
         expected = case.get("semantic_expected", case["expected"])
-        result = pipeline.run(case["text"], Expect(expected))
+        targets = case.get("targets")
+        if targets is not None:
+            capture = _Capture()
+            result = pipeline.run(case["text"], capture)
+            ok = _targets_match(capture.commands, expected, targets)
+            if targets:
+                ok = ok and result.ok
+            resolution = case.get("resolution")
+            if resolution and not _resolution_matches(result, resolution):
+                ok = False
+        else:
+            result = pipeline.run(case["text"], Expect(expected))
+            resolution = case.get("resolution")
+            ok = _resolution_matches(result, resolution) if resolution else result.ok
         obs = pipeline.observations[-1]
-        resolution = case.get("resolution")
-        ok = _resolution_matches(result, resolution) if resolution else result.ok
         regression_rows.append({
             "id": case["id"],
             "text": case["text"],
