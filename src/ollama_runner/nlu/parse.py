@@ -58,7 +58,7 @@ _LISTEN = re.compile(
     r"(?<![0-9a-zа-яе])(?:послушать|слушать)(?![0-9a-zа-яе])",
     re.IGNORECASE,
 )
-_DARKER = re.compile(r"(?<![0-9a-zа-яе])потемнее", re.IGNORECASE)
+_DARKER = re.compile(r"(?<![0-9a-zа-яе])(?:по)?темнее(?![0-9a-zа-яе])", re.IGNORECASE)
 _WARMER = re.compile(r"(?<![0-9a-zа-яе])теплее(?![0-9a-zа-яе])", re.IGNORECASE)
 _COOLER = re.compile(r"(?<![0-9a-zа-яе])холоднее(?![0-9a-zа-яе])", re.IGNORECASE)
 _KELVIN_WORD = re.compile(r"(?<![0-9a-zа-яе])\d+\s*кельвин", re.IGNORECASE)
@@ -72,8 +72,10 @@ _MUTE = re.compile(r"(?<![0-9a-zа-яе])(?:выключи|отключи|убе
 _UNMUTE = re.compile(r"(?<![0-9a-zа-яе])(?:включи|верни)\w*", re.IGNORECASE)
 _VOLUME_LESS = re.compile(r"(?<![0-9a-zа-яе])(?:убавь|уменьши)\w*", re.IGNORECASE)
 _VOLUME = re.compile(r"(?<![0-9a-zа-яе])громкост", re.IGNORECASE)
-_DECREASE = re.compile(r"(?<![0-9a-zа-яе])убавь", re.IGNORECASE)
-_INCREASE = re.compile(r"(?<![0-9a-zа-яе])(?:увеличь|прибавь)", re.IGNORECASE)
+_DECREASE = re.compile(r"(?<![0-9a-zа-яе])(?:убавь|уменьши|снизь)\w*", re.IGNORECASE)
+_INCREASE = re.compile(r"(?<![0-9a-zа-яе])(?:увеличь|прибавь)\w*", re.IGNORECASE)
+_RAISE = re.compile(r"(?<![0-9a-zа-яе])повысь\w*", re.IGNORECASE)
+_ASSIGN = re.compile(r"(?<![0-9a-zа-яе])установи\w*", re.IGNORECASE)
 _SET = re.compile(r"(?<![0-9a-zа-яе])поставь", re.IGNORECASE)
 _NEGATION = re.compile(r"(?<![0-9a-zа-яе])(?:не|нельзя)(?![0-9a-zа-яе])", re.IGNORECASE)
 _PLAY = re.compile(
@@ -306,15 +308,16 @@ def _decide(
     temperature = _color_temperature(text, folded)
     if temperature is not None:
         return temperature
+    # A percentage is a step after a directional verb and an absolute level after a set verb.
     if _DARKER.search(folded):
         return "brightness.decrease", None, amount, ("darker",)
     if _BRIGHTER.search(folded):
         return "brightness.increase", None, amount, ("brighter",)
     if _BRIGHTNESS.search(folded) and _DECREASE.search(folded):
         return "brightness.decrease", None, amount, ("brightness_decrease",)
-    if _BRIGHTNESS.search(folded) and _INCREASE.search(folded):
+    if _BRIGHTNESS.search(folded) and (_INCREASE.search(folded) or _RAISE.search(folded)):
         return "brightness.increase", None, amount, ("brightness_increase",)
-    if _BRIGHTNESS.search(folded) and (_SET.search(folded) or amount):
+    if _BRIGHTNESS.search(folded) and (_SET.search(folded) or _ASSIGN.search(folded) or amount):
         return "brightness.set", None, amount, ("brightness_set",)
     heard = _heard_audio(folded)
     if heard is not None:
@@ -400,7 +403,13 @@ def _without_listen(text: str) -> str:
 def _command_frame(text: str, registry: DeviceRegistry) -> bool:
     """A lone keyword is not a command. A verb, or only domain words, is."""
 
-    if _FRAME_VERB.search(fold(text)):
+    folded = fold(text)
+    if _FRAME_VERB.search(folded):
+        return True
+    # снизь / повысь / установи are brightness verbs, not general command frames.
+    if _BRIGHTNESS.search(folded) and (
+        _DECREASE.search(folded) or _RAISE.search(folded) or _ASSIGN.search(folded)
+    ):
         return True
     return _domain_only(text, registry)
 

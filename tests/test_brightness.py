@@ -1,10 +1,13 @@
 from ollama_runner.ha.execute import HaExecutor, planned_call
 from ollama_runner.ha.normalize import Binding, HaExecutionBinding
+from ollama_runner.ha.route import ExecutionRouter
+from ollama_runner.inventory.registry import DeviceRegistry
 from ollama_runner.nlu.parse import parse_deterministic
+from ollama_runner.nlu.values import percent_points
 from ollama_runner.resolve.capability import CapabilityResolver
 from ollama_runner.semantic import ResolvedCommand
 from ollama_runner.types import Command, Result
-from tests.test_ha_inventory import _snapshot
+from tests.test_ha_inventory import _area, _snapshot, build_inventory
 
 
 class _Quiet:
@@ -119,4 +122,109 @@ def test_numbered_lamps_keep_their_targets():
         assert call.service == "turn_on"
         assert call.brightness_pct == pct
         assert call.brightness_step_pct == step
+    assert client.calls == []
+
+
+def test_directional_brightness_keeps_a_positive_magnitude():
+    registry = DeviceRegistry.from_static()
+    decrease = {
+        "уменьши яркость света на 10 процентов": 10,
+        "убавь яркость света на 10 процентов": 10,
+        "снизь яркость света на 10 процентов": 10,
+        "сделай свет темнее на 10 процентов": 10,
+    }
+    increase = {
+        "увеличь яркость света на 10 процентов": 10,
+        "повысь яркость света на 10 процентов": 10,
+        "сделай свет ярче на 10 процентов": 10,
+    }
+    absolute = {
+        "поставь яркость света на 10 процентов": 10,
+        "установи яркость света на 30 процентов": 30,
+        "сделай яркость света 50 процентов": 50,
+    }
+    for text, points in decrease.items():
+        parsed = parse_deterministic(text, registry)
+        assert parsed.intent == "brightness.decrease", text
+        assert percent_points(parsed.value) == points, text
+        assert parsed.value is None or not str(parsed.value).startswith("-"), text
+    for text, points in increase.items():
+        parsed = parse_deterministic(text, registry)
+        assert parsed.intent == "brightness.increase", text
+        assert percent_points(parsed.value) == points, text
+    for text, points in absolute.items():
+        parsed = parse_deterministic(text, registry)
+        assert parsed.intent == "brightness.set", text
+        assert percent_points(parsed.value) == points, text
+
+    named = parse_deterministic("уменьши яркость света на 10 процентов", registry)
+    assert named.slots.device_type == "light"
+    assert named.mention == "света"
+    bare = parse_deterministic("уменьши яркость на 10 процентов", registry)
+    assert bare.intent == "brightness.decrease"
+    assert percent_points(bare.value) == 10
+    for text in ("уменьши яркость света", "убавь яркость света", "сделай свет темнее"):
+        parsed = parse_deterministic(text, registry)
+        assert parsed.intent == "brightness.decrease", text
+        assert parsed.value is None, text
+
+
+def _one_light():
+    return build_inventory(
+        areas=[_area("room", "Room")],
+        devices=[],
+        entities=[{
+            "entity_id": "light.only",
+            "device_id": None,
+            "area_id": "room",
+            "platform": "group",
+            "disabled_by": None,
+            "hidden_by": None,
+            "entity_category": None,
+            "labels": [],
+            "name": None,
+            "original_name": "Свет",
+            "aliases": [],
+        }],
+        labels=[],
+        states=[{
+            "entity_id": "light.only",
+            "state": "on",
+            "attributes": {"friendly_name": "Свет", "supported_color_modes": ["hs"]},
+        }],
+        services=[{"domain": "light", "services": {"turn_on": {}, "turn_off": {}}}],
+        entity_details={"light.only": {"aliases": [], "capabilities": {"supported_color_modes": ["hs"]}}},
+    )
+
+
+def test_relative_decrease_sends_a_negative_step_twice():
+    inventory = _one_light()
+    client = _FakeHa()
+    resolver = CapabilityResolver(inventory.registry)
+    router = ExecutionRouter(inventory.registry, inventory.bindings, client)
+    text = "уменьши яркость света на 10 процентов"
+    for _ in range(2):
+        parsed = parse_deterministic(text, inventory.registry)
+        assert parsed.intent == "brightness.decrease"
+        resolved = resolver.resolve(parsed.command(), text=text)
+        assert resolved.status == "resolved"
+        router.execute(resolved, _Quiet())
+    assert client.calls == [
+        ("light", "turn_on", {"entity_id": "light.only", "brightness_step_pct": -10}),
+        ("light", "turn_on", {"entity_id": "light.only", "brightness_step_pct": -10}),
+    ]
+    assert all("brightness_pct" not in payload for _, _, payload in client.calls)
+
+
+def test_unnamed_decrease_stays_ambiguous():
+    inventory = _snapshot()
+    client = _FakeHa()
+    resolver = CapabilityResolver(inventory.registry)
+    router = ExecutionRouter(inventory.registry, inventory.bindings, client)
+    text = "уменьши яркость на 10 процентов"
+    parsed = parse_deterministic(text, inventory.registry)
+    assert parsed.intent == "brightness.decrease"
+    resolved = resolver.resolve(parsed.command(), text=text)
+    assert resolved.status == "ambiguous"
+    router.execute(resolved, _Quiet())
     assert client.calls == []
