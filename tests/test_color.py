@@ -30,8 +30,8 @@ def _execute(entity: str, value: str, *, modes: frozenset[str] | None = None, st
     if modes is not None:
         current = bindings[entity]
         bindings[entity] = Binding(
-            current.entity_id,
-            current.domain,
+            current.default,
+            dict(current.capability_bindings),
             current.members,
             current.min_color_temp_kelvin,
             current.max_color_temp_kelvin,

@@ -112,16 +112,17 @@ def planned_call(
 
     if binding is None:
         return None
+    target = binding.for_capability(intent)
     service = _POWER.get(intent)
     if service is not None:
-        return PlannedCall(binding.domain, service, binding.entity_id)
-    if intent not in _BRIGHTNESS or binding.domain != "light":
+        return PlannedCall(target.domain, service, target.entity_id)
+    if intent not in _BRIGHTNESS or target.domain != "light":
         return None
     points = percent_points(value)
     if intent == "brightness.set":
         if points is None or not 0 <= points <= 100:
             return None
-        return PlannedCall(binding.domain, "turn_on", binding.entity_id, brightness_pct=points)
+        return PlannedCall(target.domain, "turn_on", target.entity_id, brightness_pct=points)
     if value.strip() and points is None:
         return None
     step = DEFAULT_BRIGHTNESS_STEP if points is None else points
@@ -129,9 +130,9 @@ def planned_call(
         return None
     signed = step if intent == "brightness.increase" else -step
     return PlannedCall(
-        binding.domain,
+        target.domain,
         "turn_on",
-        binding.entity_id,
+        target.entity_id,
         brightness_step_pct=signed,
     )
 
@@ -160,32 +161,33 @@ class HaExecutor:
         if resolved.intent not in _IMPLEMENTED:
             return _unsupported(result, "execution_not_implemented")
         binding = self._bindings.get(resolved.execution_target_id or "")
+        target = binding.for_capability(resolved.intent) if binding is not None else None
         relative: dict = {}
         if (
             resolved.intent in _POWER
             and binding is not None
-            and binding.domain == "media_player"
+            and binding.default.domain == "media_player"
         ):
             return self._toggle_power(resolved, result, binding)
         if resolved.intent in _VOLUME:
-            if binding is None or binding.domain != "media_player":
+            if target is None or target.domain != "media_player":
                 return _unsupported(result, "volume_unavailable")
             return self._change_volume(resolved, result, binding)
         if resolved.intent == "source.select":
-            if binding is None or binding.domain != "media_player":
+            if target is None or target.domain != "media_player":
                 return _unsupported(result, "source_unavailable")
             return self._select_source(resolved, result, binding)
         if resolved.intent in _PLAYBACK:
-            if binding is None or binding.domain != "media_player":
+            if target is None or target.domain != "media_player":
                 return _unsupported(result, "playback_unavailable")
             return self._control_playback(resolved, result, binding)
         if resolved.intent in _COLOR_TEMPERATURE:
             current = None
             if (
-                binding is not None
+                target is not None
                 and resolved.intent in {"color_temperature.warmer", "color_temperature.cooler"}
             ):
-                current = self._current_kelvin(binding.entity_id)
+                current = self._current_kelvin(target.entity_id)
             call, reason, relative = _color_temperature_call(
                 resolved.intent,
                 binding,
@@ -248,12 +250,13 @@ class HaExecutor:
         value = str(resolved.arguments.get("value") or "")
         points = percent_points(value)
         intent = resolved.intent
+        entity_id = binding.for_capability(intent).entity_id
         relative: dict = {}
         if intent in {"volume.mute", "volume.unmute"}:
             call = PlannedCall(
                 "media_player",
                 "volume_mute",
-                binding.entity_id,
+                entity_id,
                 is_volume_muted=intent == "volume.mute",
             )
         elif intent == "volume.set":
@@ -262,18 +265,18 @@ class HaExecutor:
             call = PlannedCall(
                 "media_player",
                 "volume_set",
-                binding.entity_id,
+                entity_id,
                 volume_level=_percent_level(points),
             )
         elif value.strip() and points is None:
             return _unsupported(result, "volume_out_of_range")
         elif points is None:
             service = "volume_up" if intent == "volume.increase" else "volume_down"
-            call = PlannedCall("media_player", service, binding.entity_id)
+            call = PlannedCall("media_player", service, entity_id)
         else:
             if not 1 <= points <= 100:
                 return _unsupported(result, "volume_out_of_range")
-            current = self._volume_level(binding.entity_id)
+            current = self._volume_level(entity_id)
             if current is None:
                 return _unsupported(result, "volume_unavailable")
             signed = points if intent == "volume.increase" else -points
@@ -284,7 +287,7 @@ class HaExecutor:
                 "delta_percent": signed,
                 "target_volume": level,
             }
-            call = PlannedCall("media_player", "volume_set", binding.entity_id, volume_level=level)
+            call = PlannedCall("media_player", "volume_set", entity_id, volume_level=level)
         self.planned.append(call)
         execution = {
             "attempted": self._perform,
@@ -311,7 +314,11 @@ class HaExecutor:
     def _control_playback(self, resolved: ResolvedCommand, result: Result, binding: Binding) -> Result:
         """Play and pause use the media player. Stop stays unwired until it is verified."""
 
-        call = PlannedCall("media_player", _PLAYBACK[resolved.intent], binding.entity_id)
+        call = PlannedCall(
+            "media_player",
+            _PLAYBACK[resolved.intent],
+            binding.for_capability(resolved.intent).entity_id,
+        )
         self.planned.append(call)
         execution = {
             "attempted": self._perform,
@@ -333,11 +340,12 @@ class HaExecutor:
     def _select_source(self, resolved: ResolvedCommand, result: Result, binding: Binding) -> Result:
         """Select a source the media player advertises. No power and no nearest-name guess."""
 
+        entity_id = binding.for_capability(resolved.intent).entity_id
         requested = str(resolved.arguments.get("value") or "").strip()
-        chosen = _listed_source(requested, self._source_list(binding.entity_id))
+        chosen = _listed_source(requested, self._source_list(entity_id))
         if chosen is None:
             return _unsupported(result, "source_unavailable")
-        call = PlannedCall("media_player", "select_source", binding.entity_id, source=chosen)
+        call = PlannedCall("media_player", "select_source", entity_id, source=chosen)
         self.planned.append(call)
         execution = {
             "attempted": self._perform,
@@ -400,9 +408,9 @@ class HaExecutor:
         return None
 
     def _toggle_power(self, resolved: ResolvedCommand, result: Result, binding: Binding) -> Result:
-        """TV power follows the working card: toggle the companion remote, and only when needed."""
+        """Desired-state power. State comes from the media player; the call uses the power binding."""
 
-        current = self._reported_power(binding.entity_id)
+        current = self._reported_power(binding.default.entity_id)
         if current not in {"on", "off"}:
             return _unsupported(result, "tv_power_state_unknown")
         want_on = resolved.intent == "device.turn_on"
@@ -417,16 +425,17 @@ class HaExecutor:
                     "action": "noop",
                 },
             )
-        if not binding.power_entity_id:
+        power = binding.override(resolved.intent)
+        if power is None:
             return _unsupported(result, "tv_power_unavailable")
-        call = PlannedCall("homeassistant", "toggle", binding.power_entity_id)
+        call = PlannedCall("homeassistant", "toggle", power.entity_id)
         self.planned.append(call)
         execution = {
             "attempted": self._perform,
             "intent": resolved.intent,
             "current_state": current,
             "service": "homeassistant.toggle",
-            "entity_id": binding.power_entity_id,
+            "entity_id": power.entity_id,
         }
         if not self._perform:
             return _with_execution(result, execution)
@@ -492,7 +501,10 @@ def _color_temperature_call(
     the service behavior for an explicit temperature, same as brightness.
     """
 
-    if binding is None or binding.domain != "light":
+    if binding is None:
+        return None, "color_temp_unavailable", {}
+    target = binding.for_capability(intent)
+    if target.domain != "light":
         return None, "color_temp_unavailable", {}
     low = binding.min_color_temp_kelvin
     high = binding.max_color_temp_kelvin
@@ -503,7 +515,7 @@ def _color_temperature_call(
         if kelvin is None or kelvin < low or kelvin > high:
             return None, "color_temp_out_of_range", {}
         return (
-            PlannedCall(binding.domain, "turn_on", binding.entity_id, color_temp_kelvin=kelvin),
+            PlannedCall(target.domain, "turn_on", target.entity_id, color_temp_kelvin=kelvin),
             "",
             {},
         )
@@ -512,15 +524,15 @@ def _color_temperature_call(
     direction = "warmer" if intent == "color_temperature.warmer" else "cooler"
     step = DEFAULT_COLOR_TEMP_STEP_K
     raw = current - step if direction == "warmer" else current + step
-    target = min(max(raw, low), high)
+    kelvin_target = min(max(raw, low), high)
     return (
-        PlannedCall(binding.domain, "turn_on", binding.entity_id, color_temp_kelvin=target),
+        PlannedCall(target.domain, "turn_on", target.entity_id, color_temp_kelvin=kelvin_target),
         "",
         {
             "current_kelvin": current,
             "direction": direction,
             "step_kelvin": step,
-            "target_kelvin": target,
+            "target_kelvin": kelvin_target,
         },
     )
 
@@ -548,14 +560,17 @@ def _named_color_call(binding: Binding | None, value: str) -> tuple[PlannedCall 
     and color temperature. A chromatic name is not rewritten as Kelvin.
     """
 
-    if binding is None or binding.domain != "light":
+    if binding is None:
+        return None, "color_unavailable"
+    target = binding.for_capability("color.set")
+    if target.domain != "light":
         return None, "color_unavailable"
     rgb = named_color_rgb(value)
     if rgb is None:
         return None, "color_unsupported"
     if not binding.color_modes & _CHROMATIC_MODES:
         return None, "color_unavailable"
-    return PlannedCall(binding.domain, "turn_on", binding.entity_id, rgb_color=rgb), ""
+    return PlannedCall(target.domain, "turn_on", target.entity_id, rgb_color=rgb), ""
 
 
 def _unsupported(result: Result, reason: str) -> Result:

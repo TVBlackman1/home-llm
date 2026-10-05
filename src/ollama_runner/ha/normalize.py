@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from ollama_runner.inventory.registry import (
     DeviceRegistry,
@@ -44,16 +44,42 @@ _COLOR_TEMPERATURE = frozenset({
 
 
 @dataclass(frozen=True)
-class Binding:
-    """How a registry id is executed in Home Assistant."""
+class HaExecutionBinding:
+    """The Home Assistant entity that implements a semantic capability.
+
+    This is a discovered target. It is not a backend choice and not proof
+    that home-llm knows how to perform the capability.
+    """
 
     entity_id: str
     domain: str
+
+
+@dataclass(frozen=True)
+class Binding:
+    """HA targets for one semantic device, plus light metadata.
+
+    ``default`` is the primary entity. ``capability_bindings`` holds only the
+    capabilities that use a different entity. Lookup falls back to ``default``.
+    A fallback target is not an implementation.
+    """
+
+    default: HaExecutionBinding
+    capability_bindings: dict[str, HaExecutionBinding] = field(default_factory=dict)
     members: tuple[str, ...] = ()
     min_color_temp_kelvin: int | None = None
     max_color_temp_kelvin: int | None = None
     color_modes: frozenset[str] = frozenset()
-    power_entity_id: str | None = None
+
+    def for_capability(self, intent: str) -> HaExecutionBinding:
+        """Explicit override, otherwise the primary entity."""
+
+        return self.capability_bindings.get(intent, self.default)
+
+    def override(self, intent: str) -> HaExecutionBinding | None:
+        """A different entity for this capability, if discovery found one."""
+
+        return self.capability_bindings.get(intent)
 
 
 @dataclass(frozen=True)
@@ -135,17 +161,21 @@ def build_inventory(
                 ordinal=_ordinal(device, state, detail or entity),
             )
         )
-        power_entity_id = None
-        if domain == "media_player":
-            power_entity_id = remotes.get(entity.get("device_id") or "")
+        overrides: dict[str, HaExecutionBinding] = {}
+        remote_id = remotes.get(entity.get("device_id") or "") if domain == "media_player" else None
+        if remote_id:
+            remote = HaExecutionBinding(remote_id, "remote")
+            overrides = {
+                "device.turn_on": remote,
+                "device.turn_off": remote,
+            }
         bindings[entity_id] = Binding(
-            entity_id=entity_id,
-            domain=domain,
+            default=HaExecutionBinding(entity_id, domain),
+            capability_bindings=overrides,
             members=members,
             min_color_temp_kelvin=low,
             max_color_temp_kelvin=high,
             color_modes=modes,
-            power_entity_id=power_entity_id,
         )
         runtime[entity_id] = _runtime(domain, state.get("state") or "")
 

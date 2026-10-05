@@ -1,5 +1,5 @@
 from ollama_runner.ha.execute import HaExecutor, planned_call
-from ollama_runner.ha.normalize import Binding
+from ollama_runner.ha.normalize import Binding, HaExecutionBinding
 from ollama_runner.nlu.parse import parse_deterministic
 from ollama_runner.resolve.capability import CapabilityResolver
 from ollama_runner.semantic import ResolvedCommand
@@ -64,7 +64,11 @@ def test_non_numeric_magnitude_and_out_of_range_are_not_sent():
     assert _run("brightness.increase", "light.lampa", "немного") == []
     assert _run("brightness.set", "light.lampa", "150 процентов") == []
     assert _run("brightness.set", "light.lampa", "") == []
-    spoken = planned_call("brightness.set", Binding("light.lampa", "light"), "на пятьдесят процентов")
+    spoken = planned_call(
+        "brightness.set",
+        Binding(HaExecutionBinding("light.lampa", "light")),
+        "на пятьдесят процентов",
+    )
     assert spoken is not None
     assert spoken.brightness_pct == 50
 

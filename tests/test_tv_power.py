@@ -1,7 +1,7 @@
 import logging
 
 from ollama_runner.ha.execute import HaExecutor
-from ollama_runner.ha.normalize import Binding
+from ollama_runner.ha.normalize import Binding, HaExecutionBinding
 from ollama_runner.request import command_from_result
 from ollama_runner.semantic import ResolvedCommand, SemanticCommand, Target
 from ollama_runner.types import Command, Result
@@ -37,14 +37,17 @@ def _run(intent: str, states: list | None, *, power: str | None = "remote.frame"
     inventory = _snapshot()
     bindings = dict(inventory.bindings)
     current = bindings["media_player.frame"]
+    overrides = {}
+    if power:
+        remote = HaExecutionBinding(power, "remote")
+        overrides = {"device.turn_on": remote, "device.turn_off": remote}
     bindings["media_player.frame"] = Binding(
-        current.entity_id,
-        current.domain,
+        current.default,
+        overrides,
         current.members,
         current.min_color_temp_kelvin,
         current.max_color_temp_kelvin,
         current.color_modes,
-        power,
     )
     client = _FakeHa(states, fail=fail)
     result = HaExecutor(inventory.registry, bindings, client).execute(

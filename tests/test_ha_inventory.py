@@ -1,5 +1,5 @@
 from ollama_runner.ha.execute import HaExecutor, planned_call
-from ollama_runner.ha.normalize import Binding, build_inventory
+from ollama_runner.ha.normalize import Binding, HaExecutionBinding, build_inventory
 from ollama_runner.semantic import ResolvedCommand
 from ollama_runner.sinks.jsonprint import PrintSink
 
@@ -176,8 +176,7 @@ def test_lights_tv_group_and_remote():
     assert "brightness.increase" in lamp.capabilities
     assert "color.set" in lamp.capabilities
     assert inventory.bindings["light.bulb_e27_lemon_3"] == Binding(
-        "light.bulb_e27_lemon_3",
-        "light",
+        HaExecutionBinding("light.bulb_e27_lemon_3", "light"),
         min_color_temp_kelvin=2700,
         max_color_temp_kelvin=6500,
         color_modes=frozenset({"color_temp", "hs"}),
@@ -198,7 +197,7 @@ def test_lights_tv_group_and_remote():
     assert group.ordinal is None
     binding = inventory.bindings["light.lampa"]
     assert binding.members == ("light.bulb_e27_lemon_3", "light.bulb_e27_lemon_3_2")
-    assert binding.domain == "light"
+    assert binding.default.domain == "light"
 
     tv = inventory.registry.get("media_player.frame")
     assert tv is not None
@@ -210,21 +209,48 @@ def test_lights_tv_group_and_remote():
     assert "телевизор" in tv.aliases
     assert inventory.state["media_player.frame"].power == "off"
     assert inventory.registry.get("remote.frame") is None
-    assert inventory.bindings["media_player.frame"].power_entity_id == "remote.frame"
-    assert inventory.bindings["media_player.frame"].entity_id == "media_player.frame"
+    frame = inventory.bindings["media_player.frame"]
+    assert frame.default == HaExecutionBinding("media_player.frame", "media_player")
+    assert frame.override("device.turn_on") == HaExecutionBinding("remote.frame", "remote")
 
 
 def test_power_mapping_uses_the_binding_domain():
-    call = planned_call("device.turn_on", Binding("light.lampa", "light"))
+    call = planned_call("device.turn_on", Binding(HaExecutionBinding("light.lampa", "light")))
     assert call is not None
     assert (call.domain, call.service, call.entity_id) == ("light", "turn_on", "light.lampa")
-    off = planned_call("device.turn_off", Binding("media_player.frame", "media_player"))
+    off = planned_call("device.turn_off", Binding(HaExecutionBinding("media_player.frame", "media_player")))
     assert off is not None
     assert off.service == "turn_off"
-    brighter = planned_call("brightness.increase", Binding("light.lampa", "light"))
+    brighter = planned_call("brightness.increase", Binding(HaExecutionBinding("light.lampa", "light")))
     assert brighter is not None
     assert brighter.brightness_step_pct == 10
-    assert planned_call("brightness.set", Binding("media_player.frame", "media_player"), "50") is None
+    assert planned_call(
+        "brightness.set",
+        Binding(HaExecutionBinding("media_player.frame", "media_player")),
+        "50",
+    ) is None
+    assert planned_call("device.turn_on", None) is None
+
+
+def test_tv_capability_bindings_keep_the_media_player_as_default():
+    binding = _snapshot().bindings["media_player.frame"]
+    media = HaExecutionBinding("media_player.frame", "media_player")
+    remote = HaExecutionBinding("remote.frame", "remote")
+    assert binding.default == media
+    assert binding.for_capability("device.turn_on") == remote
+    assert binding.for_capability("device.turn_off") == remote
+    assert binding.for_capability("volume.set") == media
+    assert binding.for_capability("media.pause") == media
+    assert binding.override("media.stop") is None
+    assert binding.for_capability("media.stop") == media
+
+
+def test_light_has_no_power_override():
+    binding = _snapshot().bindings["light.lampa"]
+    assert binding.default == HaExecutionBinding("light.lampa", "light")
+    assert binding.capability_bindings == {}
+    assert binding.for_capability("device.turn_on") == binding.default
+    assert binding.override("device.turn_off") is None
     assert planned_call("device.turn_on", None) is None
 
 
