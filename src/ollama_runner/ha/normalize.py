@@ -17,7 +17,7 @@ _LIGHT_BRIGHTNESS = frozenset({
     "brightness.decrease",
     "brightness.set",
 })
-_COLOR_MODES = frozenset({"hs", "rgb", "xy", "rgbw", "rgbww", "color_temp"})
+_COLOR_MODES = frozenset({"hs", "rgb", "xy", "rgbw", "rgbww"})
 _TV_BITS = (
     (128, "device.turn_on"),
     (256, "device.turn_off"),

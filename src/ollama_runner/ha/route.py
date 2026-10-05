@@ -7,7 +7,7 @@ from ollama_runner.ha.execute import HaExecutor
 from ollama_runner.ha.normalize import Binding
 from ollama_runner.inventory.registry import DeviceRegistry
 from ollama_runner.semantic import ResolvedCommand
-from ollama_runner.types import Result
+from ollama_runner.types import Command, Result
 
 
 class ExecutionRouter:
@@ -41,5 +41,10 @@ class ExecutionRouter:
         spec = ExecutionBinding(capability.backend, binding.for_capability(resolved.intent))
         executor = self._executors.get(spec.backend)
         if executor is None:
-            return self._ha.execute(resolved, sink)
+            return Result(
+                ok=False,
+                command=Command(device_id=resolved.execution_target_id or "", action=resolved.intent),
+                error="unsupported",
+                payload={"status": "unsupported", "reason": "backend_unavailable"},
+            )
         return executor.execute(resolved, sink)

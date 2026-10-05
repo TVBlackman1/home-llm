@@ -364,3 +364,41 @@ def test_english_area_name_stays_when_no_known_alias():
     assert device.area == "Kitchen"
     assert "brightness.increase" not in device.capabilities
     assert "device.turn_on" in device.capabilities
+
+
+def test_color_temperature_without_a_chromatic_mode_does_not_advertise_color():
+    built = build_inventory(
+        areas=[_area("room", "Room")],
+        devices=[],
+        entities=[{
+            "entity_id": "light.warm",
+            "device_id": None,
+            "area_id": "room",
+            "platform": "tuya_local",
+            "disabled_by": None,
+            "hidden_by": None,
+            "entity_category": None,
+            "labels": [],
+            "name": None,
+            "original_name": "Warm",
+            "aliases": [],
+        }],
+        labels=[],
+        states=[{
+            "entity_id": "light.warm",
+            "state": "on",
+            "attributes": {
+                "friendly_name": "Warm",
+                "supported_color_modes": ["color_temp"],
+                "min_color_temp_kelvin": 2700,
+                "max_color_temp_kelvin": 6500,
+            },
+        }],
+        services=[{"domain": "light", "services": {"turn_on": {}, "turn_off": {}}}],
+        entity_details={"light.warm": {"aliases": [], "capabilities": {"supported_color_modes": ["color_temp"]}}},
+    )
+    device = built.registry.get("light.warm")
+    assert device is not None
+    assert "color_temperature.set" in device.capabilities
+    assert "brightness.set" in device.capabilities
+    assert "color.set" not in device.capabilities

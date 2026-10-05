@@ -1,4 +1,4 @@
-from ollama_runner.execution import ExecutionBackend, execution_capability
+from ollama_runner.execution import ExecutionBackend, ExecutionCapability, execution_capability
 from ollama_runner.ha.route import ExecutionRouter
 from ollama_runner.request import command_from_result
 from ollama_runner.semantic import ResolvedCommand, SemanticCommand, Target
@@ -135,6 +135,23 @@ def test_relative_volume_reads_the_live_level():
         {"entity_id": "media_player.frame", "volume_level": 0.5},
     )]
     assert result.payload["execution"]["current_volume"] == 0.4
+
+
+def test_unknown_backend_is_not_sent_to_home_assistant(monkeypatch):
+    inventory = _snapshot()
+    client = _FakeHa("off")
+    router = ExecutionRouter(inventory.registry, inventory.bindings, client)
+
+    def _other(intent: str) -> ExecutionCapability:
+        return ExecutionCapability(intent, "pc_agent")
+
+    monkeypatch.setattr("ollama_runner.ha.route.execution_capability", _other)
+    result = router.execute(_resolved("device.turn_on"), _Quiet())
+    assert client.calls == []
+    assert client.reads == 0
+    assert result.ok is False
+    assert result.payload["status"] == "unsupported"
+    assert result.payload["reason"] == "backend_unavailable"
 
 
 def test_missing_device_binding_is_not_a_success():

@@ -204,7 +204,8 @@ class HaExecutor:
                 str(resolved.arguments.get("value") or ""),
             )
         if call is None:
-            return result
+            reason = "brightness_out_of_range" if resolved.intent in _BRIGHTNESS else "execution_not_dispatched"
+            return _unsupported(result, reason)
         self.planned.append(call)
         service = f"{call.domain}.{call.service}"
         execution = {

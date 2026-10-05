@@ -64,9 +64,28 @@ def test_relative_without_a_value_uses_the_explicit_default():
 
 
 def test_non_numeric_magnitude_and_out_of_range_are_not_sent():
-    assert _run("brightness.increase", "light.lampa", "немного") == []
-    assert _run("brightness.set", "light.lampa", "150 процентов") == []
-    assert _run("brightness.set", "light.lampa", "") == []
+    inventory = _snapshot()
+    for intent, value in (
+        ("brightness.increase", "немного"),
+        ("brightness.set", "150 процентов"),
+        ("brightness.set", ""),
+    ):
+        client = _FakeHa()
+        result = HaExecutor(inventory.registry, inventory.bindings, client).execute(
+            ResolvedCommand(
+                status="resolved",
+                intent=intent,
+                semantic_target_id="light.lampa",
+                execution_target_id="light.lampa",
+                arguments={"value": value} if value else {},
+                candidates=("light.lampa",),
+            ),
+            _Quiet(),
+        )
+        assert client.calls == []
+        assert result.ok is False
+        assert result.payload["status"] == "unsupported"
+        assert result.payload["reason"] == "brightness_out_of_range"
     spoken = planned_call(
         "brightness.set",
         Binding(HaExecutionBinding("light.lampa", "light")),
