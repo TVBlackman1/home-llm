@@ -64,7 +64,12 @@ _KELVIN_WORD = re.compile(r"(?<![0-9a-zа-яе])\d+\s*кельвин", re.IGNORE
 _BRIGHTER = re.compile(r"(?<![0-9a-zа-яе])ярче", re.IGNORECASE)
 _BRIGHTNESS = re.compile(r"(?<![0-9a-zа-яе])яркост", re.IGNORECASE)
 _QUIETER = re.compile(r"(?<![0-9a-zа-яе])потише", re.IGNORECASE)
+_SOFTER = re.compile(r"(?<![0-9a-zа-яе])тише(?![0-9a-zа-яе])", re.IGNORECASE)
 _LOUDER = re.compile(r"(?<![0-9a-zа-яе])(?:по)?громче", re.IGNORECASE)
+_SOUND = re.compile(r"(?<![0-9a-zа-яе])звук(?:а|у|ом|е)?(?![0-9a-zа-яе])", re.IGNORECASE)
+_MUTE = re.compile(r"(?<![0-9a-zа-яе])(?:выключи|отключи|убери)\w*", re.IGNORECASE)
+_UNMUTE = re.compile(r"(?<![0-9a-zа-яе])(?:включи|верни)\w*", re.IGNORECASE)
+_VOLUME_LESS = re.compile(r"(?<![0-9a-zа-яе])(?:убавь|уменьши)\w*", re.IGNORECASE)
 _VOLUME = re.compile(r"(?<![0-9a-zа-яе])громкост", re.IGNORECASE)
 _DECREASE = re.compile(r"(?<![0-9a-zа-яе])убавь", re.IGNORECASE)
 _INCREASE = re.compile(r"(?<![0-9a-zа-яе])(?:увеличь|прибавь)", re.IGNORECASE)
@@ -76,12 +81,13 @@ _PLAY = re.compile(
 )
 _FRAME_VERB = re.compile(
     r"(?<![0-9a-zа-яе])(?:включи|выключи|запусти|поставь|вруби|выруби|сделай|перемотай|"
-    r"убавь|увеличь|прибавь|покажи|останови|приостанови|перескочи|хочу)\w*",
+    r"убавь|уменьши|увеличь|прибавь|покажи|останови|приостанови|перескочи|хочу|убери|отключи|верни)\w*",
     re.IGNORECASE,
 )
 _DOMAIN_TOKEN = re.compile(
     r"пауз\w*|приостанови\w*|перемотай\w*|вперед\w*|назад\w*|следующ\w*|предыдущ\w*|"
-    r"перескочи\w*|останови\w*|потемнее|ярче|потише|(?:по)?громче|яркост\w*|громкост\w*|"
+    r"перескочи\w*|останови\w*|потемнее|ярче|потише|тише|(?:по)?громче|яркост\w*|громкост\w*|"
+    r"(?<![0-9a-zа-яе])звук(?:а|у|ом|е)?(?![0-9a-zа-яе])|уменьши\w*|убери\w*|отключи\w*|верни\w*|"
     r"убавь\w*|увеличь\w*|прибавь\w*|пожалуйста|чуть|немного|ну|уже|мне|тут|здесь|"
     r"сери\w*|фильм\w*|кино|альбом\w*|плейлист\w*|песн\w*|трек\w*|мультик\w*|"
     r"новост\w*|сезон\w*|исполнител\w*|процент\w*|минут\w*|"
@@ -307,12 +313,17 @@ def _decide(
         return "brightness.increase", None, amount, ("brightness_increase",)
     if _BRIGHTNESS.search(folded) and (_SET.search(folded) or amount):
         return "brightness.set", None, amount, ("brightness_set",)
-    if _QUIETER.search(folded):
+    heard = _heard_audio(folded)
+    if heard is not None:
+        return heard
+    if _QUIETER.search(folded) or _SOFTER.search(folded):
         return "volume.decrease", None, amount, ("quieter",)
     if _LOUDER.search(folded):
         return "volume.increase", None, amount, ("louder",)
-    if _VOLUME.search(folded) and _DECREASE.search(folded):
+    if _VOLUME.search(folded) and _VOLUME_LESS.search(folded):
         return "volume.decrease", None, amount, ("volume_decrease",)
+    if _VOLUME.search(folded) and _INCREASE.search(folded):
+        return "volume.increase", None, amount, ("volume_increase",)
     if _VOLUME.search(folded) and (_SET.search(folded) or amount):
         return "volume.set", None, amount, ("volume_set",)
     if kind == "audio.play" and _PLAY.search(folded):
@@ -332,6 +343,18 @@ def _decide(
             return "device.turn_off", None, None, ("power_off",)
         if _POWER_ON_WORD.search(folded) and _explicit_device(text, registry):
             return "device.turn_on", None, None, ("power_on",)
+    return None
+
+
+def _heard_audio(folded: str) -> tuple[str, None, None, tuple[str, ...]] | None:
+    """«звук» owns the verb. TV power stays the command that names the television."""
+
+    if _SOUND.search(folded) is None:
+        return None
+    if _MUTE.search(folded):
+        return "volume.mute", None, None, ("mute",)
+    if _UNMUTE.search(folded):
+        return "volume.unmute", None, None, ("unmute",)
     return None
 
 

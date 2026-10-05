@@ -35,7 +35,13 @@ _COLOR_TEMPERATURE = frozenset({
 DEFAULT_COLOR_TEMP_STEP_K = 400
 # light.turn_on has no hs_color field. rgb_color is the field filtered for hs.
 _CHROMATIC_MODES = frozenset({"hs", "xy", "rgb", "rgbw", "rgbww"})
-_VOLUME = frozenset({"volume.set", "volume.increase", "volume.decrease"})
+_VOLUME = frozenset({
+    "volume.set",
+    "volume.increase",
+    "volume.decrease",
+    "volume.mute",
+    "volume.unmute",
+})
 
 
 @dataclass(frozen=True)
@@ -48,6 +54,7 @@ class PlannedCall:
     color_temp_kelvin: int | None = None
     rgb_color: tuple[int, int, int] | None = None
     volume_level: float | None = None
+    is_volume_muted: bool | None = None
 
     def service_data(self) -> dict:
         data = {"entity_id": self.entity_id}
@@ -61,6 +68,8 @@ class PlannedCall:
             data["rgb_color"] = list(self.rgb_color)
         if self.volume_level is not None:
             data["volume_level"] = self.volume_level
+        if self.is_volume_muted is not None:
+            data["is_volume_muted"] = self.is_volume_muted
         return data
 
 
@@ -213,7 +222,14 @@ class HaExecutor:
         points = percent_points(value)
         intent = resolved.intent
         relative: dict = {}
-        if intent == "volume.set":
+        if intent in {"volume.mute", "volume.unmute"}:
+            call = PlannedCall(
+                "media_player",
+                "volume_mute",
+                binding.entity_id,
+                is_volume_muted=intent == "volume.mute",
+            )
+        elif intent == "volume.set":
             if points is None or not 0 <= points <= 100:
                 return _unsupported(result, "volume_out_of_range")
             call = PlannedCall(
@@ -251,6 +267,8 @@ class HaExecutor:
         }
         if call.volume_level is not None:
             execution["volume_level"] = call.volume_level
+        if call.is_volume_muted is not None:
+            execution["is_volume_muted"] = call.is_volume_muted
         execution.update(relative)
         if not self._perform:
             return _with_execution(result, execution)

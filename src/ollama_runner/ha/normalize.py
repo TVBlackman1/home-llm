@@ -27,6 +27,8 @@ _TV_BITS = (
     (4, "volume.set"),
     (1024, "volume.increase"),
     (1024, "volume.decrease"),
+    (8, "volume.mute"),
+    (8, "volume.unmute"),
     (32, "media.next"),
     (16, "media.previous"),
 )

@@ -61,6 +61,7 @@ class CommandResult:
     current_volume: float | None = None
     delta_percent: int | None = None
     target_volume: float | None = None
+    is_volume_muted: bool | None = None
 
 
 @dataclass(frozen=True)
@@ -158,6 +159,7 @@ def command_from_result(
         current_volume=_as_float(execution.get("current_volume")),
         delta_percent=_as_int(execution.get("delta_percent")),
         target_volume=_as_float(execution.get("target_volume")),
+        is_volume_muted=_as_bool(execution.get("is_volume_muted")),
     )
 
 
@@ -293,6 +295,7 @@ def _execute_line(command: CommandResult, prefix: dict) -> str:
         color_temp_kelvin=command.color_temp_kelvin,
         rgb_color=_rgb_text(command.rgb_color),
         volume_level=_level_text(command.volume_level),
+        is_volume_muted=_bool_text(command.is_volume_muted),
     )
 
 
@@ -305,6 +308,18 @@ def _as_float(value: object) -> float | None:
     if isinstance(value, bool) or not isinstance(value, (int, float)):
         return None
     return float(value)
+
+
+def _bool_text(value: bool | None) -> str | None:
+    if value is None:
+        return None
+    return "true" if value else "false"
+
+
+def _as_bool(value: object) -> bool | None:
+    if isinstance(value, bool):
+        return value
+    return None
 
 
 def _level_text(value: float | None) -> str | None:

@@ -3,6 +3,7 @@ import logging
 from ollama_runner.ha.execute import HaExecutor
 from ollama_runner.inventory.registry import DeviceRegistry
 from ollama_runner.nlu.parse import parse_deterministic
+from ollama_runner.nlu.values import percent_points
 from ollama_runner.request import RequestResult, command_from_result, emit_request
 from ollama_runner.semantic import ResolvedCommand, SemanticCommand, Target
 from ollama_runner.types import Command, Result
@@ -130,16 +131,83 @@ def test_volume_failure_is_execution_failed():
     assert "super-secret-token" not in result.payload["reason"]
 
 
-def test_mute_phrases_are_not_a_mute_intent():
+def test_volume_phrases_keep_direction_in_the_intent():
     registry = DeviceRegistry.from_static()
-    mute = parse_deterministic("Выключи звук на телевизоре", registry)
-    unmute = parse_deterministic("Включи звук на телевизоре", registry)
-    absent = parse_deterministic("Убери звук на телевизоре", registry)
-    quieter = parse_deterministic("Сделай телевизор тише", registry)
-    assert mute.intent == "device.turn_off"
-    assert unmute.intent == "device.turn_on"
-    assert absent.handled is False
-    assert quieter.handled is False
+    expected = {
+        "Поставь громкость телевизора на 30 процентов": ("volume.set", 30),
+        "Увеличь громкость телевизора на 10 процентов": ("volume.increase", 10),
+        "Уменьши громкость телевизора на 10 процентов": ("volume.decrease", 10),
+        "Убавь громкость телевизора на 10 процентов": ("volume.decrease", 10),
+        "Сделай телевизор громче": ("volume.increase", None),
+        "Сделай телевизор тише": ("volume.decrease", None),
+        "Сделай телевизор потише": ("volume.decrease", None),
+    }
+    for text, (intent, points) in expected.items():
+        parsed = parse_deterministic(text, registry)
+        assert parsed.intent == intent
+        assert parsed.slots.device_type == "tv"
+        assert percent_points(parsed.value or "") == points
+
+
+def test_sound_owns_the_power_verb():
+    registry = DeviceRegistry.from_static()
+    muted = (
+        "Выключи звук на телевизоре",
+        "Убери звук на телевизоре",
+        "Отключи звук на телевизоре",
+    )
+    unmuted = (
+        "Включи звук на телевизоре",
+        "Верни звук на телевизоре",
+    )
+    for text in muted:
+        parsed = parse_deterministic(text, registry)
+        assert parsed.intent == "volume.mute"
+        assert parsed.slots.device_type == "tv"
+        assert parsed.value is None
+    for text in unmuted:
+        parsed = parse_deterministic(text, registry)
+        assert parsed.intent == "volume.unmute"
+        assert parsed.slots.device_type == "tv"
+    power = {
+        "Включи телевизор": "device.turn_on",
+        "Выключи телевизор": "device.turn_off",
+        "Вруби телевизор": "device.turn_on",
+        "Включи свет": "device.turn_on",
+        "Выключи свет": "device.turn_off",
+    }
+    for text, intent in power.items():
+        parsed = parse_deterministic(text, registry)
+        assert parsed.intent == intent
+        if "свет" in text:
+            assert parsed.slots.device_type == "light"
+        else:
+            assert parsed.slots.device_type == "tv"
+    panel = parse_deterministic("Включи звуковая панель", registry)
+    assert panel.intent == "device.turn_on"
+    assert panel.slots.device_type == "soundbar"
+
+
+def test_mute_sets_the_desired_audio_state_without_power():
+    inventory = _snapshot()
+    assert "volume.mute" in inventory.registry.get("media_player.frame").capabilities
+    assert "volume.unmute" in inventory.registry.get("media_player.frame").capabilities
+    mute, mute_result = _run("volume.mute")
+    unmute, _ = _run("volume.unmute")
+    assert mute.reads == 0
+    assert unmute.reads == 0
+    assert mute.calls == [
+        ("media_player", "volume_mute", {"entity_id": "media_player.frame", "is_volume_muted": True})
+    ]
+    assert unmute.calls == [
+        ("media_player", "volume_mute", {"entity_id": "media_player.frame", "is_volume_muted": False})
+    ]
+    assert "remote" not in str(mute.calls)
+    assert "toggle" not in str(mute.calls)
+    assert mute_result.payload["execution"]["is_volume_muted"] is True
+    light, light_result = _run("volume.mute", entity="light.lampa")
+    assert light.calls == []
+    assert light_result.error == "execution target lacks capability"
 
 
 def test_absolute_trace_shows_volume_level(caplog):

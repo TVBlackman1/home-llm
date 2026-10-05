@@ -28,6 +28,8 @@ VOLUME = frozenset({
     "volume.increase",
     "volume.decrease",
     "volume.set",
+    "volume.mute",
+    "volume.unmute",
 })
 TV = POWER | TRANSPORT | frozenset({
     "media.next",
@@ -187,6 +189,8 @@ _VOLUME_INTENTS = frozenset({
     "volume.increase",
     "volume.decrease",
     "volume.set",
+    "volume.mute",
+    "volume.unmute",
 })
 _RENDER_INTENTS = frozenset({
     "photos.show",
