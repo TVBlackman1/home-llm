@@ -64,3 +64,72 @@ uv run pytest tests/test_qwen35.py tests/test_gemma3.py tests/test_qwen25.py tes
 ```bash
 uv run python tests/gen_cases.py
 ```
+
+## Интеграция с Home Assistant Assist
+
+Ниже минимальная схема: Assist -> custom ConversationEntity -> HTTP API runtime -> `run_home_request`.
+
+### 1) Запуск HTTP API на сервере semantic runtime
+
+Добавь в `.env` (или переменные окружения):
+
+```env
+ASSIST_API_HOST=0.0.0.0
+ASSIST_API_PORT=8765
+ASSIST_API_TOKEN=ваш_секретный_токен
+ASSIST_API_TIMEOUT=20
+```
+
+Запуск:
+
+```bash
+uv run assist-api
+```
+
+Проверка:
+
+```bash
+curl -X POST "http://<RUNTIME_HOST>:8765/api/assist" \
+  -H "Authorization: Bearer <ASSIST_API_TOKEN>" \
+  -H "Content-Type: application/json" \
+  -d '{"text":"включи свет", "conversation_id": null}'
+```
+
+### 2) Установка custom integration в Home Assistant
+
+Скопируй директорию:
+
+`custom_components/ollama_runner_assist/`
+
+в каталог Home Assistant:
+
+`/config/custom_components/ollama_runner_assist/`
+
+Перезапусти Home Assistant.
+
+### 3) Настройка интеграции
+
+В HA: **Settings -> Devices & Services -> Add Integration** -> `Ollama Runner Assist`.
+
+Поля:
+- `runtime_url`: `http://<RUNTIME_HOST>:8765`
+- `api_token`: тот же `ASSIST_API_TOKEN`
+- `timeout`: например `20`
+
+### 4) Выбор conversation agent в Assist
+
+В настройках Assist выбери агент `Ollama Runner Assist`.
+
+### 5) Проверка выполнения
+
+Скажи через Assist: «включи свет в спальне».  
+Ожидаемо:
+- команда уходит в runtime;
+- выполнение происходит через существующий `HaExecutor`;
+- Assist получает речевой ответ (`Готово` только при успешном выполнении).
+
+### Примечание по сети и безопасности
+
+- API рассчитан на доступ из локальной сети (HAOS -> runtime).
+- Не публикуй порт API в интернет.
+- Ограничь доступ firewall/VPN/сегментацией сети.

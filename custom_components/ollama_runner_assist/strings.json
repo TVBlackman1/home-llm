@@ -1,0 +1,15 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Ollama Runner Assist",
+        "description": "Подключение Home Assistant Assist к внешнему semantic runtime",
+        "data": {
+          "runtime_url": "URL semantic runtime",
+          "api_token": "API токен",
+          "timeout": "Тайм-аут (сек)"
+        }
+      }
+    }
+  }
+}

@@ -42,6 +42,11 @@ class Settings(BaseSettings):
     ha_port: int = 8123
     ha_token: str = ""
 
+    assist_api_host: str = "127.0.0.1"
+    assist_api_port: int = 8765
+    assist_api_token: str = ""
+    assist_api_timeout: float = 20.0
+
     @property
     def ollama_url(self) -> str:
         return f"http://{self.ollama_host}:{self.ollama_port}"

@@ -18,6 +18,7 @@ dependencies = [
 ollama-runner = "ollama_runner.main:main"
 emb = "ollama_runner.embeeding:main"
 toogle = "ollama_runner.toogle_light:main"
+assist-api = "ollama_runner.assist_api:main"
 
 [build-system]
 requires = ["uv_build>=0.12.5,<0.13.0"]
